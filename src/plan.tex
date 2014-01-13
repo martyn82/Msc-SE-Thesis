@@ -2,67 +2,125 @@
 \documentclass[9pt,a4paper]{article}
 \usepackage{hyperref}
 
-\linespread{1.1}
-
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
-\makeatletter
-\renewcommand\section{%
-	\@startsection{section}{1}
-		{\z@}%
-		{-3.5ex \@plus -1ex \@minus -.2ex}%
-		{1sp}%
-		{\normalfont\bfseries}%
-}
-\makeatother
-
-% paper attributes
-\newcommand{\theTitle}{Automatic Means of Identifying Evolutionary Events in
-Software Development}
-\newcommand{\theAuthor}{Martijn Florian Endenburg}
-\newcommand{\theUniversity}{University of Amsterdam}
-\newcommand{\theLocation}{The Netherlands}
-
-% title section
-\title{\bf{Msc. Software Engineering Project Plan}}
-\author{\theAuthor \\ \emph{\theUniversity}, \emph{\theLocation}}
-\date{\today}
+\title{\bf{Project Plan Msc. Software Engineering}}
+\date{}
 
 \begin{document}
 \maketitle
 
 \section{General information}
-\begin{description}
-	\item[Title] \hfill \\ \theTitle
+\subsection{Title}
+Automatic Means of Identifying Evolutionary Events in Software Development
 
-	\item[Host] \hfill \\ VNU Vacature Media, De Persgroep Nederland, \\
-	department of technology, development team, \\ Mt. Lincolnweg 40 \\ 1033 SN
-	Amsterdam \\ The Netherlands
+\subsection{Student name}
+Martijn Florian Endenburg
 
-	\item[Contact person] \hfill \\ Rutger Pannekoek
-								\\ Chief Technology Officer
-								\\ 020-2042521
-								\\
-								\href{mailto:r.pannekoek@vnuvacaturemedia.nl}{r.pannekoek@vnuvacaturemedia.nl}
-\end{description}
+\subsection{Host organisation and group}
+VNU Vacature Media (De Persgroep Nederland) \\
+Department of Technology, Development \\
+mt. Lincolnweg 40 \\
+1033 SN, Amsterdam \\
+The Netherlands
 
-\section{Summary}
+\subsection{Contact person}
+Rutger Pannekoek \\
+CTO at VNU Vacature Media \\
+phone: 020 - 204 25 21 \\
+email:
+\href{mailto:r.pannekoek@vnuvacaturemedia.nl}{r.pannekoek@vnuvacaturemedia.nl}
 
-\section{Problem analysis}
+\subsection{Summary}
+This master’s project will be a replication of the paper “Automatic means of
+identifying evolutionary events in software development” by Siim Karus (2013)
+\cite{karus2013}.
 
-\section{Research method}
+Karus has done this study on a data set of 27 open source software
+repositories. This data set was chosen carefully to be representative to the
+distribution of open source software projects that exist at the time of the
+study; i.e., the relative amounts of dead, alive, and active projects.
 
-\section{Expected results}
+Karus explored the usage of wavelet analysis on the evolution (time series) of
+these projects to see if this analysis method can be used to find objective
+warning signs in software projects leading to the end of code evolution.
 
-\section{Required expertise}
+\section{Project details}
 
-\section{Timeline}
+\subsection{Problem analysis}
+In closed source projects, many evolutionary events are dictated by the
+management. These events can be used to identify project scale and progress,
+which allows comparing or co-analysing different projects.
 
-\section{Risks}
+Unfortunately, the evolutionary events in open source software projects are
+mostly theoretical with little emperical validation. This also means that
+different projects can not be compared in the same scale.
+
+In this study, we are proposing means for detecting evolutionary events in open
+source software projects to offer comparable data on their evolution
+\cite{karus2013}.
+
+\paragraph{}
+\bf{Note: }\rm \emph{The previous seems an assumption by Karus as there is no
+citation or study referred to that had found that the evolutionary events in closed source
+software projects are mostly dictated by management. So, is this true?}
+
+\bf{Note: }\rm \emph{Can or cannot we generalize the findings of this study to
+both open source and industrial/closed source software projects?}
+
+\subsection{Research method}
+RQ: Can we use wavelet analysis to find objective warning signs in software
+projects leading to the end of code evolution? \cite{karus2013}
+
+\paragraph{}
+According to Karus, knowing warning signs could help in:
+\begin{itemize}
+	\item Choosing OSS to implement in business scenario.
+	\item Making timely preparations for decommissioning an OSS project.
+	\item Choosing development process that best suites the aims of a software
+	project for new OSS projects.
+\end{itemize}
+
+\paragraph{}
+The research question is a design question and based on a theory how the chosen
+analysis method could solve the question. An action research will be done by
+choosing a representative data set of open source software projects. These open
+source software projects will be analysed to find evolutionary events.
+
+The theory is based on the observations that analysis on time series in
+economical and social studies have been successfully done using wavelet
+analysis. In the evolution of software projects we are also looking at time
+series. Therefore, wavelet analysis seems a logical method to analyse software
+project evolution.
+
+\subsection{Expected results}
+
+\subsection{Required expertise}
+\begin{itemize}
+	\item Expertise on discrete wavelet transformation and analysis.
+\end{itemize}
+
+\subsection{Timeline}
+
+\subsection{Risks}
+\begin{itemize}
+	\item Improper understanding of wavelet transformation and analysis.
+	\item Insufficient data to construct a data set that is representative to the
+			real-world distribution of open source software projects in terms of scale,
+			progress, and activity.
+\end{itemize}
 
 \section{Literature study}
 
-\section{Bibliography}
+\subsection{Bibliography}
+\begingroup
+\renewcommand{\section}[2]{}%
+\begin{thebibliography}{99}
+	\bibitem[Karus2013]{karus2013} \hfill \\ S. Karus, \emph{Automatic Means of
+	Identifying Evolutionary Events in Software Development}, 1063-6773/13 IEEE,
+	2013
+\end{thebibliography}
+\endgroup
 
 \end{document}
