@@ -1,0 +1,64 @@
+\section{Research}
+
+%- what will make the research difficult
+%- what is the input you expect from literature survey
+%- what sources will you use and how will you use / document them
+%- what experiments / research will you do
+%- what proof of concept will you make
+%- what method will you use
+%- which hypothesis do you have
+%- how will you validate your research
+
+\subsection{Question}
+
+\begin{description}
+	\item[RQ:] \emph{\researchQuestion}
+\end{description}
+
+\subsection{Theory}
+The above research question is based on the observation that wavelet analysis is
+used in other disciplines to analyse time series (e.g., economics and signal
+processing). The idea behind a wavelet transform is that we can sample the same
+signal at different intervals giving us a natural means for scaling it. In case
+of software evolution, the signal can be any measurable property of an evolving
+entity. Software repositories are a source of signals or time series in software
+evolution. This allows the wavelet transform to be applied directly for mining
+software repositories.
+
+Wavelet analysis is analysis of signals (time series) by decomposing the signal
+into wavelet coefficients and scaling coefficients based on wavelet functions
+(also known as filters). The decomposition can be repeated on the scaling
+coefficients until the number of resulting wavelet coefficients is smaller than
+the filter length.
+
+\subsection{Data}
+Karus used a data set of 27 OSS projects which together form a representative
+distribution of the OSS projects available at ohloh.net at the time of his
+study. 18 of these projects were chosen randomly from Google Code Search from
+various repositories containing team projects employing different source code
+languages, team sizes, and project types. 15 of these projects are on-going and
+3 have had no development activity since January 2009 (verified in January
+2013). The alive projects have stayed alive for a minimum of 4 years.
+
+In this Master's project, I aim to use a much larger data set that still is a
+representative distribution of OSS projects at this time. Using a larger data
+set will gather more statistical information to draw more profound conclusions
+from.
+
+The data of over 10,000 OSS projects is available at the University of
+Amsterdam. Not all of these projects will be of equal use, but certainly a
+selection larger than the 27 projects used by Karus will be useful.
+
+\subsection{Method}
+During this Master's project, I will replicate the study performed by Karus to
+validate (or refute) his conclusions. I will elaborate on finding warning signs
+in software evolution as early as possible.
+
+The analysis and data preparation will be conducted in several steps: data
+aggregation, discrete wavelet transform, similar region detection, similar
+region grouping. The analysis and data aggregation will, just as Karus did, be
+performed using R Statistics Suite with ``wavelets'', ``zoo'', and ``chron''
+packages. Package ``wavelets'' provides discrete wavelet transform, package
+``zoo'' time series methods, and package ``chron'' extends support for date and
+time manipulations.
+
