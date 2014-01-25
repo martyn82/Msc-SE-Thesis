@@ -49,6 +49,14 @@ The data of over 10,000 OSS projects is available at the University of
 Amsterdam. Not all of these projects will be of equal use, but certainly a
 selection larger than the 27 projects used by Karus will be useful.
 
+\subsection{Metrics}
+Karus conducted wavelet analysis in respect to two different time series
+dimensions: days since first commit and cumulative code churn. Code churn is the
+sum of code added, modified, and deleted \cite{elbaum}. They were chosen because
+of their popularity in project process measurement frameworks \cite{karus2013}.
+Additionally, future cumulative code churn can be estimated with reasonable
+accuracy based on project snapshots \cite{dumas}.
+
 \subsection{Method}
 During this Master's project, I will replicate the study performed by Karus to
 validate (or refute) his conclusions. I will elaborate on finding warning signs
@@ -62,3 +70,15 @@ packages. Package ``wavelets'' provides discrete wavelet transform, package
 ``zoo'' time series methods, and package ``chron'' extends support for date and
 time manipulations.
 
+\subsection{Validation}
+To find warning signs we first have to be able to detect events. The use
+of wavelet analysis has been showed by Karus \cite{karus2013} to be a method
+that can detect these events in a comparable manner.
+Afterwards, we should dive into similar patterns that show a certain outcome,
+for instance, the death of a project. If it shows that these patterns are a
+result of similar activity or a lack of activity, then we can explain what these
+patterns mean and to what extent they might lead to the death of a project.
+
+This inevitably takes some time and effort to understand a pattern that occurs
+in multiple projects. But if it turns out to be conclusive, we have new insight
+in possibly predicting the end of code evolution.
