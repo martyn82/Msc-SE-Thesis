@@ -1,18 +1,11 @@
 \section{Research}
 
-%- what will make the research difficult
-%- what is the input you expect from literature survey
-%- what sources will you use and how will you use / document them
-%- what experiments / research will you do
-%- what proof of concept will you make
-%- what method will you use
-%- which hypothesis do you have
-%- how will you validate your research
-
-\subsection{Question}
+\subsection{Questions}
 
 \begin{description}
 	\item[RQ:] \emph{\researchQuestion}
+	\item[Q1:] \emph{\subQuestionOne}
+	\item[Q2:] \emph{\subQuestionTwo}
 \end{description}
 
 \subsection{Theory}
@@ -32,7 +25,7 @@ coefficients until the number of resulting wavelet coefficients is smaller than
 the filter length.
 
 \subsection{Data}
-Karus used a data set of 27 OSS projects which together form a representative
+Karus used a data set of 27 OSS projects which form a representative
 distribution of the OSS projects available at ohloh.net at the time of his
 study. 18 of these projects were chosen randomly from Google Code Search from
 various repositories containing team projects employing different source code
@@ -40,14 +33,14 @@ languages, team sizes, and project types. 15 of these projects are on-going and
 3 have had no development activity since January 2009 (verified in January
 2013). The alive projects have stayed alive for a minimum of 4 years.
 
-In this Master's project, I aim to use a much larger data set that still is a
-representative distribution of OSS projects at this time. Using a larger data
-set will gather more statistical information to draw more profound conclusions
-from.
+In this Master's project, I aim to use a much larger data set (approx. 10 times)
+that still is a representative distribution of OSS projects at this time. Using
+a larger data set will gather more statistical information to draw more
+profound conclusions from.
 
-The data of over 10,000 OSS projects is available at the University of
-Amsterdam. Not all of these projects will be of equal use, but certainly a
-selection larger than the 27 projects used by Karus will be useful.
+The data of over 10,000 OSS projects is available at Ohloh.net. Not all of these
+projects will be of equal use, but certainly a selection much larger than the 27
+projects used by Karus will be useful.
 
 \subsection{Metrics}
 Karus conducted wavelet analysis in respect to two different time series
@@ -55,30 +48,56 @@ dimensions: days since first commit and cumulative code churn. Code churn is the
 sum of code added, modified, and deleted \cite{elbaum}. They were chosen because
 of their popularity in project process measurement frameworks \cite{karus2013}.
 Additionally, future cumulative code churn can be estimated with reasonable
-accuracy based on project snapshots \cite{dumas}.
+accuracy based on project snapshots \cite{dumas}. Therefore, cumulative code
+churn as development progress measure combines some of the benefits of measuring
+progress in time spent and LOC of final code produced.
 
 \subsection{Method}
 During this Master's project, I will replicate the study performed by Karus to
-validate (or refute) his conclusions. I will elaborate on finding warning signs
-in software evolution as early as possible.
+validate (or refute) his conclusions. I will elaborate on the kinds of events
+that we are able to detect. Especially finding objective warning signs in
+software evolution, and preferably finding these as early as possible.
 
 The analysis and data preparation will be conducted in several steps: data
 aggregation, discrete wavelet transform, similar region detection, similar
-region grouping. The analysis and data aggregation will, just as Karus did, be
-performed using R Statistics Suite with ``wavelets'', ``zoo'', and ``chron''
-packages. Package ``wavelets'' provides discrete wavelet transform, package
-``zoo'' time series methods, and package ``chron'' extends support for date and
-time manipulations.
+region grouping. The analysis and data aggregation will be performed using R
+Statistics Suite with ``wavelets'', ``zoo'', and ``chron'' packages. Package
+``wavelets'' provides discrete wavelet transform, package ``zoo'' time series
+methods, and package ``chron'' extends support for date and time manipulations.
 
-\subsection{Validation}
+\paragraph{}
 To find warning signs we first have to be able to detect events. The use
 of wavelet analysis has been showed by Karus \cite{karus2013} to be a method
-that can detect these events in a comparable manner.
-Afterwards, we should dive into similar patterns that show a certain outcome,
-for instance, the death of a project. If it shows that these patterns are a
-result of similar activity or a lack of activity, then we can explain what these
-patterns mean and to what extent they might lead to the death of a project.
+that can detect these events in a comparable manner. This we will replicate.
+
+Afterwards, we should dive into similar patterns that show a certain outcome.
+For instance, the death of a project. If it shows that these patterns are a
+result of similar activity or a lack of activity, which all lead to the death of
+the project, then we might be able to explain that these specific patterns may
+lead to the death of a project.
 
 This inevitably takes some time and effort to understand a pattern that occurs
-in multiple projects. But if it turns out to be conclusive, we have new insight
-in possibly predicting the end of code evolution.
+in multiple projects. This will mostly be handwork. If it turns out to be
+conclusive, we will have new insight in possibly predicting the end of code
+evolution.
+
+\subsection{Validation}
+\noindent
+Q1: \emph{\subQuestionOne}
+
+To tell what an objective warning sign is, we need to find all common patterns
+in all of the projects under study that had a negative effect on the project.
+The event resulted in less activity, lower quality, lower progress, more
+defects, and maybe other negative effects we don't know yet.
+\\
+
+\noindent
+Q2: \emph{\subQuestionTwo}
+
+To validate whether we have discovered a pattern or event that leads to the end
+of code evolution, we need to define 'end of code evolution' in a testable
+manner. We could say that the evolution of code has ended if there was no
+activity for 12 months. If we find patterns that confirm this, then we check
+with more data if the confirmation still holds. For all the patterns we have
+found and suspect to be a warning sign for end of code evolution, we can check
+if these patterns occur in all the ended projects.

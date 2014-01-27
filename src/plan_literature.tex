@@ -1,5 +1,81 @@
 \section{Literature study}
 
+\subsection{Summaries and relevance}
+
+\begin{description}
+	\item[\cite{karus2013}] \hfill \\
+		This is the base paper of the Master's project.
+		Karus has explored the usage of wavelet transforms for the analysis of OSS
+		projects evolution. Karus was able to detect close to 1,000 similar patterns
+		in a subset of 27 OSS projects. In conclusion, the analysis reveals that
+		wavelet analysis can be a powerful and objective tool for identifying
+		evolutionary events that can be used as estimation basis or management guide
+		in software projects.
+		
+		This Master's project will extend the work of Karus by comparing
+		patterns and events in order to predict end of software evolution.
+
+	\item[\cite{raja2012}] \hfill \\
+		Raja and Tretter defined and validated a multidimensional measure of OSS
+		project survivability: project viability. This measure has three dimensions:
+		vigor, resilience, and organisation. For each of these dimensions they defined
+		a viability index. The outcome of the study is that they have been able to
+		confirm that vigor, resilience, and organisation are different attributes
+		related to project survivability.
+		
+		This paper is related to the Master's project in terms of determining whether
+		an OSS project is active or not, the Master's project provides more. The study
+		of identifying events that predict a project's viability might be more
+		valuable because they do not only confirm that there are attributes related
+		to viability, but also about the current and future condition of a project.
+
+	\item[\cite{samoladas2010}] \hfill \\
+		Samoladas et al. studied survival analysis techniques for estimating the
+		future development of a FLOSS project. They used duration data from FLOSS
+		thousands of projects from different source code repositories. They have
+		applied different survival analysis methods to predict the survivability of
+		the projects (i.e., their probability of continuation in the future). They
+		have used the application domain and number of committers as metrics that
+		affect duration.
+		
+		I find that using metrics such as number of committers (number of developers)
+		is a good way to measure project popularity, but application domain may not be
+		the most objective way of measuring project survivability. Therefore, I
+		believe that analysing time series is a more objective approach for measuring
+		project viability.
+	
+	\item[\cite{elbaum}] \hfill \\
+		Elbaum and Munson present a methodology that, as they call it, will produce a
+		viable fault surrogate. The measure for estimating the impact of code change
+		is of interest in this paper. The authors introduced the notion of \emph{code
+		churn}. A code churn is the total lines of code added, modified, and removed.
+		It is a precise measurement of software development process and product
+		outcomes.
+		
+		Karus believes, and I agree, that code churn is an objective measure of
+		software development progress. It measures the total work done. Counting the
+		lines of code (LOC) is not enough as there could have been a refactoring of
+		existing code that removed 20\% of the lines. With counting lines you would
+		miss the work done to remove that code. Therefore, code churn is a better
+		way to measure the development progress.
+	
+	\item[\cite{dumas}] \hfill \\
+		Karus and Dumas studied a means to estimate future code maintenance effort in
+		order to plan software maintenance activities. In this paper they used machine
+		learning techniques to unveil predictors of yearly cumulative code churn of
+		software projects on the basis of metrics extracted from version control
+		systems. They have shown that a code churn estimation model built purely with
+		organisational metrics is superior to one built purely with code metrics.
+		However, a combined model provides the highest predictive power. Code metrics
+		in general are complementary to organisational metrics for the purpose of
+		estimating code churn.
+		
+		In this paper, Karus and Dumas have shown that it is possible to use code
+		churn combined with machine learning to estimate future code churn. It has
+		been done by Karus in the base paper of this Master's project. This is useful
+		if we want to be able to predict software evolution.
+\end{description}
+
 \subsection{Bibliography}
 \begingroup
 \renewcommand{\section}[2]{}%
@@ -8,22 +84,19 @@
 	Identifying Evolutionary Events in Software Development}, 1063-6773/13 IEEE,
 	2013
 
-	\bibitem[2]{karus_mayan} S. Karus, \emph{Measuring
-	Software Projects Mayan Style}, 978-1-4673-6331-0/13 IEEE, 2013
-
-	\bibitem[3]{raja2012} U. Raja and M.J.
+	\bibitem[2]{raja2012} U. Raja and M.J.
 	Tretter, \emph{Defining and Evaluating a Measure of Open Source Project Survivability},
 	0098-5589/12 IEEE Transactions on Software Engineering vol.38 no.1, jan-feb
 	2012
 
-	\bibitem[4]{samoladas2010} I. Samoladas, L. Angelis, I.
+	\bibitem[3]{samoladas2010} I. Samoladas, L. Angelis, I.
 	Stamelos, \emph{Survival Analysis on the Duration of Open Source Projects},
 	Information and Software Technology 52, 2012, p.902-922
 
-	\bibitem[5]{elbaum} S.G. Elbaum and J.C. Munson, \emph{Code Churn: A Measure
+	\bibitem[4]{elbaum} S.G. Elbaum and J.C. Munson, \emph{Code Churn: A Measure
 	for Estimating the Impact of Code Change}, IEEE Software Maintenance, 1998
 
-	\bibitem[6]{dumas} S. Karus and M. Dumas, \emph{Code Churn Estimation Using
+	\bibitem[5]{dumas} S. Karus and M. Dumas, \emph{Code Churn Estimation Using
 	Organisational and Code Metrics: An Experimental Comparison}, Institute of
 	Computer Science Journal vol. 54, issue 2, 2012
 

@@ -28,19 +28,28 @@ of Identifying Evolutionary Events in Software Development''} by Siim Karus
 (2013) \cite{karus2013}.
 
 Karus has explored the usage of wavelet analysis to identify evolutionary events
-in the evolution of open source software (OSS) projects. He has done the study
-on a data set of 27 OSS repositories. This data set was chosen carefully to be a
-representative set following the distribution of all OSS projects at the time of
-the study. He selected alive, active, inactive, and dead projects.
+(i.e., common patterns) in the evolution of open source software (OSS) projects.
+The analysis was performed on a data set of 27 OSS projects. This data set was chosen
+carefully to be a representative set following the distribution of all OSS
+projects tracked by Ohloh.net at the time of the study. He selected active,
+inactive, and dead projects.
 
-Karus explored the usage of wavelet analysis on the evolution (time series) of
-these projects to see if this analysis method can be used to find objective
-warning signs in software projects leading to the end of code evolution.
+However, Karus did not dive into the kinds of patterns he discovered. He did
+conclude that similar patterns in software evolution can be identified by using
+wavelet analysis, but he does not elaborate on these events.
+
+In this Master's project I will extend the research done by Karus by using a
+larger data set. At Ohloh.net, there are over 10,000 OSS projects available. It
+should be possible to have a data set of at least 250 OSS projects for this
+study.
+Furthermore, I will dive into the detected events and try to know what they mean
+in order to tell if an event is an objective warning sign. Additionally, it may
+be possible to identify a warning sign in an early stage.
 
 \paragraph{}
 According to Karus, knowing warning signs could help in:
 \begin{itemize}
-	\item Choosing OSS to implement in a business scenario.
+	\item Choosing an OSS project to implement in a business scenario.
 	\item Making timely preparations for decommissioning an OSS project.
 	\item Choosing a development process that best suites the aims of a software
 	project for new OSS projects.
@@ -52,8 +61,9 @@ The main research question to be answered is:
 	\item[RQ:] \emph{\researchQuestion} \cite{karus2013}
 \end{description}
 
-\paragraph{}
-As Karus keeps quite shallow about what kinds of events he was able to detect
-and does not elaborate on this, I will use the methods studied by Karus to try
-to find objective warning signs in code evolution and try to tell about the
-kinds of events that we were able to detect.
+In order to answer the RQ, I will need to find answers to the following
+questions:
+\begin{description}
+	\item[Q1:] \subQuestionOne
+	\item[Q2:] \subQuestionTwo
+\end{description}
