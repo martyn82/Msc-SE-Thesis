@@ -1,2 +1,2 @@
-mscsethesis
+Master Software Engineering Thesis
 ===========
