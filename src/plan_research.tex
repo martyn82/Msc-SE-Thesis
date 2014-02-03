@@ -11,12 +11,12 @@
 \subsection{Theory}
 The above research question is based on the observation that wavelet analysis is
 used in other disciplines to analyse time series (e.g., economics and signal
-processing). The idea behind a wavelet transform is that we can sample the same
-signal at different intervals giving us a natural means for scaling it. In case
-of software evolution, the signal can be any measurable property of an evolving
-entity. Software repositories are a source of signals or time series in software
-evolution. This allows the wavelet transform to be applied directly for mining
-software repositories.
+processing). The idea behind a wavelet transform is that the same signal can
+be sampled at different intervals giving a natural means for scaling it. In
+case of software evolution, the signal can be any measurable property of an
+evolving entity. Software repositories are a source of signals or time series
+in software evolution. This allows the wavelet transform to be applied directly
+for mining software repositories.
 
 Wavelet analysis is analysis of signals (time series) by decomposing the signal
 into wavelet coefficients and scaling coefficients based on wavelet functions
@@ -25,7 +25,7 @@ coefficients until the number of resulting wavelet coefficients is smaller than
 the filter length.
 
 \subsection{Data}
-Karus used a data set of 27 OSS projects which form a representative
+Karus has used a data set of 27 OSS projects which form a representative
 distribution of the OSS projects available at ohloh.net at the time of his
 study. 18 of these projects were chosen randomly from Google Code Search from
 various repositories containing team projects employing different source code
@@ -33,42 +33,50 @@ languages, team sizes, and project types. 15 of these projects are on-going and
 3 have had no development activity since January 2009 (verified in January
 2013). The alive projects have stayed alive for a minimum of 4 years.
 
-In this Master's project, I aim to use a much larger data set (approx. 10 times)
-that still is a representative distribution of OSS projects at this time. Using
-a larger data set will gather more statistical information to draw more
-profound conclusions from.
+In this Master's project, I will use a much larger data set (approx. 10
+times) that still is a representative distribution of OSS projects at this time.
+Using a larger data set will gather more statistical information to draw more
+realistic conclusions from.
 
-The data of over 10,000 OSS projects is available at Ohloh.net. Not all of these
-projects will be of equal use, but certainly a selection much larger than the 27
-projects used by Karus will be useful.
+The evolution data of over 10,000 OSS projects is available at Ohloh.net. Not
+all of these projects will be of equal use, but certainly a selection much
+larger than the 27 projects used by Karus will be useful.
 
 \subsection{Metrics}
 Karus conducted wavelet analysis in respect to two different time series
-dimensions: days since first commit and cumulative code churn. Code churn is the
-sum of code added, modified, and deleted \cite{elbaum}. They were chosen because
-of their popularity in project process measurement frameworks \cite{karus2013}.
-Additionally, future cumulative code churn can be estimated with reasonable
-accuracy based on project snapshots \cite{dumas}. Therefore, cumulative code
-churn as development progress measure combines some of the benefits of measuring
-progress in time spent and LOC of final code produced.
+dimensions. The first is days since first commit and the second is cumulative
+code churn.
+
+Code churn is the sum of code added, modified, and deleted \cite{elbaum}. This
+metric was chosen because of its popularity in project process measurement
+frameworks \cite{karus2013}. Additionally, future cumulative code churn can be
+estimated with reasonable accuracy based on project snapshots \cite{dumas}.
+Therefore, cumulative code churn as development progress measure combines some
+of the benefits of measuring progress in time spent and lines of code (LOC) of
+final code produced.
 
 \subsection{Method}
 During this Master's project, I will replicate the study performed by Karus to
-validate (or refute) his conclusions. I will elaborate on the kinds of events
+validate or refute his conclusions. I will elaborate on the kinds of events
 that we are able to detect. Especially finding objective warning signs in
 software evolution, and preferably finding these as early as possible.
 
-The analysis and data preparation will be conducted in several steps: data
-aggregation, discrete wavelet transform, similar region detection, similar
-region grouping. The analysis and data aggregation will be performed using R
-Statistics Suite with ``wavelets'', ``zoo'', and ``chron'' packages. Package
-``wavelets'' provides discrete wavelet transform, package ``zoo'' time series
-methods, and package ``chron'' extends support for date and time manipulations.
+The analysis and data preparation will be conducted in several steps:
+\begin{enumerate}
+	\item data aggregation
+	\item discrete wavelet transform
+	\item similar region detection
+	\item similar region grouping
+\end{enumerate}
+The analysis and data aggregation will be performed using R Statistics Suite
+with ``wavelets'', ``zoo'', and ``chron'' packages. Package ``wavelets''
+provides discrete wavelet transform, package ``zoo'' time series methods, and
+package ``chron'' extends support for date and time manipulations.
 
 \paragraph{}
 To find warning signs we first have to be able to detect events. The use
 of wavelet analysis has been showed by Karus \cite{karus2013} to be a method
-that can detect these events in a comparable manner. This we will replicate.
+that can detect these events in a comparable manner. This I will replicate.
 
 Afterwards, we should dive into similar patterns that show a certain outcome.
 For instance, the death of a project. If it shows that these patterns are a
@@ -82,22 +90,67 @@ conclusive, we will have new insight in possibly predicting the end of code
 evolution.
 
 \subsection{Validation}
+For us to know what an objective warning sign is, we need to find common
+patterns in the projects under study that had a negative effect on the project.
+Negative effects include, but are not limited to, less developers activity,
+lower code quality, lower progress speed, more defects, and maybe other effects
+we don't know yet.
+
+Measuring developers activity can be done by looking at the number of
+contributors and the individual number of commits.
+
+To validate whether we have discovered a pattern or event that lead to the end
+of code evolution, we need to define 'end of code evolution' in a testable
+manner. We could say that the evolution of code has ended if there was no
+developers activity for 12 months. If we find patterns that confirm this, then
+we should validate with more data if the confirmation still holds.
+\\
+
 \noindent
 Q1: \emph{\subQuestionOne}
 
-To tell what an objective warning sign is, we need to find all common patterns
-in all of the projects under study that had a negative effect on the project.
-The event resulted in less activity, lower quality, lower progress, more
-defects, and maybe other negative effects we don't know yet.
+In order to find objective warning signs we need to know if patterns found using
+wavelet analysis are indeed evolutionary events. Karus had found 998 common
+patterns across different projects \cite{karus2013}.
+We aim to detect and point events that have a negative effect on the evolution
+of the project (i.e., warning signs).
+
+We have to dive into these events to see what happened. Which factors are
+involved that may have caused the pattern. To draw conclusions from events
+found, we have to look into metrics related to developers:
+\begin{itemize}
+	\item average number of developers
+	\item cumulative number of developers
+	\item number of commits
+	\item relative team size
+\end{itemize}
+Metrics related to code:
+\begin{itemize}
+	\item mean LOC added per commit
+	\item mean LOC modified per commit
+	\item mean LOC deleted per commit
+	\item mean LOC churned per commit
+\end{itemize}
+Metrics related to project size:
+\begin{itemize}
+	\item LOC
+	\item number of files
+	\item relative progress by date
+\end{itemize}
+
+Karus used the mean LOC and mean number of files to relate to project size. We
+believe this is a flawed number because a project usually starts small and
+usually ends larger than it started. To determine a project's size at any point
+in time, you need to take the LOC and number of files at that time and not the
+average of what it has been since its existence.
 \\
 
 \noindent
 Q2: \emph{\subQuestionTwo}
 
-To validate whether we have discovered a pattern or event that leads to the end
-of code evolution, we need to define 'end of code evolution' in a testable
-manner. We could say that the evolution of code has ended if there was no
-activity for 12 months. If we find patterns that confirm this, then we check
-with more data if the confirmation still holds. For all the patterns we have
-found and suspect to be a warning sign for end of code evolution, we can check
-if these patterns occur in all the ended projects.
+To answer this question we validate the results of wavelet analysis over a
+subset of the projects. This subset will be a careful selection of projects with
+known events. The events will be of kinds that have a negative effect on the
+evolution of the project, thus we want to detect these. Because we already know
+what events occured and what they have lead to, we can verify if wavelet
+analysis actually detects these events.
