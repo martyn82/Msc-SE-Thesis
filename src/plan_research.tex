@@ -1,9 +1,11 @@
 \section{Research}
 
-\subsection{Questions}
-
+The main research question:
 \begin{description}
 	\item[RQ:] \emph{\researchQuestion}
+\end{description}
+Sub-questions:
+\begin{description}
 	\item[Q1:] \emph{\subQuestionOne}
 	\item[Q2:] \emph{\subQuestionTwo}
 \end{description}
@@ -54,6 +56,36 @@ estimated with reasonable accuracy based on project snapshots \cite{dumas}.
 Therefore, cumulative code churn as development progress measure combines some
 of the benefits of measuring progress in time spent and lines of code (LOC) of
 final code produced.
+\\
+
+\noindent
+In order to select a representative data set, we look at the following metrics.
+\\Metrics related to developers:
+\begin{itemize}
+	\item average number of developers
+	\item cumulative number of developers
+	\item number of commits
+	\item relative team size
+\end{itemize}
+Metrics related to code:
+\begin{itemize}
+	\item mean LOC added per commit
+	\item mean LOC modified per commit
+	\item mean LOC deleted per commit
+	\item mean LOC churned per commit
+\end{itemize}
+Metrics related to project size:
+\begin{itemize}
+	\item LOC
+	\item number of files
+	\item relative progress by date
+\end{itemize}
+
+Karus used mean LOC and mean number of files to determine project size. We
+believe this is a flawed number because a project usually starts small and
+usually ends larger than it started. To determine a project's size at any point
+in time, you need to take the LOC and number of files at that time and not the
+average of what it has been since its existence.
 
 \subsection{Method}
 During this Master's project, I will replicate the study performed by Karus to
@@ -75,19 +107,16 @@ package ``chron'' extends support for date and time manipulations.
 
 \paragraph{}
 To find warning signs we first have to be able to detect events. The use
-of wavelet analysis has been showed by Karus \cite{karus2013} to be a method
+of wavelet analysis has been shown by Karus \cite{karus2013} to be a method
 that can detect these events in a comparable manner. This I will replicate.
+\\
 
 Afterwards, we should dive into similar patterns that show a certain outcome.
 For instance, the death of a project. If it shows that these patterns are a
 result of similar activity or a lack of activity, which all lead to the death of
 the project, then we might be able to explain that these specific patterns may
 lead to the death of a project.
-
-This inevitably takes some time and effort to understand a pattern that occurs
-in multiple projects. This will mostly be handwork. If it turns out to be
-conclusive, we will have new insight in possibly predicting the end of code
-evolution.
+\\
 
 \subsection{Validation}
 For us to know what an objective warning sign is, we need to find common
@@ -95,62 +124,62 @@ patterns in the projects under study that had a negative effect on the project.
 Negative effects include, but are not limited to, less developers activity,
 lower code quality, lower progress speed, more defects, and maybe other effects
 we don't know yet.
+\\
 
 Measuring developers activity can be done by looking at the number of
-contributors and the individual number of commits.
+contributors and the individual number of commits. A sudden rise in bug reports
+can be a sign of lower code quality.
+\\
 
 To validate whether we have discovered a pattern or event that lead to the end
 of code evolution, we need to define 'end of code evolution' in a testable
 manner. We could say that the evolution of code has ended if there was no
-developers activity for 12 months. If we find patterns that confirm this, then
-we should validate with more data if the confirmation still holds.
+developers activity for, say, 12 months. If we find patterns that confirm this,
+then we should validate with more data if the confirmation still holds.
 \\
 
 \noindent
-Q1: \emph{\subQuestionOne}
+\bfseries{Q1: \emph{\subQuestionOne}}\rm
+\\
 
-In order to find objective warning signs we need to know if patterns found using
-wavelet analysis are indeed evolutionary events. Karus had found 998 common
-patterns across different projects \cite{karus2013}.
-We aim to detect and point events that have a negative effect on the evolution
-of the project (i.e., warning signs).
+Karus had found that the wavelet analysis revealed 998 common patterns across
+different projects. He concluded in a quick analysis that it was confirmed that
+evolution patterns in software projects do express various warning signs leading
+to or indicating the impending end of code evolution in the project
+\cite{karus2013}.
+\\
 
-We have to dive into these events to see what happened. Which factors are
-involved that may have caused the pattern. To draw conclusions from events
-found, we have to look into metrics related to developers:
-\begin{itemize}
-	\item average number of developers
-	\item cumulative number of developers
-	\item number of commits
-	\item relative team size
-\end{itemize}
-Metrics related to code:
-\begin{itemize}
-	\item mean LOC added per commit
-	\item mean LOC modified per commit
-	\item mean LOC deleted per commit
-	\item mean LOC churned per commit
-\end{itemize}
-Metrics related to project size:
-\begin{itemize}
-	\item LOC
-	\item number of files
-	\item relative progress by date
-\end{itemize}
+However, what patterns were actually detected? Are there more patterns to be
+identified that are a result of other factors? To know what a pattern means in
+the reality of the project, we have to take a look at what factors caused the
+pattern. For instance, a sudden change in team size, progress, etc. Furthermore,
+what was the impact of the pattern on the future of the project.
+\\
 
-Karus used the mean LOC and mean number of files to relate to project size. We
-believe this is a flawed number because a project usually starts small and
-usually ends larger than it started. To determine a project's size at any point
-in time, you need to take the LOC and number of files at that time and not the
-average of what it has been since its existence.
+Because the full data set will be too large to validate each case individually,
+a subset needs to be taken. This subset will be a representative subset of the
+full data set.
 \\
 
 \noindent
-Q2: \emph{\subQuestionTwo}
+\bfseries{Q2: \emph{\subQuestionTwo}}\rm
+\\
 
-To answer this question we validate the results of wavelet analysis over a
-subset of the projects. This subset will be a careful selection of projects with
-known events. The events will be of kinds that have a negative effect on the
-evolution of the project, thus we want to detect these. Because we already know
-what events occured and what they have lead to, we can verify if wavelet
-analysis actually detects these events.
+Wavelet analysis can be used to detect patterns that lead to end of code
+evolution as found by Karus \cite{karus2013}. However, results of the wavelet
+analysis may contain false-positives -- i.e., patterns that have no single
+cause and do not neccessarily have negative effects on the project.
+On the contrary, wavelet analysis may not detect events that had a negative
+effect on the project.
+\\
+
+To answer this question we take two subsets of projects. For the false-positive
+cases we take a subset of projects of which patterns were detected using the
+wavelet analysis. We manually analyse these patterns on how they relate to the
+events that occured in the project.
+\\
+
+For the false-negative cases we take a subset of projects with known events that
+had a negative effect on the project (e.g., team change, project abandonment).
+We can then verify if these events were detected using wavelet analysis and how
+to recognize these.

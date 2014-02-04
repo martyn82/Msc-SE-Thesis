@@ -9,12 +9,17 @@ with little empirical validation. This also means that different projects can
 not be compared in the same scale.
 
 In this study, we are proposing means for detecting evolutionary events in OSS
-projects to offer comparable data on their evolution \cite{karus2013}.
+projects to offer comparable data on their evolution \cite{karus2013}. We use
+wavelet analysis on time series in software evolution to be able to detect
+events that may lead to the end of code evolution. We dive deeper into these
+events to be able to find warning signs as early as possible in the evolution
+of OSS projects.
 
 \paragraph{}
-At VNU Vacature Media developers extensively use OSS projects to support their
-software projects. These OSS projects include Apache web server, Zend Framework,
-and MySQL database server.
+At VNU Vacature Media developers extensively use OSS projects in their
+day-to-day work. The projects vary from developers tools to complete subsystems.
+These OSS projects include, but not limited to, Ansible, Apache web server, Zend
+Framework, and MySQL database server.
 
 Amongst the previous well-known OSS projects, less known OSS projects are used.
 Therefore, it is valuable to be able to detect warning signs in the
@@ -26,18 +31,31 @@ The survivability of OSS projects has been of interest by many researchers. In
 an industrial environment, a project is considered successful if it is completed
 within time and budget constraints. In OSS projects, these constraints do not
 always exist. The indicators of success for OSS projects differ from the one
-study to the other. Most studies used measures as number of developers,
-developer's satisfaction, bug resolution time, level of activity
-\cite{samoladas2010}.
+study to the other.
+
+In a study by Samoladas et al. a method for survival analysis on OSS projects
+was proposed. These methods were employed to predict the
+survivability of the projects by examining their duration, combined with other
+characterstics such as application domain and number of committers. Although
+these metrics give insight in the survivability chances of a project, it was
+also found that adding a developer to the team of contributors increased the
+survivability of the project substantially. The authors of the paper proposed
+two main research issues to be addressed in the future. The first one is to add
+more projects to the study with possibly a different categorization. In
+addition, the effects of more project parameters, such as programming language
+should be examined. This is not trivial since typically more than one language
+is used in each project \cite{samoladas2010}.
 
 \paragraph{}
-There has been a study by Raja et al. \cite{raja2012} on defining a measure of
-OSS project survivability. They have been looking for vitality of OSS projects.
-The question whether an OSS project is active or not is not of our specific
-interest. We want to be able to predict the OSS project evolution.
+There has been a study by Raja and Tretter on defining a measure of OSS project
+survivability. They have been looking for vitality of OSS projects: the ability
+of a project to grow and maintain its structure in the presence of
+perturbations. They identified three dimensions of project viability: vigor --
+the ability of a project to grow --, resilience -- the ability of a project to
+recover from disturbances --, and organization -- the structure exhibited in the
+project. These dimensions represent three distinct characteristics of project
+viability \cite{raja2012}. Although this study is of use to determine
+survivability of a project it is a snapshot of a point in time.
 
 \paragraph{}
-Karus used wavelet analysis on time series in software evolution to be able to
-detect events leading to the end of code evolution. We dive deeper into these
-events to be able to find warning signs as early as possible in the evolution of
-OSS projects.
+

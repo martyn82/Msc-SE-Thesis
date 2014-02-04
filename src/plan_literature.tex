@@ -11,9 +11,11 @@
 		wavelet analysis can be a powerful and objective tool for identifying
 		evolutionary events that can be used as estimation basis or management guide
 		in software projects.
-		
-		This Master's project will extend the work of Karus by comparing
-		patterns and events in order to predict end of software evolution.
+
+		During this Master's project I will replicate and extend the work of Karus by
+		comparing patterns and events in order to validate wavelet analysis as a tool
+		to predict end of software evolution. This will be done using a larger data
+		set and a critical validation of the results found in the base paper.
 
 	\item[\cite{raja2012}] \hfill \\
 		Raja and Tretter defined and validated a multidimensional measure of OSS
@@ -22,27 +24,21 @@
 		a viability index. The outcome of the study is that they have been able to
 		confirm that vigor, resilience, and organisation are different attributes
 		related to project survivability.
-		
+
 		This paper is related to the Master's project in terms of determining whether
-		an OSS project is active or not, the Master's project provides more. The study
-		of identifying events that predict a project's viability might be more
-		valuable because they do not only confirm that there are attributes related
-		to viability, but also about the current and future condition of a project.
+		an OSS project is active or dying.
 
 	\item[\cite{samoladas2010}] \hfill \\
 		Samoladas et al. studied survival analysis techniques for estimating the
-		future development of a FLOSS project. They used duration data from FLOSS
-		thousands of projects from different source code repositories. They have
-		applied different survival analysis methods to predict the survivability of
-		the projects (i.e., their probability of continuation in the future). They
+		future development of a FLOSS project. They used duration data from
+		FLOSS of thousands of projects from different source code repositories. They
+		have applied different survival analysis methods to predict the survivability
+		of the projects (i.e., their probability of continuation in the future). They
 		have used the application domain and number of committers as metrics that
 		affect duration.
-		
-		I find that using metrics such as number of committers (number of developers)
-		is a good way to measure project popularity, but application domain may not be
-		the most objective way of measuring project survivability. Therefore, I
-		believe that analysing time series is a more objective approach for measuring
-		project viability.
+
+		This paper is related to this project on the analysis of project survivability
+		measures. It can be used to validate the results found by wavelet analysis.
 	
 	\item[\cite{elbaum}] \hfill \\
 		Elbaum and Munson present a methodology that, as they call it, will produce a
@@ -51,13 +47,13 @@
 		churn}. A code churn is the total lines of code added, modified, and removed.
 		It is a precise measurement of software development process and product
 		outcomes.
-		
-		Karus believes, and I agree, that code churn is an objective measure of
-		software development progress. It measures the total work done. Counting the
-		lines of code (LOC) is not enough as there could have been a refactoring of
-		existing code that removed 20\% of the lines. With counting lines you would
-		miss the work done to remove that code. Therefore, code churn is a better
-		way to measure the development progress.
+
+		Code churn is an objective measure of software development progress. It
+		measures the total work done. Counting the lines of code (LOC) is not enough
+		as there could have been a refactoring of existing code that removed 20\% of
+		the lines. With counting lines you would miss the work done to remove that
+		code. Therefore, code churn is a better way to measure the development
+		progress.
 	
 	\item[\cite{dumas}] \hfill \\
 		Karus and Dumas studied a means to estimate future code maintenance effort in
@@ -69,11 +65,9 @@
 		However, a combined model provides the highest predictive power. Code metrics
 		in general are complementary to organisational metrics for the purpose of
 		estimating code churn.
-		
-		In this paper, Karus and Dumas have shown that it is possible to use code
-		churn combined with machine learning to estimate future code churn. It has
-		been done by Karus in the base paper of this Master's project. This is useful
-		if we want to be able to predict software evolution.
+
+		The paper is related to the project in ways of determining future code churn.
+		It will be of use to predict software evolution events.
 \end{description}
 
 \subsection{Bibliography}
