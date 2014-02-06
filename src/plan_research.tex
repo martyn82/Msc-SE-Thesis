@@ -12,7 +12,7 @@ Sub-questions:
 
 \subsection{Theory}
 The above research question is based on the observation that wavelet analysis is
-used in other disciplines to analyse time series (e.g., economics and signal
+used in other disciplines to analyze time series (e.g., economics and signal
 processing). The idea behind a wavelet transform is that the same signal can
 be sampled at different intervals giving a natural means for scaling it. In
 case of software evolution, the signal can be any measurable property of an
@@ -40,13 +40,15 @@ times) that still is a representative distribution of OSS projects at this time.
 Using a larger data set will gather more statistical information to draw more
 realistic conclusions from.
 
-The evolution data of over 10,000 OSS projects is available at Ohloh.net. Not
+The evolution data of over 660,000 OSS projects is available at Ohloh.net. Not
 all of these projects will be of equal use, but certainly a selection much
 larger than the 27 projects used by Karus will be useful.
 
 The data set will contain projects from different source code repositories,
-different programming languages, project size, developers, and code activity.
-The data set will be evaluated using techniques defined by Nagappan et al.
+different programming languages, project size, developers, and code activity. We
+aim to have a data set that is not only representative to the universe, but also
+diverse. The importance of diversity is pointed out in a paper by Nagappan et
+al. The data set will be evaluated using techniques defined by Nagappan et al.
 \cite{nagappan}.
 
 \subsection{Metrics}
@@ -107,12 +109,14 @@ The analysis and data preparation will be conducted in several steps:
 The analysis and data aggregation will be performed using R Statistics Suite
 with ``wavelets'', ``zoo'', and ``chron'' packages. Package ``wavelets''
 provides discrete wavelet transform, package ``zoo'' time series methods, and
-package ``chron'' extends support for date and time manipulations.
+package ``chron'' extends support for date and time manipulations. The original
+R scripts from the base paper by Karus \cite{karus2013} are available for this
+study.
 
 \paragraph{}
 To find warning signs we first have to be able to detect events. The use
-of wavelet analysis has been shown by Karus \cite{karus2013} to be a method
-that can detect these events in a comparable manner. This I will replicate.
+of wavelet analysis has been shown by Karus to be a method that can detect these
+events in a comparable manner \cite{karus2013}. This I will replicate.
 \\
 
 Afterwards, we should dive into similar patterns that show a certain outcome.
