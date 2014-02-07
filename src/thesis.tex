@@ -1,0 +1,83 @@
+% !TEX encoding = UTF-8 Unicode
+\documentclass[9pt, a4paper, portrait]{report}
+\usepackage[a4paper, total={160mm, 247mm}]{geometry}
+
+% Draft watermark
+\usepackage{draftwatermark}
+\SetWatermarkText{-DRAFT-}
+\SetWatermarkScale{5}
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% paper attributes
+\newcommand{\theTitle}{Automatic Means of Detecting Warning Signs in Software
+Evolution}
+\newcommand{\theAuthor}{Martijn Endenburg}
+\newcommand{\theUniversity}{University of Amsterdam}
+\newcommand{\theLocation}{The Netherlands}
+\newcommand{\theStatus}{Draft}
+
+% research hypothesis and questions
+\newcommand{\researchQuestion}{Can we use wavelet analysis to find objective
+warning signs in software projects leading to the end of code evolution?}
+\newcommand{\subQuestionOne}{What patterns can be found using wavelet analysis?}
+\newcommand{\subQuestionTwo}{Under what conditions does wavelet analysis
+succeed or fail in detecting evolutionary events?}
+
+% title section
+\title{\bf{\theTitle}}
+\author{\theAuthor}
+
+\begin{document}
+
+% title page
+\begin{titlepage}
+\begin{center}
+
+\vspace*{2cm}
+
+{ \huge \textsc{\theTitle} \\[0.6cm] }
+{ \large \textsc \theAuthor \\[2cm] }
+{ \textsc \today \\[0.2cm] }
+{ \large \textsc{Part-time programme \\ Master's Software Engineering} \\[2cm] }
+
+\begin{minipage}[t]{7cm}
+\begin{flushleft}
+\sc{Supervisor}\\
+\emph{R. Pannekoek}\\[1.2cm]
+
+\sc{Tutor}\\
+\emph{M. Bruntink}
+\end{flushleft}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{7cm}
+\begin{flushright}
+\sc{Organization}\\
+\emph{VNU Vacature Media \\ De Persgroep Nederland}\\[1.2cm]
+
+\sc{Publication status}\\
+\emph{Draft}
+\end{flushright}
+\end{minipage}\\[2cm]
+
+{ \Large \textsc University of Amsterdam }
+
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+\input{abstract}
+%preface
+%introduction
+%motication
+%research method
+%background and context
+%research
+%results
+%analysis and conclusion
+\input{references}
+%appendices
+
+\end{document}
