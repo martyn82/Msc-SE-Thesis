@@ -1,0 +1,5 @@
+Wavelet_cum.R: Applies discrete wavelet transform and stores the results in folder “wavelet_cum”
+Similar_sequence_analytics.R: Identifies similarities in the transformed data (uses data from folder “wavelet_cum”)
+Similar_sequence_popular.R: Counts the occurrences of similar sections identified by the previous script.
+
+The template section and locations of the section in projects are output to file sim.data.csv
