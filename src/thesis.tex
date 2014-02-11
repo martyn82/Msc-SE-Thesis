@@ -1,5 +1,5 @@
 % !TEX encoding = UTF-8 Unicode
-\documentclass[9pt, a4paper, portrait]{report}
+\documentclass[9pt, a4paper, portrait, draft]{report}
 \usepackage[a4paper, total={160mm, 247mm}]{geometry}
 
 % Draft watermark
@@ -16,7 +16,7 @@ Evolution}
 \newcommand{\theAuthor}{Martijn Endenburg}
 \newcommand{\theUniversity}{University of Amsterdam}
 \newcommand{\theLocation}{The Netherlands}
-\newcommand{\theStatus}{Draft}
+\newcommand{\theStatus}{Confidential} % Confidential / Review / Published
 
 % research hypothesis and questions
 \newcommand{\researchQuestion}{Can we use wavelet analysis to find objective
@@ -31,53 +31,24 @@ succeed or fail in detecting evolutionary events?}
 
 \begin{document}
 
-% title page
-\begin{titlepage}
-\begin{center}
+\include{title}
 
-\vspace*{2cm}
-
-{ \huge \textsc{\theTitle} \\[0.6cm] }
-{ \large \textsc \theAuthor \\[2cm] }
-{ \textsc \today \\[0.2cm] }
-{ \large \textsc{Part-time programme \\ Master's Software Engineering} \\[2cm] }
-
-\begin{minipage}[t]{7cm}
-\begin{flushleft}
-\sc{Supervisor}\\
-\emph{R. Pannekoek}\\[1.2cm]
-
-\sc{Tutor}\\
-\emph{M. Bruntink}
-\end{flushleft}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{7cm}
-\begin{flushright}
-\sc{Organization}\\
-\emph{VNU Vacature Media \\ De Persgroep Nederland}\\[1.2cm]
-
-\sc{Publication status}\\
-\emph{Draft}
-\end{flushright}
-\end{minipage}\\[2cm]
-
-{ \Large \textsc University of Amsterdam }
-
-\end{center}
-\end{titlepage}
+\include{history}
 
 \tableofcontents
-\input{abstract}
-%preface
-%introduction
-%motication
-%research method
-%background and context
-%research
-%results
-%analysis and conclusion
-\input{references}
+
+\include{abstract}
+\include{preface}
+
+\include{introduction}
+\include{motivation}
+\include{method}
+\include{background}
+\include{research}
+\include{results}
+\include{analysis}
+\include{conclusion}
+\include{references}
 %appendices
 
 \end{document}
