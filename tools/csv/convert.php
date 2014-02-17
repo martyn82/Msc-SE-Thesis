@@ -304,7 +304,6 @@ $inputHandle = fopen( $inputFile, 'r' );
 $header = fgetcsv( $inputHandle );
 
 fputcsv( $outputHandle, $CSV_OUT_HEADER, CSV_OUT_DELIMITER, CSV_OUT_ENCLOSURE );
-$c = 0;
 
 while ( ( $values = fgetcsv( $inputHandle ) ) !== false ) {
 	$row = array_combine( $header, $values );
@@ -312,11 +311,6 @@ while ( ( $values = fgetcsv( $inputHandle ) ) !== false ) {
 	$previousRow = $outFields; // set global previousRow
 	
 	fputcsv( $outputHandle, $outFields, CSV_OUT_DELIMITER, CSV_OUT_ENCLOSURE );
-	$c++;
-	
-	if ( $c > 2 ) {
-		break;
-	}
 }
 
 fclose( $inputHandle );
