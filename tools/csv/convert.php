@@ -1,5 +1,7 @@
 #!/usr/bin/env php
 <?php
+date_default_timezone_set( 'Europe/Amsterdam' );
+
 /**
  * This script converts a CSV from OhlohAnalytics project to R script input.
  * I'm not fond of using globals, however, they come in handy to keep state in a non-OO script.
@@ -36,7 +38,7 @@ $CSV_MAP = array(
 	'Files' => '',
 	'Year' => 'year_fact',
 	'Month' => 'month_fact',
-	'Day' => ''
+	'Day' => array( 'value' => array( '1' ) )
 );
 
 global $CSV_OUT_HEADER;
@@ -50,6 +52,8 @@ global $currentColumn;
 
 global $previousRow; // keeps the previous output row
 $previousRow = array();
+
+global $currentProject;
 
 /**
  * Prints help.
@@ -139,7 +143,8 @@ function warnNoColumnMapping( $column ) {
  */
 function mapRow( array $currentInputRow ) {
 	global $CSV_MAP,
-		$currentColumn;
+		$currentColumn,
+		$currentProject;
 	
 	$result = array_fill_keys( array_keys( $CSV_MAP ), NOT_AVAILABLE_VALUE );
 	
@@ -151,29 +156,44 @@ function mapRow( array $currentInputRow ) {
 		
 		$currentColumn = $column; // set global current column
 		
+		if ( $column == 'ProjectId' ) {
+			// set global current project
+			$currentProject = $currentInputRow[ $mapping ];
+		}
+		
 		if ( is_array( $mapping ) ) {
-			$values = array_map(
-				function ( $mapColumn ) use ( $currentInputRow, $CSV_MAP ) {
-					if ( !isset( $CSV_MAP[ $mapColumn ] ) ) {
-						warning( "No such column mapped: '{$mapColumn}'." );
-						return NOT_AVAILABLE_VALUE;
-					}
-					
-					$originalColumn = $CSV_MAP[ $mapColumn ];
-					
-					if ( empty( $originalColumn ) ) {
-						return NOT_AVAILABLE_VALUE;
-					}
-					
-					if ( !isset( $currentInputRow[ $originalColumn ] ) ) {
-						warning( "No column in input file: '{$originalColumn}'." );
-						return NOT_AVAILABLE_VALUE;
-					}
-					
-					return $currentInputRow[ $originalColumn ];
-				},
-				reset( $mapping )
-			);
+			if ( key( $mapping ) != 'value' ) {
+				$values = array_map(
+					function ( $mapColumn ) use ( $currentInputRow, $CSV_MAP ) {
+						if ( !isset( $CSV_MAP[ $mapColumn ] ) ) {
+							warnNoColumnMapping( $mapColumn );
+							return NOT_AVAILABLE_VALUE;
+						}
+						
+						$originalColumn = $CSV_MAP[ $mapColumn ];
+						
+						if ( empty( $originalColumn ) ) {
+							return NOT_AVAILABLE_VALUE;
+						}
+						
+						if ( is_array( $originalColumn ) && key( $originalColumn ) == 'value' ) {
+							$values = reset( $originalColumn );
+							return reset( $values );
+						}
+						
+						if ( !isset( $currentInputRow[ $originalColumn ] ) ) {
+							warning( "No column in input file: '{$originalColumn}'." );
+							return NOT_AVAILABLE_VALUE;
+						}
+						
+						return $currentInputRow[ $originalColumn ];
+					},
+					reset( $mapping )
+				);
+			}
+			else {
+				$values = reset( $mapping );
+			}
 			
 			$result[ $column ] = call_user_func_array(
 				key( $mapping ),
@@ -189,6 +209,17 @@ function mapRow( array $currentInputRow ) {
 }
 
 /**
+ * Returns the given value.
+ * 
+ * @param mixed $value
+ * 
+ * @return mixed
+ */
+function value( $value ) {
+	return $value;
+}
+
+/**
  * Formats to a date string.
  * 
  * @param integer $year
@@ -200,18 +231,13 @@ function mapRow( array $currentInputRow ) {
 function createDate( $year, $month, $day ) {
 	$values = array_map(
 		function ( $value ) {
-			return $value == NOT_AVAILABLE_VALUE
-				? '01'
-				: (
-					(int) $value < 10
-						? '0' . (string) $value
-						: (string) $value
-				);
+			return (int) $value;
 		},
 		array( $year, $month, $day )
 	);
-	
-	return vsprintf( "%s-%s-%s", $values );
+
+	$date = \DateTime::createFromFormat( 'Y-m-d', "{$values[ 0 ]}-{$values[ 1 ]}-{$values[ 2 ]}" );
+	return $date->format( "Y-m-d" );
 }
 
 /**
@@ -317,6 +343,7 @@ $inputHandle = fopen( $inputFile, 'r' );
 $header = fgetcsv( $inputHandle );
 
 fputcsv( $outputHandle, $CSV_OUT_HEADER, CSV_OUT_DELIMITER, CSV_OUT_ENCLOSURE );
+$counter = 0;
 
 while ( ( $values = fgetcsv( $inputHandle ) ) !== false ) {
 	$row = array_combine( $header, $values );
@@ -324,7 +351,12 @@ while ( ( $values = fgetcsv( $inputHandle ) ) !== false ) {
 	$previousRow = $outFields; // set global previousRow
 	
 	fputcsv( $outputHandle, $outFields, CSV_OUT_DELIMITER, CSV_OUT_ENCLOSURE );
+	
+	$counter++;
 }
 
 fclose( $inputHandle );
 fclose( $outputHandle );
+
+out( "{$counter} rows converted." );
+stop( STATUS_OK );
