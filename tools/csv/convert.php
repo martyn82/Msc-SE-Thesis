@@ -198,7 +198,20 @@ function mapRow( array $currentInputRow ) {
  * @return string
  */
 function createDate( $year, $month, $day ) {
-	return "{$year}-{$month}-{$day}";
+	$values = array_map(
+		function ( $value ) {
+			return $value == NOT_AVAILABLE_VALUE
+				? '01'
+				: (
+					(int) $value < 10
+						? '0' . (string) $value
+						: (string) $value
+				);
+		},
+		array( $year, $month, $day )
+	);
+	
+	return vsprintf( "%s-%s-%s", $values );
 }
 
 /**
