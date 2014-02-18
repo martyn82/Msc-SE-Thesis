@@ -16,10 +16,10 @@ const CSV_OUT_ENCLOSURE = '"';
 
 global $CSV_MAP;
 $CSV_MAP = array(
+	'ProjectId' => 'project_name_fact',
 	'CommitId' => '',
 	'Date' => array( 'createDate' => array( 'Year', 'Month', 'Day' ) ),
 	'DeveloperId' => '',
-	'ProjectId' => 'project_name_fact',
 	'Active Developers' => 'contributors_fact',
 	'Commit LOC' => 'loc_fact',
 	'LOC Added' => 'loc_added_fact',
@@ -34,7 +34,7 @@ $CSV_MAP = array(
 	'LOC' => 'loc_fact',
 	'Relative Date Progress' => '',
 	'Relative LOC Churn Progress' => '',
-	'Relative Team Size' => '',
+	'Relative Team Size' => array( 'relativeTeamSize' => array( 'Active Developers' ) ),
 	'Files' => '',
 	'Year' => 'year_fact',
 	'Month' => 'month_fact',
@@ -54,6 +54,7 @@ global $previousRow; // keeps the previous output row
 $previousRow = array();
 
 global $currentProject;
+global $projectCounter;
 
 /**
  * Prints help.
@@ -65,6 +66,7 @@ Usage: %script% options
 Options:
 	-h	Shows this help.
 	-i	Specify an input file [required].
+	-m	Specify a maximum number of projects [optional].
 	-o	Specify an output file [optional].
 	
 Example usage:
@@ -95,7 +97,7 @@ function out( $message ) {
  * @param string $message
  */
 function error( $message ) {
-	fwrite( STDERR, 'ERROR: ' . $message . PHP_EOL );
+	fwrite( STDERR, "ERROR: {$message}" . PHP_EOL );
 }
 
 /**
@@ -104,7 +106,16 @@ function error( $message ) {
  * @param string $message
  */
 function warning( $message ) {
-	fwrite( STDERR, 'WARNING: ' . $message . PHP_EOL );
+	fwrite( STDERR, "WARNING: {$message}" . PHP_EOL );
+}
+
+/**
+ * Writes an info message to standard error.
+ * 
+ * @param string $message
+ */
+function info( $message ) {
+	fwrite( STDERR, "INFO: {$message}" . PHP_EOL );
 }
 
 /**
@@ -144,7 +155,9 @@ function warnNoColumnMapping( $column ) {
 function mapRow( array $currentInputRow ) {
 	global $CSV_MAP,
 		$currentColumn,
-		$currentProject;
+		$currentProject,
+		$projectCounter,
+		$previousRow;
 	
 	$result = array_fill_keys( array_keys( $CSV_MAP ), NOT_AVAILABLE_VALUE );
 	
@@ -159,6 +172,10 @@ function mapRow( array $currentInputRow ) {
 		if ( $column == 'ProjectId' ) {
 			// set global current project
 			$currentProject = $currentInputRow[ $mapping ];
+			
+			if ( empty( $previousRow ) || $previousRow[ 'ProjectId' ] != $currentProject ) {
+				$projectCounter++;
+			}
 		}
 		
 		if ( is_array( $mapping ) ) {
@@ -277,6 +294,25 @@ function sum() {
 	return array_sum( func_get_args() );
 }
 
+/**
+ * Computes relative of team size.
+ * 
+ * @return integer
+ */
+function relativeTeamSize() {
+	global $previousRow,
+		$currentColumn,
+		$currentProject;
+	
+	if ( empty( $previousRow ) || $previousRow[ 'ProjectId' ] != $currentProject ) {
+		return 1;
+	}
+	
+	$previousValue = $previousRow[ 'Active Developers' ];
+	$newValue = func_get_arg( 0 );
+	return $newValue - $previousValue;
+}
+
 // -------------------------------------------------------------------------------------------- //
 
 // Read options
@@ -284,6 +320,7 @@ function sum() {
 $shortOpts = array(
 	'h',  // help
 	'i:', // input file
+	'm:', // maximum number of projects
 	'o:'  // output file
 );
 
@@ -295,11 +332,16 @@ if ( empty( $options ) ) {
 
 $inputFile = null;
 $outputFile = null;
+$maxProjects = null;
 
 foreach ( $options as $optName => $optVal ) {
 	switch ( $optName ) {
 		case 'i':
 			$inputFile = $optVal;
+			break;
+			
+		case 'm':
+			$maxProjects = (int) $optVal;
 			break;
 			
 		case 'o':
@@ -330,6 +372,11 @@ if ( !is_readable( $inputFile ) ) {
 	stop( STATUS_ERROR_GENERAL );
 }
 
+if ( $maxProjects < 0 ) {
+	error( "Maximum projects must be a non-negative number." );
+	stop( STATUS_ERROR_GENERAL );
+}
+
 // Prepare output stream
 
 if ( !empty( $outputFile ) ) {
@@ -343,20 +390,25 @@ $inputHandle = fopen( $inputFile, 'r' );
 $header = fgetcsv( $inputHandle );
 
 fputcsv( $outputHandle, $CSV_OUT_HEADER, CSV_OUT_DELIMITER, CSV_OUT_ENCLOSURE );
-$counter = 0;
+$rowCounter = 0;
+$projectCounter = 0;
 
 while ( ( $values = fgetcsv( $inputHandle ) ) !== false ) {
 	$row = array_combine( $header, $values );
 	$outFields = mapRow( $row );
 	$previousRow = $outFields; // set global previousRow
+
+	if ( $maxProjects > 0 && $projectCounter > $maxProjects ) {
+		$projectCounter--;
+		break;
+	}
 	
 	fputcsv( $outputHandle, $outFields, CSV_OUT_DELIMITER, CSV_OUT_ENCLOSURE );
-	
-	$counter++;
+	$rowCounter++;
 }
 
 fclose( $inputHandle );
 fclose( $outputHandle );
 
-out( "{$counter} rows converted." );
+info( "{$rowCounter} row(s) in {$projectCounter} project(s) converted." );
 stop( STATUS_OK );
