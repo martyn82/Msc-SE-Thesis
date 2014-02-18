@@ -1,5 +1,8 @@
 /doc
 /tmp
 .settings/
+.buildpath
 .project
 .texlipse
+.Rhistory
+.Rproj.user
