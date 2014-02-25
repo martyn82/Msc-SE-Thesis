@@ -1,5 +1,108 @@
 \chapter{Introduction}
+
+\section{Problem analysis}
+
+In closed source projects, many evolutionary events are dictated by the
+management.
+Events such as team size changes, changes in activity and progress are often the
+result of a changing hiring policy of the organization or an approaching
+deadline. These events can be used to identify project scale and progress, which
+allows comparing and co-analyzing different projects.\\
+
+In OSS projects, the evolution of a project is mostly organic and events that
+shape the project's evolution are mostly theoretical with little empirical
+validation. This also means that different projects cannot be compared in the
+same scale.\\
+
+Many organizations use OSS in an industrial environment. This makes evaluating
+the survivability of OSS projects increasingly important. At \theOrganization,
+developers extensively use OSS projects in their day-to-day work. The projects
+vary from developers tools, to operating systems, to fully operating subsystems
+of the products. These OSS projects include, but are not limited to, Ansible,
+Apache web server, MySQL database server and client, and Ubuntu.
+
+Amongst the previously listed well-known projects, less known projects are used.
+Therefore, it is valuable to be able to determine and even predict the
+survivability of these projects. The detection of warning signs in and the
+monitoring of their evolution is useful to decide whether to choose for and/or
+continue to use an OSS project.\\
+
+Because of the increasing use of OSS projects in industrial environments, OSS
+project survivability has been of interest by many researchers. Many different
+techniques are used to analyze project survival.
+
+This study is a replication of the research described in the paper
+\emph{Automatic Means of Identifying Evolutionary Events in Software
+Development} by Siim Karus. In this study, the evolution data of 250 OSS
+projects has been analyzed to find patterns that can be interpreted as warning
+signs. The technique used in the study by Karus and used in this research is
+analysis by wavelet transformation.
+
+\section{Research question}
+
+The main research question of the thesis is:
+\begin{description}
+	\item[RQ1] \hfill \\ \emph{\researchQuestion}
+\end{description}
+
+\noindent\\
+Additional questions to the main research questions are the following:
+\begin{description}
+	\item[RQ2] \hfill \\ \emph{\subQuestionOne}
+	\item[RQ3] \hfill \\ \emph{\subQuestionTwo}
+\end{description}
+
+\subsection{Theory}
+
+The above questions are based on the observations that wavelet analysis is used
+in other disciplines to analyze time series. Wavelet analysis has been
+successful in economics and signal processing. Wavelet transformation is the
+sampling of a signal at different intervals which gives a natural means of
+scaling the signal. In the case of software evolution, the signal can be any
+measurable property of an evolving entity, such as team size, lines of code,
+number of commits, etc. These properties can be measured at a given time.
+Measuring these properties over the evolution of a projects gives a series of
+signals. Software repositories are a source of signals or time series in
+software evolution. This allows wavelet transform be applied directly for mining
+software repositories.
+
+\section{Outline}
+
+Chapter \ref{background} will provide more background and context of how the
+research came to be. In chapter \ref{method} the method and approach of the
+research is discussed. Next, in chapter \ref{research}, the research execution
+itself is described. Chapter \ref{results} presents the results of the research.
+Chapter \ref{analysis} discusses the results after analysis and presents the
+conclusions of the research.
+
+\begin{comment}
+
+INTRODUCTION
+
 An introduction and overview of your thesis. Be sure to structure your thesis
 such that you do not have to repeat yourself later. In this section you do not
 cover details, but you give the reader an idea of the context, a brief overview
 of the research, and how the remainder of the thesis is structured.
+
+\end{comment}
+\begin{comment}
+
+MOTIVATION
+
+This section describes in detail what problem the research is addressing, and
+what the motivation is to address this problem.
+
+There is a concise and objective statement of the research questions (or
+hypotheses you are testing) and goals. It is made clear why these questions and
+goals are important and relevant to the outside world (i.e., the field of
+research or industry that you are addressing). You can already split the main
+research question into sub questions in this chapter.
+
+This section also describes an analysis of the problem: where does it occur and
+how, how often, and what are the consequences?
+
+An important part is also to scope to research: what aspects are included and
+what aspects are deliberately left out, and why? An example introduction can be
+found on Paul Klint’s
+homepage\footnote{http://homepages.cwi.nl/~paulk/thesesMasterSoftwareEngineering/2006/ReinierLabee.pdf}.
+\end{comment}

@@ -1,6 +1,7 @@
 % !TEX encoding = UTF-8 Unicode
 \documentclass[9pt, a4paper, portrait, draft]{report}
 \usepackage[a4paper, total={160mm, 247mm}]{geometry}
+\usepackage{verbatim}
 
 % Draft watermark
 \usepackage{draftwatermark}
@@ -16,6 +17,7 @@ Evolution}
 \newcommand{\theAuthor}{Martijn Endenburg}
 \newcommand{\theUniversity}{University of Amsterdam}
 \newcommand{\theLocation}{The Netherlands}
+\newcommand{\theOrganization}{VNU Vacature Media}
 \newcommand{\theStatus}{Confidential} % Confidential / Review / Published
 
 % research hypothesis and questions
@@ -35,15 +37,15 @@ succeed or fail in detecting evolutionary events?}
 
 \include{history}
 
+\setcounter{tocdepth}{1}
 \tableofcontents
 
 \include{abstract}
 \include{preface}
 
 \include{introduction}
-\include{motivation}
-\include{method}
 \include{background}
+\include{method}
 \include{research}
 \include{results}
 \include{analysis}
