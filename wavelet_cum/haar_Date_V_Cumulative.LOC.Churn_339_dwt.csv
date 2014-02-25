@@ -1,0 +1,16 @@
+"";"seq";"variable";"pid";"coefficient";"level";"value";"revlevel"
+"1";1;"Cumulative.LOC.Churn";339;"haar";1;1704,12734265958;4
+"2";2;"Cumulative.LOC.Churn";339;"haar";1;3461,99480068934;4
+"3";3;"Cumulative.LOC.Churn";339;"haar";1;3461,99480068934;4
+"4";4;"Cumulative.LOC.Churn";339;"haar";1;13371,3892322376;4
+"5";5;"Cumulative.LOC.Churn";339;"haar";1;23280,7836637859;4
+"6";6;"Cumulative.LOC.Churn";339;"haar";1;23280,7836637859;4
+"7";7;"Cumulative.LOC.Churn";339;"haar";1;23280,7836637859;4
+"8";8;"Cumulative.LOC.Churn";339;"haar";1;23280,7836637859;4
+"9";9;"Cumulative.LOC.Churn";339;"haar";1;23280,7836637859;4
+"10";10;"Cumulative.LOC.Churn";339;"haar";1;24936,8277453248;4
+"11";1;"Cumulative.LOC.Churn";339;"haar";2;3653;3
+"12";2;"Cumulative.LOC.Churn";339;"haar";2;11903;3
+"13";3;"Cumulative.LOC.Churn";339;"haar";2;32924;3
+"14";4;"Cumulative.LOC.Churn";339;"haar";2;32924;3
+"15";5;"Cumulative.LOC.Churn";339;"haar";2;34095;3

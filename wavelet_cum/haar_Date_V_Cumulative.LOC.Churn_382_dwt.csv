@@ -1,0 +1,16 @@
+"";"seq";"variable";"pid";"coefficient";"level";"value";"revlevel"
+"1";1;"Cumulative.LOC.Churn";382;"haar";1;12773,1768953538;4
+"2";2;"Cumulative.LOC.Churn";382;"haar";1;12773,1768953538;4
+"3";3;"Cumulative.LOC.Churn";382;"haar";1;12773,1768953538;4
+"4";4;"Cumulative.LOC.Churn";382;"haar";1;12773,1768953538;4
+"5";5;"Cumulative.LOC.Churn";382;"haar";1;12773,1768953538;4
+"6";6;"Cumulative.LOC.Churn";382;"haar";1;17179,8663557084;4
+"7";7;"Cumulative.LOC.Churn";382;"haar";1;21586,5558160629;4
+"8";8;"Cumulative.LOC.Churn";382;"haar";1;38398,7266455543;4
+"9";9;"Cumulative.LOC.Churn";382;"haar";1;47838,6021743947;4
+"10";10;"Cumulative.LOC.Churn";382;"haar";1;48188,620031082;4
+"11";1;"Cumulative.LOC.Churn";382;"haar";2;18064;3
+"12";2;"Cumulative.LOC.Churn";382;"haar";2;18064;3
+"13";3;"Cumulative.LOC.Churn";382;"haar";2;21180;3
+"14";4;"Cumulative.LOC.Churn";382;"haar";2;42416;3
+"15";5;"Cumulative.LOC.Churn";382;"haar";2;67901,5;3
