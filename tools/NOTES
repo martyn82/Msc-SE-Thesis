@@ -265,3 +265,8 @@ Programming languages by no. projects (101):
 * oberon (7)
 * chaiscript (6)
 * bfpp (3)
+
+LOC Churn is an important metric. This is not included in the activity data that can be collected from Ohloh.
+Ohloh provides LOC added and removed, but not LOC modified.
+Therefore, I would need to make (or find) a tool that checks out the source code repositories of the projects under
+study and gather LOC modified facts.
