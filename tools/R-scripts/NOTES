@@ -3,3 +3,30 @@ Similar_sequence_analytics.R: Identifies similarities in the transformed data (u
 Similar_sequence_popular.R: Counts the occurrences of similar sections identified by the previous script.
 
 The template section and locations of the section in projects are output to file sim.data.csv
+
+Wavelets are applied on commit data as follows:
+
+Time series          | Variable
+---------------------+------------------
+Date                 | Active developers
+                     | Cumulative developers
+                     | Cumulative LOC added
+                     | Cumulative LOC churn
+                     | Cumulative LOC modified
+                     | Cumulative LOC removed
+                     | LOC
+                     | Relative date progress
+                     | Relative LOC churn progress
+                     | Relative team size
+                     | Files
+Cumulative LOC churn | Active developers
+                     | Cumulative developers
+                     | Cumulative LOC added
+                     | Cumulative LOC modified
+                     | Cumulative LOC removed
+                     | LOC
+                     | Relative date progress
+                     | Relative LOC churn progress
+                     | Relative team size
+                     | Files
+                     | Commits
