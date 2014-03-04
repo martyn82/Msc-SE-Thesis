@@ -4,7 +4,7 @@ date_default_timezone_set( 'Europe/Amsterdam' );
 
 /**
  * This script converts a CSV from OhlohAnalytics project to R script input.
- * I'm not fond of using globals, however, they come in handy to keep state in a non-OO script.
+ * I'm not a fan of using globals, however, they come in handy to keep state in a non-OO script.
  */
 
 const STATUS_OK = 0;
@@ -16,7 +16,8 @@ const CSV_OUT_ENCLOSURE = '"';
 
 global $CSV_MAP;
 $CSV_MAP = array(
-	'ProjectId' => 'project_name_fact',
+	'ProjectId' => 'project_id',
+	'ProjectName' => 'project_name_fact',
 	'CommitId' => '',
 	'Date' => array( 'createDate' => array( 'Year', 'Month', 'Day' ) ),
 	'DeveloperId' => '',

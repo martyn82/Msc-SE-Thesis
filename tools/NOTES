@@ -265,8 +265,3 @@ Programming languages by no. projects (101):
 * oberon (7)
 * chaiscript (6)
 * bfpp (3)
-
-LOC Churn is an important metric. This is not included in the activity data that can be collected from Ohloh.
-Ohloh provides LOC added and removed, but not LOC modified. Can Modified LOC be computed in terms of LOC added and LOC
-removed? There can be a situation where new code was added, old code was removed, and existing code was changed. So its
-a separate dimension.

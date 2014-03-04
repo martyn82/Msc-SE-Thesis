@@ -1,0 +1,7 @@
+HOWTO SELECT A SAMPLE DATA SET:
+* Go to folder OhlohAnalytics/lib/SampleSoftwareProjects-0.1.1
+* There is a masterdata.txt file containing projects from Ohloh.
+* Filter this list of projects by keeping only the projects that you have data from and save it as masterdata_filtered (tab-separated)
+* Use the R script as located in this folder.
+* Write the results to a new csv file.
+
