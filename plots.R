@@ -7,6 +7,8 @@ namecol <- "ProjectName"
 projects <- unique(data.frame[[idcol]])
 ordertimefn <- as.numeric
 
+cm <- 0
+
 for(pid in projects) {
   project <- subset(data.frame, data.frame$ProjectId==pid, select=c(namecol, timecol, varcol))
   project.times <- as.Date(project[[timecol]])
@@ -15,6 +17,12 @@ for(pid in projects) {
   
   value.last <- project.vars[end(project.vars)][1]
   value.max <- max(project.vars)
+  value.mean <- mean(project.vars)
+  
+  if(value.mean > value.last){
+    cm <- cm + 1
+    print(project.name)
+  }
   
   mark <- "O"
   
@@ -32,6 +40,9 @@ for(pid in projects) {
     xlab=timecol,
     ylab=varcol
   )
+  lines(project.times, rep(value.mean, times=length(project.times)))
   
   dev.off()
 }
+
+print(cm)
