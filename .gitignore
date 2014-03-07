@@ -6,3 +6,5 @@
 .texlipse
 .Rhistory
 .Rproj.user
+.RData
+.DS_Store
