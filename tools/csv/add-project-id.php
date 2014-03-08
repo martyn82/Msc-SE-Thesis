@@ -1,6 +1,8 @@
 #!/usr/bin/env php
 <?php
 
+/* This script adds Ohloh projectID to the monthlyFactsAfterCleaningWithMetaData csv */
+
 const ADD_KEY = 'project_id';
 const MATCH_KEY = 'project_name_fact';
 
