@@ -1,29 +1,5 @@
 Lessons learned from literature study:
 
-Samoladas:
-- Project duration
-- Application domain
-- Number of committers/active developers
-- Conclusion: Yes, these characteristics can be used to analyze survivability. Adding a developer increases chances of survival.
-
-Raja:
-- Project viability dimensions:
-  - vigor (growth)
-  - resilience
-  - organization
-- Conclusion: yes, these dimensions exist in the context of viability (levensvatbaarheid).
-
-Crowston (Defining OSS success):
-- DeLone & McLean model of success:
-  - output (high release frequency)
-  - process (no. of developers/committers, developer activity, cycle time (release frequeny))
-  - project effects (knowledge creation, individual reputation, opportunities to developers)
-- The model comprises aspects that are indicators of project success.
-
-Crowston (Success in FLOSS development):
-- Count of developers is flawed, it aggregates the number of developers left and joined.
-- Better: a developers churn or tenure (ambtsperiode, tijd van activiteit)
-
 Wang:
 - Six crucial factors of OSS success:
   - developer participation effort
@@ -32,3 +8,45 @@ Wang:
   - targeted users
   - community social network ties
   - community quality of social ties
+- Thesis note: it is out of scope of the research to automatically detect anomalies in these factors.
+
+Raja:
+- Project viability dimensions:
+  - vigor (growth)
+  - resilience
+  - organization
+- Conclusion: yes, these dimensions exist in the context of viability (levensvatbaarheid).
+- Thesis note: it is out of scope of the research to automatically detect anomalies in resilience and organization.
+  However, growth can be measured in LOC.
+
+Samoladas:
+- Project duration
+- Application domain
+- Number of committers/active developers
+- Conclusion: Yes, these characteristics can be used to analyze survivability. Adding a developer increases chances of survival.
+- Thesis note: application domain is out of scope. Duration can be measured, however, it is hard. If I do not have any data points beyond a certain date, it does not imply that project has ended.
+
+Crowston (Defining OSS success):
+- DeLone & McLean model of success:
+  - output (high release frequency)
+  - process (no. of developers/committers, individual developer activity, cycle time (release frequeny))
+  - project effects (knowledge creation, individual reputation, opportunities to developers)
+- The model comprises aspects that are indicators of project success.
+- Thesis note: only the process aspects are in scope, except cycle time.
+
+Crowston (Success in FLOSS development):
+- Count of developers is flawed, it aggregates the number of developers left and joined.
+- Better: a developers churn or tenure (ambtsperiode, tijd van activiteit)
+- Thesis note: add developers churn to dimensions.
+
+Current dimensions:
+- Active developers (a.k.a. number of developers, number of committers) [Samoladas, Crowston D&M]
+- Developers activity [Crowston D&M]
+- Developer churn (i.e., the sum of developers joined and developers left) [Crowston]
+- LOC growth [Raja]
+- Days since first commit [Karus]
+
+Metrics with 'Days since first commit' as timeseries:
+- Code Churn: the sum of code added, deleted, and modified. As there is no modified LOC available in Ohloh, it can be measured by added and deleted. Each line modified will appear in both added and deleted.
+- Developer Churn: the sum of developers joined and left the project.
+- 
