@@ -10,7 +10,7 @@ Raja:
 - Project viability dimensions:
   - vigor (growth)
   - resilience
-  - organization.
+  - organization
 - Conclusion: yes, these dimensions exist in the context of viability (levensvatbaarheid).
 
 Crowston (Defining OSS success):
@@ -21,7 +21,8 @@ Crowston (Defining OSS success):
 - The model comprises aspects that are indicators of project success.
 
 Crowston (Success in FLOSS development):
-- Count of developers is flawed, it aggregates the number of developers left and joined. Better: a developers churn or tenure (ambtsperiode, tijd van activiteit)
+- Count of developers is flawed, it aggregates the number of developers left and joined.
+- Better: a developers churn or tenure (ambtsperiode, tijd van activiteit)
 
 Wang:
 - Six crucial factors of OSS success:
