@@ -6,30 +6,32 @@ The template section and locations of the section in projects are output to file
 
 Wavelets are applied on commit data as follows:
 
-Time series          | Variable
----------------------+-----------------------------------
-Date                 | Active developers
-                     | Cumulative developers
-                     | Cumulative LOC added
-                     | Cumulative LOC churn
-                     | Cumulative LOC modified
-                     | Cumulative LOC removed
-                     | LOC
-                     | Relative date progress
-                     | Relative LOC churn progress
-                     | Relative team size
-                     | Files
-Cumulative LOC churn | Active developers
-                     | Cumulative developers
-                     | Cumulative LOC added
-                     | Cumulative LOC modified
-                     | Cumulative LOC removed
-                     | LOC
-                     | Relative date progress
-                     | Relative LOC churn progress
-                     | Relative team size
-                     | Files
-                     | Commits
+Time series          | Variable                          | Description
+---------------------+-----------------------------------+------------------------------------------------
+Date                 | Active developers                 | Project team size per week
+                     | Cumulative developers             | Project team growth per week
+                     | Cumulative LOC added              | LOC addition growth per week
+                     | Cumulative LOC churn              | LOC churn growth per week
+                     | Cumulative LOC modified           | LOC modification growth per week
+                     | Cumulative LOC removed            | LOC removal growth per week
+                     | LOC                               | LOC size per week
+                     | Relative date progress            | 
+                     | Relative LOC churn progress       | 
+                     | Relative team size                | 
+                     | Files                             | Mean files per week
+---------------------+-----------------------------------+------------------------------------------------
+Cumulative LOC churn | Active developers                 | Developers per 1k LOC
+                     | Cumulative developers             | Project team growth per 1k LOC
+                     | Cumulative LOC added              | LOC addition growth per 1k LOC
+                     | Cumulative LOC modified           | LOC modification growth per 1k LOC
+                     | Cumulative LOC removed            | LOC removal growth per 1k LOC
+                     | LOC                               | LOC size per 1k LOC
+                     | Relative date progress            | 
+                     | Relative LOC churn progress       | 
+                     | Relative team size                | 
+                     | Files                             | Mean files per 1k LOC
+                     | Commits                           | Number of commits per 1k LOC (commit density)
+---------------------+-----------------------------------+------------------------------------------------
 
 Difference in data set (measured at Mon March 10, 2014 14:28):
 - Karus: 63 projects, 153 months, mean 2.4 months per project (min and max unknown).

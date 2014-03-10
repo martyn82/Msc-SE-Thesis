@@ -39,14 +39,21 @@ Crowston (Success in FLOSS development):
 - Better: a developers churn or tenure (ambtsperiode, tijd van activiteit)
 - Thesis note: add developers churn to dimensions.
 
-Current dimensions:
+Dimensions:
 - Active developers (a.k.a. number of developers, number of committers) [Samoladas, Crowston D&M]
+- Code Churn [Karus, Elbaum]
 - Developers activity [Crowston D&M]
 - Developer churn (i.e., the sum of developers joined and developers left) [Crowston]
-- LOC growth [Raja]
 - Days since first commit [Karus]
 
-Metrics with 'Days since first commit' as timeseries:
+Variables with 'Days since first commit' as timeseries:
 - Code Churn: the sum of code added, deleted, and modified. As there is no modified LOC available in Ohloh, it can be measured by added and deleted. Each line modified will appear in both added and deleted.
+  Code Churn over time provides a reliable measure for project activity.
 - Developer Churn: the sum of developers joined and left the project.
-- 
+  Developer Churn over time provides a reliable measure of project team changes.
+- Active Developers
+  Active Developers over time provides a reliable measure of project team size.
+- Code Churn per active developer over time as a measure of the average individual activity.
+
+Variables with 'Active Developers' as timeseries.
+- Code Churn over active developers as a means to plot the team activity.
