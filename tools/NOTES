@@ -40,11 +40,11 @@ Crowston (Success in FLOSS development):
 - Thesis note: add developers churn to dimensions.
 
 Dimensions:
-- Active developers (a.k.a. number of developers, number of committers) [Samoladas, Crowston D&M]
-- Code Churn [Karus, Elbaum]
-- Developers activity [Crowston D&M]
+- Active developers (a.k.a. number of developers, number of committers, contributors) [Samoladas, Crowston D&M]
+- Code Churn (i.e., sum of no. LOC added and removed) [Karus, Elbaum]
+- Developers activity (i.e., Code Churn per contributor) [Crowston D&M]
 - Developer churn (i.e., the sum of developers joined and developers left) [Crowston]
-- Days since first commit [Karus]
+- Time (i.e., days since first commit) [Karus]
 
 Variables with 'Days since first commit' as timeseries:
 - Code Churn: the sum of code added, deleted, and modified. As there is no modified LOC available in Ohloh, it can be measured by added and deleted. Each line modified will appear in both added and deleted.
