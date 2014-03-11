@@ -1,6 +1,6 @@
 # This script will plot the projects' evolution data.
-# It takes all projects in the data.frame and plots the metrics to following dimensions:
-
+# It takes all projects in the dataset and plots the metrics to following dimensions:
+#
 # Time series                | Variable          | Description
 # ---------------------------+-------------------+--------------------------------------------
 # Date                       | LOC               | LOC per date shows project size
