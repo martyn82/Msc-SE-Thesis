@@ -1,35 +1,48 @@
+# This script will plot the projects' evolution data.
+# It takes all projects in the data.frame and plots the metrics to following dimensions:
+
+# Time series                | Variable          | Description
+# ---------------------------+-------------------+--------------------------------------------
+# Date                       | LOC               | LOC per date shows project size
+#                            | Commit LOC Churn  | LOC churn per date shows project activity
+#                            | Active developers | Active devs per date shows project team size
+# ---------------------------+-------------------+--------------------------------------------
+# Active developers          | Commit LOC Churn  | LOC churn per team size shows productivity
+# ---------------------------+-------------------+--------------------------------------------
+
 library("hash")
 
-data.frame <- read.csv2("tools/csv/converted.csv")
+dataset <- read.csv2("data/factsForAnalysis.csv")
 
-idcol <- "ProjectId"
-namecol <- "ProjectName"
-timecols <- c("Date", "Active.Developers")
+idcol <- "Project.Id"
+namecol <- "Project.Name"
+timecols <- c("Age.Days", "Active.Developers")
 
 varcols <- hash(keys=timecols)
-varcols[["Date"]] <- c("LOC", "Commit.LOC.Churn", "Active.Developers")
+varcols[["Age.Days"]] <- c("LOC", "Commit.LOC.Churn", "Active.Developers")
 varcols[["Active.Developers"]] <- c("Commit.LOC.Churn")
 
-projects <- unique(data.frame[[idcol]])
+projects <- unique(dataset[[idcol]])
 
 for(pid in projects) {
   for (timecol in timecols){
     for(varcol in varcols[[timecol]]){
-      project <- subset(data.frame, data.frame[[idcol]]==pid, select=c(namecol, timecol, varcol))
-      project.sorted <- project[order(project[[timecol]], project[[varcol]]),]
-
+      project <- subset(dataset, dataset[[idcol]]==pid, select=c(namecol, timecol, varcol))
+      project.name <- as.character(unique(project[[namecol]]))
+      
+      project.aggregated <- aggregate(project[[varcol]] ~ project[[timecol]], project, sum)
+      project.aggregated <- setnames(project.aggregated, c(timecol, varcol))
+      
       if(timecol == "Date"){
+        project.sorted <- project.aggregated[order(as.Date(project.aggregated[[timecol]])), ]
         project.times <- as.Date(project.sorted[[timecol]])
       }
       else {
+        project.sorted <- project.aggregated[order(as.numeric(project.aggregated[[timecol]])), ]
         project.times <- as.numeric(project.sorted[[timecol]])
       }
 
-      project.name <- unique(project.sorted[[namecol]])
       project.vars <- as.numeric(project.sorted[[varcol]])
-
-      value.last <- project.vars[end(project.vars)][1]
-      value.max <- max(project.vars)
       value.mean <- mean(project.vars)
 
       jpeg(paste("plots/", timecol, ".", varcol, ".", project.name, ".", "jpg", sep=""))
