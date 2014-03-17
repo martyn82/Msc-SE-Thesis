@@ -145,12 +145,13 @@ handleProject <- function(project.data, pid, timecols){
 print(paste("Running DWT with", procs.sim, "simultaneous processes"))
 
 project.index <- 0
+project.count <- length(pids)
 
-while(project.index < length(pids)){
+while(project.index < project.count){
   procs.index <- 0
   procs.list <- list()
 
-  while(procs.index < procs.sim){
+  while(procs.index < procs.sim && project.index < project.count){
     pid <- pids[[project.index + 1]]
 
     project.data <- subset(dataset, dataset[[idcol]] == pid)
