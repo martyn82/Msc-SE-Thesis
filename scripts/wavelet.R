@@ -1,5 +1,6 @@
 # This script performs wavelet transformation on evolution data.
-# It takes the monthly facts for analysis data and outputs a csv file per project per variable.
+# 1. It takes the monthly facts for analysis data and outputs a csv file per project per variable.
+# 2. It aggregates the variables for all projects.
 
 library("hash")
 library("multicore")
@@ -9,6 +10,7 @@ library("zoo")
 dataset <- read.csv2("data/factsForAnalysis.csv")
 output <- "scripts/output/wavelet"
 output.plots <- paste(output, "plots", sep="/")
+makeplot <- FALSE
 
 if(!file.exists(output)){
   dir.create(output)
@@ -57,7 +59,8 @@ dst.dwt.V.Active.Developers <- as.data.frame(
 colnames(dst.dwt.W.Active.Developers) <- dst.dwt.columns
 colnames(dst.dwt.V.Active.Developers) <- dst.dwt.columns
 
-calculateColumnDWT <- function(project, varcol, pid, timecol){
+# Performs wavelet transformation on given project variable and timeseries.
+calculateColumnDWT <- function(project, varcol, pid, timecol, makeplot){
   project.name <- as.character(unique(project[[namecol]]))
 
   time.order.fn <- as.numeric
@@ -89,17 +92,19 @@ calculateColumnDWT <- function(project, varcol, pid, timecol){
   # perform discrete wavelet transformation on var values
   project.dwt <- dwt(as.numeric(project.vars), filter="haar")
 
-#   # plot the wavelet transformation
-#   jpeg(paste(output.plots, "/", timecol, ".", varcol, ".", project.name, ".", "jpg", sep=""))
-#   try(
-#     plot(
-#       project.dwt,
-#       main=project.name,
-#       xlab=timecol,
-#       ylab=varcol
-#     )
-#   )
-#   dev.off()
+  # plot the wavelet transformation
+  if(makeplot){
+    jpeg(paste(output.plots, "/", timecol, ".", varcol, ".", project.name, ".", "jpg", sep=""))
+    try(
+      plot(
+        project.dwt,
+        main=project.name,
+        xlab=timecol,
+        ylab=varcol
+      )
+    )
+    dev.off()
+  }
 
   for(dwtvar in dwtvars){
     dwt.dataframe <- paste("dst.dwt", dwtvar, timecol, sep=".")
@@ -115,7 +120,7 @@ calculateColumnDWT <- function(project, varcol, pid, timecol){
       mat <- as.data.frame(mat)
       colnames(mat) <- dst.dwt.columns
       mat[["variable"]] <- varcol
-      mat[["sequence"]] <- 1:length(attr(project.dwt, dwtvar)[[idx]])
+      mat[["seq"]] <- 1:length(attr(project.dwt, dwtvar)[[idx]])
       mat[["pid"]] <- pid
       mat[["coefficient"]] <- attr(attr(project.dwt, "filter"), "wt.name")
       mat[["level"]] <- idx
@@ -131,13 +136,15 @@ calculateColumnDWT <- function(project, varcol, pid, timecol){
   }
 }
 
-handleProject <- function(project.data, pid, timecols){
+handleProject <- function(project.data, pid, timecols, makeplot){
   for(timecol in timecols){
     timevarcols <- varcols[[timecol]]
     
     for(varcol in timevarcols){
-      calculateColumnDWT(project.data, varcol, pid, timecol)
+      calculateColumnDWT(project.data, varcol, pid, timecol, makeplot)
+      break
     }
+    break
   }
 }
 
@@ -158,11 +165,11 @@ while(project.index < project.count){
     project.name <- unique(project.data[[namecol]])
     print(paste("Processing", "project", project.name, "..."))
 
-    proc <- parallel(
-      try(
-        handleProject(project.data, pid, timecols)
-      )
-    )
+     proc <- parallel(
+       try(
+        handleProject(project.data, pid, timecols, makeplot)
+       )
+     )
 
     # Append to processes list
     procs.list[[length(procs.list) + 1]] <- proc
