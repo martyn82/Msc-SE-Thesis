@@ -198,7 +198,7 @@ for(timecol in timecols){
       for(pid in pids){
         print(paste("Time", timecol, "variable", varcol, "dwt", dwtvar, "project", pid))
 
-        dwt.df <- paste("dwt", dwtvar, timecol, sep=".")
+        dwt.dataframe <- paste("dst.dwt", dwtvar, timecol, sep=".")
         input.filename <- paste(output.folder, paste("haar", timecol, dwtvar, varcol, pid, "dwt.csv", sep="_"), sep="/")
 
         if(!file.exists(input.filename)){
