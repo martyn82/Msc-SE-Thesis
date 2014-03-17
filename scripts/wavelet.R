@@ -19,7 +19,7 @@ if(!file.exists(output.plots)){
 }
 
 # Number of simultaneous processes
-procs.sim <- 4
+procs.sim <- 32
 
 # W := Wavelet coefficients, V := Scaling coefficents
 dwtvars <- c("V", "W")
