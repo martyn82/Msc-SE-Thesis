@@ -8,12 +8,12 @@ library("wavelets")
 library("zoo")
 
 dataset <- read.csv2("data/factsForAnalysis.csv")
-output <- "scripts/output/wavelet"
-output.plots <- paste(output, "plots", sep="/")
+output.folder <- "scripts/output/wavelet"
+output.plots <- paste(output.folder, "plots", sep="/")
 makeplot <- FALSE
 
-if(!file.exists(output)){
-  dir.create(output)
+if(!file.exists(output.folder)){
+  dir.create(output.folder)
 }
 
 if(!file.exists(output.plots)){
@@ -119,12 +119,20 @@ calculateColumnDWT <- function(project, varcol, pid, timecol, makeplot){
       mat <- matrix(ncol=length(dst.dwt.columns), nrow=length(attr(project.dwt, dwtvar)[[idx]]))
       mat <- as.data.frame(mat)
       colnames(mat) <- dst.dwt.columns
+      
+      # variable name
       mat[["variable"]] <- varcol
+      # sequence, 1 to the length of this level of the dwt variable (V or W)
       mat[["seq"]] <- 1:length(attr(project.dwt, dwtvar)[[idx]])
+      # project ID
       mat[["pid"]] <- pid
+      # wavelet coefficient filter (always: haar)
       mat[["coefficient"]] <- attr(attr(project.dwt, "filter"), "wt.name")
+      # the current level
       mat[["level"]] <- idx
+      # the value of the dwt variable of this level
       mat[["value"]] <- attr(project.dwt, dwtvar)[[idx]]
+      # reverse level
       mat[["revlevel"]] <- levelss + 1 - idx
 
       assign(dwt.dataframe, rbind(get(dwt.dataframe, envir=.GlobalEnv), mat), envir=.GlobalEnv)
@@ -132,7 +140,7 @@ calculateColumnDWT <- function(project, varcol, pid, timecol, makeplot){
 
     filtername <- attr(attr(project.dwt, "filter"), "wt.name")
     filename <- paste(filtername, timecol, dwtvar, varcol, pid, "dwt.csv", sep="_")
-    write.csv2(get(dwt.dataframe, envir=.GlobalEnv), file=paste(output, filename, sep="/"))
+    write.csv2(get(dwt.dataframe, envir=.GlobalEnv), file=paste(output.folder, filename, sep="/"))
   }
 }
 
@@ -146,69 +154,67 @@ handleProject <- function(project.data, pid, timecols, makeplot){
   }
 }
 
-#run <- function(){
-  # Discrete wavelet transformation per project variable
-  print(paste("Running DWT with", procs.sim, "simultaneous processes"))
-  
-  project.index <- 0
-  project.count <- length(pids)
-  
-  while(project.index < project.count){
-    procs.index <- 0
-    procs.list <- list()
-  
-    while(procs.index < procs.sim && project.index < project.count){
-      pid <- pids[[project.index + 1]]
-  
-      project.data <- subset(dataset, dataset[[idcol]] == pid)
-      project.name <- unique(project.data[[namecol]])
-      print(paste("Processing", "project", project.name, "..."))
-  
-       proc <- parallel(
-         try(
-          handleProject(project.data, pid, timecols, makeplot)
-         )
+# Discrete wavelet transformation per project variable
+print(paste("Running DWT with", procs.sim, "simultaneous processes"))
+
+project.index <- 0
+project.count <- length(pids)
+
+while(project.index < project.count){
+  procs.index <- 0
+  procs.list <- list()
+
+  while(procs.index < procs.sim && project.index < project.count){
+    pid <- pids[[project.index + 1]]
+
+    project.data <- subset(dataset, dataset[[idcol]] == pid)
+    project.name <- unique(project.data[[namecol]])
+    print(paste("Processing", "project", project.name, "..."))
+
+     proc <- parallel(
+       try(
+        handleProject(project.data, pid, timecols, makeplot)
        )
-  
-      # Append to processes list
-      procs.list[[length(procs.list) + 1]] <- proc
-  
-      procs.index <- procs.index + 1
-      project.index <- project.index + 1
-    }
-    
-    collect(procs.list)
+     )
+
+    # Append to processes list
+    procs.list[[length(procs.list) + 1]] <- proc
+
+    procs.index <- procs.index + 1
+    project.index <- project.index + 1
   }
   
-  # Aggregate project transformations per variable
-  for(timecol in timecols){
-    timevarcols <- varcols[[timecol]]
-  
-    for(dwtvar in dwtvars){
-      for(varcol in timevarcols){
-        dst.dwt.W.Age.Days <- dst.dwt.V.Age.Days # why ??
-  
-        for(pid in pids){
-          print(paste("Time", timecol, "variable", varcol, "dwt", dwtvar, "project", pid))
-  
-          dwt.df <- paste("dwt", dwtvar, timecol, sep=".")
-          input.filename <- paste(output, paste("haar", timecol, dwtvar, varcol, pid, "dwt.csv", sep="_"), sep="/")
-  
-          if(!file.exists(input.filename)){
-            warning(paste("No such file:", input.filename))
-            next
-          }
-  
-          try(
-            assign("dst.dwt.W.Age.Days", rbind(get("dst.dwt.W.Age.Days", envir=.GlobalEnv), read.csv2(input.filename)), envir=.GlobalEnv)
-          )
+  collect(procs.list)
+}
+
+# Aggregate project transformations per type
+for(timecol in timecols){
+  timevarcols <- varcols[[timecol]]
+
+  for(dwtvar in dwtvars){
+    for(varcol in timevarcols){
+      dst.dwt.W.Age.Days <- dst.dwt.V.Age.Days # why ??
+
+      for(pid in pids){
+        print(paste("Time", timecol, "variable", varcol, "dwt", dwtvar, "project", pid))
+
+        dwt.df <- paste("dwt", dwtvar, timecol, sep=".")
+        input.filename <- paste(output.folder, paste("haar", timecol, dwtvar, varcol, pid, "dwt.csv", sep="_"), sep="/")
+
+        if(!file.exists(input.filename)){
+          warning(paste("No such file:", input.filename))
+          next
         }
-  
-        output.filename <- paste("factsForAnalysis", dwtvar, timecol, varcol, "csv", sep=".")
-        write.csv2(dst.dwt.W.Age.Days, file=paste(output, output.filename, sep="/"))
+
+        try(
+          assign("dst.dwt.W.Age.Days", rbind(get("dst.dwt.W.Age.Days", envir=.GlobalEnv), read.csv2(input.filename)), envir=.GlobalEnv)
+        )
       }
+
+      output.filename <- paste("factsForAnalysis", dwtvar, timecol, varcol, "csv", sep=".")
+      write.csv2(dst.dwt.W.Age.Days, file=paste(output.folder, output.filename, sep="/"))
     }
   }
-  
-  print("Done")
-#}
+}
+
+print("Done")
