@@ -19,8 +19,8 @@ src.cols <- c(
     "comments_deleted_fact",
     "blanks_added_fact",
     "blanks_deleted_fact",
-  "contributors_fact",              # 'Active.Developers'
-  "age_in_months"                   # to calculate 'Age.Days'
+  "contributors_fact",               # 'Active.Developers'
+  "age_in_months"                    # to calculate 'Age.Days'
 )
 
 # destination columns
@@ -34,7 +34,7 @@ dst.cols <- c(
   "Commit.LOC.Churn"
 )
 
-# Avg. 30.4 days per month, divided by 7 multiplied by 5 working days per week ~22.
+# Avg. 30.4 days per month, divided by 7 multiplied by 5 = working days per week: ~22.
 monthdays <- 22
 
 # source data selection

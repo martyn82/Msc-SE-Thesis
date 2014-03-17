@@ -12,6 +12,12 @@
 
 library("hash")
 
+output <- "scripts/output/plots"
+
+if(!file.exists(output)){
+  dir.create(output)
+}
+
 dataset <- read.csv2("data/factsForAnalysis.csv")
 
 idcol <- "Project.Id"
@@ -25,14 +31,20 @@ varcols[["Active.Developers"]] <- c("Commit.LOC.Churn")
 projects <- unique(dataset[[idcol]])
 
 for(pid in projects) {
+
   for (timecol in timecols){
-    for(varcol in varcols[[timecol]]){
+    timevarcols <- varcols[[timecol]]
+    
+    for(varcol in timevarcols){
       project <- subset(dataset, dataset[[idcol]]==pid, select=c(namecol, timecol, varcol))
       project.name <- as.character(unique(project[[namecol]]))
-      
-      project.aggregated <- aggregate(project[[varcol]] ~ project[[timecol]], project, sum)
-      project.aggregated <- setnames(project.aggregated, c(timecol, varcol))
-      
+
+      # Using SUM as aggregate function for Commit.LOC.Churn per Active.Developers is a flawed measure for team performance
+      aggregate.fn <- sum
+
+      project.aggregated <- aggregate(project[[varcol]] ~ project[[timecol]], project, aggregate.fn)
+      project.aggregated <- setNames(project.aggregated, c(timecol, varcol))
+
       if(timecol == "Date"){
         project.sorted <- project.aggregated[order(as.Date(project.aggregated[[timecol]])), ]
         project.times <- as.Date(project.sorted[[timecol]])
@@ -45,7 +57,7 @@ for(pid in projects) {
       project.vars <- as.numeric(project.sorted[[varcol]])
       value.mean <- mean(project.vars)
 
-      jpeg(paste("plots/", timecol, ".", varcol, ".", project.name, ".", "jpg", sep=""))
+      jpeg(paste(output, "/", timecol, ".", varcol, ".", project.name, ".", "jpg", sep=""))
 
       plot(
         project.times,
