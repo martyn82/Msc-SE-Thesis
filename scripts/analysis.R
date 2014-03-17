@@ -103,7 +103,7 @@ findSimilarSequences <- function(timecol, target.seq, pid, search.seq, search.re
 
 processPIDs <- function(pids, dataset, timecol, dwtvar, varcol){
   if(length(pids) == 0){
-    return
+    return()
   }
 
   for(i in 1:length(pids)){
