@@ -142,9 +142,7 @@ handleProject <- function(project.data, pid, timecols, makeplot){
     
     for(varcol in timevarcols){
       calculateColumnDWT(project.data, varcol, pid, timecol, makeplot)
-      break
     }
-    break
   }
 }
 
