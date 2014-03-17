@@ -148,7 +148,7 @@ handleProject <- function(project.data, pid, timecols, makeplot){
   }
 }
 
-run <- function(){
+#run <- function(){
   # Discrete wavelet transformation per project variable
   print(paste("Running DWT with", procs.sim, "simultaneous processes"))
   
@@ -213,4 +213,4 @@ run <- function(){
   }
   
   print("Done")
-}
+#}
