@@ -9,3 +9,4 @@
 .RData
 .DS_Store
 plots/
+scripts/output/wavelet
