@@ -1,0 +1,13 @@
+"";"seq";"variable";"pid";"coefficient";"level";"value";"revlevel"
+"1";1;"Commit.LOC.Churn";3115;"haar";1;926645,759075441;4
+"2";2;"Commit.LOC.Churn";3115;"haar";1;442326,404330558;4
+"3";3;"Commit.LOC.Churn";3115;"haar";1;1273987,21659599;4
+"4";4;"Commit.LOC.Churn";3115;"haar";1;316887,782668408;4
+"5";5;"Commit.LOC.Churn";3115;"haar";1;832129,62406136;4
+"6";6;"Commit.LOC.Churn";3115;"haar";1;169548,649779348;4
+"7";7;"Commit.LOC.Churn";3115;"haar";1;72777,551240063;4
+"8";8;"Commit.LOC.Churn";3115;"haar";1;510913,640785309;4
+"9";1;"Commit.LOC.Churn";3115;"haar";2;968009,5;3
+"10";2;"Commit.LOC.Churn";3115;"haar";2;1124918,5;3
+"11";3;"Commit.LOC.Churn";3115;"haar";2;708293,5;3
+"12";4;"Commit.LOC.Churn";3115;"haar";2;412732;3
