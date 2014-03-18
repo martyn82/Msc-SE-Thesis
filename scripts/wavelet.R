@@ -37,7 +37,6 @@ varcols[["Active.Developers"]] <- c("Commit.LOC.Churn")
 
 # project ids
 pids <- unique(dataset[[idcol]])
-pids <- c(758)
 
 dst.dwt.columns <- c("seq", "variable", "pid", "coefficient", "level", "value", "revlevel")
 
