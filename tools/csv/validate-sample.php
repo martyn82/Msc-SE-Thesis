@@ -2,7 +2,7 @@
 <?php
 /* This script caclulates the relative sample size per project after validation and cleansing. */
 
-$sampleFile = 'monthlyFactsAfterCleaningWithMetaDataAndId.csv';
+$sampleFile = '../../data/monthlyFactsAfterCleaningWithMetaDataAndId.csv';
 $sourceFile = '../../data/monthlyFactsWithProperEnlistments.csv';
 $outputFile = 'projectsValidation.csv';
 
@@ -69,7 +69,7 @@ fwrite( STDERR, "\r{$factCount} facts validated.\n" );
 
 $outputFileHandle = fopen( $outputFile, 'w' );
 $outputHeader = array( 'project_id', 'project_name', 'data_size', 'sample_size', 'relative_size' );
-fputcsv( $outputFileHandle, $outputHeader );
+fputcsv( $outputFileHandle, $outputHeader, ';' );
 
 $sizes = array();
 
@@ -83,10 +83,10 @@ foreach ( $sampleData as $projectName => $facts ) {
 		'project_name' => $projectName,
 		'data_size' => $dataSize,
 		'sample_size' => $sampleSize,
-		'relative_size' => $relativeSize
+		'relative_size' => number_format( $relativeSize, 10, ',', '' )
 	);
 	
-	fputcsv( $outputFileHandle, array_values( $outputLine ) );
+	fputcsv( $outputFileHandle, array_values( $outputLine ), ';' );
 	
 	$sizes[] = $relativeSize;
 }
