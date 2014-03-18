@@ -18,17 +18,22 @@ if(!(file.exists(folder.proc))) {
   dir.create(folder.proc)
 }
 
-my.csv.data <- read.csv2 (file=paste(folder.root,"CommitsWithStatistics.csv", sep="/"),  na.strings = "NA")
+my.csv.data <- read.csv2 (file=paste("data/factsForAnalysis.csv", sep="/"),  na.strings = "NA")
 
 colnames(my.csv.data)
 
-interesting_colnames <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed", "Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "LOC", "Relative.Date.Progress", "Relative.LOC.Churn.Progress", "Relative.Team.Size", "Files", "Commits")
-fill_locf <- c("Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "LOC", "Relative.Date.Progress", "Relative.LOC.Churn.Progress", "Relative.Team.Size", "Files")
-fill_zero <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed")
-aggregation_max <- c("Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "Relative.Date.Progress", "Relative.LOC.Churn.Progress")
-aggregation_avg <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed", "LOC", "Relative.Team.Size", "Files")
+#interesting_colnames <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed", "Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "LOC", "Relative.Date.Progress", "Relative.LOC.Churn.Progress", "Relative.Team.Size", "Files", "Commits")
+interesting_colnames <- c("Commit.LOC.Churn")
+#fill_locf <- c("Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "LOC", "Relative.Date.Progress", "Relative.LOC.Churn.Progress", "Relative.Team.Size", "Files")
+fill_locf <- c()
+#fill_zero <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed")
+fill_zero <- c("Commit.LOC.Churn")
+#aggregation_max <- c("Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "Relative.Date.Progress", "Relative.LOC.Churn.Progress")
+aggregation_max <- c()
+#aggregation_avg <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed", "LOC", "Relative.Team.Size", "Files")
+aggregation_avg <- c("Commit.LOC.Churn")
 #?ts
-pids <- unique(my.csv.data[["ProjectId"]])
+pids <- unique(my.csv.data[["Project.Id"]])
 
 # dwt values
 my.data.dwt.colnames = c("seq", "variable", "pid", "coefficient", "level", "value", "revlevel")
@@ -51,8 +56,8 @@ colnames(my.data.dwt.V.Cumulative.LOC.Churn) <- my.data.dwt.colnames
 calculateColumnDWT <- function(project.data, current_col, pid, timecol) {
   timeorderbyfn <- as.numeric
   unitcoef <- 1000
-  if(timecol %in% c("Date")) {
-    timeorderbyfn <- as.Date
+  if(timecol %in% c("Age.Days")) {
+    #timeorderbyfn <- as.Date
     unitcoef <- 7
   }
   aggrfn <- max
@@ -64,7 +69,7 @@ calculateColumnDWT <- function(project.data, current_col, pid, timecol) {
   if(current_col %in% c("Commits")) {
     aggrfn <- sum
     aggrfn0 <- function (x) { length(na.omit(x)) }
-    cc <- "ProjectId"
+    cc <- "Project.Id"
   }
   
   project.data.zoo <- zoo(project.data[[cc]], order.by=timeorderbyfn(project.data[[timecol]]))
@@ -119,7 +124,7 @@ calculateColumnDWT <- function(project.data, current_col, pid, timecol) {
 	# }
 	
   for(dwtvar in c("V", "W")) {
-    dwtdf <- paste("my.data.dwt", dwtvar, timecol, sep=".")
+    dwtdf <- paste("my.data.dwt", dwtvar, "Date", sep=".")
 
     levelss <- length(attr(project.data.weeks.dwt, dwtvar))
     for(idx in 1:levelss) {
@@ -151,28 +156,28 @@ for(pid in pids)
 {
   for(current_col in interesting_colnames) {
     print(paste("project", pid, "variable", current_col))
-    project.data <- subset(my.csv.data, my.csv.data[["ProjectId"]] == pid)
+    project.data <- subset(my.csv.data, my.csv.data[["Project.Id"]] == pid)
 #try(calculateColumnDWTByDate(project.data, current_col, pid))
 #try(calculateColumnDWTByChurn(project.data, current_col, pid))
     p1 <- parallel(try(calculateColumnDWT(project.data, current_col, pid, "Cumulative.LOC.Churn")))
-    p2 <- parallel(try(calculateColumnDWT(project.data, current_col, pid, "Date")))
+    p2 <- parallel(try(calculateColumnDWT(project.data, current_col, pid, "Age.Days")))
     collect(list(p1, p2))
   }
 }
 
-for(timecol in c("Date", "Cumulative.LOC.Churn")) {
+for(timecol in c("Age.Days")){ #, "Cumulative.LOC.Churn")) {
   for(dwtvar in c("V", "W")) {
     for(current_col in interesting_colnames) {
       assign("my.data.dwt.W.Date", my.data.dwt.V.Date)
       for(pid in pids) {
 	print(paste("A.. project", pid, "variable", current_col))
-	dwtdf <- paste("my.data.dwt", dwtvar, timecol, sep=".")
+	dwtdf <- paste("my.data.dwt", dwtvar, "Date", sep=".")
 	dfn <- paste(folder.proc, paste("haar", timecol, dwtvar, current_col, pid, "dwt.csv", sep="_"), sep="/")
 	if(file.exists(dfn)) {
 	  try(assign("my.data.dwt.W.Date", rbind(get("my.data.dwt.W.Date", envir = .GlobalEnv), read.csv2(dfn)), envir = .GlobalEnv))
 	}
       }
-      write.csv2 (my.data.dwt.W.Date, file=paste(folder.proc, paste("CommitsWithStatistics.dwt", dwtvar, timecol, current_col, "csv", sep="."), sep="/"))
+      write.csv2 (my.data.dwt.W.Date, file=paste(folder.proc, paste("factsForAnalysis.dwt", dwtvar, timecol, current_col, "csv", sep="."), sep="/"))
     }
   }
 }
