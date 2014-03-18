@@ -1,6 +1,61 @@
 \chapter{Research method}
 \label{method}
 
+\section{Wavelet analysis}
+The research questions mentioned in section \ref{questions} are based on the
+observations that wavelet analysis is used in other disciplines to analyze time
+series. For example, wavelet analysis has been a successful method in economics
+and (digital) signal processing (DSP).\\
+
+Wavelet transformation is the sampling of a signal at different intervals which
+gives a natural means of scaling the signal. Wavelet analysis is the analysis of
+signals (time series) by decomposing the signal into wavelet coefficients (also
+known as shift coefficients) and scaling coefficients (also known as filters).
+The decomposition can be repeated on the scaling coefficients until the number
+of resulting wavelet coefficients is smaller than the filter length.\\
+
+In replicating the research by Karus we use the same Debauchies filter of length
+2 (also known as Haar wavelet) due to its simplicity and simple interpretation.
+We apply discrete wavelet transform, meaning we use discrete shift when matching
+the series with the wavelet. The scaling coefficients of discrete Haar wavelet
+transform can be interpreted as a smoothed curve of the series. The wavelet
+coefficients show temporal variations.\\
+
+\noindent
+The main advantages of wavelet transform in time series analysis are:
+\begin{itemize}
+	\item Scaling coefficients allow fuzzy matching as differences in detals are
+	``smoothed out''.
+	\item Filter coefficients allow detection of small anomalies in series.
+	\item Transform levels make series of different lengths or scale comparable.
+\end{itemize}
+
+\paragraph{}
+In the case of software evolution, the signal can be any measurable property
+of an evolving entity, such as team size, lines of code, number of commits, etc.
+These properties can be measured at a given time series, such as age in days,
+or even a non-time-related series such as lines of code. Measuring these
+properties over the evolution of a project gives a series of signals. Software
+repositories are a source of signals or time series in software evolution. This
+allows wavelet transform be applied directly for mining software repositories.
+
+\section{Data}
+The original research was conducted by using a data set of 27 OSS projects. In
+this study a data set of 250 OSS projects is used. The use of a larger data set
+will in theory have a better spread of all OSS projects. Additionally, the
+results of the research with a larger data set can be interpreted more
+generally and with fewer noise.
+
+\begin{comment}
+In the original study by Karus it is shown that wavelet analysis can be used to
+automatically identify evolutionary events in software development
+\cite{karus2013}. He had found that by applying wavelet transformation on time
+series, patterns can be found. Amongst different projects, similar patterns were
+found. This indicates that these similar patterns could be the result of similar
+events in the evolution of these projects.
+\end{comment}
+
+\begin{comment}
 This section describes the methods used to answer the research questions. A
 good structure of this section often follows the sub questions by providing a
 method for each.
@@ -13,3 +68,4 @@ An important part of this section is validation. How will you evaluate and
 validate the outcomes of the research? You can look at Paul Klint’s homepage
 for examples of this section as
 well\footnote{http://homepages.cwi.nl/~paulk/thesesMasterSoftwareEngineering/2006/RichardKettelerij.pdf}.
+\end{comment}

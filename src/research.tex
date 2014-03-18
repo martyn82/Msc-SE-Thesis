@@ -1,6 +1,161 @@
 \chapter{Research}
 \label{research}
 
+\section{Data}
+Data was gathered from Ohloh.net\footnote{http://www.ohloh.net}. Ohloh is a
+project by the initiative of Black Duck Software. The Ohloh universe contains
+approximately 600,000 open-source software projects in January 2014. The
+evolution data of all these projects is tracked and monthly aggregated.
+
+\subsection{Data gathering}
+For the data gathering and validation we used the tool \emph{OhlohAnalytics }\rm
+created by Magiel Bruntink \cite{ohlohanalytics}. This tool was created for the
+replication of the research ``\emph{An Initial Quality Analysis of the Ohloh
+Software Evolution Data}\rm'' by M. Bruntink. This tool provides us with an
+initial data set of more than 10,000 OSS projects gathered in July 2013.\\
+
+\noindent
+The following steps are done in the data gathering process:
+\begin{enumerate}
+	\item Data collection.
+	\item Validation and cleaning.
+\end{enumerate}
+
+\subsubsection{Data collection}
+During the data collection step the names of the projects tracked by Ohloh are
+gathered. Then for each project, monthly facts (so called \emph{factoids}\rm)
+are gathered.
+These facts include size facts (lines of code (LOC), blank lines, commented lines), activity facts
+(number of commits, number of contributors, LOC added/removed), enlistments
+(i.e., source code repositories for the project), language (main programming
+language, other languages).
+
+\subsubsection{Validation and cleaning}
+The initial validation step does sanity checks and filtering on the collected
+data. It filters out the projects that have a wrongly configured repository,
+has missing data, negative LOC added, negative LOC removed, negative LOC,
+negative number of commits, negative number of contributors, or have
+inconsistent values where the difference between the previous month and current
+month numbers are inexplainable.
+
+\subsection{Data selection}
+From the 10,000 projects gathered by the OhlohAnalytics tool, a sample of 250
+projects have been selected. This sample must be a representative selection of
+the projects tracked by Ohloh. For this selection process a script called
+\emph{SampleSoftwareProjects }\rm was used and provided with the OhlohAnalytics
+tool. The SampleSoftwareProjects tool was developed by Nagappan et al at
+Microsoft Research \cite{nagappan}.
+
+The script takes a master data set containing interesting facts about the
+projects tracked by Ohloh. These facts include activity facts (user count,
+average rating, last updated), project age, size facts (LOC), and language
+facts. The projects are scored by each of these dimensions.\\
+
+Taking one sample project as base line the script evaluates projects from the
+master set and adds them to the sample if it increases the overall coverage to
+be close to that of the master set as a whole. The resulting data set is aimed
+to be 100\% representative.\\
+
+\noindent
+For this study we took the project \emph{Mozilla Firefox }\rm as basis for
+the sample. The resulting data set of 250 projects has a representativeness of
+100\% according to the SampleSoftwareProjects script.
+
+\subsection{Data validation}
+As a final step we have validated the 250 projects for data completeness. This
+is not a trivial step as we want to be able to analyze the project's evolution
+data. Therefore, the more complete this data is, the more likely we will be able
+to detect patterns. For all 250 projects we counted the number of monthly
+factoids before and after cleansing and computed the percentage of evolution
+data coverage per project. For the least covered project we have 5.1\% of its
+evolution data, the highest coverage is 99.7\%. The average coverage is 78.6\%.
+19 projects are covered for 33\% or less. 156 projects are covered for more than
+80\%.
+
+\section{Metrics}
+The following metrics are used and measured monthly:
+
+\begin{description}
+	\item[Age in days] \hfill \\
+		This is the number of days since the first factoid of a project. The factoids
+		are monthly statistics, thus the age in days is determined by the date of the
+		factoids. We have taken a constant of 22 working days per month. The average
+		month has 30.4 days, divided by 7 gives 4.34 weeks, multiplied by 5 working
+		days gives 21.7 working days per month.
+
+	\item[Active developers] \hfill \\
+		At Ohloh this is called the number of contributors and is the actual number of
+		developers that have made at least one commit in the month of the factoid.
+	
+	\item[Lines of code (LOC)] \hfill \\
+		For this study we use the same definition of LOC as in the original study by
+		Karus; blank lines and commented lines are also included in the LOC counts.
+		The reason for this is that we want to be able to measure activity and a
+		comment added or removed is also considered project activity related to code.
+
+	\item[Code Churn] \hfill \\
+		Is the sum of LOC added, LOC removed, and LOC modified. The modified LOC is
+		not tracked at Ohloh but is aggregated in LOC added and LOC removed. A
+		modified LOC is basically a line that is both removed and added.
+
+\end{description}
+
+\noindent
+For time series dimensions we used \emph{Age in days }\rm and \emph{Active
+developers}\rm. For signals we used \emph{Active developers}\rm, \emph{LOC}\rm,
+and \emph{Code churn}. Table \ref{tab:series} shows what time series are
+plotted against what signals.
+
+\begin{table}
+\centering
+	\caption{Time series and signals}
+	\begin{tabular}{| p{4cm} | p{4cm} | p{4cm} |}
+	\hline
+	Time series & Signal & Description \\ \hline
+	Age in days & Active developers & Team size over time. \\
+				& Lines of code & LOC size over time. \\
+				& Code churn & LOC change over time. \\ \hline
+	Active developers & Code churn & LOC change per team size \\ \hline
+	\end{tabular}
+\label{tab:series}
+\end{table}
+
+\section{Analysis}
+The analysis of the data is done per project, per time series, per signal
+series. For 250 projects and 4 two-dimensional series this means that were a
+total of 1,000 analysis runs.\\
+The analysis was conducted in the following steps:
+\begin{enumerate}
+	\item Data aggregation.
+	\item Wavelet transform.
+	\item Similar sequence identification.
+	\item Similar sequence grouping.
+\end{enumerate}
+
+\subsection{Data aggregation}
+The first step of the analysis is aggregregation of the data by the time series
+under analysis. For instance, if there exists multiple factoids for the same
+time series value, this data has to be aggregated. Depending on the signal
+variable the aggregation was a summation, mean, max, or min value. The output of
+the aggregation step a set of data for one project consisting of one data point
+per time value.
+
+\subsection{Wavelet transform}
+The aggregated data is fed to the discrete wavelet transformation. This step is
+divided into two ways of wavelet transformation each using a different
+coefficient. One wavelet transform is done using the filter coefficent, the
+second using the scaling coefficient. The results of the wavelet transform step
+are sequences of project evolution data which are patterns of interest. These
+sequences have characteristics such as length and amplitude that are beyond a
+predefined threshold.
+
+\subsection{Similar sequence identification}
+The results of the wavelet transforms for each dimension are analyzed and
+compared to find similar sequences in different projects.
+
+\subsection{Similar sequence grouping}
+
+\begin{comment}
 This chapter reports on the execution of the research method as described in Chapter 3.
 
 If the research has been divided into phases (e.g., using sub questions) the
@@ -8,3 +163,4 @@ phases are introduced, reported on and concluded individually. If needed this
 Chapter could be split up to balance out the sizes of all Chapters.
 An example Research Chapter is provided as Chapter 3 at Paul’s home
 page\footnote{http://homepages.cwi.nl/~paulk/thesesMasterSoftwareEngineering/2006/ReneWiegers.pdf}.
+\end{comment}
