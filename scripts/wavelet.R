@@ -5,9 +5,10 @@
 library("hash")
 library("multicore")
 library("wavelets")
-library("zoo")
 
-dataset <- read.csv2("data/factsForAnalysis.csv")
+dataset <- read.csv2("data/factsForAnalysis.csv", na.strings="NA")
+colnames(dataset)
+
 output.folder <- "scripts/output/wavelet"
 output.plots <- paste(output.folder, "plots", sep="/")
 makeplot <- FALSE
@@ -36,9 +37,11 @@ varcols[["Active.Developers"]] <- c("Commit.LOC.Churn")
 
 # project ids
 pids <- unique(dataset[[idcol]])
+pids <- c(758)
+
 dst.dwt.columns <- c("seq", "variable", "pid", "coefficient", "level", "value", "revlevel")
 
-# Initialize data frames per timeseries column, for each coefficient.
+# Initialize data frames per timeseries column, for both coefficients.
 # Age.Days
 dst.dwt.W.Age.Days <- as.data.frame(
   matrix(nrow=0, ncol=length(dst.dwt.columns))
@@ -66,35 +69,24 @@ calculateColumnDWT <- function(project, varcol, pid, timecol, makeplot){
   time.order.fn <- as.numeric
   aggregate.fn <- sum # this needs revision!!
 
-#   project.zoo <- zoo(project[[varcol]], order.by=time.order.fn(project[[timecol]]))
-#   project.zoo.idx <- index(project.zoo)
-#   project.zoo.vals <- aggregate(project.zoo, project.zoo.idx, aggregate.fn)
-#   project.zoo <- zoo(project.zoo.vals, order.by=unique(project.zoo.idx))
-
-#   project.times <- min(project[[timecol]]):max(project[[timecol]])
-
-#   project.aggregated <- rep(0, length(project.times))
-#   project.aggregated[index(project.zoo) - project.times[1] + 1] <- project.zoo
-#   project.aggregated <- zoo(project.aggregated, order.by=project.times)
-
   # this will aggregate all values from varcol where value of timecol is equal
   project.aggregated <- aggregate(project[[varcol]] ~ project[[timecol]], project, aggregate.fn)
-  project.aggregated <- setNames(project.aggregated, c(timecol, varcol))
+  colnames(project.aggregated) <- c(timecol, varcol)
 
   # sort the aggregated project data by timecol
   project.sorted <- project.aggregated[order(as.numeric(project.aggregated[[timecol]])), ]
 
   # grab the values for both axes (time values for x and var values for y)
   project.times <- as.numeric(project.sorted[[timecol]])
-#   project.vars <- aggregate(project.aggregated, by=project.times, aggregate.fn)
   project.vars <- as.numeric(project.sorted[[varcol]])
 
   # perform discrete wavelet transformation on var values
-  project.dwt <- dwt(as.numeric(project.vars), filter="haar")
+  project.dwt <- dwt(project.vars, filter="haar")
 
   # plot the wavelet transformation
   if(makeplot){
-    jpeg(paste(output.plots, "/", timecol, ".", varcol, ".", project.name, ".", "jpg", sep=""))
+    output.plots.filename <- paste(timecol, varcol, project.name, "jpg", sep=".")
+    jpeg(paste(output.plots, output.plots.filename, sep="/"))
     try(
       plot(
         project.dwt,
@@ -107,17 +99,17 @@ calculateColumnDWT <- function(project, varcol, pid, timecol, makeplot){
   }
 
   for(dwtvar in dwtvars){
-    dwt.dataframe <- paste("dst.dwt", dwtvar, timecol, sep=".")
-
+    dwtdf <- paste("dst.dwt", dwtvar, timecol, sep=".")
     levelss <- length(attr(project.dwt, dwtvar))
 
     for(idx in 1:levelss){
-      if(length(attr(project.dwt, dwtvar)[[idx]]) < 3){
+      if(length(attr(project.dwt, dwtvar)[[idx]]) <= 2){
         next
       }
 
-      mat <- matrix(ncol=length(dst.dwt.columns), nrow=length(attr(project.dwt, dwtvar)[[idx]]))
-      mat <- as.data.frame(mat)
+      mat <- as.data.frame(
+        matrix(ncol=length(dst.dwt.columns), nrow=length(attr(project.dwt, dwtvar)[[idx]]))
+      )
       colnames(mat) <- dst.dwt.columns
       
       # variable name
@@ -135,19 +127,24 @@ calculateColumnDWT <- function(project, varcol, pid, timecol, makeplot){
       # reverse level
       mat[["revlevel"]] <- levelss + 1 - idx
 
-      assign(dwt.dataframe, rbind(get(dwt.dataframe, envir=.GlobalEnv), mat), envir=.GlobalEnv)
+      assign(dwtdf, rbind(get(dwtdf, envir=.GlobalEnv), mat), envir=.GlobalEnv)
     }
 
     filtername <- attr(attr(project.dwt, "filter"), "wt.name")
     filename <- paste(filtername, timecol, dwtvar, varcol, pid, "dwt.csv", sep="_")
-    write.csv2(get(dwt.dataframe, envir=.GlobalEnv), file=paste(output.folder, filename, sep="/"))
+    
+    df <- get(dwtdf, envir=.GlobalEnv)
+    df <- subset(df, df[["variable"]] == varcol)
+    df <- df[dst.dwt.columns]
+    
+    write.csv2(df, file=paste(output.folder, filename, sep="/"))
   }
 }
 
 handleProject <- function(project.data, pid, timecols, makeplot){
   for(timecol in timecols){
     timevarcols <- varcols[[timecol]]
-    
+
     for(varcol in timevarcols){
       calculateColumnDWT(project.data, varcol, pid, timecol, makeplot)
     }
@@ -171,20 +168,20 @@ while(project.index < project.count){
     project.name <- unique(project.data[[namecol]])
     print(paste("Processing", "project", project.name, "..."))
 
-     proc <- parallel(
-       try(
+   proc <- parallel(
+     try(
         handleProject(project.data, pid, timecols, makeplot)
-       )
      )
+   )
 
     # Append to processes list
-    procs.list[[length(procs.list) + 1]] <- proc
+   procs.list[[length(procs.list) + 1]] <- proc
 
     procs.index <- procs.index + 1
     project.index <- project.index + 1
   }
-  
-  collect(procs.list)
+
+ collect(procs.list)
 }
 
 # Aggregate project transformations per type
@@ -193,26 +190,33 @@ for(timecol in timecols){
 
   for(dwtvar in dwtvars){
     for(varcol in timevarcols){
-      dst.dwt.W.Age.Days <- dst.dwt.V.Age.Days # why ??
+      dst.dwt.vars <- as.data.frame(
+        matrix(ncol=length(dst.dwt.columns), nrow=0)
+      )
+      colnames(dst.dwt.vars) <- dst.dwt.columns
 
       for(pid in pids){
         print(paste("Time", timecol, "variable", varcol, "dwt", dwtvar, "project", pid))
 
-        dwt.dataframe <- paste("dst.dwt", dwtvar, timecol, sep=".")
-        input.filename <- paste(output.folder, paste("haar", timecol, dwtvar, varcol, pid, "dwt.csv", sep="_"), sep="/")
+        dwtdf <- paste("dst.dwt", dwtvar, timecol, sep=".")
+        filename <- paste("haar", timecol, dwtvar, varcol, pid, "dwt.csv", sep="_")
+        input.filename <- paste(output.folder, filename, sep="/")
 
         if(!file.exists(input.filename)){
           warning(paste("No such file:", input.filename))
           next
         }
 
+        df <- read.csv2(input.filename)
+        df <- df[dst.dwt.columns]
+
         try(
-          assign("dst.dwt.W.Age.Days", rbind(get("dst.dwt.W.Age.Days", envir=.GlobalEnv), read.csv2(input.filename)), envir=.GlobalEnv)
+          assign("dst.dwt.vars", rbind(get("dst.dwt.vars", envir=.GlobalEnv), df), envir=.GlobalEnv)
         )
       }
 
       output.filename <- paste("factsForAnalysis", dwtvar, timecol, varcol, "csv", sep=".")
-      write.csv2(dst.dwt.W.Age.Days, file=paste(output.folder, output.filename, sep="/"))
+      write.csv2(dst.dwt.vars, file=paste(output.folder, output.filename, sep="/"))
     }
   }
 }
