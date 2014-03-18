@@ -37,19 +37,19 @@ pids <- unique(my.csv.data[["Project.Id"]])
 
 # dwt values
 my.data.dwt.colnames = c("seq", "variable", "pid", "coefficient", "level", "value", "revlevel")
-my.data.dwt.W.Date <- matrix(nrow=0,ncol=length(my.data.dwt.colnames))
-my.data.dwt.W.Date <- as.data.frame(my.data.dwt.W.Date)
-colnames(my.data.dwt.W.Date) <- my.data.dwt.colnames
-my.data.dwt.V.Date <- matrix(nrow=0,ncol=length(my.data.dwt.colnames))
-my.data.dwt.V.Date <- as.data.frame(my.data.dwt.V.Date)
-colnames(my.data.dwt.V.Date) <- my.data.dwt.colnames
+my.data.dwt.W.Age.Days <- matrix(nrow=0,ncol=length(my.data.dwt.colnames))
+my.data.dwt.W.Age.Days <- as.data.frame(my.data.dwt.W.Age.Days)
+colnames(my.data.dwt.W.Age.Days) <- my.data.dwt.colnames
+my.data.dwt.V.Age.Days <- matrix(nrow=0,ncol=length(my.data.dwt.colnames))
+my.data.dwt.V.Age.Days <- as.data.frame(my.data.dwt.V.Age.Days)
+colnames(my.data.dwt.V.Age.Days) <- my.data.dwt.colnames
 
-my.data.dwt.W.Cumulative.LOC.Churn <- matrix(nrow=0,ncol=length(my.data.dwt.colnames))
-my.data.dwt.W.Cumulative.LOC.Churn <- as.data.frame(my.data.dwt.W.Cumulative.LOC.Churn)
-colnames(my.data.dwt.W.Cumulative.LOC.Churn) <- my.data.dwt.colnames
-my.data.dwt.V.Cumulative.LOC.Churn <- matrix(nrow=0,ncol=length(my.data.dwt.colnames))
-my.data.dwt.V.Cumulative.LOC.Churn <- as.data.frame(my.data.dwt.V.Cumulative.LOC.Churn)
-colnames(my.data.dwt.V.Cumulative.LOC.Churn) <- my.data.dwt.colnames
+# my.data.dwt.W.Cumulative.LOC.Churn <- matrix(nrow=0,ncol=length(my.data.dwt.colnames))
+# my.data.dwt.W.Cumulative.LOC.Churn <- as.data.frame(my.data.dwt.W.Cumulative.LOC.Churn)
+# colnames(my.data.dwt.W.Cumulative.LOC.Churn) <- my.data.dwt.colnames
+# my.data.dwt.V.Cumulative.LOC.Churn <- matrix(nrow=0,ncol=length(my.data.dwt.colnames))
+# my.data.dwt.V.Cumulative.LOC.Churn <- as.data.frame(my.data.dwt.V.Cumulative.LOC.Churn)
+# colnames(my.data.dwt.V.Cumulative.LOC.Churn) <- my.data.dwt.colnames
 
 #timecol <- "Date"
 #timecol <- "Cumulative.LOC.Churn"
@@ -58,7 +58,7 @@ calculateColumnDWT <- function(project.data, current_col, pid, timecol) {
   unitcoef <- 1000
   if(timecol %in% c("Age.Days")) {
     #timeorderbyfn <- as.Date
-    unitcoef <- 7
+    unitcoef <- 1
   }
   aggrfn <- max
   if(current_col %in% aggregation_avg) {
@@ -124,7 +124,7 @@ calculateColumnDWT <- function(project.data, current_col, pid, timecol) {
 	# }
 	
   for(dwtvar in c("V", "W")) {
-    dwtdf <- paste("my.data.dwt", dwtvar, "Date", sep=".")
+    dwtdf <- paste("my.data.dwt", dwtvar, timecol, sep=".")
 
     levelss <- length(attr(project.data.weeks.dwt, dwtvar))
     for(idx in 1:levelss) {
@@ -160,7 +160,9 @@ for(pid in pids)
 #try(calculateColumnDWTByDate(project.data, current_col, pid))
 #try(calculateColumnDWTByChurn(project.data, current_col, pid))
     #p1 <- parallel(try(calculateColumnDWT(project.data, current_col, pid, "Cumulative.LOC.Churn")))
-    try(calculateColumnDWT(project.data, current_col, pid, "Age.Days"))
+    #p2 <- parallel(
+      try(calculateColumnDWT(project.data, current_col, pid, "Age.Days"))
+    #)
     #collect(list(p1, p2))
   }
 }
@@ -168,16 +170,16 @@ for(pid in pids)
 for(timecol in c("Age.Days")){ #, "Cumulative.LOC.Churn")) {
   for(dwtvar in c("V", "W")) {
     for(current_col in interesting_colnames) {
-      assign("my.data.dwt.W.Date", my.data.dwt.V.Date)
+      assign("my.data.dwt.W.Age.Days", my.data.dwt.V.Age.Days)
       for(pid in pids) {
 	print(paste("A.. project", pid, "variable", current_col))
-	dwtdf <- paste("my.data.dwt", dwtvar, "Date", sep=".")
+	dwtdf <- paste("my.data.dwt", dwtvar, timecol, sep=".")
 	dfn <- paste(folder.proc, paste("haar", timecol, dwtvar, current_col, pid, "dwt.csv", sep="_"), sep="/")
 	if(file.exists(dfn)) {
-	  try(assign("my.data.dwt.W.Date", rbind(get("my.data.dwt.W.Date", envir = .GlobalEnv), read.csv2(dfn)), envir = .GlobalEnv))
+	  try(assign("my.data.dwt.W.Age.Days", rbind(get("my.data.dwt.W.Age.Days", envir = .GlobalEnv), read.csv2(dfn)), envir = .GlobalEnv))
 	}
       }
-      write.csv2 (my.data.dwt.W.Date, file=paste(folder.proc, paste("factsForAnalysis.dwt", dwtvar, timecol, current_col, "csv", sep="."), sep="/"))
+      write.csv2 (my.data.dwt.W.Age.Days, file=paste(folder.proc, paste("factsForAnalysis.dwt", dwtvar, timecol, current_col, "csv", sep="."), sep="/"))
     }
   }
 }
