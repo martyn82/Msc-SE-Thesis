@@ -159,9 +159,9 @@ for(pid in pids)
     project.data <- subset(my.csv.data, my.csv.data[["Project.Id"]] == pid)
 #try(calculateColumnDWTByDate(project.data, current_col, pid))
 #try(calculateColumnDWTByChurn(project.data, current_col, pid))
-    p1 <- parallel(try(calculateColumnDWT(project.data, current_col, pid, "Cumulative.LOC.Churn")))
-    p2 <- parallel(try(calculateColumnDWT(project.data, current_col, pid, "Age.Days")))
-    collect(list(p1, p2))
+    #p1 <- parallel(try(calculateColumnDWT(project.data, current_col, pid, "Cumulative.LOC.Churn")))
+    try(calculateColumnDWT(project.data, current_col, pid, "Age.Days"))
+    #collect(list(p1, p2))
   }
 }
 
