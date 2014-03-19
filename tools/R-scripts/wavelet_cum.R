@@ -23,15 +23,15 @@ my.csv.data <- read.csv2 (file=paste("data/factsForAnalysis.csv", sep="/"),  na.
 colnames(my.csv.data)
 
 #interesting_colnames <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed", "Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "LOC", "Relative.Date.Progress", "Relative.LOC.Churn.Progress", "Relative.Team.Size", "Files", "Commits")
-interesting_colnames <- c("Commit.LOC.Churn")
+interesting_colnames <- c("LOC")
 #fill_locf <- c("Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "LOC", "Relative.Date.Progress", "Relative.LOC.Churn.Progress", "Relative.Team.Size", "Files")
 fill_locf <- c()
 #fill_zero <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed")
-fill_zero <- c("Commit.LOC.Churn")
+fill_zero <- c("LOC")
 #aggregation_max <- c("Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "Relative.Date.Progress", "Relative.LOC.Churn.Progress")
 aggregation_max <- c()
 #aggregation_avg <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed", "LOC", "Relative.Team.Size", "Files")
-aggregation_avg <- c("Commit.LOC.Churn")
+aggregation_avg <- c("LOC")
 #?ts
 pids <- unique(my.csv.data[["Project.Id"]])
 
@@ -52,7 +52,6 @@ colnames(my.data.dwt.V.Age.Days) <- my.data.dwt.colnames
 # colnames(my.data.dwt.V.Cumulative.LOC.Churn) <- my.data.dwt.colnames
 
 #timecol <- "Date"
-#timecol <- "Cumulative.LOC.Churn"
 calculateColumnDWT <- function(project.data, current_col, pid, timecol) {
   timeorderbyfn <- as.numeric
   unitcoef <- 1000
