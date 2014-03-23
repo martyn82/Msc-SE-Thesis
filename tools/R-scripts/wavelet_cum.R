@@ -13,9 +13,14 @@ library("multicore")
 
 folder.root <- "."
 folder.proc <- paste(folder.root, "wavelet_cum", sep="/")
+folder.plots <- paste(folder.proc, "plots", sep="/")
 
 if(!(file.exists(folder.proc))) {
   dir.create(folder.proc)
+}
+
+if(!file.exists(folder.plots)){
+  dir.create(folder.plots)
 }
 
 my.csv.data <- read.csv2 (file=paste("data/factsForAnalysis.csv", sep="/"),  na.strings = "NA")
@@ -25,24 +30,25 @@ colnames(my.csv.data)
 #interesting_colnames <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed", "Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "LOC", "Relative.Date.Progress", "Relative.LOC.Churn.Progress", "Relative.Team.Size", "Files", "Commits")
 interesting_colnames <- c("LOC")
 #fill_locf <- c("Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "LOC", "Relative.Date.Progress", "Relative.LOC.Churn.Progress", "Relative.Team.Size", "Files")
-fill_locf <- c()
+fill_locf <- c("LOC")
 #fill_zero <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed")
-fill_zero <- c("LOC")
+fill_zero <- c()
 #aggregation_max <- c("Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "Relative.Date.Progress", "Relative.LOC.Churn.Progress")
 aggregation_max <- c()
 #aggregation_avg <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed", "LOC", "Relative.Team.Size", "Files")
 aggregation_avg <- c("LOC")
 #?ts
 pids <- unique(my.csv.data[["Project.Id"]])
+pids <- c(758)
 
 # dwt values
 my.data.dwt.colnames = c("seq", "variable", "pid", "coefficient", "level", "value", "revlevel")
-my.data.dwt.W.Age.Days <- matrix(nrow=0,ncol=length(my.data.dwt.colnames))
-my.data.dwt.W.Age.Days <- as.data.frame(my.data.dwt.W.Age.Days)
-colnames(my.data.dwt.W.Age.Days) <- my.data.dwt.colnames
-my.data.dwt.V.Age.Days <- matrix(nrow=0,ncol=length(my.data.dwt.colnames))
-my.data.dwt.V.Age.Days <- as.data.frame(my.data.dwt.V.Age.Days)
-colnames(my.data.dwt.V.Age.Days) <- my.data.dwt.colnames
+my.data.dwt.W.Age.Months <- matrix(nrow=0,ncol=length(my.data.dwt.colnames))
+my.data.dwt.W.Age.Months <- as.data.frame(my.data.dwt.W.Age.Months)
+colnames(my.data.dwt.W.Age.Months) <- my.data.dwt.colnames
+my.data.dwt.V.Age.Months <- matrix(nrow=0,ncol=length(my.data.dwt.colnames))
+my.data.dwt.V.Age.Months <- as.data.frame(my.data.dwt.V.Age.Months)
+colnames(my.data.dwt.V.Age.Months) <- my.data.dwt.colnames
 
 # my.data.dwt.W.Cumulative.LOC.Churn <- matrix(nrow=0,ncol=length(my.data.dwt.colnames))
 # my.data.dwt.W.Cumulative.LOC.Churn <- as.data.frame(my.data.dwt.W.Cumulative.LOC.Churn)
@@ -55,7 +61,7 @@ colnames(my.data.dwt.V.Age.Days) <- my.data.dwt.colnames
 calculateColumnDWT <- function(project.data, current_col, pid, timecol) {
   timeorderbyfn <- as.numeric
   unitcoef <- 1000
-  if(timecol %in% c("Age.Days")) {
+  if(timecol %in% c("Age.Months")) {
     #timeorderbyfn <- as.Date
     unitcoef <- 1
   }
@@ -70,7 +76,7 @@ calculateColumnDWT <- function(project.data, current_col, pid, timecol) {
     aggrfn0 <- function (x) { length(na.omit(x)) }
     cc <- "Project.Id"
   }
-  
+
   project.data.zoo <- zoo(project.data[[cc]], order.by=timeorderbyfn(project.data[[timecol]]))
 #  plot(project.data.zoo)
   project.data.zoo.idx <- index(project.data.zoo)
@@ -100,7 +106,26 @@ calculateColumnDWT <- function(project.data, current_col, pid, timecol) {
 #  plot(project.data.weeks.zoo)
 
   project.data.weeks.dwt <- dwt(as.numeric(project.data.weeks.vals), filter="haar")
-	#plot(project.data.weeks.dwt)
+
+  for(dwtcoef in c("V", "W")){
+    plots.filename <- paste(paste(timecol, current_col, dwtcoef, pid, sep="_"), "jpg", sep=".")
+    jpeg(paste(folder.plots, plots.filename, sep="/"))
+    
+    if(dwtcoef == "V"){
+      try(
+        plot(project.data.weeks.dwt, plot.W=FALSE)
+      )
+    }else{
+      try(
+        plot(project.data.weeks.dwt, plot.V=FALSE)
+      )
+    }
+    
+    dev.off()
+  }
+
+  #plot(project.data.weeks.dwt)
+
 	#plot.dwt.multiple(project.data.weeks.dwt, levels=list(c(1),c(1,2,3)))
 	#plot.dwt(project.data.weeks.dwt)
 	#plot(project.data.weeks.dwt, prot.W=FALSE, plot.V=FALSE)
@@ -160,25 +185,25 @@ for(pid in pids)
 #try(calculateColumnDWTByChurn(project.data, current_col, pid))
     #p1 <- parallel(try(calculateColumnDWT(project.data, current_col, pid, "Cumulative.LOC.Churn")))
     #p2 <- parallel(
-      try(calculateColumnDWT(project.data, current_col, pid, "Age.Days"))
+      try(calculateColumnDWT(project.data, current_col, pid, "Age.Months"))
     #)
     #collect(list(p1, p2))
   }
 }
 
-for(timecol in c("Age.Days")){ #, "Cumulative.LOC.Churn")) {
+for(timecol in c("Age.Months")){ #, "Cumulative.LOC.Churn")) {
   for(dwtvar in c("V", "W")) {
     for(current_col in interesting_colnames) {
-      assign("my.data.dwt.W.Age.Days", my.data.dwt.V.Age.Days)
+      assign("my.data.dwt.W.Age.Months", my.data.dwt.V.Age.Months)
       for(pid in pids) {
-	print(paste("A.. project", pid, "variable", current_col))
+	print(paste("A.. project", pid, "variable", current_col, "coef", dwtvar))
 	dwtdf <- paste("my.data.dwt", dwtvar, timecol, sep=".")
 	dfn <- paste(folder.proc, paste("haar", timecol, dwtvar, current_col, pid, "dwt.csv", sep="_"), sep="/")
 	if(file.exists(dfn)) {
-	  try(assign("my.data.dwt.W.Age.Days", rbind(get("my.data.dwt.W.Age.Days", envir = .GlobalEnv), read.csv2(dfn)), envir = .GlobalEnv))
+	  try(assign("my.data.dwt.W.Age.Months", rbind(get("my.data.dwt.W.Age.Months", envir = .GlobalEnv), read.csv2(dfn)), envir = .GlobalEnv))
 	}
       }
-      write.csv2 (my.data.dwt.W.Age.Days, file=paste(folder.proc, paste("factsForAnalysis.dwt", dwtvar, timecol, current_col, "csv", sep="."), sep="/"))
+      write.csv2 (my.data.dwt.W.Age.Months, file=paste(folder.proc, paste("factsForAnalysis.dwt", dwtvar, timecol, current_col, "csv", sep="."), sep="/"))
     }
   }
 }

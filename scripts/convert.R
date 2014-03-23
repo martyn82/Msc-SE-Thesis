@@ -20,7 +20,7 @@ src.cols <- c(
     "blanks_added_fact",
     "blanks_deleted_fact",
   "contributors_fact",               # 'Active.Developers'
-  "age_in_months"                    # to calculate 'Age.Days'
+  "age_in_months"                    # to calculate 'Age.Days', and 'Age.Months'
 )
 
 # destination columns
@@ -29,6 +29,7 @@ dst.cols <- c(
   "Project.Name",
   "Date",
   "Age.Days",
+  "Age.Months",
   "LOC",
   "Active.Developers",
   "Commit.LOC.Churn"
@@ -66,7 +67,8 @@ for(i in 1:src.rowcount){
   day <- "01" # default day value because it is missing in the monthly data from Ohloh
 
   fact.date <- paste(year, month, day, sep="-")
-  fact.age <- as.numeric(row$age_in_months) * monthdays
+  fact.age.days <- as.numeric(row$age_in_months) * monthdays
+  fact.age.months <- row$age_in_months
   fact.contributors <- row$contributors_fact
 
   fact.loc <- sum(
@@ -92,7 +94,8 @@ for(i in 1:src.rowcount){
     project.id,
     project.name,
     fact.date,
-    fact.age,
+    fact.age.days,
+    fact.age.months,
     fact.loc,
     fact.contributors,
     fact.churn.loc

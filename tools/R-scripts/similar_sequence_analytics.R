@@ -44,7 +44,7 @@ findSimilarSequences <- function(timecol, targetseq, pid, searchseq, searchrevle
   }
 }
 
-for(timecol in c("Age.Days")){ #, "Cumulative.LOC.Churn")) {
+for(timecol in c("Age.Months")){ #, "Cumulative.LOC.Churn")) {
   for(dwtvar in c("V", "W")) {
   #for(dwtvar in c("V")) {
     for(current_col in interesting_colnames) {
