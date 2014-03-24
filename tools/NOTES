@@ -52,9 +52,12 @@ Variables with 'Days since first commit' as timeseries:
 - Active Developers
   Active Developers over time provides a reliable measure of project team size.
 - Code Churn per active developer over time as a measure of the average individual activity.
-DEVELOPER CHURN CANNOT BE EXTRACTED FROM OHLOH
 - Developer Churn: the sum of developers joined and left the project.
-  Developer Churn over time provides a reliable measure of project team changes.
+  Developer Churn over time provides a reliable measure of project team changes. (this cannot be gathered from Ohloh)
 
 Variables with 'Active Developers' as timeseries.
 - Code Churn over active developers as a means to plot the team activity.
+
+Future work:
+- Gather information of team changes; the number of developers left and joined the project per time interval. Use this to compute developer churn.
+- 
