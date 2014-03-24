@@ -46,7 +46,7 @@ sim.seqs.data <- as.data.frame(matrix(nrow=0,ncol=9,dimnames=list(NULL,c("time",
 #timecols <- c("Date", "Cumulative.LOC.Churn")
 timecols <- c("Age.Months")
 
-for(timecol in ) {
+for(timecol in timecols) {
   for(dwtvar in c("V", "W")) {
 #  for(dwtvar in c("V")) {
     for(current_col in interesting_colnames) {
