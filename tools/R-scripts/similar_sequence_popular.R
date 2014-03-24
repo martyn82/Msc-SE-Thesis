@@ -1,7 +1,7 @@
 # Finds most popular reoccurring patterns in DWT data.
 
 folder.root <- "."
-folder.proc <- paste(folder.root, "wavelet_cum", sep="/")
+folder.proc <- paste(folder.root, "similar_sequence", sep="/")
 file.sim.data <- paste(folder.root, "sim.data.csv", sep="/")
 
 projects.data <- read.csv2("data/factsForAnalysis.csv")
