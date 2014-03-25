@@ -2,10 +2,10 @@
 \label{method}
 
 \section{Wavelet analysis}
-The research questions mentioned in section \ref{questions} are based on the
-observations that wavelet analysis is used in other disciplines to analyze time
-series. For example, wavelet analysis has been a successful method in economics
-and (digital) signal processing (DSP).\\
+The research questions (section \ref{questions}) are based on the observations
+that wavelet analysis is used in other disciplines to analyze time series. For
+example, wavelet analysis has been a successful method in economics and
+(digital) signal processing (DSP).\\
 
 Wavelet transformation is the sampling of a signal at different intervals which
 gives a natural means of scaling the signal. Wavelet analysis is the analysis of
@@ -14,8 +14,8 @@ known as shift coefficients) and scaling coefficients (also known as filters).
 The decomposition can be repeated on the scaling coefficients until the number
 of resulting wavelet coefficients is smaller than the filter length.\\
 
-In replicating the research by Karus we use the same Debauchies filter of length
-2 (also known as Haar wavelet) due to its simplicity and simple interpretation.
+In replicating the research by Karus we use the same Daubechies filter of
+length 2 (also known as Haar wavelet) due to its simplicity and simple interpretation.
 We apply discrete wavelet transform, meaning we use discrete shift when matching
 the series with the wavelet. The scaling coefficients of discrete Haar wavelet
 transform can be interpreted as a smoothed curve of the series. The wavelet
@@ -24,7 +24,7 @@ coefficients show temporal variations.\\
 \noindent
 The main advantages of wavelet transform in time series analysis are:
 \begin{itemize}
-	\item Scaling coefficients allow fuzzy matching as differences in detals are
+	\item Scaling coefficients allow fuzzy matching as differences in details are
 	``smoothed out''.
 	\item Filter coefficients allow detection of small anomalies in series.
 	\item Transform levels make series of different lengths or scale comparable.
