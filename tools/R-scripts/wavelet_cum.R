@@ -39,6 +39,7 @@ aggregation_max <- c()
 aggregation_avg <- c("LOC")
 #?ts
 pids <- unique(my.csv.data[["Project.Id"]])
+pids <- c(pids[1], pids[2])
 
 # dwt values
 my.data.dwt.colnames = c("seq", "variable", "pid", "coefficient", "level", "value", "revlevel")
@@ -153,21 +154,21 @@ calculateColumnDWT <- function(project.data, current_col, pid, timecol) {
     for(idx in 1:levelss) {
       if(length(attr(project.data.weeks.dwt, dwtvar)[[idx]]) > 2)
       {
-	tmpM <- matrix(ncol=length(my.data.dwt.colnames), nrow=length(attr(project.data.weeks.dwt, dwtvar)[[idx]]))
-	tmpM <- as.data.frame(tmpM)
-	colnames(tmpM) <- my.data.dwt.colnames
-	tmpM[["variable"]] <- current_col
-	tmpM[["seq"]] <- 1:length(attr(project.data.weeks.dwt, dwtvar)[[idx]])
-	tmpM[["pid"]] <- pid
-	tmpM[["coefficient"]] <- attr(attr(project.data.weeks.dwt,"filter"),"wt.name")
-	tmpM[["level"]] <- idx
-	tmpM[["value"]] <- attr(project.data.weeks.dwt, dwtvar)[[idx]]
-	tmpM[["revlevel"]] <- levelss + 1 - idx
+        tmpM <- matrix(ncol=length(my.data.dwt.colnames), nrow=length(attr(project.data.weeks.dwt, dwtvar)[[idx]]))
+        tmpM <- as.data.frame(tmpM)
+        colnames(tmpM) <- my.data.dwt.colnames
+        tmpM[["variable"]] <- current_col
+        tmpM[["seq"]] <- 1:length(attr(project.data.weeks.dwt, dwtvar)[[idx]])
+        tmpM[["pid"]] <- pid
+        tmpM[["coefficient"]] <- attr(attr(project.data.weeks.dwt,"filter"),"wt.name")
+        tmpM[["level"]] <- idx
+        tmpM[["value"]] <- attr(project.data.weeks.dwt, dwtvar)[[idx]]
+        tmpM[["revlevel"]] <- levelss + 1 - idx
 
-	assign(dwtdf, rbind(get(dwtdf, envir = .GlobalEnv), tmpM), envir = .GlobalEnv)
+        assign(dwtdf, rbind(get(dwtdf), tmpM))
       }
     }
-    write.csv2(get(dwtdf, envir = .GlobalEnv), file=paste(folder.proc, paste(attr(attr(project.data.weeks.dwt,"filter"),"wt.name"), timecol, dwtvar, current_col, pid, "dwt.csv", sep="_"), sep="/"))
+    write.csv2(get(dwtdf), file=paste(folder.proc, paste(attr(attr(project.data.weeks.dwt,"filter"),"wt.name"), timecol, dwtvar, current_col, pid, "dwt.csv", sep="_"), sep="/"))
   }
 
 }
@@ -190,17 +191,17 @@ for(pid in pids)
   }
 }
 
-for(timecol in c("Age.Months")){ #, "Cumulative.LOC.Churn")) {
+for(timecol in c("Age.Months")){ #for(timecol in c("Age.Months", "Cumulative.LOC.Churn")) {
   for(dwtvar in c("V", "W")) {
     for(current_col in interesting_colnames) {
       assign("my.data.dwt.W.Age.Months", my.data.dwt.V.Age.Months)
       for(pid in pids) {
-	print(paste("A.. project", pid, "variable", current_col, "coef", dwtvar))
-	dwtdf <- paste("my.data.dwt", dwtvar, timecol, sep=".")
-	dfn <- paste(folder.proc, paste("haar", timecol, dwtvar, current_col, pid, "dwt.csv", sep="_"), sep="/")
-	if(file.exists(dfn)) {
-	  try(assign("my.data.dwt.W.Age.Months", rbind(get("my.data.dwt.W.Age.Months", envir = .GlobalEnv), read.csv2(dfn)), envir = .GlobalEnv))
-	}
+        print(paste("A.. project", pid, "variable", current_col, "coef", dwtvar))
+        dwtdf <- paste("my.data.dwt", dwtvar, timecol, sep=".")
+        dfn <- paste(folder.proc, paste("haar", timecol, dwtvar, current_col, pid, "dwt.csv", sep="_"), sep="/")
+        if(file.exists(dfn)) {
+          try(assign("my.data.dwt.W.Age.Months", rbind(get("my.data.dwt.W.Age.Months", envir = .GlobalEnv), read.csv2(dfn)), envir = .GlobalEnv))
+        }
       }
       write.csv2 (my.data.dwt.W.Age.Months, file=paste(folder.proc, paste("factsForAnalysis.dwt", dwtvar, timecol, current_col, "csv", sep="."), sep="/"))
     }
