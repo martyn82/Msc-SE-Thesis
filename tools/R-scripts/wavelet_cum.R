@@ -39,7 +39,6 @@ aggregation_max <- c()
 aggregation_avg <- c("LOC")
 #?ts
 pids <- unique(my.csv.data[["Project.Id"]])
-pids <- c(pids[1], pids[2])
 
 # dwt values
 my.data.dwt.colnames = c("seq", "variable", "pid", "coefficient", "level", "value", "revlevel")
