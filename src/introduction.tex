@@ -10,32 +10,37 @@ result of a change in, for instance, the hiring policy of the organization, or
 an approaching deadline. These events can be used to identify project scale and
 progress, which allows comparing and co-analyzing different projects.\\
 
-The evolution of an open-source software (OSS) project is more organic. Events
-that shape the OSS project's evolution are mostly theoretical with little
-empirical validation. This means that different projects cannot be compared
-in the same scale.\\
+In an open-source software (OSS) project, evolutionary events are mostly
+theoretical with little empirical validation. Changes in team size, activity,
+and the like are more organic. This means that different OSS projects cannot be
+compared in the same scale.\\
 
 OSS projects are being used by many organizations in an industrial environment.
-The number of organizations that use OSS projects is increasing. This makes
-evaluating the survivability of OSS projects more important.\\
-
+This makes evaluating the survivability of OSS projects an important task.
 At \theOrganization, developers extensively use OSS projects in their day-to-day
 work. The projects vary from developers tools, and utilities, to operating
 systems and full system stacks. These OSS projects include, but are not limited
-to, Ansible, Apache web server, MySQL database server and client, and Ubuntu
-Linux.
+to, Ansible, Apache web server, MySQL database, and Ubuntu/Linux. Amongst the
+previously listed well-known projects, less known projects are used.
 
-Amongst the previously listed well-known projects, less known projects are used.
-Therefore, it is valuable to be able to determine or even predict the
-survivability of these projects. The detection of warning signs in and the
-monitoring of their evolution is useful to decide whether to choose for or
-continue to use an OSS project.\\
+\paragraph{}
+Automatically detecting warning signs in the evolution of OSS projects is useful
+if a company is using OSS projects to support their business. This business can
+be anything that is valuable to that company. The method can aid in selecting
+OSS projects for new purposes. For instance, selecting a healthy project that
+has a bigger chance of surviving.\\
 
-This study is a replication of the research described in the paper
+Additionally, the method can be used to monitor projects that are in use by the
+company. In case anomalies occur, the company can decide to look for
+alternatives and eventually replace projects that have a lower chance of
+survival.
+
+\paragraph{}
+This study is a replication and extension of the research from the paper
 \emph{Automatic Means of Identifying Evolutionary Events in Software
-Development} by Siim Karus. In this study, the evolution data of 250 OSS
-projects is analyzed to find patterns that can be interpreted as warning
-signs.
+Development} by Siim Karus \cite{karus2013}. It is extended by using a larger
+data set and attempts to find warning signs in the software evolution of OSS
+projects.
 
 \section{Research questions}
 \label{questions}
@@ -52,6 +57,19 @@ be answered:
 	\item[RQ2] \hfill \\ \emph{\subQuestionOne}
 	\item[RQ3] \hfill \\ \emph{\subQuestionTwo}
 \end{description}
+
+\paragraph{}
+Wavelet analysis is the analysis of waveforms. It is an analysis tool that is
+used in many fields, such as, economics, geographics, and seismology, to
+perform all kinds of digital signal processing (DSP).
+
+Software evolution comprises various measures, such as lines of code, number of
+developers, etc. These metrics can be put in the frequency domain of a waveform,
+whereas the age in months of a project can be put in the time domain of a
+waveform. This way, wavelet analysis can be used to analyze software evolution.
+
+As wavelet analysis is a tool that is relatively easy to automate, it
+provides automatic detection of patterns in software evolution.
 
 \section{Outline}
 
