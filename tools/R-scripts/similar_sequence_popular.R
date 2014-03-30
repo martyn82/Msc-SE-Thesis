@@ -1,13 +1,19 @@
 # Finds most popular reoccurring patterns in DWT data.
 
 folder.root <- "."
-folder.proc <- paste(folder.root, "wavelet_cum", sep="/")
+folder.proc <- paste(folder.root, "similar_sequence", sep="/")
 file.sim.data <- paste(folder.root, "sim.data.csv", sep="/")
 
-allpids <- c( 15, 17, 18,121,126,137,138,139,140,146,147,149,163,168,169,170,257,324,339,340,344,350,351,352,354,355,356,357,358,359,360,361,362,367,368,369,370,371,373,375,376,378) # 251,252 # 258,323,302,321
-pids <- c( 15, 17, 18,121,126,137,138,139,140,146,147,149,163,168,169,170,257,324,339,340,344,367,368,369,371,385,378,379,381)
-deadpids <- c(15,17,18,339,340,344,350,351,352,354,355,356,357,358,359,360,361,362,367,368,369,370,371,373,375,376,378)#251,252)
-deadpids <- c(15,17,18,339,340,344,367,368,369,371,385,378,379,381)#251,252)
+projects.data <- read.csv2("data/factsForAnalysis.csv")
+
+#allpids <- c( 15, 17, 18,121,126,137,138,139,140,146,147,149,163,168,169,170,257,324,339,340,344,350,351,352,354,355,356,357,358,359,360,361,362,367,368,369,370,371,373,375,376,378) # 251,252 # 258,323,302,321
+#pids <- c( 15, 17, 18,121,126,137,138,139,140,146,147,149,163,168,169,170,257,324,339,340,344,367,368,369,371,385,378,379,381)
+#deadpids <- c(15,17,18,339,340,344,350,351,352,354,355,356,357,358,359,360,361,362,367,368,369,370,371,373,375,376,378)#251,252)
+#deadpids <- c(15,17,18,339,340,344,367,368,369,371,385,378,379,381)#251,252)
+
+allpids <- unique(projects.data[["Project.Id"]])
+deadpids <- c()
+
 # No matches: 357; 370 web; 373 AviSynthLexer; 375 VDMHomePage
 # Not in OLAP: 350-363, 376
 alivepids <- allpids[!(allpids %in% deadpids)]
@@ -16,7 +22,8 @@ alivepids <- allpids[!(allpids %in% deadpids)]
 
 minocc <- 3
 filter_name <- "haar"
-interesting_colnames <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed", "Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "LOC", "Relative.Date.Progress", "Relative.LOC.Churn.Progress", "Relative.Team.Size", "Files", "Commits")
+#interesting_colnames <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed", "Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "LOC", "Relative.Date.Progress", "Relative.LOC.Churn.Progress", "Relative.Team.Size", "Files", "Commits")
+interesting_colnames <- c("LOC")
 
 simfile <- file(paste(folder.root, paste("haar", "similar.csv", sep="_"), sep="/"), open="w")
 open(simfile)
@@ -36,7 +43,10 @@ sim.seqs.data <- as.data.frame(matrix(nrow=0,ncol=9,dimnames=list(NULL,c("time",
 #current_col <- "Files"
 #simdata_rel <- simdata[1:10,]
 
-for(timecol in c("Date", "Cumulative.LOC.Churn")) {
+#timecols <- c("Date", "Cumulative.LOC.Churn")
+timecols <- c("Age.Months")
+
+for(timecol in timecols) {
   for(dwtvar in c("V", "W")) {
 #  for(dwtvar in c("V")) {
     for(current_col in interesting_colnames) {

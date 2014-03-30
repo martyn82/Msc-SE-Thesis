@@ -11,7 +11,7 @@ colnames(dataset)
 
 output.folder <- "scripts/output/wavelet"
 output.plots <- paste(output.folder, "plots", sep="/")
-makeplot <- FALSE
+makeplot <- TRUE
 
 if(!file.exists(output.folder)){
   dir.create(output.folder)
@@ -29,10 +29,10 @@ dwtvars <- c("V", "W")
 
 idcol <- "Project.Id"
 namecol <- "Project.Name"
-timecols <- c("Age.Days", "Active.Developers")
+timecols <- c("Age.Months") #c("Age.Months", "Active.Developers")
 
 varcols <- hash(keys=timecols)
-varcols[["Age.Days"]] <- c("LOC", "Commit.LOC.Churn", "Active.Developers")
+varcols[["Age.Months"]] <- c("LOC") #c("LOC", "Commit.LOC.Churn", "Active.Developers")
 varcols[["Active.Developers"]] <- c("Commit.LOC.Churn")
 
 # project ids
@@ -41,15 +41,15 @@ pids <- unique(dataset[[idcol]])
 dst.dwt.columns <- c("seq", "variable", "pid", "coefficient", "level", "value", "revlevel")
 
 # Initialize data frames per timeseries column, for both coefficients.
-# Age.Days
-dst.dwt.W.Age.Days <- as.data.frame(
+# Age.Months
+dst.dwt.W.Age.Months <- as.data.frame(
   matrix(nrow=0, ncol=length(dst.dwt.columns))
 )
-dst.dwt.V.Age.Days <- as.data.frame(
+dst.dwt.V.Age.Months <- as.data.frame(
   matrix(nrow=0, ncol=length(dst.dwt.columns))
 )
-colnames(dst.dwt.W.Age.Days) <- dst.dwt.columns
-colnames(dst.dwt.V.Age.Days) <- dst.dwt.columns
+colnames(dst.dwt.W.Age.Months) <- dst.dwt.columns
+colnames(dst.dwt.V.Age.Months) <- dst.dwt.columns
 
 # Active.Developers
 dst.dwt.W.Active.Developers <- as.data.frame(
@@ -82,22 +82,21 @@ calculateColumnDWT <- function(project, varcol, pid, timecol, makeplot){
   # perform discrete wavelet transformation on var values
   project.dwt <- dwt(project.vars, filter="haar")
 
-  # plot the wavelet transformation
-  if(makeplot){
-    output.plots.filename <- paste(timecol, varcol, project.name, "jpg", sep=".")
-    jpeg(paste(output.plots, output.plots.filename, sep="/"))
-    try(
-      plot(
-        project.dwt,
-        main=project.name,
-        xlab=timecol,
-        ylab=varcol
-      )
-    )
-    dev.off()
-  }
-
   for(dwtvar in dwtvars){
+    if(makeplot){
+      output.plots.filename <- paste(paste(timecol, varcol, dwtvar, project.name, sep="_"), "jpg", sep=".")
+      jpeg(paste(output.plots, output.plots.filename, sep="/"))
+      try(
+        plot(
+          attr(project.dwt, dwtvar),
+          main=project.name,
+          xlab=timecol,
+          ylab=varcol
+        )
+      )
+      dev.off()
+    }
+    
     dwtdf <- paste("dst.dwt", dwtvar, timecol, sep=".")
     levelss <- length(attr(project.dwt, dwtvar))
 
@@ -214,7 +213,7 @@ for(timecol in timecols){
         )
       }
 
-      output.filename <- paste("factsForAnalysis", dwtvar, timecol, varcol, "csv", sep=".")
+      output.filename <- paste("factsForAnalysis", dwtvar, timecol, varcol, "csv", sep="_")
       write.csv2(dst.dwt.vars, file=paste(output.folder, output.filename, sep="/"))
     }
   }

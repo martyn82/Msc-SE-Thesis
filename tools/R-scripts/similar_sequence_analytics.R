@@ -2,6 +2,11 @@
 
 folder.root <- "."
 folder.proc <- paste(folder.root, "wavelet_cum", sep="/")
+folder.output <- paste(folder.root, "similar_sequence", sep="/")
+
+if(!file.exists(folder.output)){
+  dir.create(folder.output)
+}
 
 # pids <- c(15, 17,18,121,126,137,138,139,140,146,147,149,156,163,168,169,170,172,251,252,257,258,302,321,323,324)
 alloweddeviation <- 0.005
@@ -10,7 +15,8 @@ minrevlevel <- ceiling(log(minseq)/log(2))
 maxsearchseq <- 65
 pids_complete <- c()
 filter_name <- "haar"
-interesting_colnames <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed", "Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "LOC", "Relative.Date.Progress", "Relative.LOC.Churn.Progress", "Relative.Team.Size", "Files", "Commits")
+#interesting_colnames <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed", "Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "LOC", "Relative.Date.Progress", "Relative.LOC.Churn.Progress", "Relative.Team.Size", "Files", "Commits")
+interesting_colnames <- c("LOC")
 
 findSimilarSequences <- function(timecol, targetseq, pid, searchseq, searchrevlevel, pid0, current_column, dwtvar, revlevel) {
   if(length(searchseq) >= minseq & length(targetseq) >= minseq) {
@@ -43,23 +49,24 @@ findSimilarSequences <- function(timecol, targetseq, pid, searchseq, searchrevle
   }
 }
 
-for(timecol in c("Date", "Cumulative.LOC.Churn")) {
+for(timecol in c("Age.Months")){ #, "Cumulative.LOC.Churn")) {
   for(dwtvar in c("V", "W")) {
   #for(dwtvar in c("V")) {
     for(current_col in interesting_colnames) {
 			if(current_col == timecol)
 				next
-      simfile <- file(paste(folder.proc, paste("haar", timecol, dwtvar, current_col,"similar.csv", sep="_"), sep="/"), open="w")
+      simfile <- file(paste(folder.output, paste("haar", timecol, dwtvar, current_col,"similar.csv", sep="_"), sep="/"), open="w")
       open(simfile)
       writeLines(paste("Time col", "Variable", "pid0", "pid0 revlevel", "pid0 startseq", "pid", "pid revlevel", "pid startseq", "length", "Max. deviation", "Seq", "a0", "b0", sep = ";"), con=simfile)
 
-      print(paste(folder.proc, paste("CommitsWithStatistics.dwt", dwtvar, timecol, current_col, "csv", sep="."), sep="/"))
-      my.data <- read.csv2 (paste(folder.proc, paste("CommitsWithStatistics.dwt", dwtvar, timecol, current_col, "csv", sep="."), sep="/"), header=TRUE)
+      input.filename <- paste(folder.proc, paste("factsForAnalysis.dwt", dwtvar, timecol, current_col, "csv", sep="."), sep="/")
+      print(input.filename)
+      my.data <- read.csv2(input.filename, header=TRUE)
 
       pids <- unique(my.data[["pid"]])
-			pids <- c(15, 17,18,121,126,137,138,139,140,146,147,149,163,168,169,170,251,252,257,324,339,340,344,350,351,352,354,355,356,357,358,359,360,361,362,367,368,369,370,371,373,375,376,378,379,380,381,382,383,384,385,386,387) # 258,323,302,321,353,363,365,372,374
+			#pids <- c(15, 17,18,121,126,137,138,139,140,146,147,149,163,168,169,170,251,252,257,324,339,340,344,350,351,352,354,355,356,357,358,359,360,361,362,367,368,369,370,371,373,375,376,378,379,380,381,382,383,384,385,386,387) # 258,323,302,321,353,363,365,372,374
 			# No matches: 357; 370 web; 373 AviSynthLexer; 375 VDMHomePage
-			pids <- c(15, 17,18,121,126,137,138,139,140,146,147,149,163,168,169,170,251,252,257,324,339,340,344,367,368,369,371,385,378,379,381)
+			#pids <- c(15, 17,18,121,126,137,138,139,140,146,147,149,163,168,169,170,251,252,257,324,339,340,344,367,368,369,371,385,378,379,381)
 
       if(length(pids) > 0) {
 				for(i in c(1:length(pids))) {

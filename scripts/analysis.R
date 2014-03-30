@@ -188,6 +188,6 @@ for(timecol in timecols){
   }
 }
 
-collect(proc.list)
+#collect(proc.list)
 
 print("Done")

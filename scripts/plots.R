@@ -3,7 +3,7 @@
 #
 # Time series                | Variable          | Description
 # ---------------------------+-------------------+--------------------------------------------
-# Date                       | LOC               | LOC per date shows project size
+# Age in Months              | LOC               | LOC per date shows project size
 #                            | Commit LOC Churn  | LOC churn per date shows project activity
 #                            | Active developers | Active devs per date shows project team size
 # ---------------------------+-------------------+--------------------------------------------
@@ -22,10 +22,10 @@ dataset <- read.csv2("data/factsForAnalysis.csv")
 
 idcol <- "Project.Id"
 namecol <- "Project.Name"
-timecols <- c("Age.Days", "Active.Developers")
+timecols <- c("Age.Months") #c("Age.Months", "Active.Developers")
 
 varcols <- hash(keys=timecols)
-varcols[["Age.Days"]] <- c("LOC", "Commit.LOC.Churn", "Active.Developers")
+varcols[["Age.Months"]] <- c("LOC") #c("LOC", "Commit.LOC.Churn", "Active.Developers")
 varcols[["Active.Developers"]] <- c("Commit.LOC.Churn")
 
 projects <- unique(dataset[[idcol]])
@@ -57,7 +57,8 @@ for(pid in projects) {
       project.vars <- as.numeric(project.sorted[[varcol]])
       value.mean <- mean(project.vars)
 
-      jpeg(paste(output, "/", timecol, ".", varcol, ".", project.name, ".", "jpg", sep=""))
+      output.filename <- paste(timecol, varcol, pid, sep="_")
+      jpeg(paste(output, "/", output.filename, ".", "jpg", sep=""))
 
       plot(
         project.times,
