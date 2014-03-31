@@ -8,6 +8,6 @@ output.file <- "tools/csv/masterdata_filtered.csv"
 input.df <- read.csv2(input.file, sep="\t")
 source.df <- read.csv2(source.file)
 
-output.df <- input.df[!input.df$id %in% source.df$project_id, ]
+output.df <- input.df[input.df$id %in% source.df$project_id, ]
 
 write.table(output.df, file=output.file, sep="\t", row.names=FALSE)
