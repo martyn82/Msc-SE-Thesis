@@ -1,4 +1,5 @@
-# This script filters the masterdata.txt for the sample selection based on projects existing in data/projectsWithCoverageForSample.csv
+# This script filters the masterdata.txt for the sample selection based on
+# projects existing in data/projectsWithCoverageForSample.csv
 
 input.file <- "tools/csv/masterdata.txt"
 source.file <- "data/projectsWithCoverageForSample.csv"
