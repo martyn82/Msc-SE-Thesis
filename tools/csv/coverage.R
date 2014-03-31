@@ -1,4 +1,5 @@
 # This script validates the projects data by calculating the relative evolution coverage.
+# It takes monthlyFactsAfterCleaningWithMetaDataAndId as input.
 
 input.file <- "data/monthlyFactsAfterCleaningWithMetaDataAndId.csv"
 output.file <- "data/projectsWithCoverage.csv"
@@ -50,9 +51,9 @@ for(pid in pids){
     sample_size=project.data.size,
     coverage=project.data.coverage
   )
-  
+
   output.df <- rbind(output.df, row)
-  
+
   c <- c + 1
 }
 
