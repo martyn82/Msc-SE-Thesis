@@ -34,10 +34,8 @@ for(pid in pids){
   project.data <- subset(input.df, input.df[["project_id"]]==pid)
   project.data.months <- project.data[["age_in_months"]]
   
-  # months.seq is the time span of the project data
-  project.data.months.seq <- min(project.data.months):max(project.data.months)
-  # months.size is the number of months
-  project.data.months.size <- length(project.data.months.seq)
+  # months.size is the number of months a project was tracked by Ohloh
+  project.data.months.size <- max(project.data.months) - min(project.data.months) + 1
   
   # project.data.size is the number of data points (months) available in the data set
   project.data.size <- length(project.data[["project_id"]])
