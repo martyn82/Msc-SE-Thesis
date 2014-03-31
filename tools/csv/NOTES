@@ -6,3 +6,4 @@ Then following steps should be taken:
 - Run 'augment_id.R' to add the project IDs to each row; output: monthlyFactsAfterCleaningWithMetaDataAndId.csv in data/ folder.
 - Run 'coverage.R' to compute the evolution data coverage for each project; output: projectsWithCoverage.csv. It is a list of projects and its coverage percentage.
 - Run 'generate_list_for_sample.R' to create a file with projects that have the highest coverage. From these projects a solid sample can be taken.
+- Run 'filter_masterdata.R' to remove projects from masterdata.txt that do not appear in data/projectsWithCoverageForSample.csv and outputs masterdata_filtered.csv that can be used with the tool from Microsoft Research to select a representative sample.
