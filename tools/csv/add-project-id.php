@@ -6,7 +6,7 @@
 const ADD_KEY = 'project_id';
 const MATCH_KEY = 'project_name_fact';
 
-$sourceFile		= '../../data/SampleProjectNamesListWithIds.csv';
+$sourceFile		= '../../data/ValidatedProjectNamesListWithIds.csv';
 $MATCH_KEY		= MATCH_KEY;
 $projectsFile	= '../../data/monthlyFactsAfterCleaningWithMetaData.csv';
 $finalFile		= 'monthlyFactsAfterCleaningWithMetaDataAndId.csv';
