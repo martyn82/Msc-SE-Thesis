@@ -1,5 +1,6 @@
 # This script validates the projects data by calculating the relative evolution coverage.
 # It takes monthlyFactsAfterCleaningWithMetaDataAndId as input.
+# Output: data/projectsWithCoverage.csv; a list of projects and their coverage.
 
 input.file <- "data/monthlyFactsAfterCleaningWithMetaDataAndId.csv"
 output.file <- "data/projectsWithCoverage.csv"
