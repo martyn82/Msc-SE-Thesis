@@ -19,7 +19,7 @@ colnames(output.df) <- output.cols
 total <- length(pids)
 
 print(
-  paste("Validating", total, "projects")
+  paste("Calculates evolution coverage for", total, "projects")
 )
 
 c <- 1
