@@ -10,4 +10,4 @@ source.df <- read.csv2(source.file)
 
 output.df <- input.df[!input.df$id %in% source.df$project_id, ]
 
-write.csv2(output.df, file=output.file)
+write.table(output.df, file=output.file, sep="\t", row.names=FALSE)
