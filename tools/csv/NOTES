@@ -2,8 +2,14 @@ Given:
   A validated and cleansed data set exists in folder data/ with name monthlyFactsAfterCleaningWithMetaData.csv,
   A file ValidatedProjectNamesListWithIds.csv exists in folder data/ which maps project name to Ohloh ID.
 
-Then following steps should be taken:
+Then following steps should be taken in order to select a sample that has a minimum evolution coverage:
 - Run 'augment_id.R' to add the project IDs to each row; output: monthlyFactsAfterCleaningWithMetaDataAndId.csv in data/ folder.
 - Run 'coverage.R' to compute the evolution data coverage for each project; output: projectsWithCoverage.csv. It is a list of projects and its coverage percentage.
 - Run 'generate_list_for_sample.R' to create a file with projects that have the highest coverage. From these projects a solid sample can be taken.
 - Run 'filter_masterdata.R' to remove projects from masterdata.txt that do not appear in data/projectsWithCoverageForSample.csv and outputs masterdata_filtered.csv that can be used with the tool from Microsoft Research to select a representative sample.
+- Copy the output 'masterdata_filtered.csv' to SampleSoftwareProjects from Microsoft Research.
+- Pick a nice base line project (e.g., JUnit) and select a sample running the SampleSoftwareProject.R script. The output will be 'sample.csv'.
+- Copy the output 'sample.csv' back to tools/csv.
+- Run 'sample_facts_for_analysis.R' to select the data from 'data/monthlyFactsAfterCleaningWithMetaDataAndId.csv' for each project that appears in 'sample.csv'. The output will be 'data/factsForAnalysis.csv'.
+
+At this point, a sample data set of a certain size is made with a minimum evolution coverage and a minimum number of data points.
