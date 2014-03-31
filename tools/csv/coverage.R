@@ -26,7 +26,7 @@ c <- 1
 
 for(pid in pids){
   print(
-    paste("Validating project ID", pid, "(", c, "/", total, ")...")
+    paste("Calculating coverage for project", pid, "(", c, "/", total, ")...")
   )
 
   project.data <- subset(input.df, input.df[["project_id"]]==pid)
