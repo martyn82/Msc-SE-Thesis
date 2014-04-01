@@ -36,7 +36,7 @@ Cumulative LOC churn | Active developers                 | Developers per 1k LOC
 Difference in data set (measured at Mon March 10, 2014 14:28):
 - Karus: 63 projects, 153 months, mean 2.4 months per project (min and max unknown).
   (built from 124,799 commits, mean 1,980 commits per project, max 12,127 commits per project, min 1 commit per project)
-- Me: 250 projects, 26,914 months, mean 107.6 months per project, max 296 months per project, min 6 months per project.
+- Me: 250 projects, 22,493 months, mean 90 months per project, max 321 months per project, min 14 months per project.
 
 Using Date as timeseries, Karus aggregated data per 7 days period.
 Using LOC churn as timeseries, Karus aggregated data per 1k LOC.
