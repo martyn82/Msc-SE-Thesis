@@ -1,8 +1,8 @@
 # identifies similar sequences in DWT data
 
 folder.root <- "."
-folder.proc <- paste(folder.root, "wavelet_cum", sep="/")
-folder.output <- paste(folder.root, "similar_sequence", sep="/")
+folder.proc <- paste(folder.root, "output", "wavelet_cum", sep="/")
+folder.output <- paste(folder.root, "output", "similar_sequence", sep="/")
 
 if(!file.exists(folder.output)){
   dir.create(folder.output)

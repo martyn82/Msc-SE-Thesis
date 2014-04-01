@@ -12,8 +12,8 @@ library("zoo")
 library("multicore")
 
 folder.root <- "."
-folder.proc <- paste(folder.root, "wavelet_cum", sep="/")
-folder.plots <- paste(folder.proc, "plots", sep="/")
+folder.proc <- paste(folder.root, "output", "wavelet_cum", sep="/")
+folder.plots <- paste(folder.root, "output", "plots", sep="/")
 
 if(!(file.exists(folder.proc))) {
   dir.create(folder.proc)
