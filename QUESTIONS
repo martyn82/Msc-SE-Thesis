@@ -1,7 +1,19 @@
-* How many data points per project (% of total evolution data of a project) is needed at a minimum for solid analysis?
-* Plain Commit.LOC.Churn per Active.Developers is flawed because
+Q: How many data points per project (% of total evolution data of a project) is needed at a minimum for solid analysis?
+A: A non-interrupted sequence with a certain minimum of data points is needed. Missing information might be identified as a pattern which is not.
+
+Q: What is the minimum sequence length?
+A: ?
+
+Q: What does LOC.Churn per Active.Developers say?
+A: Plain LOC.Churn per Active.Developers is flawed because:
 (1) It does not say anything about team size; teams could have members that haven't committed in that month; and,
 (2) It does not say anything about team performance; team size varies during project lifetime, all churns are aggregated per team size, thus the longer a project stays in the same team size, the better the project will seem to perform with that team size.
-* Is Mean.Commit.LOC.Churn per Active.Developers better? This says something about the mean churn per team size.
-* Or is Active.Developers per 1k Commit.LOC.Churn better? This says something about team performance?
-* We could try to determine the code churn per contributor metric (Crowston et al. 2003) by dividing the Commit.LOC.Churn by Active.Developers. Is it accurate enough?
+
+Q: Is Active.Developers per 1k LOC.Churn better? This says something about team performance?
+A: ?
+
+Q: We could try to determine the code churn per contributor metric (Crowston et al. 2003) by dividing the LOC.Churn by Active.Developers. Is it accurate enough?
+A: ?
+   If there is 10,000 LOC churn and 10 active developers, then it is flattened to 100 LOC per developer.
+   The real division could be 2,000 per developer for 4 developers, 1,000 for 1, and 200 for the others.
+   Depends on what relation is analyzed.
