@@ -8,7 +8,7 @@ dead.threshold.Active.Developers <- 0
 input.file <- paste("data", "factsForAnalysis.csv", sep="/")
 input.data <- read.csv2(input.file)
 
-output.file <- paste("data", "deadProjects.csv", sep="/")
+output.file <- paste("output", "deadProjects.csv", sep="/")
 output.cols <- c("pid", "by.loc", "by.churn", "by.devs")
 
 pids <- unique(input.data$Project.Id)

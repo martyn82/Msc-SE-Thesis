@@ -5,7 +5,7 @@ folder.proc <- paste(folder.root, "output", "similar_sequence", sep="/")
 file.sim.data <- paste(folder.root, "output", "sim.data.csv", sep="/")
 
 projects.data <- read.csv2("data/factsForAnalysis.csv")
-dead.projects.data <- read.csv2("data/deadProjects.csv")
+dead.projects.data <- read.csv2("output/deadProjects.csv")
 
 #allpids <- c( 15, 17, 18,121,126,137,138,139,140,146,147,149,163,168,169,170,257,324,339,340,344,350,351,352,354,355,356,357,358,359,360,361,362,367,368,369,370,371,373,375,376,378) # 251,252 # 258,323,302,321
 #pids <- c( 15, 17, 18,121,126,137,138,139,140,146,147,149,163,168,169,170,257,324,339,340,344,367,368,369,371,385,378,379,381)
