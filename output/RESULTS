@@ -73,10 +73,10 @@ The bottom:
  11. Project 586397, 5 sequences; regions of no LOC change.
 
 FEEDBACK
-- The sequences indicate there was no LOC change (with the max. deviation as allowed margins), however, the sequence of
-  less LOC change is longer in reality (and in the project files) than the region detection has identified. This may be
-  a 'bug' in the detection script, a constraint, or something else that should be adjusted. I might be able to extract all
+- The sequences indicate there was no LOC change (with the max. deviation as allowed margins), however, the sequences
+  are longer in reality (and in the project files) than the region detection has identified. This may be
+  an issue with the detection script, a constraint, or something else that should be adjusted. I might be able to extract all
   sequences that overlap and compute the length of the total sequence.
 - All these sequences have the same cause: no LOC change (with respect to max.deviation). However, they were not identified
-  as similar, but as individual instances.
+  as similar, but as individual instances. The similarity occurs when it is at the same revlevel and of same length.
 - Not a single sequence was detected using shift coefficients. Why is that?
