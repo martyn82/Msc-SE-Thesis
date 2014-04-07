@@ -1,8 +1,9 @@
 Q: How many data points per project (% of total evolution data of a project) is needed at a minimum for solid analysis?
-A: A non-interrupted sequence with a certain minimum of data points is needed. Missing information might be identified as a pattern which is not.
+A: A non-interrupted sequence with a certain minimum of data points is needed. Missing information might be identified
+   as a pattern which is not.
 
-Q: What is the minimum sequence length?
-A: ?
+Q: What is the best minimum sequence length?
+A: Currently, we have set it to 4 data points. I cannot come up with reasons why, but neither with reasons why not.
 
 Q: What does LOC.Churn per Active.Developers say?
 A: Plain LOC.Churn per Active.Developers is flawed because:
@@ -17,3 +18,16 @@ A: ?
    If there is 10,000 LOC churn and 10 active developers, then it is flattened to 100 LOC per developer.
    The real division could be 2,000 per developer for 4 developers, 1,000 for 1, and 200 for the others.
    Depends on what relation is analyzed.
+
+Q: Can we use wavelet analysis to find objective warning signs in software projects leading to the end of code evolution?
+A: Apparently, yes.
+
+Q: What patterns can be found using wavelet analysis?
+A: Regions of no LOC change, when using Months as time, and LOC as frequency.
+
+Q: Under what conditions does wavelet analysis succeed or fail in detecting evolutionary events?
+A: In the case of using Months as time, and LOC as frequency, you need to have a complete data range, or you will
+   detect regions of no LOC change which suggest low activity when the actual reason is that you have no data; a false positive.
+   If you have a complete range of data, you will be able to find shorter and longer regions of no LOC change. These
+   regions may occur anywhere in the project lifetime. Care should be taken to not mistake any sequence of minor LOC
+   change for a warning sign.
