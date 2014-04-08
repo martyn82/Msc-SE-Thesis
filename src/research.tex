@@ -164,8 +164,42 @@ All found similar sequences are saved in a file per coefficient.
 The similar sequence grouping step takes the similar sequences found in the
 previous step and classifies the sequences by number of projects, number of
 occurances, lengths, etc. The resulting file enables selection of sequences by
-length, occurances, frequency, etc. This resulting data is useful for validation
-of the results.
+these properties. The resulting data is used for partial manual, and partial
+automatic validation.
+
+\section{Warning signs}
+\subsection{Dead projects}
+The validation of the sequence identification was done by first classifying
+a subset of the data set containing only dead projects. A dead project is
+defined as a project that had no change in LOC in the past 12 months.\\
+
+The list of dead projects is then used to filter the sequences detected by
+these dead projects. The resulting set of sequences contains just the sequences
+in dead projects. Each sequence is related to other sequences in other projects
+which might be dead or not. These related projects are evaluated by checking if
+they exist in the dead projects list.
+
+\subsection{Dying projects}
+The related projects that are not 'dead' are extracted for analysis. Their
+related sequences will be analyzed. If a project from the 'not-dead' list has a
+sequence related to that of a 'dead' project, and the related sequence occurs
+at the end of the non-dead project's evolution data, then that project is a
+good candidate to be classified as a 'dying' project.\\
+
+The resulting data set contains a list of projects that might be 'dying', the
+transform level at which the sequence was detected, and the number of times the
+sequence was matched against another sequence. This set is of use when manually
+validating the projects.
+
+\section{Validation}
+To validate whether the 'dying' projects are indeed dying, a manual
+investigation has to be made. For the resulting projects, the Ohloh.net project
+page can be consulted. The data set used contains data until July 2013,
+therefore, it is easy to confirm if the trend of 'dying' has continued up to
+April 2014. The activity report at Ohloh.net is very useful. It tells the
+amounts of commits and contributors in the past 30 days and in the past 12
+months. Changes that show a decrease of over 30\% in either commits,
+contributors, or both are in general a bad sign.
 
 \begin{comment}
 This chapter reports on the execution of the research method as described in Chapter 3.

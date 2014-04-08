@@ -2,18 +2,19 @@
 \label{method}
 
 \section{Wavelet transform and analysis}
-The word \emph{wavelet }\rm literally means 'small wave'. It comes from the
-theory that a wave is continuous; e.g., it lasts from minus infinity to plus
-infinity. The idea of a wavelet is that it is a sample of a wave that starts
-and ends at some points in time.
+The word \emph{wavelet }\rm literally means 'small wave'. It has its origins in
+the theoretical continuous wave; e.g., a wave that lasts from minus infinity
+to plus infinity. A wavelet is a sample of a continuous wave that starts and
+ends at some points in time (i.e., is finite).
 
 \paragraph{}
-A wavelet is a signal in a 2 dimensional space. Each dimension is a certain
-domain. The abstract domains are the \emph{time domain }\rm and \emph{frequency
-domain}\rm. In the case of an audio signal, the analogies are easily made. In
-other fields, any observable property can serve as either frequency or time
-value. As long as the relation between the two properties is functional within
-the context of the signal.
+A wavelet is a signal in a 2 dimensional space. Each dimension is a domain. The
+domains are the \emph{time domain}\rm, visualized at the \emph{x }\rm axis,
+and \emph{frequency domain}\rm, visualized at the \emph{y }\rm axis.
+In the case of an audio signal, the analogies are easily made. In other fields, any
+observable property can serve as either frequency or time value. As long as the
+relation between the two properties is functional within the context of the
+signal.
 
 \paragraph{}
 Wavelet transformation is the sampling of a signal at different intervals which
@@ -41,7 +42,7 @@ The main advantages of wavelet transform in time series analysis are:
 
 \subsection{Haar filter}
 In this study and in the study by Karus, the \emph{Daubechies }\rm filter of
-length 2 (also known as \emph{Haar }\rm wavelet, due to its simplicity and
+length 2 (also known as \emph{Haar }\rm wavelet), due to its simplicity and
 simple interpretation.
 
 We apply discrete wavelet transform, meaning we use discrete shift when matching
@@ -50,7 +51,7 @@ transform can be interpreted as a smoothed curve of the series. The wavelet
 coefficients show temporal variations.
 
 \paragraph{}
-Naively speaken, the Haar transform is a means of digitalizing an analogue
+Naively spoken, the Haar transform is a means of digitalizing an analogue
 signal. It still serves this purpose in many devices we use in a day-to-day
 basis. The Haar transform sampling can be performed multiple times. The number
 of times depends on the resolution of the analogue signal. The higher the
@@ -62,10 +63,11 @@ For each part it computes the integral. The difference of the two levels is
 recorded. Thus, for each increase in detail (i.e., each re-division of the
 signal) the extra information that is added is captured in that level. This
 process can be repeated until there is insufficient time resolution to add more
-information.\\
+information. This way, by repeatedly dividing the signal into a more detailed
+signal, we can get arbitrarily close to a continuous signal.\\
 
-The result is a multi-layered sequence of values, where each layer represents a
-decomposition level.
+The result after transformation is a multi-layered sequence of values, where
+each layer represents a decomposition level.
 
 \subsection{Wavelets in software evolution}
 The use of wavelet transformation in the analysis of software evolution removes
