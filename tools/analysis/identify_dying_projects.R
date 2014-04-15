@@ -9,7 +9,7 @@
 #   a. Identify if they might be dying: the sequence is at the end of the project evolution wave
 
 similar.file <- paste("output", "haar_similar.csv", sep="/")
-dead.file <- paste("output", "deadProjects.csv", sep="/")
+dead.file <- paste("output", "deadProjectsValidated.csv", sep="/")
 wavelet.dir <- paste("output", "wavelet_cum", sep="/")
 
 output.file <- paste("output", "dyingProjects.csv", sep="/")
@@ -23,10 +23,11 @@ print("Reading files...")
 
 similar.data <- read.csv2(similar.file)
 dead.data <- read.csv2(dead.file)
+dead.data.confirmed <- subset(dead.data, dead.data$confirmed.dead=="TRUE")
 
 print("Selecting sequences of dead projects...")
 
-dead.pids <- unique(dead.data$pid)
+dead.pids <- unique(dead.data.confirmed$pid)
 similar.dead <- subset(similar.data, similar.data$pid0 %in% dead.pids)
 similar.rowcount <- dim(similar.dead)[1]
 
