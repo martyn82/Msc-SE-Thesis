@@ -29,8 +29,13 @@ for(pid in pids){
   project.data.LOC.Churn <- sum(project.data.last_months$LOC.Churn) # If dead, the sum of churn will be low
   project.data.Active.Developers <- max(project.data.last_months$Active.Developers) # If dead, the max of active developers will be low
   project.data.LOC <- project.data.last_months[1, "LOC"] # If dead, the LOC diff will be low
+  project.data.LOC.upper = project.data.LOC + dead.threshold.LOC
+  project.data.LOC.lower = project.data.LOC - dead.threshold.LOC
 
-  project.is_dead.by.LOC <- all(project.data.last_months$LOC == project.data.LOC) #(project.data.LOC <= dead.threshold.LOC)
+  project.is_dead.by.LOC <- all(
+    project.data.last_months$LOC <= project.data.LOC.upper
+    & project.data.last_months$LOC >= project.data.LOC.lower
+  )
   project.is_dead.by.LOC.Churn <- (project.data.LOC.Churn <= dead.threshold.LOC.Churn)
   project.is_dead.by.Active.Developers <- (project.data.Active.Developers <= dead.threshold.Active.Developers)
   
