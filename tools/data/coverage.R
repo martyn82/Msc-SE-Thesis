@@ -34,13 +34,13 @@ for(pid in pids){
   project.data <- subset(input.df, input.df[["project_id"]]==pid)
   project.data.months <- project.data[["age_in_months"]]
   
-  # months.size is the number of months a project was tracked by Ohloh
+  # months.size is the timespan of months of a project in the data set
   project.data.months.size <- max(project.data.months) - min(project.data.months) + 1
   
   # project.data.size is the number of data points (months) available in the data set
   project.data.size <- length(project.data[["project_id"]])
   
-  # the coverage is the ratio of the number of data points divided by the time span in months
+  # the coverage is the ratio of the number of data points divided by the timespan in months
   project.data.coverage <- project.data.size / project.data.months.size
 
   row <- data.frame(
