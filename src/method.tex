@@ -1,75 +1,7 @@
 \chapter{Research method}
 \label{method}
 
-\section{Wavelet transform and analysis}
-The word \emph{wavelet }\rm literally means 'small wave'. It has its origins in
-the theoretical continuous wave; e.g., a wave that lasts from minus infinity
-to plus infinity. A wavelet is a sample of a continuous wave that starts and
-ends at some points in time (i.e., is finite).
-
-\paragraph{}
-A wavelet is a signal in a 2 dimensional space. Each dimension is a domain. The
-domains are the \emph{time domain}\rm, visualized at the \emph{x }\rm axis,
-and \emph{frequency domain}\rm, visualized at the \emph{y }\rm axis.
-In the case of an audio signal, the analogies are easily made. In other fields, any
-observable property can serve as either frequency or time value. As long as the
-relation between the two properties is functional within the context of the
-signal.
-
-\paragraph{}
-Wavelet transformation is the sampling of a signal at different intervals which
-gives a natural means of scaling the signal. Wavelet analysis is the analysis of
-signals by decomposing the signal into wavelet coefficients (also known as shift
-coefficients) and scaling coefficients (also known as filters).
-
-The decomposition can be repeated on the scaling coefficients until the number
-of resulting wavelet coefficients is smaller than the filter length.
-
-\paragraph{}
-\emph{Shifting }\rm is the operation of moving the wavelet through the time
-domain. This operation is also known as \emph{translating }\rm the wavelet.
-\emph{Filtering }\rm is the operation of scaling the wavelet in the frequency
-domain. This operation is also known as \emph{dilating }\rm the wavelet.
-
-\paragraph{}
-The main advantages of wavelet transform in time series analysis are:
-\begin{itemize}
-	\item Scaling coefficients allow fuzzy matching as differences in details are
-	``smoothed out''.
-	\item Filter coefficients allow detection of small anomalies in series.
-	\item Transform levels make series of different lengths or scale comparable.
-\end{itemize}
-
-\subsection{Haar filter}
-In this study and in the study by Karus, the \emph{Daubechies }\rm filter of
-length 2 (also known as \emph{Haar }\rm wavelet), due to its simplicity and
-simple interpretation.
-
-We apply discrete wavelet transform, meaning we use discrete shift when matching
-the series with the wavelet. The scaling coefficients of discrete Haar wavelet
-transform can be interpreted as a smoothed curve of the series. The wavelet
-coefficients show temporal variations.
-
-\paragraph{}
-Naively spoken, the Haar transform is a means of digitalizing an analogue
-signal. It still serves this purpose in many devices we use in a day-to-day
-basis. The Haar transform sampling can be performed multiple times. The number
-of times depends on the resolution of the analogue signal. The higher the
-analogue resolution, the more sampling transforms are possible.\\
-
-It starts by computing the integral of the full time series signal. It then
-divides the signal into two equal parts over the time domain.
-For each part it computes the integral. The difference of the two levels is
-recorded. Thus, for each increase in detail (i.e., each re-division of the
-signal) the extra information that is added is captured in that level. This
-process can be repeated until there is insufficient time resolution to add more
-information. This way, by repeatedly dividing the signal into a more detailed
-signal, we can get arbitrarily close to a continuous signal.\\
-
-The result after transformation is a multi-layered sequence of values, where
-each layer represents a decomposition level.
-
-\subsection{Wavelets in software evolution}
+\section{Wavelets in software evolution}
 The use of wavelet transformation in the analysis of software evolution removes
 the factor of project size and enables comparing projects equally to find
 similar sequences.
@@ -83,6 +15,39 @@ properties over the evolution of a project gives a series of signals. Software
 repositories are a source of signals in software evolution. This allows wavelet
 transform be applied directly for mining software repositories.
 
+\section{Warning signs}
+\subsection{Dead projects}
+The validation of the sequence identification was done by first classifying
+a subset of the data set containing only dead projects. A dead project is
+defined as a project that had no change in LOC in the past 12 months.\\
+
+The list of dead projects is then used to filter the sequences detected by
+these dead projects. The resulting set of sequences contains just the sequences
+in dead projects. Each sequence is related to other sequences in other projects
+which might be dead or not. These related projects are evaluated by checking if
+they exist in the dead projects list.
+
+\subsection{Dying projects}
+The related projects that are not 'dead' are extracted for analysis. Their
+related sequences will be analyzed. If a project from the 'not-dead' list has a
+sequence related to that of a 'dead' project, and the related sequence occurs
+at the end of the non-dead project's evolution data, then that project is a
+good candidate to be classified as a 'dying' project.\\
+
+The resulting data set contains a list of projects that might be 'dying', the
+transform level at which the sequence was detected, and the number of times the
+sequence was matched against another sequence. This set is of use when manually
+validating the projects.
+
+\section{Validation}
+To validate whether the 'dying' projects are indeed dying, a manual
+investigation has to be made. For the resulting projects, the Ohloh.net project
+page can be consulted. The data set used contains data until July 2013,
+therefore, it is easy to confirm if the trend of 'dying' has continued up to
+April 2014. The activity report at Ohloh.net is very useful. It tells the
+amounts of commits and contributors in the past 30 days and in the past 12
+months. Changes that show a decrease of over 30\% in either commits,
+contributors, or both are in general a bad sign.
 
 \begin{comment}
 This section describes the methods used to answer the research questions. A

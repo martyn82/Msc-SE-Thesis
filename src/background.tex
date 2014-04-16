@@ -1,6 +1,7 @@
 \chapter{Background}
 \label{background}
 
+\section{Related research}
 The survivability of OSS projects has been of interest by many researchers. In
 an industrial environment, a project is considered successful if it is completed
 within time and budget constraints. In OSS projects, these constraints do not
@@ -9,48 +10,48 @@ study to the other.
 
 \paragraph{}
 In a study by Samoladas et al. a method for survival analysis on OSS projects
-was proposed. These methods were employed to predict the survivability of the
-projects by examining their duration, combined with other characterstics such
-as application domain and number of committers. Although these metrics give
-insight in the survivability chances of a project, it was also found that
-adding a developer to the team of contributors increased the survivability of
-the project substantially. This relation cannot be linear; there must be a
-point where adding a developer to the project has no (substantial) increase of
-survivability.
+was proposed \cite{samoladas2010}. These methods were employed to predict the
+survivability of the projects by examining their duration, combined with other
+characterstics such as application domain and number of committers.
+Although these metrics give insight in the survivability chances of a project,
+it was also found that adding a developer to the team of contributors increased
+the survivability of the project substantially. This relation cannot be linear;
+there must be a point where adding a developer to the project has no
+(substantial) increase of survivability.
 
 The authors of the paper proposed two main research issues to be addressed in
 the future. The first one is to add more projects to the study with possibly a
 different categorization.
 And second, the effects of more project parameters, such as programming
 language should be examined. This is not trivial since typically more than one
-language is used in each project \cite{samoladas2010}.
+language is used in each project.
 
 \paragraph{}
-A study by Raja and Tretter on defining a measure of OSS project survivability.
+A study by Raja and Tretter on defining a measure of OSS project survivability
+\cite{raja2012}.
 They have been looking for vitality of OSS projects: the ability of a project
 to grow and maintain its structure in the presence of perturbations. They
 identified three dimensions of project viability: vigor -- the ability of a
 project to grow --, resilience -- the ability of a project to recover from
 disturbances --, and organization -- the structure exhibited in the project.
-These dimensions represent three distinct characteristics of project viability
-\cite{raja2012}. This measure is of use to determine survivability of a
-project, however, it is a snapshot of a point in time. It does not take into
-account the events prior to this point in time. Nor does it enable prediction of
-survivability in the near future. Therefore, it can be challenging to get an
-objective view on a project's survivability as a representative point in
-time has to be selected.
+These dimensions represent three distinct characteristics of project viability.
+This measure is of use to determine survivability of a project, however, it is
+a snapshot of a point in time. It does not take into account the events prior
+to this point in time, nor does it enable prediction of survivability in the
+near future. Therefore, it can be challenging to get an objective view on a
+project's survivability as a representative point in time has to be selected.
 
 \paragraph{}
 Crowston et al. identified measures that can be applied to assess the success of
-OSS projects. The authors used the DeLone and McLean model of information
-systems success to evaluate OSS project success \cite{delone1992}. The aspects
-identified by DeLone and McLean are elaborated; output of systems development -- it is
-believed that a project that has a high frequency of releases is healthy --,
-process of systems development -- the number of developers, the individual
-level of activity, and cycle time (time between releases) --, and
-project effects -- employment opportunities of the contributors, individual
-reputation, and knowledge creation. In this study it was found that many of
-these aspects are indicators of OSS project success \cite{crowston2003}.
+OSS projects \cite{crowston2003}. The authors used the DeLone and McLean model
+of information systems success to evaluate OSS project success
+\cite{delone1992}. The aspects identified by DeLone and McLean are elaborated;
+output of systems development -- it is believed that a project that has a high
+frequency of releases is healthy --, process of systems development -- the
+number of developers, the individual level of activity, and cycle time (time
+between releases) --, and project effects -- employment opportunities of the
+contributors, individual reputation, and knowledge creation. In this study it
+was found that many of these aspects are indicators of OSS project success.
 Although the cycle time is an aspect that could be measured automatically, the
 other aspects are \emph{soft}\rm. Soft in the way that it is hard to get into
 numbers. This makes automatic evaluation and analysis on these aspects very
@@ -58,13 +59,13 @@ hard.
 
 \paragraph{}
 Another study conducted by Crowston et al. extends the previous study by using
-Free/Libre Open-Source Software (FLOSS) projects. They found that the number of
-developers as a simple count of developers is a somewhat flawed number as
-it aggregates the number of developers leaving and the number of developers
-joining a project. A 'churn' of the developers or a 'tenure' of individuals
-would be more appropriate.
-This study took projects from one source code repository,
-SourceForge, instead of different repositories \cite{crowston2006}.
+Free/Libre Open-Source Software (FLOSS) projects \cite{crowston2006}. They found
+that the number of developers as a simple count of developers is a somewhat
+flawed number as it aggregates the number of developers leaving and the number
+of developers joining a project. A 'churn' of the developers or a 'tenure' of
+individuals would be more appropriate.
+This study took projects from one source code repository, SourceForge, instead
+of different repositories.
 
 \paragraph{}
 A study conducted by Wang has shown that warning signs can be found in
@@ -77,18 +78,86 @@ easily analyzed automatically.
 
 \paragraph{}
 Karus explored a method known as \emph{wavelet analysis }\rm to analyze software
-evolution data. It is a method that is easily automated. The wavelet analysis
-interprets evolution data as a series of signals and is able to find sequences
-in this signal. The sequences of multiple projects can be compared in order to
-find recurring patterns. Karus was able to detect close to 1,000 similar
-patterns across 27 OSS projects. His conclusion is that wavelet analysis
-can be a powerful tool for identifying evolutionary events \cite{karus2013}.
+evolution data \cite{karus2013}. It is a method that is easily automated. The
+wavelet analysis interprets evolution data as a series of signals and is able
+to find sequences in this signal. The sequences of multiple projects can be
+compared in order to find recurring patterns. Karus was able to detect close to
+1,000 similar patterns across 27 OSS projects. His conclusion is that wavelet
+analysis can be a powerful tool for identifying evolutionary events.
 
 \paragraph{}
 In this research, we aim to add semantics to Karus' findings in a sense to be
 able to tell whether a specific pattern or event can be interpreted as a
 warning sign. A warning sign is a pattern or event that has a negative effect
 on the evolution of an OSS project.
+
+\section{Wavelet transform and analysis}
+The word \emph{wavelet }\rm literally means 'small wave'. It has its origins in
+the theoretical continuous wave; e.g., a wave that lasts from minus infinity
+to plus infinity. A wavelet is a sample of a continuous wave that starts and
+ends at some points in time (i.e., is finite).
+
+\paragraph{}
+A wavelet is a signal in a 2 dimensional space. Each dimension is a domain. The
+domains are the \emph{time domain}\rm, visualized at the \emph{x }\rm axis,
+and \emph{frequency domain}\rm, visualized at the \emph{y }\rm axis.
+In the case of an audio signal, the analogies are easily made. In other fields, any
+observable property can serve as either frequency or time value. As long as the
+relation between the two properties is functional within the context of the
+signal.
+
+\paragraph{}
+Wavelet transformation is the sampling of a signal at different intervals which
+gives a natural means of scaling the signal. Wavelet analysis is the analysis of
+signals by decomposing the signal into wavelet coefficients (also known as shift
+coefficients) and scaling coefficients (also known as filters).
+
+The decomposition can be repeated on the scaling coefficients until the number
+of resulting wavelet coefficients is smaller than the filter length.
+
+\paragraph{}
+\emph{Shifting }\rm is the operation of moving the wavelet through the time
+domain. This operation is also known as \emph{translating }\rm the wavelet.
+\emph{Filtering }\rm is the operation of scaling the wavelet in the frequency
+domain. This operation is also known as \emph{dilating }\rm the wavelet.
+
+\paragraph{}
+The main advantages of wavelet transform in time series analysis are:
+\begin{itemize}
+	\item Scaling coefficients allow fuzzy matching as differences in details are
+	``smoothed out''.
+	\item Filter coefficients allow detection of small anomalies in series.
+	\item Transform levels make series of different lengths or scale comparable.
+\end{itemize}
+
+\subsection{Haar filter}
+In this study and in the study by Karus, the \emph{Daubechies }\rm filter of
+length 2 (also known as \emph{Haar }\rm wavelet), due to its simplicity and
+simple interpretation.
+
+We apply discrete wavelet transform, meaning we use discrete shift when matching
+the series with the wavelet. The scaling coefficients of discrete Haar wavelet
+transform can be interpreted as a smoothed curve of the series. The wavelet
+coefficients show temporal variations.
+
+\paragraph{}
+Naively spoken, the Haar transform is a means of digitalizing an analogue
+signal. It still serves this purpose in many devices we use in a day-to-day
+basis. The Haar transform sampling can be performed multiple times. The number
+of times depends on the resolution of the analogue signal. The higher the
+analogue resolution, the more sampling transforms are possible.\\
+
+It starts by computing the integral of the full time series signal. It then
+divides the signal into two equal parts over the time domain.
+For each part it computes the integral. The difference of the two levels is
+recorded. Thus, for each increase in detail (i.e., each re-division of the
+signal) the extra information that is added is captured in that level. This
+process can be repeated until there is insufficient time resolution to add more
+information. This way, by repeatedly dividing the signal into a more detailed
+signal, we can get arbitrarily close to a continuous signal.\\
+
+The result after transformation is a multi-layered sequence of values, where
+each layer represents a decomposition level.
 
 \begin{comment}
 This chapter contains all the information needed to put the thesis into

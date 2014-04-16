@@ -1,6 +1,5 @@
 % !TEX encoding = UTF-8 Unicode
-\documentclass[9pt, a4paper, portrait, draft]{report}
-\usepackage[a4paper, total={160mm, 247mm}]{geometry}
+\documentclass{uvamscse}
 \usepackage{verbatim}
 
 % Draft watermark
@@ -8,17 +7,7 @@
 \SetWatermarkText{-DRAFT-}
 \SetWatermarkScale{5}
 
-\pagenumbering{arabic}
-\setcounter{page}{1}
-
-% paper attributes
-\newcommand{\theTitle}{Automatic Means of Detecting Warning Signs in Software
-Evolution}
-\newcommand{\theAuthor}{Martijn Endenburg}
-\newcommand{\theUniversity}{University of Amsterdam}
-\newcommand{\theLocation}{The Netherlands}
-\newcommand{\theOrganization}{VNU Vacature Media}
-\newcommand{\theStatus}{Confidential} % Confidential / Review / Published
+\newcommand{\keywords}{\vspace{1cm}\noindent\bfseries{Keywords: }\rm}
 
 % research hypothesis and questions
 \newcommand{\researchQuestion}{Can we use wavelet analysis to find objective
@@ -28,19 +17,23 @@ warning signs in software projects leading to the end of code evolution?}
 succeed or fail in detecting evolutionary events?}
 
 % title section
-\title{\bf{\theTitle}}
-\author{\theAuthor}
+\title{Automatic Means of Detecting Warning Signs in Software Evolution}
+\author{Martijn Endenburg}
+\authemail{martijn.endenburg@gmail.com}
+\host{VNU Vacature Media \emph{division of De Persgroep Nederland}\rm}
+\newcommand{\hostOrg}{VNU Vacature Media}
+\supervisor{Magiel Bruntink (UvA), Rutger Pannekoek (VNU)}
+\docstatus{Draft}
+
+\abstract{
+	\input{abstract}
+}
 
 \begin{document}
-
-\include{title}
+\maketitle
 
 \include{history}
 
-\setcounter{tocdepth}{2}
-\tableofcontents
-
-\include{abstract}
 \include{preface}
 
 \include{introduction}
@@ -49,6 +42,7 @@ succeed or fail in detecting evolutionary events?}
 \include{research}
 \include{results}
 \include{analysis}
+
 \include{references}
 %appendices
 
