@@ -85,6 +85,7 @@
 }
 %% end of Listing environment
 
+\newcommand{\revisionhistory}{\newpage}
 
 \newcommand{\uvacoverfoot}{%
 	\vfill
@@ -129,7 +130,7 @@
 		\textbf{Publication status:}	& \uvastatus
 	\end{tabular}
 	\uvacoverfoot
-	\newpage
+	\revisionhistory
 	\tableofcontents
 	\newpage
 	\uvaabstract

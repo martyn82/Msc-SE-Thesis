@@ -2,10 +2,17 @@
 \documentclass{uvamscse}
 \usepackage{verbatim}
 
-% Draft watermark
+%% Draft section
 \usepackage{draftwatermark}
 \SetWatermarkText{-DRAFT-}
 \SetWatermarkScale{5}
+
+\renewcommand{\revisionhistory}{
+	\newpage
+	\input{history}
+	\newpage
+}
+%% end Draft section
 
 \newcommand{\keywords}{\vspace{1cm}\noindent\bfseries{Keywords: }\rm}
 
@@ -32,7 +39,7 @@ succeed or fail in detecting evolutionary events?}
 \begin{document}
 \maketitle
 
-\include{history}
+%\include{history}
 
 \include{preface}
 
