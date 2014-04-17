@@ -1,6 +1,7 @@
 /doc
 /tmp
 .settings/
+.externalToolBuilders/
 .buildpath
 .project
 .texlipse
@@ -9,3 +10,11 @@
 .RData
 .DS_Store
 .~lock.*
+*.aux
+*.log
+*.blg
+*.toc
+*.dvi
+*.ps
+*.bak
+*.bbl
