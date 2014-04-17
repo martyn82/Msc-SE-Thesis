@@ -1,85 +1,153 @@
 \chapter{Introduction}
 \label{introduction}
 
-\section{Problem analysis}
+This chapter introduces the study by describing the problem this study is
+addressing and the motivation for the research direction.
 
-In closed source projects, many evolutionary events are dictated by the
-management. Events such as team size changes, changes in activity and progress
-are often the result of a change in, for instance, the hiring policy of the
-organization, or an approaching deadline. These events can be used to identify
-project scale and progress, which allows comparing and co-analyzing different
-projects.\\
+\section{Problem}
+Many elements of the software development process have been found to be related
+to the project's progress. These elements include, but are not limited to, team
+composition, team size, frequency of releases, developer's activity, and
+developer's and user satisfaction
+\cite{crowston2006}\cite{delone1992}\cite{samoladas2010}.
 
-In an open-source software (OSS) project, evolutionary events are mostly
-theoretical with little empirical validation. Changes in team size, activity,
-and the like are more organic. This means that different OSS projects cannot be
-compared on the same scale.\\
+A change in one or more of these elements affect the project's progress. The
+effect of the change on the project's progress can be positive or negative. If a
+change in one or more of the elements has a substantial effect on the
+project's progress, we call it an \emph{evolutionary event}\rm; an event that
+changed the project's evolution.
 
-OSS projects are being used by many organizations in an industrial environment.
-This makes evaluating the survivability of OSS projects important.
+\paragraph{}
+In closed source projects, many evolutionary events are the effect of decisions
+made by the management of these projects. The majority of closed source
+software projects are initiated and maintained by commercial organisations.
+These projects evolve according to changing business requirements, strategies,
+and commercial goals.
+
+In these organisations, a change in the hiring policy, or planning and
+deadlines, can become an evolutionary event in relation to the projects
+affected by these changes. However, these events can be used to identify
+project scale and progress. This allows comparing and co-analysing different
+projects.
+
+\paragraph{}
+In open-source software (OSS) projects, evolutionary events are mostly
+theoretical with little empirical validation. Changes in team size, and
+activity, are organical. A community of an OSS project changes continuously,
+often with little impact on the evolution of the project. This means that
+different OSS projects cannot be compared on the same scale.
+
+\paragraph{}
+Comparing and analysing software projects is of interest to better understand
+why some projects fail and others succeed. Up to today, it is hard to pinpoint
+the key factors that define the success or failure of a software project.
+Therefore, a means to identify the events that shape a project's evolution would
+be useful. For closed-source software projects in a commercial environment,
+these events can be easily tracked by the managerial history of the project. For
+OSS projects, this is a different story.
+
+
+
+\section{Motivation}
+OSS projects are being used by an increasing number of (commercial)
+organisations. Therefore, the evaluation of the survivability of OSS projects
+becomes increasingly important.
+
+\paragraph{}
 At \hostOrg, developers extensively use OSS projects in their day-to-day
 work. The projects vary from developers tools, and utilities, to operating
 systems and full system stacks. These OSS projects include, but are not limited
-to, Ansible, Apache web server, MySQL database, and Ubuntu/Linux. Amongst the
-previously listed well-known projects, less known projects are used.
+to, Ansible, Apache web server, MySQL database, and Ubuntu/Linux. Besides the
+previously listed well-known projects, lesser known projects are also used.
 
 \paragraph{}
-Automatically detecting warning signs in the evolution of OSS projects is useful
-if the people at the company uses OSS projects to support the business. This
-business can be anything that is valuable to a company. The method of
-automatically detecting warning signs can aid in selecting OSS projects for new
-purposes. For instance, selecting a healthy project that has a bigger chance of
-surviving is more suitable because it is able to support the business for a
-longer period than a project of which the activity is decreasing. Additionally,
-the method can be used to monitor projects that the people at the company are
-using. In case serious anomalies are detected, a decision can be made to look
-for alternatives and eventually replace projects that have a lower chance of
-survival.
+Given the increasing popularity of OSS projects, and the use of many OSS
+projects by the host organisation, a means to assess OSS project's
+survivability is useful. An assessment of the survivability of an OSS project
+will aid in the decision for selection and/or continuity of a project.
 
 \paragraph{}
-This study is a replication and extension of the research by Siim Karus
-\emph{Automatic Means of Identifying Evolutionary Events in Software
-Development} \cite{karus2013}. It is extended by using a larger data set and
-attempts to find warning signs in the software evolution of OSS projects.
+In the study \emph{Automatic Means of Identifying Evolutionary Events in
+Software Development }\rm by Siim Karus \cite{karus2013}, Karus proposed the
+use of wavelet analysis to automatically detect anomalies in the evlution of
+OSS projects.
+
+\paragraph{}
+Wavelet analysis is the analysis of waveforms. It is a tool that started in the
+field of seismology, but is expanded to many other fields today. Economics,
+geographics, audio, video, compression techniques, AD-convertors, and many kinds
+of digital signal processing (DSP) is using wavelet transformations and
+analysis.
+
+A big advantage of wavelet analysis is that it is built upon solid mathematical
+principles of waveforms, integrals, and statistics, making it fairly easy to
+automate.
+
+\paragraph{}
+At first glance, it may seem strange to use wavelet analysis to analyse software
+projects. Software evolution comprises various metrics, such as lines of code,
+number of developers, etc. These metrics can be modeled in the frequency domain
+of a waveform. A variable that has a functional relation to these
+metrics is the \emph{age }\rm of a project, which naturally fits the time domain
+of a waveform.
+
+\paragraph{}
+When analysing these waveforms, we should be able to detect anomalies in
+these waveforms. After investigating and comparing these anomalies we might as
+well be able to find the events that caused these evolutionary patterns. A
+comparison with known events that had a negative effect on a project's progress
+may reveal that we are able to detect warning signs in software evolution.\\
+
+\noindent
+Knowing these warning signs helps in:
+\begin{itemize}
+	\item Choosing an OSS project to implement in a business scenario.
+	\item Making timely preparations for decommissioning an OSS project.
+	\item Choosing a development process that best suits the aims of a software
+	project for new OSS projects.
+\end{itemize}
+
+\paragraph{}
+A \emph{warning sign }\rm is any pattern in the waveform that eventually results
+in the \emph{end of code evolution }\rm of a project. The \emph{end of code
+evolution }\rm means that the source code of a project does not change anymore.
+For a pattern being such a warning sign, it has to be similar to patterns that
+are confirmed to be such warning signs.
+
+% \section{Replication}
+% This study is a replication of the research by Siim Karus \emph{Automatic Means
+% of Identifying Evolutionary Events in Software Development} \cite{karus2013}.
+% 
+% \subsection{The original study}
+% The original study by Karus had the following research question:\\[0.5cm]
+% \emph{Can we use wavelet analysis to find objective warning signs in
+% software projects that lead to the end of code evolution?}\rm
 
 \section{Research questions}
 \label{questions}
 
-The main research question of the thesis is (RQ1):
+The main research question (RQ1) is:\\
+
 \begin{description}
-	\item \hfill \\ \emph{\researchQuestion}
+	\item[RQ1] \emph{\researchQuestion}\\[0.3cm]
 \end{description}
 
-\paragraph{}
-Wavelet analysis is the analysis of waveforms. It is an analysis tool that
-started in seismology. Its use is expanded to many other fields, such as,
-economics, geographics, audio and video processing, and others, to perform
-all kinds of digital signal processing (DSP).
-
-Software evolution comprises various measures, such as lines of code, number of
-developers, etc. These metrics can be put in the frequency domain of a waveform,
-whereas the age in months of a project can be put in the time domain of a
-waveform. This way, wavelet analysis can be used to analyze software evolution.
-
-As wavelet analysis is a tool that is relatively easy to automate, it
-provides automatic detection of patterns in software evolution.
-
-\paragraph{}
-In order to find the answer to the main question, the following questions will
-be answered:
+\noindent
+In order to find the answer to the main question, the following
+questions will be answered:
 \begin{description}
-	\item \hfill \\ \emph{\subQuestionOne} (RQ2)
-	\item \hfill \\ \emph{\subQuestionTwo} (RQ3)
+	\item[RQ2] \emph{\subQuestionOne}
+	\item[RQ3] \emph{\subQuestionTwo}
 \end{description}
 
 \section{Outline}
 
 Chapter \ref{background} will provide more information on prior research in the
-field of OSS survivability. In chapter \ref{method} the method and approach of
-the research is discussed. Next, in chapter \ref{research}, the research
-execution itself is described. Chapter \ref{results} presents the results of
-the research. Chapter \ref{analysis} discusses the results after analysis and
-presents the conclusions of the research.
+field of OSS project survivability. In chapter \ref{method} the method and
+approach of the research is discussed. Chapter \ref{research} describes the
+research execution. In chapter \ref{results}, the results are presented, and
+chapter \ref{analysis} provides the results after analysis and presents the
+conclusions of the research.
 
 \begin{comment}
 
