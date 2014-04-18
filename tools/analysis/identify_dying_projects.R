@@ -103,9 +103,9 @@ print("Aggregating data...")
 output.data <- aggregate(
   output.data$match.count,
   by=list(
-    "pid"=output.data$pid,
-    "max.revlevel"=output.data$max.revlevel,
-    "dead.count"=output.data$dead.count
+    output.data$pid,
+    output.data$max.revlevel,
+    output.data$dead.count
   ),
   FUN=sum
 )
