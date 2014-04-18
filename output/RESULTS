@@ -5,8 +5,10 @@ The least occuring sequences all occured multiple times in a single project:
    3: Project 408980, sequence of length 4, max.dev. 0.00425, no LOC change between point 21 and 24 (of 24) at revlevel 5.
 
 MOST OCCURING
-The most occuring two sequences both occured 1,424 times in 204 projects, length 4, max.dev. 0.00499 (the maximum allowed
-deviation = 0.005) and the sequences indicate a short period of no LOC change (with respect to the max.dev.).
+The most occuring two sequences:
+   1: The first occurred 1,424 times in 204 projects, length 4, max.dev. 0.00499 (the maximum allowed deviation = 0.005)
+   2: The second occurred 1,416 times in 204 proejcts, length 4, max.dev. 0.00499
+The sequences indicate a short period of no LOC change (with respect to the max.dev.).
 
 LONGEST
 The three longest sequences have length 19, occured 4-5 times in 4-5 projects.

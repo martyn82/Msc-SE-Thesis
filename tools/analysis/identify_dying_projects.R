@@ -13,7 +13,12 @@ dead.file <- paste("output", "deadProjectsValidated.csv", sep="/")
 wavelet.dir <- paste("output", "wavelet_cum", sep="/")
 
 output.file <- paste("output", "dyingProjects.csv", sep="/")
-output.cols <- c("pid", "max.revlevel", "match.count")
+output.cols <- c(
+  "pid",          # The project that is potential dying
+  "max.revlevel", # The maximum level of detail of the sequence that identified the project as dying
+  "match.count",  # The number of times the sequence occurred
+  "dead.count"    # The number of dead projects matching the sequence
+)
 output.data <- as.data.frame(
   matrix(ncol=length(output.cols), nrow=0)
 )
@@ -35,11 +40,17 @@ print("Searching for dying projects...")
 
 for(i in 1:similar.rowcount){
   similar.row <- similar.dead[i, ]
+  
+  # extract the list of projects and split them into a list of pids
   projects.list <- as.character(similar.row$Project.list)
   projects.pids <- as.numeric(unlist(strsplit(projects.list, split="|", fixed=TRUE)))
+  
+  # the dead pids in the list
   projects.pids.dead <- subset(projects.pids, projects.pids %in% dead.pids)
+  # the other pids in the list
   projects.pids.other <- subset(projects.pids, !(projects.pids %in% dead.pids))
 
+  # similar regions from the pids
   similar.regions <- as.character(similar.row$Project.id.ss.rl)
   similar.regions <- as.character(unlist(strsplit(similar.regions, split="|", fixed=TRUE)))
 
@@ -72,11 +83,13 @@ for(i in 1:similar.rowcount){
       seq.region.untrim$seq <= (region.startseq + region.length)
     )
 
+    # if the sequence occurs at the end of the evolution data, then add it
     if(max(seq.region.untrim$seq) == max(seq.region$seq)){
       row <- data.frame(
         pid=region.pid,
         max.revlevel=region.revlevel,
-        match.count=1
+        match.count=1,
+        dead.count=length(projects.pids.dead)
       )
 
       output.data <- rbind(output.data, row)
@@ -90,7 +103,7 @@ print("Aggregating data...")
 output.data <- aggregate(output.data$match.count, by=list(output.data$pid, output.data$max.revlevel), FUN=sum)
 colnames(output.data) <- output.cols
 output.data <- lapply(split(output.data, output.data$pid), function(df){
-  df[which.max(df$max.revlevel), c(1, 2, 3)]
+  df[which.max(df$max.revlevel), length(output.cols)]
 })
 output.data <- do.call(rbind, output.data)
 
