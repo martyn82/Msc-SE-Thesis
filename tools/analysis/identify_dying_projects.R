@@ -16,8 +16,8 @@ output.file <- paste("output", "dyingProjects.csv", sep="/")
 output.cols <- c(
   "pid",          # The project that is potential dying
   "max.revlevel", # The maximum level of detail of the sequence that identified the project as dying
-  "match.count",  # The number of times the sequence occurred
-  "dead.count"    # The number of dead projects matching the sequence
+  "dead.count",   # The number of dead projects matching the sequence
+  "match.count"   # The number of times the sequence occurred (must be the last column)
 )
 output.data <- as.data.frame(
   matrix(ncol=length(output.cols), nrow=0)
@@ -100,7 +100,15 @@ for(i in 1:similar.rowcount){
 }
 
 print("Aggregating data...")
-output.data <- aggregate(output.data$match.count, by=list(output.data$pid, output.data$max.revlevel), FUN=sum)
+output.data <- aggregate(
+  output.data$match.count,
+  by=list(
+    "pid"=output.data$pid,
+    "max.revlevel"=output.data$max.revlevel,
+    "dead.count"=output.data$dead.count
+  ),
+  FUN=sum
+)
 colnames(output.data) <- output.cols
 output.data <- lapply(split(output.data, output.data$pid), function(df){
   df[which.max(df$max.revlevel), length(output.cols)]
