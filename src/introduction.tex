@@ -1,70 +1,64 @@
 \chapter{Introduction}
 \label{introduction}
 
-This chapter introduces the study by describing the problem this study is
-addressing and the motivation for the research direction.
+This chapter introduces research topic by describing the problem analysis, and
+the motivation for the research direction.
 
 \section{Problem}
-Many elements of the software development process have been found to be related
-to the project's progress. These elements include, but are not limited to, team
-composition, team size, frequency of releases, developer's activity, and
-developer's and user satisfaction
-\cite{crowston2006}\cite{delone1992}\cite{samoladas2010}.
+Many elements of the software development process are related to the project's
+progress. These elements include, but are not limited to, team composition,
+team size, frequency of releases, developer's activity, and developer's and
+user satisfaction \cite{crowston2006, delone1992, samoladas2010}.
 
-A change in one or more of these elements affect the project's progress. The
-effect of the change on the project's progress can be positive or negative. If a
-change in one or more of the elements has a substantial effect on the
-project's progress, we call it an \emph{evolutionary event}\rm; an event that
-changed the project's evolution.
+A change in one or more of these elements positively or negatively affect the
+project's progress. If a change in one or more of the elements has a substantial
+effect on the project's progress, we call it an \emph{evolutionary event}\rm; an
+event that changed the project's evolution.
 
 \paragraph{}
 In closed source projects, many evolutionary events are the effect of decisions
-made by the management of these projects. The majority of closed source
-software projects are initiated and maintained by commercial organisations.
-These projects evolve according to changing business requirements, strategies,
-and commercial goals.
+made by the management. The majority of closed source software projects are
+initiated and maintained by commercial organisations. These projects evolve
+according to changing business requirements, strategies, and commercial goals.
 
-In these organisations, a change in the hiring policy, or planning and
-deadlines, can become an evolutionary event in relation to the projects
-affected by these changes. However, these events can be used to identify
-project scale and progress. This allows comparing and co-analysing different
-projects.
+In commercial organisations, a change in the hiring policy, or planning and
+deadlines, can become an evolutionary event for the projects affected by these
+changes. These events can be used to identify project scale and progress. This
+allows comparing and co-analysing different projects \cite{karus2013}.
 
 \paragraph{}
 In open-source software (OSS) projects, evolutionary events are mostly
-theoretical with little empirical validation. Changes in team size, and
-activity, are organical. A community of an OSS project changes continuously,
-often with little impact on the evolution of the project. This means that
-different OSS projects cannot be compared on the same scale.
+theoretical with little empirical validation. Changes in development activity,
+community, and other aspects of the OSS process are mostly organic. A community
+of an OSS project changes continuously, often with little impact on the
+evolution of the project \cite{androutsellis}. This means that different OSS
+projects cannot be compared on the same scale.
 
 \paragraph{}
 Comparing and analysing software projects is of interest to better understand
-why some projects fail and others succeed. Up to today, it is hard to pinpoint
-the key factors that define the success or failure of a software project.
-Therefore, a means to identify the events that shape a project's evolution would
-be useful. For closed-source software projects in a commercial environment,
-these events can be easily tracked by the managerial history of the project. For
-OSS projects, this is a different story.
+the survivability of OSS projects. The key factors that define the success or
+failure of a software project have not yet been found.
+
+We expect to be able to find indicators of failure in the events that
+shape a project's evolution. Therefore, a means to identify these evolutionary
+events would be useful. For closed-source software projects in a commercial
+environment, these events can be easily tracked by the managerial history of
+the project. For OSS projects, this is not the case.
 
 
 
 \section{Motivation}
-OSS projects are being used by an increasing number of (commercial)
-organisations. Therefore, the evaluation of the survivability of OSS projects
-becomes increasingly important.
-
-\paragraph{}
 At \hostOrg, developers extensively use OSS projects in their day-to-day
 work. The projects vary from developers tools, and utilities, to operating
 systems and full system stacks. These OSS projects include, but are not limited
-to, Ansible, Apache web server, MySQL database, and Ubuntu/Linux. Besides the
-previously listed well-known projects, lesser known projects are also used.
+to, Ansible, Apache Web Server, MySQL, OpenStack, OpenVPN, and Ubuntu/Linux.
+Besides the previously listed well-known projects, lesser known projects are
+also used.
 
 \paragraph{}
-Given the increasing popularity of OSS projects, and the use of many OSS
-projects by the host organisation, a means to assess OSS project's
-survivability is useful. An assessment of the survivability of an OSS project
-will aid in the decision for selection and/or continuity of a project.
+Given that OSS projects are popular in many organisations a means to assess OSS
+project's survivability is useful. An assessment of the survivability of an OSS
+project will aid in the decision for selection and/or continuity of a project.
 
 \paragraph{}
 In the study \emph{Automatic Means of Identifying Evolutionary Events in
@@ -73,33 +67,38 @@ use of wavelet analysis to automatically detect anomalies in the evlution of
 OSS projects.
 
 \paragraph{}
-Wavelet analysis is the analysis of waveforms. It is a tool that started in the
-field of seismology, but is expanded to many other fields today. Economics,
-geographics, audio, video, compression techniques, AD-convertors, and many kinds
-of digital signal processing (DSP) is using wavelet transformations and
-analysis.
-
-A big advantage of wavelet analysis is that it is built upon solid mathematical
-principles of waveforms, integrals, and statistics, making it fairly easy to
-automate.
+Wavelet analysis is the analysis of signals (time series) by decomposing the
+signal into wavelet coefficients and scaling coefficients by using wavelet
+functions. A more in-depth description of this tool is contained in the chapters
+\ref{background} and \ref{method}.
 
 \paragraph{}
-At first glance, it may seem strange to use wavelet analysis to analyse software
-projects. Software evolution comprises various metrics, such as lines of code,
-number of developers, etc. These metrics can be modeled in the frequency domain
-of a waveform. A variable that has a functional relation to these
-metrics is the \emph{age }\rm of a project, which naturally fits the time domain
-of a waveform.
+The use of wavelet analysis is extended to many fields having many purposes.
+One of the applications of wavelet analysis is pattern recognition in digital
+signal processing, such as duplication detection and face recognition in
+imagery \cite{myna, wadkar}. The big advantage of wavelet analysis is that
+it is based upon solid mathematical principles as integrals and statistics,
+making it fairly easy to automate.
 
 \paragraph{}
-When analysing these waveforms, we should be able to detect anomalies in
-these waveforms. After investigating and comparing these anomalies we might as
-well be able to find the events that caused these evolutionary patterns. A
-comparison with known events that had a negative effect on a project's progress
-may reveal that we are able to detect warning signs in software evolution.\\
+At first glance, it may seem odd to use wavelet analysis to analyse evolution of
+software projects. Software evolution comprises various metrics, such as lines
+of code, number of developers, etc. These metrics can be modeled in the
+frequency domain of a waveform. These metrics have a functional relation to the
+age of a project, which fits the time domain of a waveform. This gives a
+natural transition of each of these metrics to a waveform and enables the
+analysis of such a waveform.
+
+\paragraph{}
+When analysing waveforms of software evolution metrics, we should be able to
+detect anomalies in these waveforms. After investigating and comparing these
+anomalies we might as well be able to find the events that caused these
+evolutionary patterns. A comparison with known events that had a negative
+effect on a project's progress may reveal that we are able to detect warning
+signs in software evolution.\\
 
 \noindent
-Knowing these warning signs helps in:
+Knowing these warning signs will help in:
 \begin{itemize}
 	\item Choosing an OSS project to implement in a business scenario.
 	\item Making timely preparations for decommissioning an OSS project.
@@ -108,20 +107,15 @@ Knowing these warning signs helps in:
 \end{itemize}
 
 \paragraph{}
-A \emph{warning sign }\rm is any pattern in the waveform that eventually results
-in the \emph{end of code evolution }\rm of a project. The \emph{end of code
-evolution }\rm means that the source code of a project does not change anymore.
-For a pattern being such a warning sign, it has to be similar to patterns that
-are confirmed to be such warning signs.
+A \emph{warning sign }\rm is any pattern in the waveform that has a chance of
+resulting in the \emph{end of code evolution }\rm of a project. The \emph{end of
+code evolution }\rm means that the source code activities of a project have
+stopped. There could still be commits on the project, for instance in Wiki
+pages, external library updates, or documentation, but no more source code
+changes. For a pattern being such a warning sign, it has to be similar to
+patterns that are confirmed to be such warning signs.
 
-% \section{Replication}
-% This study is a replication of the research by Siim Karus \emph{Automatic Means
-% of Identifying Evolutionary Events in Software Development} \cite{karus2013}.
-% 
-% \subsection{The original study}
-% The original study by Karus had the following research question:\\[0.5cm]
-% \emph{Can we use wavelet analysis to find objective warning signs in
-% software projects that lead to the end of code evolution?}\rm
+
 
 \section{Research questions}
 \label{questions}
@@ -139,6 +133,11 @@ questions will be answered:
 	\item[RQ2] \emph{\subQuestionOne}
 	\item[RQ3] \emph{\subQuestionTwo}
 \end{description}
+
+\paragraph{}
+For emphasis, we are not looking for OSS vitality as the project's ability to
+provide support and grow in the number of releases. In this study, we only look
+at the development process ignoring documentation and community support.
 
 \section{Outline}
 
@@ -158,8 +157,6 @@ such that you do not have to repeat yourself later. In this section you do not
 cover details, but you give the reader an idea of the context, a brief overview
 of the research, and how the remainder of the thesis is structured.
 
-\end{comment}
-\begin{comment}
 
 MOTIVATION
 
