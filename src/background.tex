@@ -1,30 +1,65 @@
 \chapter{Background}
 \label{background}
 
-\section{Related research}
-The survivability of OSS projects has been of interest by many researchers. In
-an industrial environment, a project is considered successful if it is completed
-within time and budget constraints. In OSS projects, these constraints do not
-always exist. The indicators of success for OSS projects differ from the one
-study to the other.
+This chapter provides background information by contributing to a basic
+understanding of the field of software evolution and the assessment of
+survivability and success of OSS projects.
+
+\section{Software evolution}
+The analogy of the term \emph{evolution }\rm in the field of software
+engineering was first used by Lehman's laws of software evolution \cite{lehman}.
+Software does not evolve by intrinsic feedback loops like evolution in plants
+and animals, but by extrinsic feedback that comes from the operational domain.
 
 \paragraph{}
-In a study by Samoladas et al. a method for survival analysis on OSS projects
-was proposed \cite{samoladas2010}. These methods were employed to predict the
-survivability of the projects by examining their duration, combined with other
-characterstics such as application domain and number of committers.
-Although these metrics give insight in the survivability chances of a project,
-it was also found that adding a developer to the team of contributors increased
-the survivability of the project substantially. This relation cannot be linear;
-there must be a point where adding a developer to the project has no
-(substantial) increase of survivability.
+Lehman identified eight laws that are the driving factors of changes in software
+systems. These laws can be roughly categorised into two categories: laws
+related to the product (e.g., source code, and internal quality), and laws
+related to the process (e.g., organisation, development process, business
+requirements and user satisfaction).
 
-The authors of the paper proposed two main research issues to be addressed in
-the future. The first one is to add more projects to the study with possibly a
-different categorization.
-And second, the effects of more project parameters, such as programming
-language should be examined. This is not trivial since typically more than one
-language is used in each project.
+\paragraph{}
+The laws related to the software process tell us that in order for a software
+system to stay useful and satisfactory, it needs to keep changing according to
+users' needs. What needs to change is fed through the feedback system.
+
+On average and in terms of activity, the organisation of a software development
+process does not change much during a product's life time (law IV:
+Conservation of Organisational Stability).
+
+\paragraph{}
+The laws related to the software product tell us that as the source code of the
+software system changes, its complexity will increase and its quality will
+decline unless proper actions are taken to maintain it or reduce the complexity
+and improve its quality. However, the contents of the product will be
+statistically invariant during the active life time of a product.
+
+\paragraph{}
+Lehman's laws of software evolution are valid for both closed source software
+and open-source software. These laws form the foundation of what we understand
+as software evolution.
+
+\paragraph{}
+The evolution of a software system comprises various measures on different
+moments in time. For instance, the lines of code metric over a project's life
+time is a way to measure the evolution of lines of code in a software project.
+
+
+
+\section{Project survivability}
+In a study by Samoladas et al. a method for survival analysis on OSS projects
+was proposed \cite{samoladas2010}. The authors used duration data regarding
+FLOSS projects to predict the survivability of the projects by examining their
+duration, combined with other characterstics such as application domain and
+number of committers. Although these metrics give insight in the survivability
+chances of a project, it was also found that adding a developer to the team of
+contributors increased the survivability of the project substantially.
+
+The authors proposed two main research issues to be addressed in the future. The
+first one is to add more projects to the study with possibly a different
+categorisation. And second, the effects of more project parameters, such as
+programming language should be examined. This is not trivial since typically
+more than one language is used in each project.
 
 \paragraph{}
 A study by Raja and Tretter on defining a measure of OSS project survivability
@@ -33,18 +68,19 @@ They have been looking for vitality of OSS projects: the ability of a project
 to grow and maintain its structure in the presence of perturbations. They
 identified three dimensions of project viability: vigor -- the ability of a
 project to grow --, resilience -- the ability of a project to recover from
-disturbances --, and organization -- the structure exhibited in the project.
+disturbances --, and organisation -- the structure exhibited in the project.
 These dimensions represent three distinct characteristics of project viability.
+
 This measure is of use to determine survivability of a project, however, it is
-a snapshot of a point in time. It does not take into account the events prior
-to this point in time, nor does it enable prediction of survivability in the
-near future. Therefore, it can be challenging to get an objective view on a
+a snapshot of a single point in time. It does not take into account the events
+prior to this point in time, nor does it enable prediction of survivability in
+the near future. Therefore, it can be challenging to get an objective view on a
 project's survivability as a representative point in time has to be selected.
 
 \paragraph{}
 Crowston et al. identified measures that can be applied to assess the success of
-OSS projects \cite{crowston2003}. The authors used the DeLone and McLean model
-of information systems success to evaluate OSS project success
+OSS projects \cite{crowston2003}. The authors used the DeLone and McLean Model
+of Information Systems Success to evaluate OSS project success
 \cite{delone1992}. The aspects identified by DeLone and McLean are elaborated;
 output of systems development -- it is believed that a project that has a high
 frequency of releases is healthy --, process of systems development -- the
@@ -52,38 +88,35 @@ number of developers, the individual level of activity, and cycle time (time
 between releases) --, and project effects -- employment opportunities of the
 contributors, individual reputation, and knowledge creation. In this study it
 was found that many of these aspects are indicators of OSS project success.
+
 Although the cycle time is an aspect that could be measured automatically, the
-other aspects are \emph{soft}\rm. Soft in the way that it is hard to get into
-numbers. This makes automatic evaluation and analysis on these aspects very
-hard.
+other aspects such as employment opportunities, reputation, and knowledge
+creation are very hard to get into numbers and therefore hard to automate.
 
 \paragraph{}
 Another study conducted by Crowston et al. extends the previous study by using
-Free/Libre Open-Source Software (FLOSS) projects \cite{crowston2006}. They found
-that the number of developers as a simple count of developers is a somewhat
-flawed number as it aggregates the number of developers leaving and the number
-of developers joining a project. A 'churn' of the developers or a 'tenure' of
-individuals would be more appropriate.
-This study took projects from one source code repository, SourceForge, instead
-of different repositories.
+Free/Libre Open-Source Software (FLOSS) projects \cite{crowston2006}. In
+addition to what was found in the previous study, they had found that the number
+of developers as a simple count of developers is a flawed number as it
+aggregates the number of developers leaving and the number of developers
+joining a project. A 'churn' of the developers or a 'tenure' of individuals
+would be more appropriate.
 
 \paragraph{}
-A study conducted by Wang has shown that warning signs can be found in
+A study conducted by J. Wang has shown that warning signs can be found in
 six crucial factors of OSS projects success: developer participation effort,
 developer service quality, software license restrictiveness, targeted users,
 community social network ties, and community quality of social ties
 \cite{wang2012}.
-These factors play a role in OSS project success, however, these factors are not
-easily analyzed automatically.
 
 \paragraph{}
-Karus explored a method known as \emph{wavelet analysis }\rm to analyze software
-evolution data \cite{karus2013}. It is a method that is easily automated. The
-wavelet analysis interprets evolution data as a series of signals and is able
-to find sequences in this signal. The sequences of multiple projects can be
-compared in order to find recurring patterns. Karus was able to detect close to
-1,000 similar patterns across 27 OSS projects. His conclusion is that wavelet
-analysis can be a powerful tool for identifying evolutionary events.
+Karus explored a method known as \emph{wavelet analysis }\rm to analyse software
+evolution data \cite{karus2013}. The wavelet analysis interprets evolution data
+as a series of signals and is able to find sequences in this signal. The
+sequences of multiple projects can be compared in order to find recurring
+patterns. Karus was able to detect 998 similar patterns across 27 OSS projects.
+His conclusion is that wavelet analysis can be a powerful tool for identifying
+evolutionary events.
 
 \paragraph{}
 In this research, we aim to add semantics to Karus' findings in a sense to be
@@ -99,8 +132,8 @@ ends at some points in time (i.e., is finite).
 
 \paragraph{}
 A wavelet is a signal in a 2 dimensional space. Each dimension is a domain. The
-domains are the \emph{time domain}\rm, visualized at the \emph{x }\rm axis,
-and \emph{frequency domain}\rm, visualized at the \emph{y }\rm axis.
+domains are the \emph{time domain}\rm, visualised at the \emph{x }\rm axis,
+and \emph{frequency domain}\rm, visualised at the \emph{y }\rm axis.
 In the case of an audio signal, the analogies are easily made. In other fields, any
 observable property can serve as either frequency or time value. As long as the
 relation between the two properties is functional within the context of the
@@ -141,7 +174,7 @@ transform can be interpreted as a smoothed curve of the series. The wavelet
 coefficients show temporal variations.
 
 \paragraph{}
-Naively spoken, the Haar transform is a means of digitalizing an analogue
+Naively spoken, the Haar transform is a means of digitalising an analogue
 signal. It still serves this purpose in many devices we use in a day-to-day
 basis. The Haar transform sampling can be performed multiple times. The number
 of times depends on the resolution of the analogue signal. The higher the

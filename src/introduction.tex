@@ -32,13 +32,20 @@ theoretical with little empirical validation. Changes in development activity,
 community, and other aspects of the OSS process are mostly organic. A community
 of an OSS project changes continuously, often with little impact on the
 evolution of the project \cite{androutsellis}. This means that different OSS
-projects cannot be compared on the same scale.
+projects cannot be compared on the same scale. In other words, different OSS
+projects cannot be uniformly and objectively assessed without any transition of
+their evolution data.
 
 \paragraph{}
-Comparing and analysing software projects is of interest to better understand
-the survivability of OSS projects. The key factors that define the success or
-failure of a software project have not yet been found.
+For closed source projects, the measurement of a project's success or
+effectiveness is critical to our understanding of the value and efficacy of
+management actions and investments \cite{delone2003}.
 
+Comparing and analysing OSS projects is of interest to better understand the
+survivability of OSS projects. The key factors that define the success or
+failure of an OSS project have not yet been found.
+
+\paragraph{}
 We expect to be able to find indicators of failure in the events that
 shape a project's evolution. Therefore, a means to identify these evolutionary
 events would be useful. For closed-source software projects in a commercial
@@ -83,22 +90,23 @@ making it fairly easy to automate.
 \paragraph{}
 At first glance, it may seem odd to use wavelet analysis to analyse evolution of
 software projects. Software evolution comprises various metrics, such as lines
-of code, number of developers, etc. These metrics can be modeled in the
-frequency domain of a waveform. These metrics have a functional relation to the
-age of a project, which fits the time domain of a waveform. This gives a
-natural transition of each of these metrics to a waveform and enables the
+of code, number of developers, number of commits, etc. The measures of these
+metrics are all snapshots of moments in time. These metrics can be modeled in
+the frequency domain of a waveform. The metrics have a functional relation to
+the age of a project, which fits the time domain of a waveform. This gives a
+natural transition of each metric to be modeled as a waveform and enables the
 analysis of such a waveform.
 
 \paragraph{}
-When analysing waveforms of software evolution metrics, we should be able to
-detect anomalies in these waveforms. After investigating and comparing these
-anomalies we might as well be able to find the events that caused these
-evolutionary patterns. A comparison with known events that had a negative
-effect on a project's progress may reveal that we are able to detect warning
-signs in software evolution.\\
+When analysing waveforms of software evolution metrics using wavelets, we
+should be able to detect anomalies in these waveforms. After investigating and
+comparing these anomalies we might as well be able to find the events that
+caused these evolutionary patterns. A comparison with known events that had a
+negative effect on a project's progress may reveal that we are able to detect
+warning signs in software evolution.\\
 
 \noindent
-Knowing these warning signs will help in:
+Knowing these warning signs will help in \cite{karus2013}:
 \begin{itemize}
 	\item Choosing an OSS project to implement in a business scenario.
 	\item Making timely preparations for decommissioning an OSS project.
@@ -120,8 +128,6 @@ patterns that are confirmed to be such warning signs.
 \section{Research questions}
 \label{questions}
 
-The main research question (RQ1) is:\\
-
 \begin{description}
 	\item[RQ1] \emph{\researchQuestion}\\[0.3cm]
 \end{description}
@@ -135,9 +141,10 @@ questions will be answered:
 \end{description}
 
 \paragraph{}
-For emphasis, we are not looking for OSS vitality as the project's ability to
-provide support and grow in the number of releases. In this study, we only look
-at the development process ignoring documentation and community support.
+We are not looking for OSS vitality as the project's ability to provide support
+and grow in the number of releases. In this study, we only look at the
+development process using software analytics, ignoring documentation and
+community support.
 
 \section{Outline}
 
