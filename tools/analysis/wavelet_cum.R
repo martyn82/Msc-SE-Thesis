@@ -106,22 +106,22 @@ calculateColumnDWT <- function(project.data, current_col, pid, timecol) {
 
   project.data.weeks.dwt <- dwt(as.numeric(project.data.weeks.vals), filter="haar")
 
-  for(dwtcoef in c("V", "W")){
-    plots.filename <- paste(paste(timecol, current_col, dwtcoef, pid, sep="_"), "jpg", sep=".")
-    jpeg(paste(folder.plots, plots.filename, sep="/"))
-    
-    if(dwtcoef == "V"){
-      try(
-        plot(project.data.weeks.dwt, plot.W=FALSE)
-      )
-    }else{
-      try(
-        plot(project.data.weeks.dwt, plot.V=FALSE)
-      )
-    }
-    
-    dev.off()
-  }
+#   for(dwtcoef in c("V", "W")){
+#     plots.filename <- paste(paste(timecol, current_col, dwtcoef, pid, sep="_"), "jpg", sep=".")
+#     jpeg(paste(folder.plots, plots.filename, sep="/"))
+#     
+#     if(dwtcoef == "V"){
+#       try(
+#         plot(project.data.weeks.dwt, plot.W=FALSE)
+#       )
+#     }else{
+#       try(
+#         plot(project.data.weeks.dwt, plot.V=FALSE)
+#       )
+#     }
+#     
+#     dev.off()
+#   }
 
   #plot(project.data.weeks.dwt)
 
