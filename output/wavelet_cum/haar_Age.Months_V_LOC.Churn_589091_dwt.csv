@@ -1,0 +1,11 @@
+"";"seq";"variable";"pid";"coefficient";"level";"value";"revlevel"
+"1";1;"LOC.Churn";589091;"haar";1;4876,91546984362;3
+"2";2;"LOC.Churn";589091;"haar";1;382,544768621922;3
+"3";3;"LOC.Churn";589091;"haar";1;0;3
+"4";4;"LOC.Churn";589091;"haar";1;0;3
+"5";5;"LOC.Churn";589091;"haar";1;0;3
+"6";6;"LOC.Churn";589091;"haar";1;0;3
+"7";7;"LOC.Churn";589091;"haar";1;0;3
+"8";1;"LOC.Churn";589091;"haar";2;270,5;2
+"9";2;"LOC.Churn";589091;"haar";2;0;2
+"10";3;"LOC.Churn";589091;"haar";2;0;2
