@@ -27,7 +27,7 @@ filter_name <- "haar"
 #interesting_colnames <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed", "Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "LOC", "Relative.Date.Progress", "Relative.LOC.Churn.Progress", "Relative.Team.Size", "Files", "Commits")
 interesting_colnames <- c("LOC.Churn")
 
-simfile <- file(paste(folder.root, paste("haar", "similar.csv", sep="_"), sep="/"), open="w")
+simfile <- file(paste(folder.root, paste("haar", "similar", "Age.Months", "LOC.Churn.csv", sep="_"), sep="/"), open="w")
 open(simfile)
 writeLines(paste("Time col", "DWT_var", "Variable", "pid0", "pid0 revlevel", "pid0 startseq", "length", "Max. deviation", "occurrances", "Project count", "Project list", "seq", "Project id-ss-rl", "HasDead", "HasAlive", "HasMixed", "Seq Id", sep = ";"), con=simfile)
 
@@ -55,13 +55,13 @@ for(timecol in timecols) {
 		if(current_col == timecol)
 			next;
 			
-      simdata <- read.csv2(paste(folder.proc, paste("haar", timecol, dwtvar, current_col,"similar.csv", sep="_"), sep="/"))
+      simdata <- read.csv2(paste(folder.proc, paste("haar", timecol, dwtvar, current_col, "similar.csv", sep="_"), sep="/"))
 			
 			#simdata[["pid0.endseq"]] <- simdata[["pid0.startseq"]] + simdate[["length"]]
 			#simdata[["pid0.absstart"]] <- 2^(my.project.data[as.character(simdata[["pid0"]]) ,paste("Levels", simdata[["Time.col"]], sep=".")] - simdata[["pid0.revlevel"]])simdata[["pid0.startseq"]] + simdate[["length"]]
 			
 			
-      print(paste(folder.proc, paste("haar", timecol, dwtvar, current_col,"similar.csv", sep="_"), sep="/"))
+      print(paste(folder.proc, paste("haar", timecol, dwtvar, current_col, "similar.csv", sep="_"), sep="/"))
 			
       while(dim(simdata)[1] > minocc) {
 				pid <- simdata[1, "pid0"]
