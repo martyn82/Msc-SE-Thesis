@@ -55,7 +55,7 @@ for(timecol in c("Age.Months")){ #, "Cumulative.LOC.Churn")) {
     for(current_col in interesting_colnames) {
 			if(current_col == timecol)
 				next
-      simfile <- file(paste(folder.output, paste("haar", timecol, dwtvar, current_col,"similar.csv", sep="_"), sep="/"), open="w")
+      simfile <- file(paste(folder.output, paste("haar", timecol, dwtvar, current_col, "similar.csv", sep="_"), sep="/"), open="w")
       open(simfile)
       writeLines(paste("Time col", "Variable", "pid0", "pid0 revlevel", "pid0 startseq", "pid", "pid revlevel", "pid startseq", "length", "Max. deviation", "Seq", "a0", "b0", sep = ";"), con=simfile)
 
