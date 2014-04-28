@@ -25,7 +25,7 @@ alivepids <- allpids[!(allpids %in% deadpids)]
 minocc <- 3
 filter_name <- "haar"
 #interesting_colnames <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed", "Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "LOC", "Relative.Date.Progress", "Relative.LOC.Churn.Progress", "Relative.Team.Size", "Files", "Commits")
-interesting_colnames <- c("LOC")
+interesting_colnames <- c("LOC.Churn")
 
 simfile <- file(paste(folder.root, paste("haar", "similar.csv", sep="_"), sep="/"), open="w")
 open(simfile)
