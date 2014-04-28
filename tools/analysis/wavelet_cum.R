@@ -28,15 +28,15 @@ my.csv.data <- read.csv2 (file=paste("data/factsForAnalysis.csv", sep="/"),  na.
 colnames(my.csv.data)
 
 #interesting_colnames <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed", "Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "LOC", "Relative.Date.Progress", "Relative.LOC.Churn.Progress", "Relative.Team.Size", "Files", "Commits")
-interesting_colnames <- c("LOC.Churn")
+interesting_colnames <- c("Active.Developers")
 #fill_locf <- c("Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "LOC", "Relative.Date.Progress", "Relative.LOC.Churn.Progress", "Relative.Team.Size", "Files")
 fill_locf <- c("LOC.Churn")
 #fill_zero <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed")
-fill_zero <- c()
+fill_zero <- c("Active.Developers")
 #aggregation_max <- c("Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "Relative.Date.Progress", "Relative.LOC.Churn.Progress")
 aggregation_max <- c()
 #aggregation_avg <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed", "LOC", "Relative.Team.Size", "Files")
-aggregation_avg <- c("LOC.Churn")
+aggregation_avg <- c("Active.Developers", "LOC", "LOC.Churn")
 #?ts
 pids <- unique(my.csv.data[["Project.Id"]])
 
