@@ -4,7 +4,7 @@
 projects.dead.file <- paste("output", "deadProjectsValidated.csv", sep="/")
 projects.dead <- read.csv2(projects.dead.file)
 
-projects.dying.file <- paste("output", "dyingProjectsValidated.csv", sep="/")
+projects.dying.file <- paste("output", "dyingProjectsValidated_Active.Developers.csv", sep="/")
 projects.dying <- read.csv2(projects.dying.file)
 
 projects.dead.confirmed <- subset(projects.dead, projects.dead$confirmed.dead=="TRUE")
@@ -56,7 +56,7 @@ rm(project.id)
 projects.sub <- projects.sub[order(projects.sub$pid), ]
 projects.sub$X <- NULL
 
-if(length(projects.missing)>0){
+if(length(projects.missing) > 0){
   warning(paste("Missing", length(projects.missing), "project's data..."))
 }
 
