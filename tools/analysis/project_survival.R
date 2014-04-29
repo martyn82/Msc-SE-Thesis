@@ -1,3 +1,7 @@
+# This script plots the Kaplan-Meier survival curve for projects identified as potential dying against
+# a control group of equal size containing projects that are not dead and not potential dying.
+# By default, dying projects containing the longest sequence are selected.
+
 library(plyr)
 library(splines)
 library(survival)
@@ -8,13 +12,20 @@ metric <- "Active.Developers"
 
 facts.data <- read.csv2("data/factsForAnalysis.csv")
 dead.data <- read.csv2("output/deadProjectsValidated.csv")
-dying.data <- read.csv2(paste("output", paste(paste("dyingProjectsValidated", metric, sep="_"), "csv", sep="."), sep="/"))
 
+dying.file.name <- paste(
+  paste("dyingProjectsValidated", metric, sep="_"), "csv", sep="."
+)
+dying.data <- read.csv2(paste("output", dying.file.name, sep="/"))
 max.deadcount <- max(dying.data$dead.count)
 
 dead.data <- subset(dead.data, dead.data$confirmed.dead == "TRUE")
 dying.data <- subset(dying.data, dying.data$dead.count == max.deadcount)
-control.data <- subset(facts.data, !(facts.data$Project.Id %in% dying.data$pid))
+control.data <- subset(
+  facts.data,
+  !(facts.data$Project.Id %in% dying.data$pid)
+  & !(facts.data$Project.Id %in% dead.data$pid)
+)
 
 cols <- c("pid", "time", "group", "status")
 projects <- as.data.frame(
