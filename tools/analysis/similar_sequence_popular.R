@@ -25,9 +25,9 @@ alivepids <- allpids[!(allpids %in% deadpids)]
 minocc <- 3
 filter_name <- "haar"
 #interesting_colnames <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed", "Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "LOC", "Relative.Date.Progress", "Relative.LOC.Churn.Progress", "Relative.Team.Size", "Files", "Commits")
-interesting_colnames <- c("Active.Developers")
+interesting_colnames <- c("LOC.Churn")
 
-simfile <- file(paste(folder.root, paste("haar", "similar", "Age.Months", "Active.Developers.csv", sep="_"), sep="/"), open="w")
+simfile <- file(paste(folder.root, paste("haar", "similar", "Age.Months", "LOC.Churn.csv", sep="_"), sep="/"), open="w")
 open(simfile)
 writeLines(paste("Time col", "DWT_var", "Variable", "pid0", "pid0 revlevel", "pid0 startseq", "length", "Max. deviation", "occurrances", "Project count", "Project list", "seq", "Project id-ss-rl", "HasDead", "HasAlive", "HasMixed", "Seq Id", sep = ";"), con=simfile)
 
