@@ -8,11 +8,11 @@
 # 3. Read the sequences of the projects in the list that are similar.
 #   a. Identify if they might be dying: the sequence is at the end of the project evolution wave
 
-similar.file <- paste("output", "haar_similar.csv", sep="/")
+similar.file <- paste("output", "haar_similar_Age.Months_Active.Developers.csv", sep="/")
 dead.file <- paste("output", "deadProjectsValidated.csv", sep="/")
 wavelet.dir <- paste("output", "wavelet_cum", sep="/")
 
-output.file <- paste("output", "dyingProjects.csv", sep="/")
+output.file <- paste("output", "dyingProjects_Active.Developers.csv", sep="/")
 output.cols <- c(
   "pid",          # The project that is potential dying
   "max.revlevel", # The maximum level of detail of the sequence that identified the project as dying
@@ -27,6 +27,11 @@ colnames(output.data) <- output.cols
 print("Reading files...")
 
 similar.data <- read.csv2(similar.file)
+
+if(dim(similar.data)[1] == 0){
+  stop("No data to analyse.")
+}
+
 dead.data <- read.csv2(dead.file)
 dead.data.confirmed <- subset(dead.data, dead.data$confirmed.dead=="TRUE")
 

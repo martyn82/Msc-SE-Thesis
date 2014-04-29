@@ -1,3 +1,6 @@
+# This is a throw-away script that extracts projects identified as dying that have a relative decrease of -100% in
+# commits and contributors.
+
 projects.dead.file <- paste("output", "deadProjectsValidated.csv", sep="/")
 projects.dead <- read.csv2(projects.dead.file)
 
@@ -30,7 +33,7 @@ for(pid in projects.dying.pids){
     | is.na(project.rows$year.commits.change)
   )
   
-  if(!is.na(is.missing) && is.missing){
+  if(is.missing){
     projects.missing <- rbind(projects.missing, pid)
     next
   }
