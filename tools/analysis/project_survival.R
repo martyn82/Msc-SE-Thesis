@@ -8,7 +8,7 @@ library(survival)
 
 source("tools/analysis/ggkm.R")
 
-metric <- "Active.Developers"
+metric <- "LOC"
 
 facts.data <- read.csv2("data/factsForAnalysis.csv")
 dead.data <- read.csv2("output/deadProjectsValidated.csv")
@@ -24,7 +24,6 @@ dying.data <- subset(dying.data, dying.data$dead.count == max.deadcount)
 control.data <- subset(
   facts.data,
   !(facts.data$Project.Id %in% dying.data$pid)
-  & !(facts.data$Project.Id %in% dead.data$pid)
 )
 
 cols <- c("pid", "time", "group", "status")
