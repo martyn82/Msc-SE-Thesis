@@ -9,31 +9,67 @@ library(zoo)
 
 source("tools/analysis/ggkm.R")
 
+# Specify the metric to be analysed
 metric <- "LOC"
 
+# Read all facts
 facts.data <- read.csv2("data/factsForAnalysis.csv")
+# Read all validated dead projects
 dead.data <- read.csv2("output/deadProjectsValidated.csv")
-
-dying.file.name <- paste(
-  paste("dyingProjectsValidated", metric, sep="_"), "csv", sep="."
-)
-dying.data <- read.csv2(paste("output", dying.file.name, sep="/"))
-
-if(metric == "Active.Developers"){
-  min.dead.count <- 1
-} else {
-  min.dead.count <- max(dying.data$dead.count)
-}
-
-dying.data <- subset(dying.data, dying.data$dead.count >= min.dead.count)
-
+# Keep only the dead projects that are confirmed to be dead
 dead.data <- subset(dead.data, as.logical(dead.data$confirmed.dead) == TRUE)
 dead.data$X <- NULL
 
+# Read the validated dying projects (i.e., the projects with a potential 'warning' pattern)
+dying.file <- paste(
+  "output",
+  paste(
+    paste("dyingProjectsValidated", metric, sep="_"),
+    "csv",
+    sep="."
+  ),
+  sep="/"
+)
+dying.data <- read.csv2(dying.file)
+# Order dying by number of dead projects having same pattern (descending)
+dying.data <- dying.data[order(-dying.data$dead.count), ]
+
+# Determine the maximum group size to be analysed
+group.size <- min(
+  c(
+    floor(length(unique(facts.data$Project.Id)) / 2),
+    length(unique(dying.data$pid))
+  )
+)
+
+# Select the sample of projects with the pattern
+dying.data <- dying.data[1:group.size, ]
+
+# Select the projects without the pattern
 control.data <- subset(
   facts.data,
   !(facts.data$Project.Id %in% dying.data$pid)
 )
+
+# Determine which dead projects had a 'warning' pattern
+deads.lists <- dying.data$deads
+deads.with.sequence <- list()
+
+for(i in 1:length(deads.lists)){
+  deads.list <- as.character(deads.lists[i])
+  deads.list.pids <- as.numeric(unlist(strsplit(deads.list, "|", fixed=TRUE)))
+  deads.with.sequence <- append(deads.with.sequence, deads.list.pids)
+}
+deads.with.sequence <- unique(deads.with.sequence)
+
+dead.pids <- unique(dead.data$pid)
+dying.pids <- unique(dying.data$pid)
+
+# Select sample of projects without pattern
+control.pids <- unique(control.data$Project.Id)[1:group.size]
+control.data <- subset(control.data, control.data$Project.Id %in% control.pids)
+
+all.pids <- as.numeric(append(dying.pids, control.pids))
 
 cols <- c("pid", "time", "group", "status")
 projects <- as.data.frame(
@@ -42,30 +78,6 @@ projects <- as.data.frame(
     nrow=0
   )
 )
-
-# generate_list_of_dead_pids_with_sequence() {
-#   1. Read 'deads' lists from all rows
-#   2. Split lists into pids
-#   3. Filter pids and keep unique
-# }
-
-deads.lists <- dying.data$deads
-deads.with.sequence <- list()
-
-for(i in 1:length(deads.lists)){
-  deads.list <- as.character(deads.lists[i])
-  deads.list.pids <- as.numeric(unlist(strsplit(deads.list, "|", fixed=TRUE)))
-  
-  deads.with.sequence <- append(deads.with.sequence, deads.list.pids)
-}
-
-deads.with.sequence <- unique(deads.with.sequence)
-dead.pids <- unique(dead.data$pid)
-dying.pids <- unique(dying.data$pid)
-control.pids <- unique(control.data$Project.Id)[1:length(dying.pids)]
-
-control.data <- subset(control.data, control.data$Project.Id %in% control.pids)
-all.pids <- as.numeric(append(dying.pids, control.pids))
 
 for(pid in all.pids){
   project <- subset(facts.data, facts.data$Project.Id == pid)
@@ -77,9 +89,12 @@ for(pid in all.pids){
     max.date <- max(as.Date(project$Date))
     dead.date <- as.Date(dead.project$dead.date)
     max.months <- max(project$Age.Months)
-    diff.months <- 12 * as.numeric(as.yearmon(max.date) - as.yearmon(dead.date))
+    diff.months <- floor(12 * as.numeric(as.yearmon(max.date) - as.yearmon(dead.date)))
     time <- max.months - diff.months
+
     print(paste("Project", pid, "aged", max.months, "months, died at", time, "months"))
+
+    rm(dead.project, max.date, dead.date, max.months, diff.months)
   } else {
     time <- max(project$Age.Months)
   }
@@ -94,7 +109,7 @@ for(pid in all.pids){
   projects <- rbind(projects, row)
 }
 
-rm(row)
+rm(row, time, has.sequence, is.dead, i, group.size)
 
 colnames(projects) <- cols
 
