@@ -8,15 +8,18 @@
 # 3. Read the sequences of the projects in the list that are similar.
 #   a. Identify if they might be dying: the sequence is at the end of the project evolution wave
 
-similar.file <- paste("output", "haar_similar_Age.Months_Active.Developers.csv", sep="/")
+metric <- "LOC"
+
+similar.file <- paste("output", paste(paste("haar", "similar", "Age.Months", metric, sep="_"), "csv", sep="."), sep="/")
 dead.file <- paste("output", "deadProjectsValidated.csv", sep="/")
 wavelet.dir <- paste("output", "wavelet_cum", sep="/")
 
-output.file <- paste("output", "dyingProjects_Active.Developers.csv", sep="/")
+output.file <- paste("output", paste(paste("dyingProjects", metric, sep="_"), "csv", sep="."), sep="/")
 output.cols <- c(
   "pid",          # The project that is potential dying
   "max.revlevel", # The maximum level of detail of the sequence that identified the project as dying
-  "dead.count"    # The number of dead projects matching the sequence
+  "dead.count",   # The number of dead projects matching the sequence
+  "deads"         # The set of dead pids with the same sequence
 #  "match.count"   # The number of times the sequence occurred (must be the last column)
 )
 output.data <- as.data.frame(
@@ -33,7 +36,7 @@ if(dim(similar.data)[1] == 0){
 }
 
 dead.data <- read.csv2(dead.file)
-dead.data.confirmed <- subset(dead.data, dead.data$confirmed.dead=="TRUE")
+dead.data.confirmed <- subset(dead.data, as.logical(dead.data$confirmed.dead) == TRUE)
 
 print("Selecting sequences of dead projects...")
 
@@ -94,7 +97,8 @@ for(i in 1:similar.rowcount){
         pid=region.pid,
         max.revlevel=region.revlevel,
         #match.count=1,
-        dead.count=length(projects.pids.dead)
+        dead.count=length(projects.pids.dead),
+        deads=do.call(paste, c(as.list(projects.pids.dead), sep="|"))
       )
 
       output.data <- rbind(output.data, row)
