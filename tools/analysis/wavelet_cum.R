@@ -27,17 +27,12 @@ my.csv.data <- read.csv2 (file=paste("data/factsForAnalysis.csv", sep="/"),  na.
 
 colnames(my.csv.data)
 
-#interesting_colnames <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed", "Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "LOC", "Relative.Date.Progress", "Relative.LOC.Churn.Progress", "Relative.Team.Size", "Files", "Commits")
+# "Active.Developers", "LOC.Churn", "LOC"
 interesting_colnames <- c("Active.Developers")
-#fill_locf <- c("Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "LOC", "Relative.Date.Progress", "Relative.LOC.Churn.Progress", "Relative.Team.Size", "Files")
-fill_locf <- c("LOC.Churn")
-#fill_zero <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed")
+fill_locf <- c("LOC", "LOC.Churn")
 fill_zero <- c("Active.Developers")
-#aggregation_max <- c("Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "Relative.Date.Progress", "Relative.LOC.Churn.Progress")
 aggregation_max <- c()
-#aggregation_avg <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed", "LOC", "Relative.Team.Size", "Files")
 aggregation_avg <- c("Active.Developers", "LOC", "LOC.Churn")
-#?ts
 pids <- unique(my.csv.data[["Project.Id"]])
 
 # dwt values
@@ -49,19 +44,10 @@ my.data.dwt.V.Age.Months <- matrix(nrow=0,ncol=length(my.data.dwt.colnames))
 my.data.dwt.V.Age.Months <- as.data.frame(my.data.dwt.V.Age.Months)
 colnames(my.data.dwt.V.Age.Months) <- my.data.dwt.colnames
 
-# my.data.dwt.W.Cumulative.LOC.Churn <- matrix(nrow=0,ncol=length(my.data.dwt.colnames))
-# my.data.dwt.W.Cumulative.LOC.Churn <- as.data.frame(my.data.dwt.W.Cumulative.LOC.Churn)
-# colnames(my.data.dwt.W.Cumulative.LOC.Churn) <- my.data.dwt.colnames
-# my.data.dwt.V.Cumulative.LOC.Churn <- matrix(nrow=0,ncol=length(my.data.dwt.colnames))
-# my.data.dwt.V.Cumulative.LOC.Churn <- as.data.frame(my.data.dwt.V.Cumulative.LOC.Churn)
-# colnames(my.data.dwt.V.Cumulative.LOC.Churn) <- my.data.dwt.colnames
-
-#timecol <- "Date"
 calculateColumnDWT <- function(project.data, current_col, pid, timecol) {
   timeorderbyfn <- as.numeric
   unitcoef <- 1000
   if(timecol %in% c("Age.Months")) {
-    #timeorderbyfn <- as.Date
     unitcoef <- 1
   }
   aggrfn <- max

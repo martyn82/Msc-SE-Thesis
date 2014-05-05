@@ -24,7 +24,7 @@ alivepids <- allpids[!(allpids %in% deadpids)]
 
 minocc <- 3
 filter_name <- "haar"
-#interesting_colnames <- c("Active.Developers", "Commit.LOC.Added", "Commit.LOC.Churn", "Commit.LOC.Modified", "Commit.LOC.Removed", "Cumulative.Developers", "Cumulative.LOC.Added", "Cumulative.LOC.Churn", "Cumulative.LOC.Modified", "Cumulative.LOC.Removed", "LOC", "Relative.Date.Progress", "Relative.LOC.Churn.Progress", "Relative.Team.Size", "Files", "Commits")
+#interesting_colnames <- c("Active.Developers", "LOC.Churn", "LOC")
 interesting_colnames <- c("LOC.Churn")
 
 simfile <- file(paste(folder.root, paste("haar", "similar", "Age.Months", "LOC.Churn.csv", sep="_"), sep="/"), open="w")
@@ -45,7 +45,6 @@ sim.seqs.data <- as.data.frame(matrix(nrow=0,ncol=9,dimnames=list(NULL,c("time",
 #current_col <- "Files"
 #simdata_rel <- simdata[1:10,]
 
-#timecols <- c("Date", "Cumulative.LOC.Churn")
 timecols <- c("Age.Months")
 
 for(timecol in timecols) {
