@@ -69,7 +69,7 @@ dying.pids <- unique(dying.data$pid)
 control.pids <- unique(control.data$Project.Id)[1:group.size]
 control.data <- subset(control.data, control.data$Project.Id %in% control.pids)
 
-all.pids <- as.numeric(append(dying.pids, control.pids))
+all.pids <- unique(as.numeric(append(dying.pids, control.pids)))
 
 cols <- c("pid", "time", "group", "status")
 projects <- as.data.frame(
