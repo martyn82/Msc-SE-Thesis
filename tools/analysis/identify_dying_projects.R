@@ -32,7 +32,7 @@ print("Reading files...")
 similar.data <- read.csv2(similar.file)
 
 if(dim(similar.data)[1] == 0){
-  stop("No data to analyse.")
+  stop(paste("No similar data for this metric:", metric))
 }
 
 dead.data <- read.csv2(dead.file)
