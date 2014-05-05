@@ -1,12 +1,13 @@
 # This script takes the dead projects and verifies their patterns.
 # It classifies the patterns observed in dead projects by type.
 # Types:
-# +------+--------------------------------------+
-# | Type | Description                          |
-# +------+--------------------------------------+
-# |  A   | Occurs at the end of project data.   |
-# |  B   | Others.                              |
-# +------+--------------------------------------+
+# +------+------------------------------------------------------+
+# | Type | Description                                          |
+# +------+------------------------------------------------------+
+# |  A   | Occurs at the end of project data.                   |
+# |  B   | Others.                                              |
+# |  AB  | Sequences occurring in at the end and anywhere else. |
+# +------+------------------------------------------------------+
 
 metric <- "LOC"
 
