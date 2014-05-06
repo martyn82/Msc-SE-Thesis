@@ -124,73 +124,145 @@ able to tell whether a specific pattern or event can be interpreted as a
 warning sign. A warning sign is a pattern or event that has a negative effect
 on the evolution of an OSS project.
 
-\section{Wavelet transform and analysis}
-The word \emph{wavelet }\rm literally means 'small wave'. It has its origins in
-the theoretical continuous wave; e.g., a wave that lasts from minus infinity
-to plus infinity. A wavelet is a sample of a continuous wave that starts and
-ends at some points in time (i.e., is finite).
+\section{Wavelet analysis}
+A wavelet is a portion of a continuous-time signal/waveform. Opposed to the
+continuous wave which has infinite duration, the wavelet has a finite duration.
+
+The analysis of waves is being used in many fields, such as, economics,
+seismology, (astro-)physics, and computer science.
+
+\subsection{Waveforms}
+A waveform (short: wave) is a signal (i.e., time-series) in a two-dimensional
+space. Waveforms are used to model many types of signals, such as audio waves,
+electromagnetic waves, gravitational, and quantum mechanical waves.
 
 \paragraph{}
-A wavelet is a signal in a 2 dimensional space. Each dimension is a domain. The
-domains are the \emph{time domain}\rm, visualised at the \emph{x }\rm axis,
-and \emph{frequency domain}\rm, visualised at the \emph{y }\rm axis.
-In the case of an audio signal, the analogies are easily made. In other fields, any
-observable property can serve as either frequency or time value. As long as the
-relation between the two properties is functional within the context of the
-signal.
+In many models of waveforms the two dimensions typically represent the time
+domain and the frequency domain. An audio signal is an example of a waveform
+modeled that way.
+
+In visualisations of waveforms, the time domain is often plotted on the
+horizontal axis, and the frequency domain on the vertical axis. In the example
+of an audio wave, the frequency domain may represent the amplitude, or the
+frequency, and the time the duration of the amplitude or frequency value.
+
+However, the time domain is not specifically bound to time intervals only. A
+less intuitive, but realistic approach would be to model amplitude in the time
+domain. That way the frequency relation to amplitude of a signal can be
+analysed, but the time information is lost.
+
+\subsection{Discrete wavelet transformation}
+To be able to analyse and compare different wavelets, we need a way to scale
+the signal. Discrete wavelet transformation is the operation of applying a
+filter function, or set of filter functions (i.e., filter bank) to the wavelet.
+This is a way of sampling the signal at different intervals giving a natural
+means of scaling the signal \cite{karus2013}.
 
 \paragraph{}
-Wavelet transformation is the sampling of a signal at different intervals which
-gives a natural means of scaling the signal. Wavelet analysis is the analysis of
-signals by decomposing the signal into wavelet coefficients (also known as shift
-coefficients) and scaling coefficients (also known as filters).
-
-The decomposition can be repeated on the scaling coefficients until the number
-of resulting wavelet coefficients is smaller than the filter length.
-
-\paragraph{}
-\emph{Shifting }\rm is the operation of moving the wavelet through the time
-domain. This operation is also known as \emph{translating }\rm the wavelet.
-\emph{Filtering }\rm is the operation of scaling the wavelet in the frequency
-domain. This operation is also known as \emph{dilating }\rm the wavelet.
+Wavelet analysis is similar to Fourier analysis with the difference that
+wavelets deal with time and frequency information, and Fourier transform deals
+with frequency information only. Wavelet analysis is the analysis of signals
+(time-series) by decomposing the signal into wavelet/shift\footnote{Shifting,
+or translating, is the operation of moving the wavelet in the time domain.}
+coefficients and scaling/filter\footnote{Filtering, or dilating, is the
+operation of scaling the wavelet in the frequency domain.} coefficients based
+on wavelet functions (e.g., filters) \cite{karus2013}. The decomposition can be
+repeated on the scaling/filter coefficients until the number of resulting
+wavelet/shift coefficients is smaller than the filter length. The filter length
+is a property of the filter function being used.
 
 \paragraph{}
-The main advantages of wavelet transform in time series analysis are:
+Wavelet transform has proven important in signal processing thanks to its
+inherent properties which allow comparisons at different scales and shifts.
+Compared to other time series analysis techniques, the main advantages of
+wavelet transformations in the analysis of signals are \cite{karus2013}:
 \begin{itemize}
 	\item Scaling coefficients allow fuzzy matching as differences in details are
-	``smoothed out''.
+	'smoothed out'.
 	\item Filter coefficients allow detection of small anomalies in series.
 	\item Transform levels make series of different lengths or scale comparable.
 \end{itemize}
 
-\subsection{Haar filter}
-In this study and in the study by Karus, the \emph{Daubechies }\rm filter of
-length 2 (also known as \emph{Haar }\rm wavelet), due to its simplicity and
-simple interpretation.
-
-We apply discrete wavelet transform, meaning we use discrete shift when matching
-the series with the wavelet. The scaling coefficients of discrete Haar wavelet
-transform can be interpreted as a smoothed curve of the series. The wavelet
-coefficients show temporal variations.
+\subsection{Wavelet functions}
+In formal literature, the \emph{Wavelet function }\rm is the function that
+defines the shape of the wavelet (also called 'Mother Wavelet') and is a
+function that accepts a time value and returns the frequency value. There are
+two 'parent functions' of a wavelet, the first is the Mother Wavelet
+characterising the shape of the wavelet. The second is the Father Wavelet
+characterising the basic wavelet scale. In general, a wavelet function is any
+operation on an existing wavelet \cite{wadkar}.
 
 \paragraph{}
-Naively spoken, the Haar transform is a means of digitalising an analogue
-signal. It still serves this purpose in many devices we use in a day-to-day
-basis. The Haar transform sampling can be performed multiple times. The number
-of times depends on the resolution of the analogue signal. The higher the
-analogue resolution, the more sampling transforms are possible.\\
+Many wavelet functions exist and differ largely in complexity and applicability
+depending on the signal of interest.
 
-It starts by computing the integral of the full time series signal. It then
-divides the signal into two equal parts over the time domain.
-For each part it computes the integral. The difference of the two levels is
-recorded. Thus, for each increase in detail (i.e., each re-division of the
-signal) the extra information that is added is captured in that level. This
-process can be repeated until there is insufficient time resolution to add more
-information. This way, by repeatedly dividing the signal into a more detailed
-signal, we can get arbitrarily close to a continuous signal.\\
+\subsection{Haar wavelet}
+In 1910, the Hungarian mathematician Alfred Haar introduced Haar functions. The
+Haar transform is one of the earliest examples of what is known now as a
+compact, dyadic, orthonormal wavelet transform \cite{stankovic}. The Haar function
+is the simplest and oldest orthonormal wavelet with compact support.
 
-The result after transformation is a multi-layered sequence of values, where
-each layer represents a decomposition level.
+The Haar wavelet is the wavelet produced by the Haar functions defining the
+wavelet. The Haar wavelet can be defined in the following ways, given that $T$
+is the set of time values of the signal, and $F$ the set of frequency values of
+the signal.
+\begin{description}
+	\item[Wavelet function (mother wavelet)] \hfill \\ $\Psi(t) = f$, $t \in T$ and
+	$f \in F$. Produces the shape of the wavelet.
+	\item[Scaling function (father wavelet)] \hfill \\ $\Phi(f) = t$, $t \in T$ and
+	$f \in F$. Produces the scale of the wavelet.
+	\item[Scaling filter] \hfill \\ A low-pass filter of length $2N$ and sum 1. A
+	high-pass filter can be calculated as the quadrature mirror filter of the
+	low-pass filter.
+\end{description}
+
+The Haar wavelet is a member of the Daubechies family of wavelets, based on the
+work of the Belgian mathematician Ingrid Daubechies. The Daubechies wavelets is
+a family of orthogonal wavelets defining a discrete wavelet transform. All
+wavelets of the Daubechies family can be entirely defined by their scaling
+filter. The Haar wavelet has a filter of length 2 and is therefore also
+referenced to as the Daubechies-2 (D2) filter. It is the simplest wavelet of
+the Daubechies family.
+
+In this study and in the study by Karus \cite{karus2013}, the Haar filter is
+used to perform wavelet transformations due to its simplicity and simple
+interpretation.
+
+\subsection{Discrete wavelet transformation using the Haar filter}
+There is firm discrete mathematics underlying the workings of wavelet
+transformation and thus the Haar filter. However, we can informally - but not
+exactly - describe the steps that are taken by the Haar functions processing a
+signal.
+
+\begin{enumerate}
+	\item The input signal is read and interpreted as a wavelet
+	\item Put wavelet in a list of wavelets (list count = 1)
+		\begin{enumerate}
+			\item compute averages of frequency values for each wavelet in list
+			\item divide all wavelets by 2 and put in a list (list count = level * 2)
+			\item compute integrals over each wavelet
+			\item compute differences between intervals and the averages
+			\item save the differences computed in this level
+			\item goto (a) unless number of wavelet coefficients is smaller than 2
+		\end{enumerate}
+	\item Output differences per level
+\end{enumerate}
+
+In each decomposition (step 2 in the above listing), the Haar function adds
+more detail to the wavelets in the current level. The Haar filter captures the
+differences between levels. The decomposition in step 2 in the above listing
+will be repeated until the wavelets can no longer be divided. This happens when
+there is no more time resolution left in the input signal to add further detail
+from that signal. The decomposition can continue as long as the time-resolution
+allows. The wavelet constructed in the highest level of decomposition comes
+arbitrarily close to a continuous-time waveform.
+
+\paragraph{}
+Wavelet transformations using the Haar filter is widely used. For example, as a
+way of digitalising an analogue signal in A-D converters, pattern recognition,
+face recognition, image processing, data coding, multiplexing, digital
+filtering, digital speech processing, voice controlled computing devices,
+and robotics.
 
 \begin{comment}
 This chapter contains all the information needed to put the thesis into
