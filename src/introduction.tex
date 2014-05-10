@@ -1,19 +1,19 @@
 \chapter{Introduction}
 \label{introduction}
 
-This chapter introduces the research topic by describing the problem, and the
-motivation for the research direction.
+This chapter introduces the research topic by describing the problem the
+research is aiming to solve, and the motivation for the research direction.
 
-\section{Problem}
+\section{Problem analysis}
 Many elements of the software development process are related to the project's
 progress. These elements include, but are not limited to, team composition,
 team size, frequency of releases, developer's activity, and developer's and
 user satisfaction \cite{crowston2006, delone1992, samoladas2010}.
 
-A change in one or more of these elements positively or negatively affect the
-project's progress. If a change in one or more of the elements has a substantial
-effect on the project's progress, we call it an \emph{evolutionary event}\rm; an
-event that changed the project's evolution.
+A change in one or more of these elements affects the project's progress
+positively or negatively. If a change in one or more of the elements has a
+substantial effect on the project's progress, we call it an \emph{evolutionary
+event}\rm; an event that changed the project's evolution.
 
 \paragraph{}
 In closed source projects, many evolutionary events are the effect of decisions
@@ -33,8 +33,8 @@ community, and other aspects of the OSS process are mostly organic. A community
 of an OSS project changes continuously, often with little impact on the
 evolution of the project \cite{androutsellis}. This means that different OSS
 projects cannot be compared on the same scale. In other words, different OSS
-projects cannot be uniformly and objectively assessed without any transition of
-their evolution data.
+projects cannot be objectively assessed by their evolution data without a
+proper transformation of that data.
 
 \paragraph{}
 For closed source projects, the measurement of a project's success or
@@ -63,47 +63,43 @@ Besides the previously listed well-known projects, lesser known projects are
 also used.
 
 \paragraph{}
-Given that OSS projects are popular in many organisations a means to assess OSS
-project's survivability is useful. An assessment of the survivability of an OSS
-project will aid in the decision for selection and/or continuity of a project.
+Given that OSS projects are popular in many organisations, and, as a result,
+OSS projects contribute to the overall value of the products and services of
+these organisations, a means to objectively assess OSS project's survivability
+is of value. An assessment of the survivability of an OSS project will aid in
+the decision for selection and/or continuity of a project.
 
 \paragraph{}
 In the study \emph{Automatic Means of Identifying Evolutionary Events in
 Software Development }\rm by Siim Karus \cite{karus2013}, Karus proposed the
-use of wavelet analysis to automatically detect anomalies in the evlution of
-OSS projects.
+use of wavelet analysis to automatically detect anomalies in OSS projects.
 
 \paragraph{}
-Wavelet analysis is the analysis of signals (time series) by decomposing the
-signal into wavelet coefficients and scaling coefficients by using wavelet
-functions. A more in-depth description of this tool is contained in the chapters
-\ref{background} and \ref{method}.
-
-\paragraph{}
-The use of wavelet analysis is extended to many fields having many purposes.
-One of the applications of wavelet analysis is pattern recognition in digital
-signal processing, such as duplication detection and face recognition in
-imagery \cite{myna, wadkar}. The big advantage of wavelet analysis is that
-it is based upon solid mathematical principles as integrals and statistics,
-making it fairly easy to automate.
+Wavelet analysis is used in many fields having many purposes. One of the
+applications of wavelet analysis is pattern recognition in digital signal
+processing, such as duplication detection and face recognition in imagery
+\cite{myna, wadkar}. The wavelet algorithms process data at different scales or
+resolutions \cite{graps}. The big advantage of wavelet analysis is that we are
+able to analyse the data at different scale levels. Another advantage is that it
+is based upon mathematical principles, making it fairly easy to automate.
 
 \paragraph{}
 At first glance, it may seem odd to use wavelet analysis to analyse evolution of
-software projects. Software evolution comprises various metrics, such as lines
-of code, number of developers, number of commits, etc. The measures of these
-metrics are all snapshots of moments in time. These metrics can be modeled in
-the frequency domain of a waveform. The metrics have a functional relation to
-the age of a project, which fits the time domain of a waveform. This gives a
-natural transition of each metric to be modeled as a waveform and enables the
-analysis of such a waveform.
+software projects. Software evolution data comprises various metrics, such as
+lines of code, number of developers, number of commits, etc. The measures of
+these metrics are all snapshots of moments in time. These metrics can be
+modeled in the frequency domain of a waveform. The metrics have a functional
+relation to the age of a project, which fits the time domain of a waveform.
+This gives a natural transition of each metric to be modeled as a waveform and
+enables the analysis of such a waveform.
 
 \paragraph{}
-When analysing waveforms of software evolution metrics using wavelets, we
-should be able to detect anomalies in these waveforms. After investigating and
-comparing these anomalies we might as well be able to find the events that
-caused these evolutionary patterns. A comparison with known events that had a
-negative effect on a project's progress may reveal that we are able to detect
-warning signs in software evolution.\\
+When analysing waveforms of software evolution metrics, we should be able to
+detect anomalies in these waveforms. After investigating and comparing these
+anomalies we might as well be able to find the patterns that resulted from
+evolutionary events. A comparison with known events that had a negative effect
+on a project's progress may reveal that we are able to detect warning signs in
+software evolution.\\
 
 \noindent
 Knowing these warning signs will help in \cite{karus2013}:
@@ -115,9 +111,9 @@ Knowing these warning signs will help in \cite{karus2013}:
 \end{itemize}
 
 \paragraph{}
-A \emph{warning sign }\rm is any pattern in the waveform that has a chance of
-resulting in the \emph{end of code evolution }\rm of a project. The \emph{end of
-code evolution }\rm means that the source code activities of a project have
+A \emph{warning sign }\rm is any pattern in the waveform that has a high chance
+of resulting in the \emph{end of code evolution }\rm of a project. The \emph{end
+of code evolution }\rm means that the source code activities of a project have
 stopped. There could still be commits on the project, for instance in Wiki
 pages, external library updates, or documentation, but no more source code
 changes. For a pattern being such a warning sign, it has to be similar to

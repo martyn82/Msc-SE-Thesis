@@ -2,14 +2,15 @@
 \label{background}
 
 This chapter provides background information by contributing to a basic
-understanding of the field of software evolution and the assessment of
-survivability and success of OSS projects.
+understanding of the field of software evolution, the assessment of
+survivability and success of OSS projects, and wavelet analysis.
 
 \section{Software evolution}
 The analogy of the term \emph{evolution }\rm in the field of software
-engineering was first used by Lehman's laws of software evolution \cite{lehman}.
-Software does not evolve by intrinsic feedback loops like evolution in plants
-and animals, but by extrinsic feedback that comes from the operational domain.
+engineering was first used by Lehman in his laws of software evolution
+\cite{lehman}. Software does not evolve by intrinsic feedback loops like
+evolution in plants and animals, but by extrinsic feedback that comes from the
+operational domain.
 
 \paragraph{}
 Lehman identified eight laws that are the driving factors of changes in software
@@ -49,11 +50,12 @@ time is a way to measure the evolution of lines of code in a software project.
 \section{Project survivability}
 In a study by Samoladas et al. a method for survival analysis on OSS projects
 was proposed \cite{samoladas2010}. The authors used duration data regarding
-FLOSS projects to predict the survivability of the projects by examining their
-duration, combined with other characterstics such as application domain and
-number of committers. Although these metrics give insight in the survivability
-chances of a project, it was also found that adding a developer to the team of
-contributors increased the survivability of the project substantially.
+Free/Libre Open-Source Software (FLOSS) projects to predict the survivability of
+the projects by examining their duration, combined with other characterstics
+such as application domain and number of committers. These metrics give insight
+in the survivability chances of a project. It was also found that adding a
+developer to the team of contributors increased the survivability of the
+project substantially.
 
 The authors proposed two main research issues to be addressed in the future. The
 first one is to add more projects to the study with possibly a different
@@ -115,31 +117,29 @@ evolution data \cite{karus2013}. The wavelet analysis interprets evolution data
 as a series of signals and is able to find sequences in this signal. The
 sequences of multiple projects can be compared in order to find recurring
 patterns. Karus was able to detect 998 similar patterns across 27 OSS projects.
-His conclusion is that wavelet analysis can be a powerful tool for identifying
+He concluded that wavelet analysis can be a powerful tool for identifying
 evolutionary events.
 
-\paragraph{}
-In this research, we aim to add semantics to Karus' findings in a sense to be
-able to tell whether a specific pattern or event can be interpreted as a
-warning sign. A warning sign is a pattern or event that has a negative effect
-on the evolution of an OSS project.
+
+
+
 
 \section{Wavelet analysis}
-A wavelet is a portion of a continuous-time signal/waveform. Opposed to the
-continuous wave which has infinite duration, the wavelet has a finite duration.
+A wavelet is a portion of a continuous-time signal (also known as waveform).
+Opposed to the continuous wave which has infinite duration, the wavelet has a
+finite duration.
 
 The analysis of waves is being used in many fields, such as, economics,
 seismology, (astro-)physics, and computer science.
 
 \subsection{Waveforms}
-A waveform (short: wave) is a signal (i.e., time-series) in a two-dimensional
-space. Waveforms are used to model many types of signals, such as audio waves,
-electromagnetic waves, gravitational, and quantum mechanical waves.
+A waveform, or wave, is a signal (time-series) in a two-dimensional space.
+Waveforms are used to model many types of signals, such as audio,
+electromagnetic (light), gravitational, and quantum mechanical waves.
 
 \paragraph{}
-In many models of waveforms the two dimensions typically represent the time
-domain and the frequency domain. An audio signal is an example of a waveform
-modeled that way.
+In many models of waveforms the two dimensions typically represent the time and
+frequency domains. An audio signal is an example of a waveform modeled that way.
 
 In visualisations of waveforms, the time domain is often plotted on the
 horizontal axis, and the frequency domain on the vertical axis. In the example
@@ -184,38 +184,28 @@ wavelet transformations in the analysis of signals are \cite{karus2013}:
 \end{itemize}
 
 \subsection{Wavelet functions}
-In formal literature, the \emph{Wavelet function }\rm is the function that
-defines the shape of the wavelet (also called 'Mother Wavelet') and is a
-function that accepts a time value and returns the frequency value. There are
-two 'parent functions' of a wavelet, the first is the Mother Wavelet
-characterising the shape of the wavelet. The second is the Father Wavelet
-characterising the basic wavelet scale. In general, a wavelet function is any
-operation on an existing wavelet \cite{wadkar}.
+A wavelet function is a function that defines a wavelet. In general, a wavelet
+function is any operation on an existing wavelet \cite{wadkar}. Many wavelet
+functions exist and differ largely in complexity and applicability depending on
+the signal of interest.
 
-\paragraph{}
-Many wavelet functions exist and differ largely in complexity and applicability
-depending on the signal of interest.
-
-\subsection{Haar wavelet}
-In 1910, the Hungarian mathematician Alfred Haar introduced Haar functions. The
-Haar transform is one of the earliest examples of what is known now as a
-compact, dyadic, orthonormal wavelet transform \cite{stankovic}. The Haar function
-is the simplest and oldest orthonormal wavelet with compact support.
-
-The Haar wavelet is the wavelet produced by the Haar functions defining the
-wavelet. The Haar wavelet can be defined in the following ways, given that $T$
-is the set of time values of the signal, and $F$ the set of frequency values of
-the signal.
+A wavelet can be defined in the following ways, given that $T$ is the set of
+time values of the signal, and $F$ the set of frequency values of the signal.
 \begin{description}
-	\item[Wavelet function (mother wavelet)] \hfill \\ $\Psi(t) = f$, $t \in T$ and
-	$f \in F$. Produces the shape of the wavelet.
-	\item[Scaling function (father wavelet)] \hfill \\ $\Phi(f) = t$, $t \in T$ and
-	$f \in F$. Produces the scale of the wavelet.
+	\item[Wavelet function (mother wavelet)] \hfill \\ $\Psi: T \longrightarrow
+	F$\\ $\Psi(t) = f$, such that $t \in T$ and $f \in F$.\\
+	This function maps $T$ onto $F$ and thus produces the shape of the wavelet.
+
+	\item[Scaling function (father wavelet)] \hfill \\ $\Phi: F \longrightarrow
+	T$\\ $\Phi(f) = t$, such that $t \in T$ and $f \in F$.\\
+	This function maps $F$ onto $T$ and thus produces the scale of the wavelet.
+
 	\item[Scaling filter] \hfill \\ A low-pass filter of length $2N$ and sum 1. A
 	high-pass filter can be calculated as the quadrature mirror filter of the
-	low-pass filter.
+	low-pass filter. Daubechies wavelets can be defined by the scaling filter.
 \end{description}
 
+\subsection{Haar wavelet}
 The Haar wavelet is a member of the Daubechies family of wavelets, based on the
 work of the Belgian mathematician Ingrid Daubechies. The Daubechies wavelets is
 a family of orthogonal wavelets defining a discrete wavelet transform. All
@@ -224,45 +214,31 @@ filter. The Haar wavelet has a filter of length 2 and is therefore also
 referenced to as the Daubechies-2 (D2) filter. It is the simplest wavelet of
 the Daubechies family.
 
+\paragraph{}
+In 1910, the Hungarian mathematician Alfred Haar introduced Haar functions. The
+Haar transform is one of the earliest examples of what is known now as a
+compact, dyadic, orthonormal wavelet transform \cite{stankovic}. The Haar function
+is the simplest and oldest orthonormal wavelet with compact support.
+
+\paragraph{}
 In this study and in the study by Karus \cite{karus2013}, the Haar filter is
 used to perform wavelet transformations due to its simplicity and simple
 interpretation.
 
 \subsection{Discrete wavelet transformation using the Haar filter}
-There is firm discrete mathematics underlying the workings of wavelet
-transformation and thus the Haar filter. However, we can informally - but not
-exactly - describe the steps that are taken by the Haar functions processing a
-signal.
-
-\begin{enumerate}
-	\item The input signal is read and interpreted as a wavelet
-	\item Put wavelet in a list of wavelets (list count = 1)
-		\begin{enumerate}
-			\item compute averages of frequency values for each wavelet in list
-			\item divide all wavelets by 2 and put in a list (list count = level * 2)
-			\item compute integrals over each wavelet
-			\item compute differences between intervals and the averages
-			\item save the differences computed in this level
-			\item goto (a) unless number of wavelet coefficients is smaller than 2
-		\end{enumerate}
-	\item Output differences per level
-\end{enumerate}
-
-In each decomposition (step 2 in the above listing), the Haar function adds
-more detail to the wavelets in the current level. The Haar filter captures the
-differences between levels. The decomposition in step 2 in the above listing
-will be repeated until the wavelets can no longer be divided. This happens when
-there is no more time resolution left in the input signal to add further detail
-from that signal. The decomposition can continue as long as the time-resolution
-allows. The wavelet constructed in the highest level of decomposition comes
-arbitrarily close to a continuous-time waveform.
+In each decomposition (e.g., each scaling or filtering step) the Haar function
+adds more detail to the wavelets in the current level. The Haar filter captures
+the differences between scale levels. The decomposition will be repeated until
+the wavelets can no longer be divided. This happens when there is no more time
+and/or frequency resolution left in the input signal to add further detail from
+that signal.
 
 \paragraph{}
-Wavelet transformations using the Haar filter is widely used. For example, as a
+Wavelet transformation using the Haar filter is widely used. For example, as a
 way of digitalising an analogue signal in A-D converters, pattern recognition,
 face recognition, image processing, data coding, multiplexing, digital
 filtering, digital speech processing, voice controlled computing devices,
-and robotics.
+robotics, and compression mechanisms.
 
 \begin{comment}
 This chapter contains all the information needed to put the thesis into
