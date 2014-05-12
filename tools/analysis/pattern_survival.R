@@ -103,4 +103,4 @@ ggkm(
   xlabs=opts.time
 )
 
-rm(opts.time.interval, opts.time, opts.var, surv.fit)
+rm(opts.time.interval, opts.time, opts.var, opts.pattern.type, surv.fit, ggkm)
