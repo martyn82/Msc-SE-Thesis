@@ -1,13 +1,15 @@
 # This script takes the dead projects and verifies their patterns.
 # It classifies the patterns observed in dead projects by type.
-# Types:
-# +------+------------------------------------------------------+
-# | Type | Description                                          |
-# +------+------------------------------------------------------+
-# |  A   | Occurs at the end of project data.                   |
-# |  B   | Others.                                              |
-# |  AB  | Sequences occurring in at the end and anywhere else. |
-# +------+------------------------------------------------------+
+#
+# +------+---------------------------------------------------+
+# | Type | Description                                       |
+# +------+---------------------------------------------------+
+# |  A   | Strictly occurring at the end of project data.    |
+# |  B   | Strictly occurring not at the end of project data.|
+# |  AB  | Others.                                           |
+# +------+---------------------------------------------------+
+
+options(warn=2)
 
 metric <- "LOC"
 
@@ -32,8 +34,14 @@ similar.count <- nrow(similar.dead)
 # 2. Get list of patterns for all these dead projects (similar.dead)
 # 3. Browse through the patterns and classify by type.
 
-type.a <- c()
-type.b <- c()
+patterns <- data.frame(
+  "seq.id"=numeric(0),
+  "seq.type"=character(0),
+  "pid"=numeric(0),
+  stringsAsFactors=FALSE
+)
+patterns.cols <- colnames(patterns)
+p <- 1
 
 for(i in 1:similar.count){
   similar.row <- similar.dead[i, ]
@@ -72,18 +80,44 @@ for(i in 1:similar.count){
     )
 
     if(max(seq.region.untrim$seq) == max(seq.region$seq)){
-      # Type A
-      type.a <- append(type.a, c(similar.row$Seq.Id))
+      pattern.type <- "A"
     } else {
-      # Type B
-      type.b <- append(type.b, c(similar.row$Seq.Id))
+      pattern.type <- "B"
     }
+    
+    patterns[p, ] <- c(
+      "seq.id"=as.numeric(similar.row$Seq.Id),
+      "seq.type"=as.character(pattern.type),
+      "pid"=as.numeric(region.pid)
+    )
+    p <- p + 1
   }
 }
 
-type.a <- unique(type.a)
-type.b <- unique(type.b)
-type.ab <- unique(intersect(type.a, type.b))
+rm(p, pattern.type, seq.region.untrim, seq.region, seq.data, seq.file)
+rm(region.startseq, region.length, region, region.revlevel, region.pid)
+rm(similar.data, similar.row, similar.regions, similar.dead, similar.count, similar.file)
+rm(dead.pids, dead.data, dead.confirmed, wavelet.dir, metric, dwtvar)
 
-type.a <- type.a[!(type.a %in% type.ab)]
-type.b <- type.b[!(type.b %in% type.ab)]
+# Strictly type the patterns
+for(p in 1:dim(patterns)[1]){
+  pattern <- patterns[p, ]
+  is.type <- pattern$seq.type
+  is.other <- dim(patterns[patterns$seq.id == pattern$seq.id & patterns$seq.type != is.type, ])[1] > 0
+  
+  if(is.other){
+    pattern$seq.type <- "AB"
+    patterns[p, ] <- pattern
+  }
+}
+
+rm(pattern, p, is.type, is.other)
+
+# Aggregate unique patterns by merging pid list
+patterns <- aggregate(patterns$pid, by=list(patterns$seq.id, patterns$seq.type), function(x){paste(unique(x), sep="|", collapse="|")})
+colnames(patterns) <- patterns.cols
+
+output.file <- paste("output", paste(paste("patterns", timecol, varcol, sep="_"), "csv", sep="."), sep="/")
+write.csv2(patterns, file=output.file)
+
+rm(output.file, varcol, timecol)
