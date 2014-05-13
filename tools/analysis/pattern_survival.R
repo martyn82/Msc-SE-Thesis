@@ -99,7 +99,7 @@ surv.fit <- survfit(Surv(time, status) ~ group, data=projects, type="kaplan-meie
 ggkm(
   surv.fit,
   timeby=opts.time.interval,
-  main=paste("Survivial of projects by", opts.var, "having patterns of type", opts.pattern.type),
+  main=paste("OSS projects with Type", opts.pattern.type, "pattern on", opts.var),
   xlabs=opts.time
 )
 
