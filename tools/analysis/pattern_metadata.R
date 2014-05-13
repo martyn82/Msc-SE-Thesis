@@ -17,6 +17,9 @@ patterns.metadata <- data.frame(
   "has.dead"=logical(0),
   "has.alive"=logical(0),
   "has.mixed"=logical(0),
+  "loc.seq"=character(0),
+  "ad.seq"=character(0),
+  "lc.seq"=character(0),
   stringsAsFactors=FALSE
 )
 p <- 1
@@ -36,7 +39,10 @@ for(sid in sids){
     "max.lc.diff"=as.numeric(seq$max.lc.diff),
     "has.dead"=as.logical(sim$HasDead),
     "has.alive"=as.logical(sim$HasAlive),
-    "has.mixed"=as.logical(sim$HasMixed)
+    "has.mixed"=as.logical(sim$HasMixed),
+    "loc.seq"=as.character(seq$loc.seq),
+    "ad.seq"=as.character(seq$ad.seq),
+    "lc.seq"=as.character(seq$lc.seq)
   )
   p <- p + 1
 }
