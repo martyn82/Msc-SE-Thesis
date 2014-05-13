@@ -9,8 +9,6 @@
 # |  AB  | Others.                                           |
 # +------+---------------------------------------------------+
 
-options(warn=2)
-
 metric <- "LOC"
 dead.only <- TRUE
 

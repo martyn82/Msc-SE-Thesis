@@ -3,7 +3,9 @@
 library(plyr)
 library(zoo)
 
-locations.data <- read.csv2("output/sequenceLocations_LOC.csv")
+metric <- "LOC"
+
+locations.data <- read.csv2(paste("output", paste(paste("sequenceLocations", metric, sep="_"), "csv", sep="."), sep="/"))
 dead.data <- read.csv2("output/deadProjectsValidated.csv")
 dead.data <- dead.data[as.logical(dead.data$confirmed.dead) == TRUE, ]
 facts.data <- read.csv2("data/factsForAnalysis.csv")
