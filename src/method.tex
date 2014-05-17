@@ -5,6 +5,8 @@ This chapter elaborates on the phases of the research, (1) data selection, (2)
 wavelet analysis, (3) pattern identification, and (4) validation.
 
 \section{Data selection}
+\label{method:data}
+
 For the gathering of data for this research, we use a tool by Magiel Bruntink
 \cite{ohlohanalytics}. This tool, ``\emph{OhlohAnalytics}\rm'', was developed as
 part of the replicative research by Magiel Bruntink \cite{bruntink2014}, and
@@ -31,9 +33,10 @@ The evolution data of a project is available as monthly data from Ohloh. The
 OhlohAnalytics tool adds some extra data computed from the raw data from Ohloh
 for convenience. The complete list of data fields available from the
 OhlohAnalytics tool is presented in table \ref{table:fields}. The column
-'Source' specifies if the field is either 'Raw' (directly available from Ohloh),
-or if it is added by the OhlohAnalytics tool as derived from an operation on one
-or more other fields. In the latter case, the fields are listed.
+'Source' specifies if the field is either 'Raw' data (i.e., directly available
+from Ohloh), or if it is added by the OhlohAnalytics tool as derived from an
+operation on one or more other fields. In the latter case, the fields are
+listed.
 
 \begin{table}
 \centering
@@ -115,21 +118,11 @@ or more other fields. In the latter case, the fields are listed.
 \label{table:fields}
 \end{table}
 
-\begin{comment}
-\begin{description}
-	\item[project\_name\_fact] \hfill \\
-	The name of the project at Ohloh.
-
-	\item[year\_fact and month\_fact] \hfill \\
-	The year and month time data for the current set of measurements.
-\end{description}
-\end{comment}
-
 \paragraph{}
-In the above list, the 'lines of code' (LOC) metric is equal to the LOC metric
-used by Ohloh. This is the total number of source lines of code at the given
-time (month). These lines include all lines of source text for the project in
-any programming language, but excludes blank lines and comments.
+In table \ref{table:fields}, the 'lines of code' (LOC) metric is equal to the
+LOC metric used by Ohloh. This is the total number of source lines of code at
+the given time of analysis. These lines include all lines of source text for
+the project in any programming language, but excludes blank lines and comments.
 
 \subsection{Selection criteria}
 
@@ -155,9 +148,9 @@ only the projects that have a continuous series of data are kept.
 A time series of 1 monthly data point is obviously not analysable over time and
 uncomparable to larger projects. The threshold of 12 monthly data points is
 chosen to minimise noise in the evolution data that are caused by too young and
-unstable projects. 
+unstable projects.
 
-\subsubsection{Data representativeness}
+\subsubsection{Data sample and representativeness}
 Another criterion for the selection of projects in the data set is that they
 form a subset that is representative to the set of all OSS projects tracked by
 Ohloh. We use a tool created by Nagappan \emph{et al. }\rm\cite{nagappan} at

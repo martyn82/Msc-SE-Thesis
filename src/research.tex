@@ -4,124 +4,60 @@
 This chapter describes the execution of the research.
 
 \section{Data set}
-
-
-\begin{comment}
-\section{Data}
-The evolution data of 250 OSS projects was gathered from
-Ohloh.net\footnote{http://www.ohloh.net}. Ohloh is a project by the initiative
-of Black Duck Software\footnote{http://www.blackducksoftware.com}. The Ohloh
-universe contains approximately 600,000 open-source software projects in
-January 2014. The evolution data of all these projects is tracked and monthly
-analyzed by Ohloh.net.
-
-\subsection{Data gathering}
-The data was gathered using the tool \emph{OhlohAnalytics }\rm by Magiel
-Bruntink \cite{ohlohanalytics}. The tool is created as part of the research
-``\emph{An Initial Quality Analysis of the Ohloh Software Evolution Data}\rm''
-by M. Bruntink. This tool provides us with an initial data set of more than
-10,000 OSS projects gathered in July 2013.\\
-
-\noindent	
-The following steps are done in the data gathering process:
-\begin{enumerate}
-	\item Data collection.
-	\item Validation and cleaning.
-\end{enumerate}
-
-\subsubsection{Data collection}
-During the data collection step the names of the projects tracked by Ohloh are
-gathered. Then for each project, monthly analysis facts (so called
-\emph{factoids}\rm) are gathered. These facts include: size facts (lines of code
-(LOC), blank lines, commented lines), activity facts (number of commits, number
-of contributors, LOC added/removed), enlistments (i.e., source code
-repositories for the project), and programming languages.
-
-\subsubsection{Validation and cleaning}
-The initial validation step does sanity checks and filtering on the collected
-data. It filters out the projects that have a wrongly configured repository,
-has missing data, negative LOC added, negative LOC removed, negative LOC,
-negative number of commits, negative number of contributors, or have
-inconsistent values where the difference between the previous month and current
-month numbers are inexplainable.\\
-
-\noindent
-The resulting set is a set of valid factoids for the 10,000 projects.
-
-\subsection{Data selection}
-The data selection procedure consists of the following steps:
-\begin{enumerate}
-	\item Project coverage computation.
-	\item Master data filtering.
-	\item Sample selection.
-\end{enumerate}
-
-\subsubsection{Project coverage computation}
-The cleansed set of 10,000 projects is analyzed by computing the project's
-evolution coverage. For each project, the difference between the minimum and
-maximum age in months is taken against the number of months present in the
-data set. This way, we have the percentage of the coverage between the mininum
-and maximum age.
-
-\subsubsection{Master data filtering}
-The next step is to filter out the projects from the master data that do not
-have a 100\% coverage or that have less than 12 data points (months). The result
-of this step is a filtered master data set that is the input of the next step.
-
-\subsubsection{Sample selection}
-A sample of 250 projects need to be selected from the 10,000 projects gathered
-by the OhlohAnalytics tool. This sample must be a representative selection of
-the projects tracked by Ohloh.net. For this selection process the tool
-\emph{SampleSoftwareProjects }\rm was used. The SampleSoftwareProjects tool was
-developed for the research by Nagappan et al. at Microsoft Research
-\cite{nagappan}.
-
-\paragraph{}
-The tool takes the filtered master data set containing facts of interest about
-the projects tracked by Ohloh.net to characterize these projects. These facts
-include activity facts (user count, average rating, last updated), project age,
-size facts (LOC), and language facts. The projects are given a score by each of
-these dimensions. Taking one sample project as base line the script evaluates
-projects from the master set and adds them to the sample if it increases the
-overall coverage to be close to that of the master set as a whole. The
-resulting data set is aimed to be 100\% representative.
-
-\paragraph{}
-For this study we took the project \emph{Mozilla Firefox }\rm as basis for
-the sample. The resulting data set of 250 projects has a representativeness of
-99.5\% of the Ohloh.net universe, according to the SampleSoftwareProjects tool.
-
-\section{Metrics}
-The following metrics are used and measured monthly:
+The data set of 250 projects was selected using the method described in section
+\ref{method:data}. It was conducted in the following steps:
 
 \begin{description}
-	\item[Age in months] \hfill \\
-		This is the number of months since the first factoid of a project.
+	\item[1. Gathering, initial validation and cleansing] \hfill \\ The initial
+	data of 12,360 projects was gathered from Ohloh.net in July 2013. then
+	validated and cleansed accordingly by Magiel Bruntink using the OhlohAnalytics
+	tool \cite{ohlohanalytics, bruntink2014}. The result of this step is a
+	consistent data set of evolution data of 10,811 projects.
 
-	\item[Active developers] \hfill \\
-		At Ohloh.net this is called the number of contributors and is the actual
-		number of developers that have made at least one commit in the month of the
-		factoid.
+	\item[2. Fraction of evolution] \hfill \\ The evolution data of the
+	projects contained gaps. Many projects did not have a continuous series of
+	evolution data. We expect a continuous series of data to be required in order
+	to analyse time series for a project. Therefore, a number representing the
+	continuity of the data was needed. For each project the difference between the
+	minimum and maximum values of the $age\_in\_months$ fact is taken, added by
+	one, giving us the expected number of data points a project should have. The
+	calculation of the fraction of total evolution data is done for each project.
 	
-	\item[Lines of code (LOC)] \hfill \\
-		For this study we use the same definition of LOC as in the original study by
-		Karus; blank lines and commented lines are also included in the LOC counts.
-		The reason for this is that we want to be able to measure activity and a
-		comment added or removed is also considered project activity related to code.
-
-	\item[Code Churn] \hfill \\
-		Is the sum of LOC added, LOC removed, and LOC modified. The modified LOC is
-		not tracked at Ohloh.net. Modified LOC is aggregated in LOC added and LOC
-		removed; a modified LOC is basically a line that is both removed and added.
-
+	Now that we know the fractions of the total evolution data for each project, we
+	can filter these projects and keep only the projects that have all data points
+	between minimum and maximum $age\_in\_months$. From the set of 10,811
+	projects, a total number of 6,418 projects is left.
+	
+	\item[3. Minimum evolution length] \hfill \\ As a final step of validating and
+	selecting the master data set, we will be keeping only the projects that have
+	at least 12 data points (i.e., have an evolution period of at least 1 year).
+	
+	After this selection, a set of 5,986 projects is left of where the sample can
+	be taken from.
+	
+	\item[4. Sample selection] \hfill \\ For the selection of a sample of 250
+	projects, we use the tool created by Nagappan \emph{et al. }\rm\cite{nagappan}.
+	This tool takes a sample set and selects additional projects to add to the
+	sample that increase the overall representativeness of that sample.
+	
+	The basis for the sample selection is an atomic set containing the
+	project ``Mozilla Firefox''. The choice for this project as basis is done
+	because of its popularity and size.
+	
+	The analysis in step 1 revealed that this project has many defficiencies in
+	its evolution data available at Ohloh.net. However, after all steps of
+	validation, cleansing, and selection, it is still included in the 5,986
+	projects. A quick view on the final data of ``Mozilla Firefox'' shows that it
+	contains 61 subsequent data points. Therefore, no objective arguments can be
+	made not to use it as the basis of the sample.
+	
+	The tool then iteratively selects 249 more projects and adds it to the sample.
+	Each addition project is selected by its score to maximally increase the
+	representativeness of the sample. The resulting set of 250 projects was scored
+	to be 99.5\% representative to the master data set from Ohloh.net.
 \end{description}
 
-\noindent
-The variable we used in the time domain is 'Age in months'; in the
-frequency domain this is 'LOC', 'Code Churn', and 'Active Developers'. Table
-\ref{tab:series} shows which variable in the time domain is plotted against
-what variable in the frequency domain.
-
+\begin{comment}
 \begin{table}
 \centering
 	\caption{Evolution signals}

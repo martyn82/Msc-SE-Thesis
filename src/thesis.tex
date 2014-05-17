@@ -2,7 +2,7 @@
 \documentclass{uvamscse}
 \usepackage{verbatim}
 \usepackage{url}
-\usepackage[]{algorithm2e}
+%\usepackage[]{algorithm2e}
 
 %% Draft section
 \usepackage{draftwatermark}
@@ -17,8 +17,8 @@
 }
 %% end Draft section
 
-\newcommand{\keywords}{\vspace{1cm}\noindent\bfseries{Keywords: }\rm}
 \renewcommand{\arraystretch}{1.3}
+\newcommand{\keywords}{\vspace{1cm}\noindent\bfseries{Keywords: }\rm}
 
 % research hypothesis and questions
 \newcommand{\researchQuestion}{Can we use wavelet analysis to find objective
@@ -55,6 +55,15 @@ succeed or fail in detecting evolutionary events?}
 \bibliography{thesis}{}
 \bibliographystyle{plain}
 
-%appendices
+%% appendices
+%\cleardoublepage
+%\listoffigures
+%\phantomsection
+%\addcontentsline{toc}{chapter}{\listfigurename}
+
+\cleardoublepage
+\listoftables
+\phantomsection
+\addcontentsline{toc}{chapter}{\listtablename}
 
 \end{document}
