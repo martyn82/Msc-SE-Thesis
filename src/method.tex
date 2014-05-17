@@ -1,15 +1,10 @@
 \chapter{Research method}
 \label{method}
 
-This chapter elaborates on the phases of the research:
-\begin{enumerate}
-	\item Data selection
-	\item Wavelet analysis
-	\item Pattern search
-	\item Validation
-\end{enumerate}
+This chapter elaborates on the phases of the research, (1) data selection, (2)
+wavelet analysis, (3) pattern identification, and (4) validation.
 
-\section{Phase 1: Data selection}
+\section{Data selection}
 For the gathering of data for this research, we use a tool by Magiel Bruntink
 \cite{ohlohanalytics}. This tool, ``\emph{OhlohAnalytics}\rm'', was developed as
 part of the replicative research by Magiel Bruntink \cite{bruntink2014}, and
@@ -32,81 +27,119 @@ regularly contains errors and inconsistencies. The tool helps with analysing
 and cleansing this data, leaving a data set of project evolution data that is
 consistent.
 
-The evolution data of a project is available as monthly data by Ohloh. The
-data available from the OhlohAnalytics tool is the following (in alphabetical
-order):
+The evolution data of a project is available as monthly data from Ohloh. The
+OhlohAnalytics tool adds some extra data computed from the raw data from Ohloh
+for convenience. The complete list of data fields available from the
+OhlohAnalytics tool is presented in table \ref{table:fields}. The column
+'Source' specifies if the field is either 'Raw' (directly available from Ohloh),
+or if it is added by the OhlohAnalytics tool as derived from an operation on one
+or more other fields. In the latter case, the fields are listed.
 
+\begin{table}
+\centering
+	\caption{Monthly data fields}
+	\begin{tabular}{p{4cm} p{3cm} p{7.5cm}}
+		\hline
+		\bfseries{Field}\rm & \bfseries{Source}\rm &
+		\bfseries{Description}\rm \\ \hline
+		
+		project\_name\_fact & Raw & The name of the project at Ohloh. \\
+		\hline
+		
+		\bfseries{Activity}\rm \\ \hline
+
+		abs\_loc\_growth & $loc\_added\_fact$, $loc\_deleted\_fact$ & The number of
+		'lines of code' (LOC) that the project has grown (or shrank) this month. \\
+
+		blanks\_added\_fact & Raw & The number of blank lines added to source text
+		this month. \\
+
+		blanks\_deleted\_fact & Raw & The number of blank lines deleted from source
+		text this month. \\
+
+		comments\_added\_fact & Raw & The number of lines of comments added in source
+		text this month. \\
+
+		comments\_deleted\_fact & Raw & The number of lines deleted from source text
+		which are comments; for this month. \\
+
+		commits\_fact & Raw & The total number of commits made this month. \\
+
+		contributors\_fact & Raw & The total number of contributors who made at least
+		one commit this month. \\
+
+		ind\_loc\_growth & $loc\_fact$, $abs\_loc\_growth$ & The relative growth of
+		the project measured in LOC for this month. \\
+
+		loc\_added\_fact & Raw & The number of LOC added this month. \\
+
+		loc\_deleted\_fact & Raw & The number of LOC deleted this month. \\
+		\hline
+		
+		\bfseries{Analysis}\rm \\ \hline
+
+		age\_in\_months & $month\_fact$, $year\_fact$ & The age of the project in
+		months measured since the first data point; starts at 0. \\
+
+		age\_in\_years & $age\_in\_months$ & The age of the project in years measured
+		since the first data point; starts at 0. \\
+
+		cumulative\_commits\_fact & $commits\_fact$ & The total number of commits
+		since the first data point (i.e., where $age\_in\_months = 0$). \\
+
+		main\_language\_fact & Raw & The programming language having the highest LOC
+		value for the project in this month (XML and HTML are ignored). \\
+
+		month\_fact & Raw & The month value of this month's analysis. Extracted from
+		$udpated\_at$ field. \\
+
+		year\_fact & Raw & The year value of this month's analysis. Extracted from
+		$updated\_at$ field. \\
+		\hline
+		
+		\bfseries{Size}\rm \\ \hline
+
+		blanks\_fact & Raw & The total number of blank lines in source text this
+		month. \\
+
+		comment\_ratio\_fact & Raw & The fraction of net lines in source text which
+		are comments; for this month. \\
+
+		comments\_fact & Raw & The total number of lines in source text which are
+		comments; for this month. \\
+
+		loc\_fact & Raw & The total number of LOC this month. \\
+
+		\hline
+	\end{tabular}
+\label{table:fields}
+\end{table}
+
+\begin{comment}
 \begin{description}
-	\item[abs\_loc\_growth] \hfill \\
-	The number of lines of code (LOC) that the project grown (or shrank) this
-	month.
-
-	\item[age\_in\_months] \hfill \\
-	The age of the project in months measured since the first data point;
-	starting at 0.
-
-	\item[age\_in\_years] \hfill \\
-	The age of the project in years measured since the first data point; starting
-	at 0.
-
-	\item[blanks\_added\_fact] \hfill \\
-	The number of blank lines added.
-
-	\item[blanks\_fact] \hfill \\
-	The number of blank lines.
-
-	\item[blanks\_deleted\_fact] \hfill \\
-	The number of blank lines deleted.
-
-	\item[comment\_ratio\_fact] \hfill \\
-	The fraction of net lines which are comments.
-
-	\item[comments\_added\_fact] \hfill \\
-	The number of lines of comments added.
-
-	\item[comments\_fact] \hfill \\
-	The number of lines of comments.
-
-	\item[comments\_deleted\_fact] \hfill \\
-	The number of lines of comments deleted.
-
-	\item[commits\_fact] \hfill \\
-	The number of commits.
-
-	\item[contributors\_fact] \hfill \\
-	The number of contributors who made at least one commit.
-
-	\item[cumulative\_commits\_fact] \hfill \\
-	The cumulative number of commits since first data point.
-
-	\item[ind\_loc\_growth] \hfill \\
-	The relative growth of the project in lines of code (LOC).
-
-	\item[loc\_added\_fact] \hfill \\
-	The number of lines of code (LOC) added.
-
-	\item[loc\_fact] \hfill \\
-	The number of lines of code (LOC).
-
-	\item[loc\_deleted\_fact] \hfill \\
-	The number of lines of code (LOC) deleted.
-
-	\item[main\_language\_fact] \hfill \\
-	The main programming language used in the project.
-
 	\item[project\_name\_fact] \hfill \\
 	The name of the project at Ohloh.
 
 	\item[year\_fact and month\_fact] \hfill \\
 	The year and month time data for the current set of measurements.
 \end{description}
+\end{comment}
+
+\paragraph{}
+In the above list, the 'lines of code' (LOC) metric is equal to the LOC metric
+used by Ohloh. This is the total number of source lines of code at the given
+time (month). These lines include all lines of source text for the project in
+any programming language, but excludes blank lines and comments.
 
 \subsection{Selection criteria}
 
 From the initial 10,000+ projects of which the evolution data is consistent, a
 subset of 250 projects will be made. Karus used a data set of 27 projects to
 perform his wavelet analysis research \cite{karus2013}. We believe a larger
-data set will yield more trustworthy results.
+data set will yield more trustworthy results. The number 250 was chosen to have
+a substantial larger set than the initial study by Karus, but still keep it
+feasible to analyse and validate the data and results because of time
+constaints.
 
 \subsubsection{Evolution data continuity}
 Before we can select the projects for the study, we need another validation
@@ -119,23 +152,32 @@ study. Therefore, all the 10,000+ projects will be analysed by continuity and
 only the projects that have a continuous series of data are kept.
 
 \subsubsection{Minimum evolution length}
-To eliminate noise generated by too young or fragile projects, we only keep
-projects that have a continuous sequence of at least 12 months of evolution
-data.
+A time series of 1 monthly data point is obviously not analysable over time and
+uncomparable to larger projects. The threshold of 12 monthly data points is
+chosen to minimise noise in the evolution data that are caused by too young and
+unstable projects. 
 
 \subsubsection{Data representativeness}
-Another criterion for the projects in the data set is that they form a set that
-is representative to the set of all OSS projects tracked by Ohloh. We use a tool
-created by Nagappan \emph{et al. }\rm at Microsoft Research that is able to
-select a representative set of projects \cite{nagappan}.
+Another criterion for the selection of projects in the data set is that they
+form a subset that is representative to the set of all OSS projects tracked by
+Ohloh. We use a tool created by Nagappan \emph{et al. }\rm\cite{nagappan} at
+Microsoft Research that is able to determine the representativeness of a subset of
+projects. The tool scores projects by the total lines of code
+and the 12-month contributors count.
+
+This tool is also capable of selecting that subset based on a given baseline
+project and a total subset size. It keeps adding projects to the subset as long
+as the project added will increase the total representativeness of the subset
+to the given 'universe' of projects. We will use this tool to select and score
+the subset of 250 projects from the Ohloh masterdata.
 
 
 
-\section{Phase 2: Wavelet analysis}
+\section{Wavelet analysis}
 
-\section{Phase 3: Pattern search}
+\section{Pattern identification}
 
-\section{Phase 4: Validation}
+\section{Validation}
 
 \begin{comment}
 \section{Wavelets in software evolution}
