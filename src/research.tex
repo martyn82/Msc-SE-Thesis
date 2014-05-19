@@ -5,62 +5,75 @@ This chapter describes the execution of the research.
 
 \section{Data set}
 The data set of 250 projects was selected using the method described in section
-\ref{method:data}. It was conducted in the following steps:
+\ref{method:data}. It was conducted in the steps described in the following
+paragraphs.
 
-\begin{description}
-	\item[1. Initial analysis, validation, and cleansing] \hfill \\ The raw
-	data of 12,360 projects was collected from Ohloh.net in July 2013. It was then
-	analysed, validated, and cleansed accordingly by Magiel Bruntink using his
-	OhlohAnalytics tool \cite{ohlohanalytics, bruntink2014}. This step consists
-	of the analysis and validation of the data by detecting inconsistent values and
-	remove these from the data set. Additional fields are added to the raw data for
-	convenience. The complete list of data fields are shown in table
-	\ref{table:fields}. The result of this step is a consistent data set of
-	evolution data of 10,811 projects.
+\subsection{Initial analysis, validation, and cleansing}
+The evolution data of a project is available as monthly data from Ohloh.net. The
+raw data of 12,360 projects was collected from Ohloh.net in July 2013 by Magiel
+Bruntink as part of his research \cite{bruntink2014}. It was then analysed,
+validated, and cleansed accordingly by Bruntink's tool \emph{OhlohAnalytics}\rm
+\cite{ohlohanalytics}.
 
-	\item[2. Fraction of evolution] \hfill \\ The evolution data of the
-	projects contained gaps. Many projects did not have a continuous series of
-	evolution data. We expect a continuous series of data to be required in order
-	to analyse time series for a project. Therefore, a number representing the
-	continuity of the data was needed. For each project the difference between the
-	minimum and maximum values of the $age\_in\_months$ fact is taken, added by
-	one, giving us the expected number of data points a project should have. The
-	calculation of the fraction of total evolution data is done for each project.
+This step consists of the analysis, validation, and cleansing of the data by
+detecting inconsistent values and removing these records from the data set.
+Additional fields are derived from and added to the raw data for convenience.
 
-	Now that we know the fractions of the total evolution data for each project, we
-	can filter these projects and keep only the projects that have all data points
-	between minimum and maximum $age\_in\_months$. From the set of 10,811
-	projects, a total number of 6,418 projects is left.
+The complete list of data fields are shown in table \ref{table:fields}. The
+column 'Source' specifies if the field is either 'Raw' data (i.e., directly
+available from Ohloh), or if it is added by the OhlohAnalytics tool as derived
+from an operation on one or more other fields. In the latter case, the fields
+are listed. The 'lines of code' (LOC) metric is equal to the LOC metric used by
+Ohloh. This is the total number of source lines of code at the given time of
+analysis. These lines include all lines of source text for the project in any
+programming language, but excludes blank lines and comments.
 
-	\item[3. Minimum evolution length] \hfill \\ As a final step in validating and
-	cleaning the master data set, we will be keeping only the projects that have
-	at least 12 data points (i.e., have a subsequent evolution period of at least 1
-	year).
+The result of this step is a consistent data set of evolution data of 10,811
+projects.
 
-	After this selection, a set of 5,986 projects is left where the sample will be
-	taken from.
+\input{table_data_fields}
 
-	\item[4. Sample selection] \hfill \\ For the selection of a sample of 250
-	projects, we use the tool created by Nagappan \emph{et al. }\rm\cite{nagappan}.
-	This tool takes a sample set and selects additional projects to add to the
-	sample that increase the overall representativeness of that sample.
+\subsection{Continuous data sequence}
+The evolution data of the 10,811 projects contained gaps. Many projects do not
+have a continuous series of evolution data. We expect a continuous series of
+data to be required in order to analyse time series for a project. Therefore, a
+number representing the continuity of the data was needed. For each project the
+difference between the minimum and maximum values of the $age\_in\_months$ fact
+is taken, added by one, giving us the expected number of data points a project
+should have. The calculation of the fraction of total evolution data is done
+for each project.
 
-	The basis for the sample selection is an atomic set containing the
-	project ``Mozilla Firefox''. The choice for this project as basis is done
-	because of its popularity and size.
+After the fractions of the total evolution data for each project are caculated,
+we can filter these projects and keep only the projects that have all data points
+between minimum and maximum $age\_in\_months$. From the set of 10,811 projects,
+a total number of 6,418 projects is left.
 
-	The analysis in step 1 revealed that this project has many defficiencies in
-	its evolution data available at Ohloh.net. However, after all steps of
-	validation, cleansing, and selection, it is still included in the 5,986
-	projects. A quick view on the final data of ``Mozilla Firefox'' shows that it
-	contains 61 subsequent data points. Therefore, no objective arguments can be
-	made not to use it as the basis of the sample.
+\subsection{Minimal sequence length}
+As a final step in validating and cleaning the master data set, we will be
+keeping only the projects that have at least 12 data points (i.e., have a
+subsequent evolution period of at least 1 year).
 
-	The tool then iteratively selects 249 more projects and adds it to the sample.
-	Each addition project is selected by its score to maximally increase the
-	representativeness of the sample. The resulting set of 250 projects was scored
-	to be 99.5\% representative to the master data set from Ohloh.net.
-\end{description}
+After this selection, a set of 5,986 projects is left where the sample will be
+taken from.
+
+\subsection{Sample selection}
+For the selection of a sample of 250 projects, we use the tool created by
+Nagappan \emph{et al. }\rm\cite{nagappan}. This tool takes a sample set and
+selects additional projects to add to the sample that increase the overall
+representativeness of that sample.
+
+The tool iteratively selects 250 projects and adds it to the sample. Each
+additional project is selected by its score to maximally increase the
+representativeness of the sample as a whole, compared to the master data.
+
+The master data is a list of 20,028 projects tracked by Ohloh.net delivered with
+this tool. A pre-filtering of this master data was done to make the tool select
+only the projects that appear in our data set of 5,986 projects. After
+pre-filtering, a subset of the master data of 1,588 projects is left. From this
+subset, a sample of 250 projects was selected.
+
+The resulting sample of 250 projects was scored against the initial master data
+of 20,028 projects and scores a 99.5\% representativeness.
 
 \begin{comment}
 \begin{table}

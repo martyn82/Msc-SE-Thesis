@@ -1,0 +1,79 @@
+\begin{table}
+\centering
+	\caption{Monthly data fields}
+	\begin{tabular}{p{4cm} p{3cm} p{7.5cm}}
+		\hline
+		\bfseries{Field}\rm & \bfseries{Source}\rm &
+		\bfseries{Description}\rm \\ \hline
+		
+		project\_name\_fact & Raw & The name of the project at Ohloh. \\
+		\hline
+		
+		\bfseries{Activity}\rm \\ \hline
+
+		abs\_loc\_growth & $loc\_added\_fact$, $loc\_deleted\_fact$ & The number of
+		'lines of code' (LOC) that the project has grown (or shrank) this month. \\
+
+		blanks\_added\_fact & Raw & The number of blank lines added to source text
+		this month. \\
+
+		blanks\_deleted\_fact & Raw & The number of blank lines deleted from source
+		text this month. \\
+
+		comments\_added\_fact & Raw & The number of lines of comments added in source
+		text this month. \\
+
+		comments\_deleted\_fact & Raw & The number of lines deleted from source text
+		which are comments; for this month. \\
+
+		commits\_fact & Raw & The total number of commits made this month. \\
+
+		contributors\_fact & Raw & The total number of contributors who made at least
+		one commit this month. \\
+
+		ind\_loc\_growth & $loc\_fact$, $abs\_loc\_growth$ & The relative growth of
+		the project measured in LOC for this month. \\
+
+		loc\_added\_fact & Raw & The number of LOC added this month. \\
+
+		loc\_deleted\_fact & Raw & The number of LOC deleted this month. \\
+		\hline
+		
+		\bfseries{Analysis}\rm \\ \hline
+
+		age\_in\_months & $month\_fact$, $year\_fact$ & The age of the project in
+		months measured since the first data point; starts at 0. \\
+
+		age\_in\_years & $age\_in\_months$ & The age of the project in years measured
+		since the first data point; starts at 0. \\
+
+		cumulative\_commits\_fact & $commits\_fact$ & The total number of commits
+		since the first data point (i.e., where $age\_in\_months = 0$). \\
+
+		main\_language\_fact & Raw & The programming language having the highest LOC
+		value for the project in this month (XML and HTML are ignored). \\
+
+		month\_fact & Raw & The month value of this month's analysis. Extracted from
+		$udpated\_at$ field. \\
+
+		year\_fact & Raw & The year value of this month's analysis. Extracted from
+		$updated\_at$ field. \\
+		\hline
+		
+		\bfseries{Size}\rm \\ \hline
+
+		blanks\_fact & Raw & The total number of blank lines in source text this
+		month. \\
+
+		comment\_ratio\_fact & Raw & The fraction of net lines in source text which
+		are comments; for this month. \\
+
+		comments\_fact & Raw & The total number of lines in source text which are
+		comments; for this month. \\
+
+		loc\_fact & Raw & The total number of LOC this month. \\
+
+		\hline
+	\end{tabular}
+\label{table:fields}
+\end{table}

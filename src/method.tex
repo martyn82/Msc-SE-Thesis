@@ -22,107 +22,14 @@ and from very popular to unknown. The most popular projects being Apache HTTP
 Server, Apache OpenOffice, Apache Subversion, Bash, Firebug, Linux Kernel,
 Mozilla Firefox, MySQL, PHP, and Ubuntu.
 
-\subsection{Project timely facts}
+\subsection{Data validation and cleansing}
 The OhlohAnalytics tool provides us with an initial data set of more than
 10,000 OSS projects \cite{bruntink2014}. The raw data gathered from Ohloh
 regularly contains errors and inconsistencies. The tool helps with analysing
 and cleansing this data, leaving a data set of project evolution data that is
 consistent.
 
-The evolution data of a project is available as monthly data from Ohloh. The
-OhlohAnalytics tool adds some extra data computed from the raw data from Ohloh
-for convenience. The complete list of data fields available from the
-OhlohAnalytics tool is presented in table \ref{table:fields}. The column
-'Source' specifies if the field is either 'Raw' data (i.e., directly available
-from Ohloh), or if it is added by the OhlohAnalytics tool as derived from an
-operation on one or more other fields. In the latter case, the fields are
-listed.
 
-\begin{table}
-\centering
-	\caption{Monthly data fields}
-	\begin{tabular}{p{4cm} p{3cm} p{7.5cm}}
-		\hline
-		\bfseries{Field}\rm & \bfseries{Source}\rm &
-		\bfseries{Description}\rm \\ \hline
-		
-		project\_name\_fact & Raw & The name of the project at Ohloh. \\
-		\hline
-		
-		\bfseries{Activity}\rm \\ \hline
-
-		abs\_loc\_growth & $loc\_added\_fact$, $loc\_deleted\_fact$ & The number of
-		'lines of code' (LOC) that the project has grown (or shrank) this month. \\
-
-		blanks\_added\_fact & Raw & The number of blank lines added to source text
-		this month. \\
-
-		blanks\_deleted\_fact & Raw & The number of blank lines deleted from source
-		text this month. \\
-
-		comments\_added\_fact & Raw & The number of lines of comments added in source
-		text this month. \\
-
-		comments\_deleted\_fact & Raw & The number of lines deleted from source text
-		which are comments; for this month. \\
-
-		commits\_fact & Raw & The total number of commits made this month. \\
-
-		contributors\_fact & Raw & The total number of contributors who made at least
-		one commit this month. \\
-
-		ind\_loc\_growth & $loc\_fact$, $abs\_loc\_growth$ & The relative growth of
-		the project measured in LOC for this month. \\
-
-		loc\_added\_fact & Raw & The number of LOC added this month. \\
-
-		loc\_deleted\_fact & Raw & The number of LOC deleted this month. \\
-		\hline
-		
-		\bfseries{Analysis}\rm \\ \hline
-
-		age\_in\_months & $month\_fact$, $year\_fact$ & The age of the project in
-		months measured since the first data point; starts at 0. \\
-
-		age\_in\_years & $age\_in\_months$ & The age of the project in years measured
-		since the first data point; starts at 0. \\
-
-		cumulative\_commits\_fact & $commits\_fact$ & The total number of commits
-		since the first data point (i.e., where $age\_in\_months = 0$). \\
-
-		main\_language\_fact & Raw & The programming language having the highest LOC
-		value for the project in this month (XML and HTML are ignored). \\
-
-		month\_fact & Raw & The month value of this month's analysis. Extracted from
-		$udpated\_at$ field. \\
-
-		year\_fact & Raw & The year value of this month's analysis. Extracted from
-		$updated\_at$ field. \\
-		\hline
-		
-		\bfseries{Size}\rm \\ \hline
-
-		blanks\_fact & Raw & The total number of blank lines in source text this
-		month. \\
-
-		comment\_ratio\_fact & Raw & The fraction of net lines in source text which
-		are comments; for this month. \\
-
-		comments\_fact & Raw & The total number of lines in source text which are
-		comments; for this month. \\
-
-		loc\_fact & Raw & The total number of LOC this month. \\
-
-		\hline
-	\end{tabular}
-\label{table:fields}
-\end{table}
-
-\paragraph{}
-In table \ref{table:fields}, the 'lines of code' (LOC) metric is equal to the
-LOC metric used by Ohloh. This is the total number of source lines of code at
-the given time of analysis. These lines include all lines of source text for
-the project in any programming language, but excludes blank lines and comments.
 
 \subsection{Selection criteria}
 
@@ -134,7 +41,7 @@ a substantial larger set than the initial study by Karus, but still keep it
 feasible to analyse and validate the data and results because of time
 constaints.
 
-\subsubsection{Evolution data continuity}
+\subsubsection{Continuous data sequence}
 Before we can select the projects for the study, we need another validation
 step. Although the set of 10,000+ projects' evolution data is consistent, not
 all of it is useable for this study.
@@ -144,19 +51,19 @@ continuous series (i.e., without gaps) of evolution data for each project under
 study. Therefore, all the 10,000+ projects will be analysed by continuity and
 only the projects that have a continuous series of data are kept.
 
-\subsubsection{Minimum evolution length}
+\subsubsection{Minimal sequence length}
 A time series of 1 monthly data point is obviously not analysable over time and
 uncomparable to larger projects. The threshold of 12 monthly data points is
 chosen to minimise noise in the evolution data that are caused by too young and
 unstable projects.
 
-\subsubsection{Data sample and representativeness}
+\subsubsection{Sample selection}
 Another criterion for the selection of projects in the data set is that they
 form a subset that is representative to the set of all OSS projects tracked by
 Ohloh. We use a tool created by Nagappan \emph{et al. }\rm\cite{nagappan} at
 Microsoft Research that is able to determine the representativeness of a subset of
-projects. The tool scores projects by the total lines of code
-and the 12-month contributors count.
+projects. The tool scores projects by the total lines of code and the 12-month
+contributors count.
 
 This tool is also capable of selecting that subset based on a given baseline
 project and a total subset size. It keeps adding projects to the subset as long
