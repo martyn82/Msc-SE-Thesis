@@ -18,6 +18,7 @@ opts.time <- "Age.Months"
 opts.var <- "LOC"
 opts.time.interval <- 12
 opts.pattern.type <- "A"
+opts.reprsample <- TRUE
 
 patterns.dead <- read.csv2(paste("output", paste(paste("patterns", opts.time, opts.var, sep="_"), "csv", sep="."), sep="/"))
 sequences.data <- read.csv2(paste("output", paste(paste("haar", "similar", opts.time, opts.var, sep="_"), "csv", sep="."), sep="/"))
@@ -44,12 +45,24 @@ control.pids <- unique(facts.data[!(facts.data$Project.Id %in% sequences.pids), 
 # Select group
 group.size <- min(
   c(
-    floor(length(control.pids) / 2),
+    length(control.pids),
     length(sequences.pids)
   )
 )
-sequences.pids.sample <- sequences.pids[1:group.size]
-control.pids.sample <- control.pids[1:group.size]
+sequences.pids.sample <- sample(sequences.pids, group.size)
+
+if(opts.reprsample){
+  ## Representative sample selection
+  source("tools/analysis/sample_project_selection.R")
+  ohloh <- read.delim("../OhlohAnalytics/lib/SampleSoftwareProjects-0.1.1/masterdata_filtered.csv", header=T, na.strings=c("", "NA"))
+  ohloh.sub <- ohloh[ohloh$id %in% control.pids, ]
+  sample <- ohloh.sub[ohloh.sub$id == 4361, ] # 4361 : netbsd
+  np <- next.projects(group.size, sample, universe=ohloh.sub, id ~ total_code_lines + twelve_month_contributor_count)
+  new.projects <- as.data.frame(np[1])
+  control.pids.sample <- new.projects$new.projects.id
+} else {
+  control.pids.sample <- sample(control.pids, group.size)
+}
 
 # Store PIDs of both groups
 all.pids <- unique(as.numeric(append(sequences.pids.sample, control.pids.sample)))
@@ -103,4 +116,4 @@ ggkm(
   xlabs=opts.time
 )
 
-rm(opts.time.interval, opts.time, opts.var, opts.pattern.type, surv.fit, ggkm)
+rm(opts.time.interval, opts.time, opts.var, opts.pattern.type, ggkm)
