@@ -28,7 +28,7 @@ my.csv.data <- read.csv2 (file=paste("data/factsForAnalysis.csv", sep="/"),  na.
 colnames(my.csv.data)
 
 # "Active.Developers", "LOC.Churn", "LOC"
-interesting_colnames <- c("Active.Developers")
+interesting_colnames <- c("LOC")
 fill_locf <- c("LOC", "LOC.Churn")
 fill_zero <- c("Active.Developers")
 aggregation_max <- c()

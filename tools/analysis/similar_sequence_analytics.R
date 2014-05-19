@@ -16,7 +16,7 @@ maxsearchseq <- 65
 pids_complete <- c()
 filter_name <- "haar"
 #c("Active.Developers", "LOC.Churn", "LOC")
-interesting_colnames <- c("LOC.Churn")
+interesting_colnames <- c("LOC")
 
 findSimilarSequences <- function(timecol, targetseq, pid, searchseq, searchrevlevel, pid0, current_column, dwtvar, revlevel) {
   if(length(searchseq) >= minseq & length(targetseq) >= minseq) {
