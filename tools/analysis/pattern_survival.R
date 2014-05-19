@@ -60,6 +60,9 @@ if(opts.reprsample){
   np <- next.projects(group.size, sample, universe=ohloh.sub, id ~ total_code_lines + twelve_month_contributor_count)
   new.projects <- as.data.frame(np[1])
   control.pids.sample <- new.projects$new.projects.id
+
+  colnames(new.projects) <- colnames(ohloh.sub)
+  new.projects.score <- score.projects(new.projects, universe=ohloh.sub, id ~ total_code_lines + twelve_month_contributor_count)
 } else {
   control.pids.sample <- sample(control.pids, group.size)
 }
