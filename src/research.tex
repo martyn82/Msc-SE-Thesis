@@ -53,8 +53,7 @@ As a final step in validating and cleaning the master data set, we will be
 keeping only the projects that have at least 12 data points (i.e., have a
 subsequent evolution period of at least 1 year).
 
-After this selection, a set of 5,986 projects is left where the sample will be
-taken from.
+After this selection, a set of 5,986 projects is left.
 
 \subsection{Sample selection}
 For the selection of a sample of 250 projects, we use the tool created by
@@ -75,60 +74,46 @@ subset, a sample of 250 projects was selected.
 The resulting sample of 250 projects was scored against the initial master data
 of 20,028 projects and scores a 99.5\% representativeness.
 
-\begin{comment}
-\begin{table}
-\centering
-	\caption{Evolution signals}
-	\begin{tabular}{| p{4cm} | p{4cm} | p{4cm} |}
-	\hline
-	\bfseries{Time domain}\rm & \bfseries{Frequency domain}\rm &
-	\bfseries{Description}\rm
-	\\
-	\hline Age in months	& LOC & LOC per month. \\
-							& Code Churn & Churn per month. \\
-							& Active Developers & Contributors per month. \\ \hline
-	\end{tabular}
-\label{tab:series}
-\end{table}
+\paragraph{}
+The evolution data of 250 distinct projects make a total of 22,943 data points.
+The biggest project having 321 data points, the smallest having 14 data points.
 
 \section{Analysis}
-The analysis is done in the following steps:
-\begin{enumerate}
-	\item Wavelet transform.
-	\item Similar sequence identification.
-	\item Similar sequence grouping.
-\end{enumerate}
 
-\subsection{Wavelet transform}
-During the wavelet transform steps, each project is analyzed separately using
-each combination as specified in table \ref{tab:series}.
+The 250 projects are analysed by selecting time series (signals) of their
+evolution data. In this research, analysis is done on modeling $age\_in\_months$
+on the time domain, and $loc\_fact$ on the frequency domain. The signals per
+project represent the value of the 'lines of code' at a given 'age in months'.
 
-The data is prepared by sorting it by the time domain, indexing, and aggregate
-data where appropriate. Then the discrete wavelet transform is applied using the
-Haar filter.
+\subsection{Wavelet transform and analysis}
 
-The resulting data structure is saved in a file representing the transform data
-for a specific project. A file per coefficient (scale and filter) is saved
-with aggregated data for all projects. These files contain all values per level
-found for all projects.
+\subsubsection{Wavelet transform}
+Each project's signal is separately transformed using discrete wavelet
+transform. The results of the transforms are saved per project. This is the raw
+data after decomposing signals and is saved for further analysis.
 
-\subsection{Similar sequence identification}
-The results of the wavelet transforms are analyzed and identified as sequences.
-A sequence is a series of values with a minimum length of 3 values and a maximum
-length of 65. The sequences of each project are compared to the sequences of
-every other project. In case a similar sequence is found, it is recorded.
-Similar is having the same series of values with a maximum deviation of
-0.005.
+\subsubsection{Similar sequence identification}
+The similar sequence identification found 1,669,448 sequences that occurred
+at least 2 times in the data. Only 16 sequences were found using wavelet
+coefficients, the other 1,669,432 sequences were found using filter
+coefficients. This is expected as filter coefficients are better than wavelet
+coefficients at finding small changes in signals.
 
-All found similar sequences are saved in a file per coefficient.
+\subsubsection{Similar sequence grouping}
+The last step in the analysis of the found sequences aggregates and groups the
+sequences together and keeps only the 'popular' sequences. As mentioned, a
+sequence is considered popular if it appears at least 3 times in the data.
 
-\subsection{Similar sequence grouping}
-The similar sequence grouping step takes the similar sequences found in the
-previous step and classifies the sequences by number of projects, number of
-occurances, lengths, etc. The resulting file enables selection of sequences by
-these properties. The resulting data is used for partial manual, and partial
-automatic validation.
-\end{comment}
+The results of this step revealed a total of 16,049 of such popular sequences.
+All the popular sequences were found in the sequences by filter coefficients,
+and none in the sequences by wavelet coefficients. The sequences occurred at
+least 4 times, and at most 1,511 times. They occur in at least 1 and at most 204
+projects. Their lengths differ between 4 points and 19 points across various
+decomposition levels (levels of detail).
+
+\subsection{Pattern identification}
+
+
 
 \begin{comment}
 This chapter reports on the execution of the research method as described in Chapter 3.
