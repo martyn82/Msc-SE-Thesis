@@ -7,17 +7,16 @@ survivability and success of OSS projects, and wavelet analysis.
 
 \section{Software evolution}
 The analogy of the term \emph{evolution }\rm in the field of software
-engineering was first used by Lehman in his laws of software evolution
-\cite{lehman}. Software does not evolve by intrinsic feedback loops like
-evolution in plants and animals, but by extrinsic feedback that comes from the
-operational domain.
+engineering was first used by \citet{lehman} in his laws of software evolution.
+Software does not evolve by intrinsic feedback loops like evolution in plants
+and animals, but by extrinsic feedback that comes from the operational domain.
 
 \paragraph{}
-Lehman identified eight laws that are the driving factors of changes in software
-systems. These laws can be roughly categorised into two categories: laws
-related to the product (e.g., source code, and internal quality), and laws
-related to the process (e.g., organisation, development process, business
-requirements and user satisfaction).
+\citeauthor{lehman} identified eight laws that are the driving factors of
+changes in software systems. These laws can be roughly categorised into two
+categories: laws related to the product (e.g., source code, and internal
+quality), and laws related to the process (e.g., organisation, development
+process, business requirements and user satisfaction).
 
 \paragraph{}
 The laws related to the software process tell us that in order for a software
@@ -25,8 +24,8 @@ system to stay useful and satisfactory, it needs to keep changing according to
 users' needs. What needs to change is fed through the feedback system.
 
 On average and in terms of activity, the organisation of a software development
-process does not change much during a product's life time (law IV:
-Conservation of Organisational Stability).
+process does not change much during a product's life time; \citeauthor{lehman}'s
+fourth law: Conservation of Organisational Stability.
 
 \paragraph{}
 The laws related to the software product tell us that as the source code of the
@@ -36,9 +35,9 @@ and improve its quality. However, the contents of the product will be
 statistically invariant during the active life time of a product.
 
 \paragraph{}
-Lehman's laws of software evolution are valid for both closed source software
-and open-source software. These laws form the foundation of what we understand
-as software evolution.
+\citeauthor{lehman}'s laws of software evolution are valid for both closed
+source software and open-source software. These laws form the foundation of
+what we understand as software evolution.
 
 \paragraph{}
 The evolution of a software system comprises various measures on different
@@ -49,24 +48,23 @@ time is a way to measure the evolution of lines of code in a software project.
 
 \section{Project survivability}
 %% perhaps restructure in Project success, and Project survivability %%
-In a study by Samoladas et al. a method for survival analysis on OSS projects
-was proposed \cite{samoladas2010}. The authors used duration data regarding
-Free/Libre Open-Source Software (FLOSS) projects to predict the survivability of
-the projects by examining their duration, combined with other characterstics
-such as application domain and number of committers. These metrics give insight
-in the survivability chances of a project. It was also found that adding a
+In a study by \citet{samoladas2010} a method for survival analysis on OSS
+projects was proposed. The authors used duration data regarding Free/Libre
+Open-Source Software (FLOSS) projects to predict the survivability of the
+projects by examining their duration, combined with other characterstics such
+as application domain and number of committers. These metrics give insight in
+the survivability chances of a project. It was also found that adding a
 developer to the team of contributors increased the survivability of the
 project substantially.
 
-The authors proposed two main research issues to be addressed in the future. The
-first one is to add more projects to the study with possibly a different
+The authors proposed two main research issues to be addressed in the future.
+The first one is to add more projects to the study with possibly a different
 categorisation. And second, the effects of more project parameters, such as
 programming language should be examined. This is not trivial since typically
 more than one language is used in each project.
 
 \paragraph{}
-A study by Raja and Tretter on defining a measure of OSS project survivability
-\cite{raja2012}.
+A study by \citet{raja2012} on defining a measure of OSS project survivability.
 They have been looking for vitality of OSS projects: the ability of a project
 to grow and maintain its structure in the presence of perturbations. They
 identified three dimensions of project viability: vigor -- the ability of a
@@ -81,14 +79,14 @@ the near future. Therefore, it can be challenging to get an objective view on a
 project's survivability as a representative point in time has to be selected.
 
 \paragraph{}
-Crowston et al. identified measures that can be applied to assess the success of
-OSS projects \cite{crowston2003}. The authors used the DeLone and McLean Model
-of Information Systems Success to evaluate OSS project success
-\cite{delone1992}. The aspects identified by DeLone and McLean are elaborated;
-output of systems development -- it is believed that a project that has a high
-frequency of releases is healthy --, process of systems development -- the
-number of developers, the individual level of activity, and cycle time (time
-between releases) --, and project effects -- employment opportunities of the
+\citet{crowston2003} identified measures that can be applied to assess the
+success of OSS projects. The authors used the ``Model of Information Systems
+Success'' by \citet{delone1992} to evaluate OSS project success. The aspects
+identified by \citeauthor{delone1992} are elaborated; output of systems
+development -- it is believed that a project that has a high frequency of
+releases is healthy --, process of systems development -- the number of
+developers, the individual level of activity, and cycle time (time between
+releases) --, and project effects -- employment opportunities of the
 contributors, individual reputation, and knowledge creation. In this study it
 was found that many of these aspects are indicators of OSS project success.
 
@@ -97,24 +95,22 @@ other aspects such as employment opportunities, reputation, and knowledge
 creation are very hard to get into numbers and therefore hard to automate.
 
 \paragraph{}
-Another study conducted by Crowston et al. extends the previous study by using
-Free/Libre Open-Source Software (FLOSS) projects \cite{crowston2006}. In
-addition to what was found in the previous study, they had found that the number
-of developers as a simple count of developers is a flawed number as it
-aggregates the number of developers leaving and the number of developers
-joining a project. A 'churn' of the developers or a 'tenure' of individuals
-would be more appropriate.
+Another study conducted by \citet{crowston2006} extends the previous study by
+using Free/Libre Open-Source Software (FLOSS) projects. In addition to what was
+found in the previous study, they had found that the number of developers as a
+simple count of developers is a flawed number as it aggregates the number of
+developers leaving and the number of developers joining a project. A 'churn' of
+the developers or a 'tenure' of individuals would be more appropriate.
 
 \paragraph{}
-A study conducted by J. Wang has shown that warning signs can be found in
-six crucial factors of OSS projects success: developer participation effort,
+A study conducted by \citet{wang2012} has shown that warning signs can be found
+in six crucial factors of OSS projects success: developer participation effort,
 developer service quality, software license restrictiveness, targeted users,
-community social network ties, and community quality of social ties
-\cite{wang2012}.
+community social network ties, and community quality of social ties.
 
 \paragraph{}
-Karus explored a method known as \emph{wavelet analysis }\rm to analyse software
-evolution data \cite{karus2013}. The wavelet analysis interprets evolution data
+\citet{karus2013} explored a method known as \emph{wavelet analysis }\rm to
+analyse software evolution data. The wavelet analysis interprets evolution data
 as a series of signals and is able to find sequences in this signal. The
 sequences of multiple projects can be compared in order to find recurring
 patterns. Karus was able to detect 998 similar patterns across 27 OSS projects.
@@ -218,8 +214,8 @@ the Daubechies family.
 \paragraph{}
 In 1910, the Hungarian mathematician Alfred Haar introduced Haar functions. The
 Haar transform is one of the earliest examples of what is known now as a
-compact, dyadic, orthonormal wavelet transform \cite{stankovic}. The Haar function
-is the simplest and oldest orthonormal wavelet with compact support.
+compact, dyadic, orthonormal wavelet transform \cite{stankovic}. The Haar
+function is the simplest and oldest orthonormal wavelet with compact support.
 
 \subsection{Discrete wavelet transformation using the Haar filter}
 In each decomposition (e.g., each scaling or filtering step) the Haar function

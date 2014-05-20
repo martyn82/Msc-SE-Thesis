@@ -10,10 +10,10 @@ paragraphs.
 
 \subsection{Initial analysis, validation, and cleansing}
 The evolution data of a project is available as monthly data from Ohloh.net. The
-raw data of 12,360 projects was collected from Ohloh.net in July 2013 by Magiel
-Bruntink as part of his research \cite{bruntink2014}. It was then analysed,
-validated, and cleansed accordingly by Bruntink's tool \emph{OhlohAnalytics}\rm
-\cite{ohlohanalytics}.
+raw data of 12,360 projects was collected from Ohloh.net in July 2013 by
+\citet{bruntink2014} as part of his research. It was then analysed, validated,
+and cleansed accordingly by the tool \emph{OhlohAnalytics }\rm
+by \citet{ohlohanalytics}.
 
 This step consists of the analysis, validation, and cleansing of the data by
 detecting inconsistent values and removing these records from the data set.
@@ -31,17 +31,16 @@ programming language, but excludes blank lines and comments.
 The result of this step is a consistent data set of evolution data of 10,811
 projects.
 
-\input{table_data_fields}
+\input{tables/table_data_fields}
 
-\subsection{Continuous data sequence}
-The evolution data of the 10,811 projects contained gaps. Many projects do not
-have a continuous series of evolution data. We expect a continuous series of
-data to be required in order to analyse time series for a project. Therefore, a
-number representing the continuity of the data was needed. For each project the
-difference between the minimum and maximum values of the $age\_in\_months$ fact
-is taken, added by one, giving us the expected number of data points a project
-should have. The calculation of the fraction of total evolution data is done
-for each project.
+\subsection{Subsequent data series}
+The evolution data of the 10,811 projects contained gaps. We expect a
+subsequent series of data is necessary to be able to analyse time series for a
+project. Therefore, a number representing the fraction of continuity of the
+data was needed. For each project the difference between the minimum and
+maximum values of the $age\_in\_months$ fact is taken, added by one, giving us
+the expected number of data points for a project. The calculation of the
+fraction of total evolution data is done for each project.
 
 After the fractions of the total evolution data for each project are caculated,
 we can filter these projects and keep only the projects that have all data points
@@ -57,8 +56,8 @@ After this selection, a set of 5,986 projects is left.
 
 \subsection{Sample selection}
 For the selection of a sample of 250 projects, we use the tool created by
-Nagappan \emph{et al. }\rm\cite{nagappan}. This tool takes a sample set and
-selects additional projects to add to the sample that increase the overall
+\citet{nagappan}. This tool takes a, possibly atomic, sample set and selects
+additional projects to add to the sample that increase the overall
 representativeness of that sample.
 
 The tool iteratively selects 250 projects and adds it to the sample. Each
@@ -87,6 +86,17 @@ project represent the value of the 'lines of code' at a given 'age in months'.
 
 \subsection{Wavelet transform and analysis}
 
+For the wavelet transform and analysis, we have used R Statistics Suite
+with packages ``wavelets'', ``chron'' and ``zoo''. The Wavelets R package
+contains an implementation of discrete wavelet transform functions and the Haar
+filter. The Haar filter is used by \citet{karus2013} in his research because of
+its simplicity and ease of interpretation. As this study is a replication of
+\citeauthor{karus2013}' study, the choice of using the Haar filter was made.
+
+The R scripts used for these three steps are based on the scripts created and
+used by \citeauthor{karus2013} in the initial research. Small adjustments have
+been made to make them compatible with our data set.
+
 \subsubsection{Wavelet transform}
 Each project's signal is separately transformed using discrete wavelet
 transform. The results of the transforms are saved per project. This is the raw
@@ -111,7 +121,7 @@ least 4 times, and at most 1,511 times. They occur in at least 1 and at most 204
 projects. Their lengths differ between 4 points and 19 points across various
 decomposition levels (levels of detail).
 
-\subsection{Pattern identification}
+\section{Pattern identification}
 
 
 

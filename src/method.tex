@@ -7,132 +7,122 @@ transformation and analysis, Pattern identification, and Validation.
 \section{Data selection}
 \label{method:data}
 
-For the gathering of data for this research, we use a tool by Magiel Bruntink
-\cite{ohlohanalytics}. This tool, ``\emph{OhlohAnalytics}\rm'', was developed as
-part of the replicative research by Magiel Bruntink \cite{bruntink2014}, and
-provides a validated and cleansed data set of more than 10,000 OSS projects.
+The data for this research is provided by a tool by \citet{ohlohanalytics}.
+This tool, ``\emph{OhlohAnalytics}\rm'', was developed as part of the
+replicative research by \citet{bruntink2014}, and provides a validated and
+cleansed data set of more than 10,000 OSS projects.
 
-The projects are tracked by and gathered from
-Ohloh\footnote{http://www.ohloh.net}: \emph{``Ohloh is a free, public directory
-of Free and Open Source Software and the contributors who create and maintain
-it.'' }\rm \cite{ohloh}.
+The projects are tracked by and gathered from Ohloh.net: \emph{``Ohloh is a
+free, public directory of Free and Open Source Software and the contributors
+who create and maintain it.'' }\rm \cite{ohloh}.
 
-Today, Ohloh tracks more than 660,000 OSS projects varying from tiny to huge,
-and from very popular to unknown. The most popular projects being Apache HTTP
-Server, Apache OpenOffice, Apache Subversion, Bash, Firebug, Linux Kernel,
-Mozilla Firefox, MySQL, PHP, and Ubuntu.
+At the time of this writing, Ohloh tracks more than 660,000 OSS projects varying
+in all ranges of size, and popularity. The most popular projects currently being
+Apache HTTP Server, Apache OpenOffice, Apache Subversion, Bash, Firebug, Linux
+Kernel, Mozilla Firefox, MySQL, PHP, and Ubuntu.
 
 \subsection{Data validation and cleansing}
 The OhlohAnalytics tool provides us with an initial data set of more than
 10,000 OSS projects \cite{bruntink2014}. The raw data gathered from Ohloh
-regularly contains errors and inconsistencies. The tool helps with analysing
-and cleansing this data, leaving a data set of project evolution data that is
-consistent.
+regularly contains errors and inconsistencies. This tool analyses the
+consistency of the data and cleanses the data where needed. This results in a
+consistent data set of project evolution data.
 
 
 
 \subsection{Project selection criteria}
 
 From the initial 10,000+ projects of which the evolution data is consistent, a
-subset of 250 projects will be made. Karus used a data set of 27 projects to
-perform his wavelet analysis research \cite{karus2013}. We believe a larger
-data set will yield more trustworthy results. The number 250 was chosen to have
-a substantial larger set than the initial study by Karus, but still keep it
-feasible to analyse and validate the data and results within the given time
-constaints.
+subset of 250 projects will be made. \citet{karus2013} used a data set of 27
+projects to perform his wavelet analysis research. We believe a larger
+data set will yield more trustworthy results. The number 250 is a somewhat
+arbitrary number, but chosen to have a substantial larger set than the initial
+study by \citeauthor{karus2013}, but still keep it feasible to analyse and
+validate the data and results within the given time constaints of 4 months for
+this thesis.
 
-\subsubsection{Continuous data sequence}
-Before we can select the projects for the study, we need another validation
-step. Although the set of 10,000+ projects' evolution data is consistent, not
-all of it is useable for this study.
+\subsubsection{Subsequent data series}
+Prior to the selection of the projects for the study, another validation
+step is needed. Although the set of 10,000+ projects' evolution data is
+consistent, not all of it is suited for wavelet analysis.
 
-To be able to perform wavelet analysis on this data, we need to have a
-continuous series (i.e., without gaps) of evolution data for each project under
-study. Therefore, all the 10,000+ projects will be analysed by continuity and
-only the projects that have a continuous series of data are kept.
+To be able to perform wavelet analysis on any series of data, we need to have
+a subsequent series (i.e., without gaps) of evolution data for each project
+under study. Therefore, all the 10,000+ projects will be analysed for continuity
+and only the projects that have a subsequent series of data are kept.
 
 \subsubsection{Minimal sequence length}
-A time series of 1 monthly data point is obviously not analysable over time and
-uncomparable to larger projects. The threshold of 12 monthly data points is
-chosen to minimise noise in the evolution data that are caused by too young and
-unstable projects.
+A time series of 1 (monthly) data point is obviously not analysable over time
+and uncomparable to larger projects. The threshold of at least 12 monthly data
+points is chosen to minimise noise in the evolution data that may be caused by
+too young and unstable projects.
 
 \subsubsection{Representativeness}
 Another criterion for the selection of projects in the data set is that they
 form a subset that is representative to the set of all OSS projects tracked by
-Ohloh. We use a tool created by Nagappan \emph{et al. }\rm\cite{nagappan} at
-Microsoft Research that is able to determine the representativeness of a subset of
-projects. The tool scores projects by the total lines of code and the 12-month
+Ohloh.net. A tool created by \citet{nagappan} at Microsoft Research that is able
+to determine the representativeness of a subset of projects will be used. This
+tool scores projects by two metrics: total lines of code, and yearly
 contributors count.
 
-This tool is also capable of selecting that subset based on a given baseline
-project and a total subset size. It keeps adding projects to the subset as long
-as the project added will increase the total representativeness of the subset
-to the given 'universe' of projects. We will use this tool to select and score
-the subset of 250 projects from the Ohloh masterdata.
+The tool by \citet{nagappan} is also capable of selecting a sample based on a
+given baseline project and a total subset size. It keeps adding projects to the
+subset as long as the project added will increase the total representativeness
+of the sample subset to a given 'universe' of projects. We will use this tool
+to select and score the sample subset of 250 projects using the Ohloh.net
+projects as universe.
 
 
 
 \section{Analysis}
-The analysis will be conducted in three steps: Wavelet transform, Similar
-sequence identification, and Similar sequence grouping.
-
-For the wavelet transforms and analysis, we will be using R Statistics Suite
-with package ``wavelets''. The Wavelets R package contains an implementation of
-discrete wavelet transform functions and the Haar filter. The Haar filter is
-used by Karus in his research \cite{karus2013} because of its simplicity and
-ease of interpretation. As this study is a recplication of Karus' study, the
-choice of using the Haar filter was made.
-
-The R scripts used for these three steps are based on the scripts created and
-used by Karus in the initial research \cite{karus2013}. Small adjustments have
-been made to make them compatible with our data set.
+The analysis of the projects under study will be conducted in three steps:
+Wavelet transform, Similar sequence identification, and Similar sequence
+grouping.
 
 \subsection{Wavelet transform}
 The first step in the analysis of time series of software evolution is the
-wavelet transform. During this step, a project's signal is transformed using
-discrete wavelet transform and the Haar filter. The resulting data is saved for
-further analysis. This data comprises the coefficients at each level of
-decomposition.
+wavelet transform. During this step discrete wavelet transform using the Haar
+filter is applied on a project's signal. The results comprise the coefficients
+at each level of decomposition. The results are saved for analysis.
 
 \subsection{Similar sequence identification}
-The second step takes the coefficients from the wavelet transform step and
-analyses them to find similar sequences. A sequence is a continuous series of
-coefficients with a length between 3 and 65 data points. A sequence is
-considered 'similar' if it appears in at least 2 other places and the
-values of the compared sequences deviate less than a certain threshold. These
-similar sequences may be found in the same project, but may also be found
-across projects.
+This second step takes the coefficients from the wavelet transform step and
+analyses them to find \emph{similar sequences}\rm. A sequence is a subsequent
+series of coefficients - resulted from discrete wavelet transform at a
+particular level of decomposition - with a length between 3 and 65 points.
+These thresholds were chosen to distinguish a sequence from an ordinary pair of
+coefficients if the sequence is very short. On the contrary, if a sequence is
+very long (larger than 65 points) we need to be able to distinguish the
+sequence from the complete signal.
+
+The 'points' mentioned here are not the same as data points in the data set.
+The data points represent monthly data from a project, and the points in
+sequences represent coefficients found at a certain level of decomposition
+during the wavelet transform. More specifically, these 'points' are scaled or
+filtered data points.
+
+A sequence is considered 'similar' if the values of the compared sequences
+deviate less than a threshold and if the sequence appears in at least 2 other
+places. Similar sequences may be found within one project, but preferrably be
+found across projects.
 
 \subsection{Similar sequence grouping}
-As a final step, the similar sequences from previous step are taken as input and
-the 'popular' sequences are extracted. A sequence is considered 'popular' if it
-appears at least 3 times in the data. Each unique sequence is assigned an
-identification number to be used in further analysis. The popular sequences are
-grouped together and added meta data, such as, the number of occurrances, the
-list of project IDs having the sequence, and if it appears in dead, alive, or
-both dead and alive projects.
+In this final wavelet analysis step, the similar sequences from previous step
+are taken as input to find 'popular' sequences. A sequence is considered
+'popular' if it appears at least 3 times in the sequence data. Each unique
+sequence is assigned an identification number to be used in further analysis.
+The popular sequences are grouped together and added meta data, such as, the
+number of occurrances, the list of projects having the sequence, and whether it
+appears in dead, alive, or both dead and alive projects.
 
 
-\section{Pattern identification}
+\section{}
+
+
 
 \section{Validation}
 
 \begin{comment}
-\section{Wavelets in software evolution}
-The use of wavelet transformation in the analysis of software evolution removes
-the factor of project size and enables comparing projects equally to find
-similar sequences.
-
-\paragraph{}
-In software evolution, the signal can be any measurable property of an evolving
-entity, such as team size, lines of code, number of commits, etc.
-These properties can be measured at a given time series, such as age in months,
-or even a non-time-related series such as lines of code. Measuring these
-properties over the evolution of a project gives a series of signals. Software
-repositories are a source of signals in software evolution. This allows wavelet
-transform be applied directly for mining software repositories.
-
 \section{Warning signs}
 \subsection{Dead projects}
 The validation of the sequence identification was done by first classifying
