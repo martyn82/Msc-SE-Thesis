@@ -17,31 +17,32 @@ event}\rm; an event that changed the project's evolution.
 
 \paragraph{}
 In closed source projects, many evolutionary events are the effect of decisions
-made by the management. The majority of closed source software projects are
-initiated and maintained by commercial organisations. These projects evolve
-according to changing business requirements, strategies, and commercial goals.
+made by the management \cite{karus2013}. The majority of closed source software
+projects are initiated and maintained by commercial organisations. These
+projects evolve according to changing business requirements, strategies, and
+commercial goals.
 
-In commercial organisations, a change in the hiring policy, or planning and
-deadlines, can become an evolutionary event for the projects affected by these
-changes. These events can be used to identify project scale and progress. This
-allows comparing and co-analysing different projects \cite{karus2013}.
+In commercial organisations, events of change in the hiring policy, or
+planning and deadlines, can become evolutionary to the projects affected by
+these changes. These events can be used to identify project scale and progress
+\cite{karus2013}, which allows comparing and co-analysing different projects.
 
 \paragraph{}
 In open-source software (OSS) projects, evolutionary events are mostly
-theoretical with little empirical validation. Changes in development activity,
-community, and other aspects of the OSS process are mostly organic. A community
-of an OSS project changes continuously, often with little impact on the
-evolution of the project \cite{androutsellis}. This means that different OSS
-projects cannot be compared on the same scale. In other words, different OSS
-projects cannot be objectively assessed by their evolution data without a
-proper transformation of that data.
+theoretical with little empirical validation \cite{karus2013}. Changes in
+development activity, community, and other aspects of the OSS process are
+mostly organic \cite{androutsellis}. A community of an OSS project changes
+continuously, often with little impact on the evolution of the project. This
+means that different OSS projects cannot be compared on the same scale. In
+other words, different OSS projects cannot be objectively assessed by their
+evolution data without a proper transformation of that data.
 
 \paragraph{}
 For closed source projects, the measurement of a project's success or
 effectiveness is critical to our understanding of the value and efficacy of
 management actions and investments \cite{delone2003}.
 
-Comparing and analysing OSS projects is of interest to better understand the
+Comparing and co-analysing OSS projects is of interest to better understand the
 survivability of OSS projects. The key factors that define the success or
 failure of an OSS project have not yet been found.
 
@@ -49,25 +50,24 @@ failure of an OSS project have not yet been found.
 We expect to be able to find indicators of failure in the events that
 shape a project's evolution. Therefore, a means to identify these evolutionary
 events would be useful. For closed-source software projects in a commercial
-environment, these events can be easily tracked by the managerial history of
-the project. For OSS projects, this is not the case.
+environment, these events can be tracked by the managerial history of the
+project. For OSS projects, this is not the case.
 
 
 
 \section{Motivation}
 At \hostOrg, developers extensively use OSS projects in their day-to-day
-work. The projects vary from developers tools, and utilities, to operating
-systems and full system stacks. These OSS projects include, but are not limited
-to, Ansible, Apache Web Server, MySQL, OpenStack, OpenVPN, and Ubuntu/Linux.
-Besides the previously listed well-known projects, lesser known projects are
-also used.
+work. The projects vary from developers tools, and utilities, to full system
+stacks. These OSS projects include Ansible, Apache HTTP Server, MySQL,
+OpenStack, OpenVPN, and Ubuntu/Linux. Besides the previously listed well-known
+projects, lesser known projects are also used.
 
 \paragraph{}
-Given that OSS projects are popular in many organisations, and, as a result,
-OSS projects contribute to the overall value of the products and services of
-these organisations, a means to objectively assess OSS project's survivability
-is of value. An assessment of the survivability of an OSS project will aid in
-the decision for selection and/or continuity of a project.
+Given that OSS projects are popular and contribute to the overall value of the
+products and services of many organisations, a means to objectively assess OSS
+project's survivability is of value. An assessment of the survivability of an
+OSS project will aid in the decision for selection and/or continuity of a
+project.
 
 \paragraph{}
 In the study \emph{Automatic Means of Identifying Evolutionary Events in
@@ -99,9 +99,18 @@ detect anomalies in these waveforms. After investigating and comparing these
 anomalies we might as well be able to find the patterns that resulted from
 evolutionary events. A comparison with known events that had a negative effect
 on a project's progress may reveal that we are able to detect warning signs in
-software evolution.\\
+software evolution.
 
-\noindent
+\paragraph{}
+A warning sign is defined as any pattern in the waveform that has a high chance
+of resulting in the \emph{end of code evolution }\rm of a project. The
+\emph{end of code evolution }\rm means that the source code activities of a
+project have stopped. There could still be commits on the project, for instance
+in Wiki pages, external library updates, or documentation, but no more source
+code changes. For a pattern being such a warning sign, it has to be similar to
+patterns that are confirmed to be such warning signs.
+
+\paragraph{}
 According to \citet{karus2013}, knowing these warning signs will help in:
 \begin{itemize}
 	\item Choosing an OSS project to implement in a business scenario.
@@ -110,14 +119,6 @@ According to \citet{karus2013}, knowing these warning signs will help in:
 	project for new OSS projects.
 \end{itemize}
 
-\subsection{Warning sign}
-A warning sign is defined as any pattern in the waveform that has a high chance
-of resulting in the \emph{end of code evolution }\rm of a project. The
-\emph{end of code evolution }\rm means that the source code activities of a
-project have stopped. There could still be commits on the project, for instance
-in Wiki pages, external library updates, or documentation, but no more source
-code changes. For a pattern being such a warning sign, it has to be similar to
-patterns that are confirmed to be such warning signs.
 
 
 
@@ -143,11 +144,13 @@ and grow in the number of releases. In this study, we only look at the
 development process using software analytics, ignoring documentation and
 community support.
 
+
+
 \section{Outline}
 
+In chapter \ref{method}, the method and approach for the research is discussed.
 Chapter \ref{background} will provide more information on prior research in the
-field of OSS project survivability. In chapter \ref{method} the method and
-approach of the research is discussed. Chapter \ref{research} describes the
+field of OSS project survivability. Chapter \ref{research} describes the
 research execution. In chapter \ref{results}, the results are presented, and
 chapter \ref{analysis} provides the results after analysis and presents the
 conclusions of the research.

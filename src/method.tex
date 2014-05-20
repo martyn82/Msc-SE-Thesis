@@ -13,9 +13,10 @@ This tool, ``\emph{OhlohAnalytics}\rm'', was developed as part of the
 replicative research by \citet{bruntink2014}, and provides a validated and
 cleansed data set of more than 10,000 OSS projects.
 
-The projects are tracked by and gathered from Ohloh.net: \emph{``Ohloh is a
-free, public directory of Free and Open Source Software and the contributors
-who create and maintain it.'' }\rm \cite{ohloh}.
+The projects are tracked by and gathered from
+Ohloh\footnote{\url{http://www.ohloh.net}}: \emph{``Ohloh is a free, public
+directory of Free and Open Source Software and the contributors who create and
+maintain it.'' }\rm \cite{ohloh}.
 
 At the time of this writing, Ohloh tracks more than 660,000 OSS projects varying
 in all ranges of size, and popularity. The most popular projects currently being
@@ -39,29 +40,29 @@ projects to perform his wavelet analysis research. We believe a larger
 data set will yield more trustworthy results. The number 250 is a somewhat
 arbitrary number, but chosen to have a substantial larger set than the initial
 study by \citeauthor{karus2013}, but still keep it feasible to analyse and
-validate the data and results within the given time constaints of 4 months for
+validate the data and results within the given time constraints of 4 months for
 this thesis.
 
 \subsubsection{Subsequent data series}
 Prior to the selection of the projects for the study, another validation
 step is needed. Although the set of 10,000+ projects' evolution data is
-consistent, not all of it is suited for wavelet analysis.
+consistent, probably not all of it is suited for wavelet analysis.
 
-To be able to perform wavelet analysis on any series of data, we need to have
+To be able to perform wavelet analysis on a series of data, we need to have
 a subsequent series (i.e., without gaps) of evolution data for each project
 under study. Therefore, all the 10,000+ projects will be analysed for continuity
-and only the projects that have a subsequent series of data are kept.
+and the projects that show gaps in the data are removed from the data set.
 
 \subsubsection{Minimal sequence length}
 A time series of 1 (monthly) data point is obviously not analysable over time
 and uncomparable to larger projects. The threshold of at least 12 monthly data
 points is chosen to minimise noise in the evolution data that may be caused by
-too young and unstable projects.
+too young or unstable projects.
 
 \subsubsection{Representativeness}
 Another criterion for the selection of projects in the data set is that they
 form a subset that is representative to the set of all OSS projects tracked by
-Ohloh.net. A tool created by \citet{nagappan} at Microsoft Research that is able
+Ohloh. A tool created by \citet{nagappan} at Microsoft Research that is able
 to determine the representativeness of a subset of projects will be used. This
 tool scores projects by two metrics: total lines of code, and yearly
 contributors count.
@@ -70,8 +71,8 @@ The tool by \citet{nagappan} is also capable of selecting a sample based on a
 given baseline project and a total subset size. It keeps adding projects to the
 subset as long as the project added will increase the total representativeness
 of the sample subset to a given 'universe' of projects. We will use this tool
-to select and score the sample subset of 250 projects using the Ohloh.net
-projects as universe.
+to select and score the sample subset of 250 projects using the Ohloh projects
+as universe.
 
 
 
@@ -128,7 +129,7 @@ projects.
 
 
 \section{Pattern analysis}
-This phase in the research is the analysis of patterns. The patterns found
+In this phase of the research, the patterns will be analysed. The patterns found
 in the previous phase will be validated mostly manually, in search of patterns
 that are an objective warning sign [\ref{itm:question_warningsigns}].
 
@@ -142,16 +143,19 @@ code evolution for that project).
 \label{def:dead}
 A project is considered 'dead' if it complies to the following properties:
 \begin{itemize}
-	\item the project showed no change in LOC for the last 12 months;
+	\item the project showed no change in LOC\footnote{LOC: abbreviation for
+	'lines of code'.} for the last 12 months;
 	\item the project has had 0 contributors in code for the last 12 months;
-	\item the project has had 0 LOC churn for the last 12 months.
+	\item the project has had 0 LOC churn\footnote{LOC churn: the sum of LOC added
+	and LOC deleted.} for the last 12 months.
 \end{itemize}
 
 \noindent
-The above properties together specify that the project has had no code activity
+The above properties combined specify that the project has had no code activity
 for the past year, meaning the code evolution of the project has stopped.
 According to this definition, changes in documentation, wiki pages, external
-library updates, and other non-code changes are still allowed for dead projects.
+library updates, and other non-code changes are still allowed for dead
+projects.
 
 To compare dead and alive projects from the data set, we can use the above
 definition to identify the projects from the data set that are dead, and the
@@ -161,9 +165,9 @@ other projects are still alive by definition.
 To be sure that the projects from our data set that comply to the definition of
 dead are indeed dead, manual validation of these findings have to be done.
 In verifying if a project is dead, we will consult the project's page on the
-Ohloh.net website to see if the most recent data still complies to the
-definition of dead. Furthermore, we will lookup the project's website and its
-repository to find the latest commit history.
+Ohloh website to see if the most recent data still complies to the definition of
+dead. Furthermore, we will lookup the project's website and its repository to
+find the latest commit history.
 
 \subsection{Pattern selection}
 Having the list of dead projects all patterns appearing in dead projects will be
