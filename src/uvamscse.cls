@@ -88,7 +88,6 @@
 \newcommand{\revisionhistory}{\newpage}
 
 \newcommand{\uvacoverfoot}{%
-	\vfill
 	\begin{center}
 	\begin{tabular}{ r | l }
 		\multirow{3}{*}{\includegraphics[height=48pt]{figures/uva.pdf}}
@@ -98,6 +97,12 @@
 			& \url{http://www.software-engineering-amsterdam.nl}
 		% Supervisor: Prof Dr P. Klint
 	\end{tabular}
+	\end{center}
+}
+\newcommand{\hostlogo}{%
+	\vfill
+	\begin{center}
+		\includegraphics[height=76pt]{figures/vnu.jpg}
 	\end{center}
 }
 
@@ -129,6 +134,7 @@
 		\textbf{Host organisation:}		& \uvahost \\[0.3cm]
 		\textbf{Publication status:}	& \uvastatus
 	\end{tabular}
+	\hostlogo
 	\uvacoverfoot
 	\revisionhistory
 	\tableofcontents

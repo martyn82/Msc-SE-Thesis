@@ -1,8 +1,9 @@
 \chapter{Research method}
 \label{method}
 
-This chapter elaborates on the phases of the research, Data selection, Wavelet
-transformation and analysis, Pattern identification, and Validation.
+This chapter elaborates on the steps to be taken in order to answer the
+research questions. A description of each of the phases of the research is
+given.
 
 \section{Data selection}
 \label{method:data}
@@ -74,22 +75,27 @@ projects as universe.
 
 
 
-\section{Analysis}
-The analysis of the projects under study will be conducted in three steps:
-Wavelet transform, Similar sequence identification, and Similar sequence
-grouping.
+\section{Wavelet transform and analysis}
+The analysis of the projects under study will be conducted in two main steps:
+Wavelet transform, and Wavelet analysis. The second step is subdivided into two
+smaller steps: Similar sequence identification, and Similar sequence grouping.
 
 \subsection{Wavelet transform}
 The first step in the analysis of time series of software evolution is the
 wavelet transform. During this step discrete wavelet transform using the Haar
-filter is applied on a project's signal. The results comprise the coefficients
-at each level of decomposition. The results are saved for analysis.
+filter is applied on a project's signal (see also section
+\ref{wavelet_analysis}). The results comprise the coefficients at each level of
+decomposition and are saved for analysis.
 
-\subsection{Similar sequence identification}
-This second step takes the coefficients from the wavelet transform step and
-analyses them to find \emph{similar sequences}\rm. A sequence is a subsequent
-series of coefficients - resulted from discrete wavelet transform at a
-particular level of decomposition - with a length between 3 and 65 points.
+\subsection{Wavelet analysis}
+The wavelet analysis step is split into two sub-steps which will be described in
+the following two subsections.
+
+\subsubsection{Similar sequence identification}
+During this step the coefficients from the wavelet transform step are
+analysed to find \emph{similar sequences}\rm. A sequence is defined as a
+subsequent series of coefficients - at a particular level of decomposition -
+with a length between 3 and 65 points.
 These thresholds were chosen to distinguish a sequence from an ordinary pair of
 coefficients if the sequence is very short. On the contrary, if a sequence is
 very long (larger than 65 points) we need to be able to distinguish the
@@ -101,62 +107,67 @@ sequences represent coefficients found at a certain level of decomposition
 during the wavelet transform. More specifically, these 'points' are scaled or
 filtered data points.
 
-A sequence is considered 'similar' if the values of the compared sequences
-deviate less than a threshold and if the sequence appears in at least 2 other
-places. Similar sequences may be found within one project, but preferrably be
-found across projects.
+A sequence is considered 'similar' if at least one other sequence was found of
+which the values are equal with respect to an allowed deviation. Similar
+sequences may be found within one project, but preferrably be found across
+projects.
 
-\subsection{Similar sequence grouping}
-In this final wavelet analysis step, the similar sequences from previous step
-are taken as input to find 'popular' sequences. A sequence is considered
-'popular' if it appears at least 3 times in the sequence data. Each unique
-sequence is assigned an identification number to be used in further analysis.
-The popular sequences are grouped together and added meta data, such as, the
-number of occurrances, the list of projects having the sequence, and whether it
-appears in dead, alive, or both dead and alive projects.
+\subsubsection{Similar sequence grouping}
+In this step, the similar sequences from previous step are taken as input to
+find 'patterns'.
+
+A sequence is considered a 'pattern' if it appears at least 3 times in the
+sequence data. Each pattern instance is assigned an identification number to be
+used in further analysis.
+
+The sequences that form a pattern instance are grouped together and added meta
+data, such as, the number of occurrances, the list of projects having the
+sequence, and whether it appears in dead, alive, or both dead and alive
+projects.
 
 
-\section{}
 
+\section{Pattern analysis}
+This phase in the research is the analysis of patterns. The patterns found
+in the previous phase will be validated mostly manually, in search of patterns
+that are an objective warning sign [\ref{itm:question_warningsigns}].
 
+\subsection{Warning signs}
+A 'warning sign' is defined as a pattern found in a signal of a project's
+evolution data (such as the value of the 'lines of code' metric over time), that
+significantly increases the chances for that project to die (i.e., to end the
+code evolution for that project).
 
-\section{Validation}
+\subsubsection{Definition of dead}
+\label{def:dead}
+A project is considered 'dead' if it complies to the following properties:
+\begin{itemize}
+	\item the project showed no change in LOC for the last 12 months;
+	\item the project has had 0 contributors in code for the last 12 months;
+	\item the project has had 0 LOC churn for the last 12 months.
+\end{itemize}
 
-\begin{comment}
-\section{Warning signs}
-\subsection{Dead projects}
-The validation of the sequence identification was done by first classifying
-a subset of the data set containing only dead projects. A dead project is
-defined as a project that had no change in LOC in the past 12 months.\\
+\noindent
+The above properties together specify that the project has had no code activity
+for the past year, meaning the code evolution of the project has stopped.
+According to this definition, changes in documentation, wiki pages, external
+library updates, and other non-code changes are still allowed for dead projects.
 
-The list of dead projects is then used to filter the sequences detected by
-these dead projects. The resulting set of sequences contains just the sequences
-in dead projects. Each sequence is related to other sequences in other projects
-which might be dead or not. These related projects are evaluated by checking if
-they exist in the dead projects list.
+To compare dead and alive projects from the data set, we can use the above
+definition to identify the projects from the data set that are dead, and the
+other projects are still alive by definition.
 
-\subsection{Dying projects}
-The related projects that are not 'dead' are extracted for analysis. Their
-related sequences will be analyzed. If a project from the 'not-dead' list has a
-sequence related to that of a 'dead' project, and the related sequence occurs
-at the end of the non-dead project's evolution data, then that project is a
-good candidate to be classified as a 'dying' project.\\
+\subsubsection{Dead project validation}
+To be sure that the projects from our data set that comply to the definition of
+dead are indeed dead, manual validation of these findings have to be done.
+In verifying if a project is dead, we will consult the project's page on the
+Ohloh.net website to see if the most recent data still complies to the
+definition of dead. Furthermore, we will lookup the project's website and its
+repository to find the latest commit history.
 
-The resulting data set contains a list of projects that might be 'dying', the
-transform level at which the sequence was detected, and the number of times the
-sequence was matched against another sequence. This set is of use when manually
-validating the projects.
-
-\section{Validation}
-To validate whether the 'dying' projects are indeed dying, a manual
-investigation has to be made. For the resulting projects, the Ohloh.net project
-page can be consulted. The data set used contains data until July 2013,
-therefore, it is easy to confirm if the trend of 'dying' has continued up to
-April 2014. The activity report at Ohloh.net is very useful. It tells the
-amounts of commits and contributors in the past 30 days and in the past 12
-months. Changes that show a decrease of over 30\% in either commits,
-contributors, or both are in general a bad sign.
-\end{comment}
+\subsection{Pattern selection}
+Having the list of dead projects all patterns appearing in dead projects will be
+selected for further analysis.
 
 \begin{comment}
 This section describes the methods used to answer the research questions. A

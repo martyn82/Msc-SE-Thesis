@@ -87,10 +87,13 @@ project represent the value of the 'lines of code' at a given 'age in months'.
 \subsection{Wavelet transform and analysis}
 
 For the wavelet transform and analysis, we have used R Statistics Suite
-with packages ``wavelets'', ``chron'' and ``zoo''. The Wavelets R package
-contains an implementation of discrete wavelet transform functions and the Haar
-filter. The Haar filter is used by \citet{karus2013} in his research because of
-its simplicity and ease of interpretation. As this study is a replication of
+with packages ``wavelets'', ``chron'' and ``zoo''. The Wavelets package
+contains an implementation of discrete wavelet transform functions, including
+the Haar filter; Chron contains functions for working with chronological data
+series; and Zoo eases indexing and working with indexed of data.
+
+The Haar filter is used by \citet{karus2013} in his research because of its
+simplicity and ease of interpretation. As this study is a replication of
 \citeauthor{karus2013}' study, the choice of using the Haar filter was made.
 
 The R scripts used for these three steps are based on the scripts created and
@@ -104,26 +107,35 @@ data after decomposing signals and is saved for further analysis.
 
 \subsubsection{Similar sequence identification}
 The similar sequence identification found 1,669,448 sequences that occurred
-at least 2 times in the data. Only 16 sequences were found using wavelet
-coefficients, the other 1,669,432 sequences were found using filter
+at least 2 times in the data. Only 16 sequences were found using wavelet/shift
+coefficients, the other 1,669,432 sequences were found using filter/scale
 coefficients. This is expected as filter coefficients are better than wavelet
 coefficients at finding small changes in signals.
 
 \subsubsection{Similar sequence grouping}
 The last step in the analysis of the found sequences aggregates and groups the
-sequences together and keeps only the 'popular' sequences. As mentioned, a
-sequence is considered popular if it appears at least 3 times in the data.
+sequences together and keeps only the patterns (i.e., 'popular' sequences). As
+mentioned, a sequence is considered a pattern if it appears at least 3 times in
+the data.
 
-The results of this step revealed a total of 16,049 of such popular sequences.
-All the popular sequences were found in the sequences by filter coefficients,
-and none in the sequences by wavelet coefficients. The sequences occurred at
-least 4 times, and at most 1,511 times. They occur in at least 1 and at most 204
-projects. Their lengths differ between 4 points and 19 points across various
-decomposition levels (levels of detail).
+The results of this step revealed a total of 16,049 patterns in the projects.
+All the patterns were found in the sequences resulting from using filter
+coefficients, and 0 in those from using wavelet coefficients. The sequences
+occurred at least 4 times, and at most 1,511 times. They occur in at least 1
+and at most 204 projects. Their lengths differ between 4 points and 19 points
+across various decomposition levels (levels of detail).
 
-\section{Pattern identification}
+\section{Finding warning signs}
+\subsection{Dead projects}
+In the search to find patterns that are warning signs leading to the end of code
+evolution, we first extract from our initial 250 projects the projects that
+satisfy the definition of a dead project (see: section \ref{def:dead}). A total
+of 43 projects are dead according to the definition and their evolution data in
+the data set. However, further verification is needed to confirm that these
+projects are indeed dead.
 
-
+After manual verification with data from April 2014, we could confirm that 21
+of the 43 projects are indeed dead.
 
 \begin{comment}
 This chapter reports on the execution of the research method as described in Chapter 3.
