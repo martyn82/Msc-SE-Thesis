@@ -144,6 +144,10 @@ horizontal axis, and the frequency domain on the vertical axis. In the example
 of an audio wave, the frequency domain may represent the amplitude, or the
 frequency, and the time the duration of the amplitude or frequency value.
 
+\begin{center}
+\includegraphics[height=192pt]{figures/pink_audio.pdf}
+\end{center}
+
 However, the time domain is not specifically bound to time intervals only. A
 less intuitive, but realistic approach would be to model amplitude in the time
 domain. That way the frequency relation to amplitude of a signal can be
@@ -190,11 +194,11 @@ the signal of interest.
 A wavelet can be defined in the following ways, given that $T$ is the set of
 time values of the signal, and $F$ the set of frequency values of the signal.
 \begin{description}
-	\item[Wavelet function (mother wavelet)] \hfill \\ $\Psi: T \longrightarrow
+	\item[Wavelet function (mother wavelet)] \hfill \\ $\Psi: T \rightarrow
 	F$\\ $\Psi(t) = f$, such that $t \in T$ and $f \in F$.\\
 	This function maps $T$ onto $F$ and thus produces the shape of the wavelet.
 
-	\item[Scaling function (father wavelet)] \hfill \\ $\Phi: F \longrightarrow
+	\item[Scaling function (father wavelet)] \hfill \\ $\Phi: F \rightarrow
 	T$\\ $\Phi(f) = t$, such that $t \in T$ and $f \in F$.\\
 	This function maps $F$ onto $T$ and thus produces the scale of the wavelet.
 
