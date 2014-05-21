@@ -3,7 +3,7 @@
 \usepackage[square, numbers, comma]{natbib}
 \usepackage{nameref}
 \usepackage{url}
-\usepackage[singlelinecheck=false]{caption}
+\usepackage[singlelinecheck=false, skip=0pt, justification=centering]{caption}
 \usepackage{verbatim}
 %\usepackage[]{algorithm2e}
 
@@ -20,6 +20,12 @@
 }
 %% end Draft section
 
+%% Keep table resize here to make only tables inside the text smaller font
+\let\oldtabular\tabular
+\renewcommand{\tabular}{\footnotesize\oldtabular}
+\renewcommand{\thetable}{\Roman{table}}
+%% /Table
+
 \makeatletter
 \let\orgdescriptionlabel\descriptionlabel
 \renewcommand*{\descriptionlabel}[1]{%
@@ -35,6 +41,8 @@
 
 \renewcommand{\arraystretch}{1.5}
 \newcommand{\keywords}{\vspace{1cm}\noindent\bfseries{Keywords: }\rm}
+
+\renewcommand{\thefigure}{\Roman{figure}}
 
 % research hypothesis and questions
 \newcommand{\researchQuestion}{Can we use wavelet analysis to find objective
@@ -59,12 +67,6 @@ succeed or fail in detecting evolutionary events?}
 \begin{document}
 \maketitle
 
-%% Keep table resize here to make only tables inside the text smaller font
-\let\oldtabular\tabular
-\renewcommand{\tabular}{\footnotesize\oldtabular}
-\renewcommand{\thetable}{\Roman{table}}
-%% /Table
-
 \include{preface}
 
 \include{introduction}
@@ -79,10 +81,10 @@ succeed or fail in detecting evolutionary events?}
 
 %% appendices
 
-%\cleardoublepage
-%\listoffigures
-%\phantomsection
-%\addcontentsline{toc}{chapter}{\listfigurename}
+\cleardoublepage
+\listoffigures
+\phantomsection
+\addcontentsline{toc}{chapter}{\listfigurename}
 
 \cleardoublepage
 \listoftables
