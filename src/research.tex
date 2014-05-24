@@ -1,64 +1,82 @@
 \chapter{Research}
 \label{research}
 
-This chapter describes the execution of the research.
+\section{Data selection}
+\label{method:data}
+A total number of 250 OSS projects will be used for this study. This number is
+somewhat arbitrary, but was chosen to have a much larger data set than the
+initial study conducted by \citet{karus2013}, as we believe a larger data
+set yields more trustworthy results, and still keep the research feasible
+within the given time constraints of four months.
 
-\section{Data set}
-The data set of 250 projects was selected using the method described in section
-\ref{method:data}. It was conducted in the steps described in the following
-paragraphs.
+Several steps have been taken prior to the selection of this set of 250
+projects. The steps are described in the following sections.
 
-\subsection{Initial analysis, validation, and cleansing}
-The evolution data of a project is available as monthly data from Ohloh. The
-raw data of 12,360 projects was collected from Ohloh in July 2013 by
-\citet{bruntink2014} as part of his research. It was then analysed, validated,
-and cleansed accordingly by the tool \emph{OhlohAnalytics }\rm
-by \citet{ohlohanalytics}.
+\subsection{Data gathering}
+The data for this research is gathered from
+Ohloh\footnote{\url{http://www.ohloh.net}}: \emph{``Ohloh is a free, public
+directory of Free and Open Source Software and the contributors who create and
+maintain it.'' }\rm \cite{ohloh}. At the time of this writing, Ohloh tracks more
+than 660,000 OSS projects varying in all ranges of size, and popularity. The
+most popular projects currently being Apache HTTP Server, Apache OpenOffice,
+Apache Subversion, Bash, Firebug, Linux Kernel, Mozilla Firefox, MySQL, PHP,
+and Ubuntu.
 
-This step consists of the analysis, validation, and cleansing of the data by
-detecting inconsistent values and removing these records from the data set.
-Additional fields are derived from and added to the raw data for convenience.
+\paragraph{}
+For this research, we use the data provided by a tool by \citet{ohlohanalytics}.
+This tool, ``\emph{OhlohAnalytics}\rm'', was developed as part of the
+replicative research by \citet{bruntink2014}, and provides a validated and
+cleansed data set of 12,360 OSS projects, collected from Ohloh in July 2013.
 
-The complete list of data fields are shown in table \ref{table:fields}. The
-column 'Source' specifies if the field is either 'Raw' data (i.e., directly
-available from Ohloh), or if it is added by the OhlohAnalytics tool as derived
-from an operation on one or more other fields. In the latter case, the fields
-are listed. The 'lines of code' (LOC) metric is equal to the LOC metric used by
-Ohloh. This is the total number of source lines of code at the given time of
-analysis. These lines include all lines of source text for the project in any
-programming language, but excludes blank lines and comments.
+\subsection{Initial data validation and cleansing}
+The OhlohAnalytics tool by \citet{ohlohanalytics} did the initial analysis,
+validation, and cleansing of the data by detecting inconsistent values and
+removing these records from the data set. Additionally, extra data fields are
+derived or aggregated from and added to the raw data for convenience.
 
-The result of this step is a consistent data set of evolution data of 10,811
-projects.
+The complete list of data fields provided by OhlohAnalytics are shown in Table
+\ref{table:fields}. The column 'Source' specifies if the field is either 'Raw'
+data (i.e., directly available from Ohloh), or if it is added by the
+OhlohAnalytics tool as derived from an operation on one or more other fields.
+In the latter case, the fields are listed.
+
+The result of the data gathering and cleansing step is a consistent data set of
+evolution data of 10,811 projects.
 
 \input{tables/table_data_fields}
 
 \subsection{Subsequent data series}
+Although the data set should be consistent after validation and cleansing, we 
+need another validation step prior to the selection of the 250 projects for the
+study.
+
 The evolution data of the 10,811 projects contained gaps. We expect a
 subsequent series of data is necessary to be able to analyse time series for a
-project. Therefore, a number representing the fraction of continuity of the
-data was needed. For each project the difference between the minimum and
-maximum values of the $age\_in\_months$ fact is taken, added by one, giving us
-the expected number of data points for a project. The calculation of the
-fraction of total evolution data is done for each project.
+project. Therefore, a number representing the \emph{fraction of continuity }\rm
+of the evolution data per project was needed. For each project the difference
+between the minimum and maximum values of the $age\_in\_months$ fact is taken,
+added by one, giving us the expected number of data points for a project. The
+calculation of the fraction of total evolution data is done for each project.
 
-After the fractions of the total evolution data for each project are caculated,
-we can filter these projects and keep only the projects that have all data points
-between minimum and maximum $age\_in\_months$. From the set of 10,811 projects,
-a total number of 6,418 projects is left.
+After the fractions of the total evolution data for each project were caculated,
+these projects were filtered and only the projects that have all data points
+between minimum and maximum $age\_in\_months$ are kept. From the set of 10,811
+projects, a total number of 6,418 projects is left.
 
 \subsection{Minimal sequence length}
-As a final step in validating and cleaning the master data set, we will be
-keeping only the projects that have at least 12 data points (i.e., have a
-subsequent evolution period of at least 1 year).
+A time series of 1 (monthly) data point is obviously not analysable over time
+and uncomparable to larger projects. The threshold of at least 12 monthly data
+points is chosen to minimise noise in the evolution data that may be caused by
+too young or unstable projects.
 
 After this selection, a set of 5,986 projects is left.
 
-\subsection{Sample selection}
+\subsection{Representativeness}
 For the selection of a sample of 250 projects, we use the tool created by
-\citet{nagappan}. This tool takes a, possibly atomic, sample set and selects
-additional projects to add to the sample that increase the overall
-representativeness of that sample.
+\citet{nagappan} at Microsoft Research. This tool takes a, possibly atomic,
+sample set and selects additional projects to add to the sample that increase
+the overall representativeness of that sample. The tool scores projects by two
+metrics: total lines of code, and yearly contributors count.
 
 The tool iteratively selects 250 projects and adds it to the sample. Each
 additional project is selected by its score to maximally increase the
@@ -73,19 +91,24 @@ subset, a sample of 250 projects was selected.
 The resulting sample of 250 projects was scored against the initial master data
 of 20,028 projects and scores a 99.5\% representativeness.
 
+\subsection{Results of data selection}
+The results of the Data selection phase of the study are the following: the
+evolution data of 250 distinct projects having a total of 22,943 data points.
+The biggest project having 321 monthly data points, the smallest having 14
+monthly data points. This confirms that there are no projects with less
+than 12 monthly data points.
+
+
+\section{Wavelet transform and analysis}
+\label{method:dwt}
+
+The evolution of the 250 projects are modeled as signals as input for the
+wavelet analysis. We have constructed project signals by modeling
+$age\_in\_months$ in the time domain, and $loc\_fact$ in the frequency domain.
+The expectation is that we are measuring project's code activity over time and
+therefore should be able to detect patterns in the code activity.
+
 \paragraph{}
-The evolution data of 250 distinct projects make a total of 22,943 data points.
-The biggest project having 321 data points, the smallest having 14 data points.
-
-\section{Analysis}
-
-The 250 projects are analysed by selecting time series (signals) of their
-evolution data. In this research, analysis is done on modeling $age\_in\_months$
-on the time domain, and $loc\_fact$ on the frequency domain. The signals per
-project represent the value of the 'lines of code' at a given 'age in months'.
-
-\subsection{Wavelet transform and analysis}
-
 For the wavelet transform and analysis, we have used R Statistics Suite
 with packages ``wavelets'', ``chron'' and ``zoo''. The Wavelets package
 contains an implementation of discrete wavelet transform functions, including
@@ -96,28 +119,62 @@ The Haar filter is used by \citet{karus2013} in his research because of its
 simplicity and ease of interpretation. As this study is a replication of
 \citeauthor{karus2013}' study, the choice of using the Haar filter was made.
 
-The R scripts used for these three steps are based on the scripts created and
-used by \citeauthor{karus2013} in the initial research. Small adjustments have
-been made to make them compatible with our data set.
+\paragraph{}
+The R scripts used for the steps of wavelet transform, sequence identification,
+and grouping, are based on the scripts created and used by
+\citeauthor{karus2013} in the initial research. Small adjustments have been
+made to make them compatible with our data set.
 
-\subsubsection{Wavelet transform}
-Each project's signal is separately transformed using discrete wavelet
-transform. The results of the transforms are saved per project. This is the raw
-data after decomposing signals and is saved for further analysis.
+\subsection{Wavelet transform}
+The first step in the analysis of time series of software evolution is the
+wavelet transform. During this step discrete wavelet transform using the Haar
+filter is applied on a project's signal. The results comprise the coefficients
+at each level of decomposition which are saved for further analysis. For more
+details on this analysis method see section \ref{wavelet_analysis}.
 
-\subsubsection{Similar sequence identification}
+\subsection{Similar sequence identification}
+During this step the coefficients from the wavelet transform step are
+analysed to find \emph{similar sequences}\rm. A sequence is defined as a
+subsequent series of coefficients - at a particular level of decomposition -
+with a length between 3 and 65 points.
+These thresholds were chosen to distinguish a sequence from an ordinary pair of
+coefficients if the sequence is very short. On the contrary, if a sequence is
+very long (larger than 65 points) we need to be able to distinguish the
+sequence from the complete signal.
+
+The 'points' mentioned here are not the same as data points in the data set.
+The data points represent monthly data from a project, and the points in
+sequences represent coefficients found at a certain level of decomposition
+during the wavelet transform. More specifically, these 'points' are scaled or
+filtered data points.
+
+A sequence is considered 'similar' if at least one other sequence was found of
+which the values are equal with respect to an allowed deviation. Similar
+sequences may be found within one project, but preferrably be found across
+projects.
+
+\paragraph{}
 The similar sequence identification found 1,669,448 sequences that occurred
 at least 2 times in the data. Only 16 sequences were found using wavelet/shift
 coefficients, the other 1,669,432 sequences were found using filter/scale
 coefficients. This is expected as filter coefficients are better than wavelet
 coefficients at finding small changes in signals.
 
-\subsubsection{Similar sequence grouping}
-The last step in the analysis of the found sequences aggregates and groups the
-sequences together and keeps only the patterns (i.e., 'popular' sequences). As
-mentioned, a sequence is considered a pattern if it appears at least 3 times in
-the data.
+\subsection{Similar sequence grouping}
+\label{def:pattern}
+In this step, the similar sequences from previous step are taken as input to
+find 'patterns'.
 
+A sequence is considered a 'pattern' if it appears at least 3 times in the
+sequence data. Each pattern instance is assigned an identification number to be
+used in further analysis.
+
+The sequences that form a pattern instance are grouped together and added meta
+data, such as, the number of occurrances, the list of projects having the
+sequence, and whether it appears in dead, alive, or both dead and alive
+projects.
+
+\subsection{Results of wavelet analysis}
 The results of this step revealed a total of 16,049 patterns in the projects.
 All the patterns were found in the sequences resulting from using filter
 coefficients, and 0 in those from using wavelet coefficients. The sequences
@@ -125,19 +182,28 @@ occurred at least 4 times, and at most 1,511 times. They occur in at least 1
 and at most 204 projects. Their lengths differ between 4 points and 19 points
 across various decomposition levels (levels of detail).
 
-\section{Finding warning signs}
-\subsection{Dead projects}
-In the search to find patterns that are warning signs leading to the end of code
-evolution, we first extract from our initial 250 projects the projects that
-satisfy the definition of a dead project (see: section \ref{def:dead}). A total
-of 43 projects are dead according to the definition and their evolution data in
-the data set. However, further verification is needed to confirm that these
-projects are indeed dead.
+\section{Pattern identification}
+\subsection{Dead project identification}
+In the search to find patterns that are warning signs leading to the end of
+code evolution, we first extract from our initial 250 projects the projects
+that satisfy the definition of a dead project (see also section \ref{def:dead}).
+A total of 43 projects are dead according to the definition and their evolution
+data in the data set. However, further verification is needed to confirm that
+these projects are indeed dead.
 
 After manual verification with data from April 2014, we could confirm that 21
 of the 43 projects are indeed dead.
 
+\subsection{Pattern selection}
+Having the subset of dead projects, all patterns appearing in dead projects
+will be selected for further analysis. Then, a selection will be made for all
+projects having a pattern appearing in dead projects. This selection of
+projects where dead-project-patterns occur may show warning signs.
+
 \begin{comment}
+- Execution of the research
+- Phases, steps
+
 This chapter reports on the execution of the research method as described in Chapter 3.
 
 If the research has been divided into phases (e.g., using sub questions) the

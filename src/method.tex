@@ -1,145 +1,65 @@
 \chapter{Research method}
 \label{method}
 
-This chapter elaborates on the steps to be taken in order to answer the
-research questions. A description of each of the phases of the research is
-given.
+\section{Research approach}
+The research will be conducted in the following steps:
+\begin{description}
+	\item[Literature study.] As part of the research plan, relevant literature will
+	be studied in order to get familiar with the topics touched by this
+	study. Important topics are, the ecosystem of OSS organisation and community,
+	and the success and survival factors of OSS projects. Literature regarding
+	wavelets, wavelet transforms and analysis, and in particular the Haar wavelet
+	will be studied to understand its workings. The results of this study are
+	provided as background material in chapter \ref{background}.
+	
+	\item[Data selection.] In the next step, the OSS projects for the study will be
+	selected. The evolution data of these OSS projects will be validated and
+	cleansed to ensure all data for these projects is consistent.
+	
+	Further evaluation of the data should be done prior to the selection of the
+	data set for the study. It is expected that not all data is suitable for
+	analysis.
+	
+	An important criterion for the data is that the evolution data for each project
+	is continuous, in the sense that it does not contain 'gaps'. Analysis on time
+	series requires subsequent series of data.
+	
+	The data set for analysis should also be representative to the total set of
+	OSS projects in order to be able to generalise conclusions from the
+	projects within the data set to the world of OSS projects in general.
+	
+	\item[Wavelet analysis.] This step is divided into two sub-steps: wavelet
+	transform, and wavelet analysis.
+	
+	First, the evolution data of the selected projects will be transformed using
+	discrete wavelet transform (DWT). The results of these transforms are kept for
+	further analysis. Important here is the choice of signal. The signal is a model
+	of a time variable and a frequency variable, and is also known as a 'wave'. The
+	signal can be composed of any measurable property of a project's evolution, such as
+	'lines of code' (LOC).
+	
+	Second, the results of the transforms are being analysed to find patterns. A
+	pattern is a sequence of transformed data that occurs multiple times. To be
+	able to find patterns, we need to define in detail when a sequence is a
+	pattern. Choosing what recurrent in terms of number of occurrances will highly
+	influence the number of patterns found and possibly influence the types
+	of patterns we are able to detect. The same counts for the allowed error or
+	deviation in similarity for patterns.
+	
+	\item[Pattern identification.] The patterns found in the Wavelet analysis step
+	will be further analysed to find patterns that are 'warning signs'. This is a
+	pattern that leads to the 'end of code evolution' for a project (recall
+	\ref{itm:question_warningsigns}). The validation needed in this step is
+	described in section \ref{method:validation}.
+	
+	\item[Conclude.] The final phase in the study is the analysis of the results to
+	come to conlusions and answers to the research questions (section
+	\ref{questions}).
+\end{description}
 
-\section{Data selection}
-\label{method:data}
-
-The data for this research is provided by a tool by \citet{ohlohanalytics}.
-This tool, ``\emph{OhlohAnalytics}\rm'', was developed as part of the
-replicative research by \citet{bruntink2014}, and provides a validated and
-cleansed data set of more than 10,000 OSS projects.
-
-The projects are tracked by and gathered from
-Ohloh\footnote{\url{http://www.ohloh.net}}: \emph{``Ohloh is a free, public
-directory of Free and Open Source Software and the contributors who create and
-maintain it.'' }\rm \cite{ohloh}.
-
-At the time of this writing, Ohloh tracks more than 660,000 OSS projects varying
-in all ranges of size, and popularity. The most popular projects currently being
-Apache HTTP Server, Apache OpenOffice, Apache Subversion, Bash, Firebug, Linux
-Kernel, Mozilla Firefox, MySQL, PHP, and Ubuntu.
-
-\subsection{Data validation and cleansing}
-The OhlohAnalytics tool provides us with an initial data set of more than
-10,000 OSS projects \cite{bruntink2014}. The raw data gathered from Ohloh
-regularly contains errors and inconsistencies. This tool analyses the
-consistency of the data and cleanses the data where needed. This results in a
-consistent data set of project evolution data.
-
-
-
-\subsection{Project selection criteria}
-
-From the initial 10,000+ projects of which the evolution data is consistent, a
-subset of 250 projects will be made. \citet{karus2013} used a data set of 27
-projects to perform his wavelet analysis research. We believe a larger
-data set will yield more trustworthy results. The number 250 is a somewhat
-arbitrary number, but chosen to have a substantial larger set than the initial
-study by \citeauthor{karus2013}, but still keep it feasible to analyse and
-validate the data and results within the given time constraints of 4 months for
-this thesis.
-
-\subsubsection{Subsequent data series}
-Prior to the selection of the projects for the study, another validation
-step is needed. Although the set of 10,000+ projects' evolution data is
-consistent, probably not all of it is suited for wavelet analysis.
-
-To be able to perform wavelet analysis on a series of data, we need to have
-a subsequent series (i.e., without gaps) of evolution data for each project
-under study. Therefore, all the 10,000+ projects will be analysed for continuity
-and the projects that show gaps in the data are removed from the data set.
-
-\subsubsection{Minimal sequence length}
-A time series of 1 (monthly) data point is obviously not analysable over time
-and uncomparable to larger projects. The threshold of at least 12 monthly data
-points is chosen to minimise noise in the evolution data that may be caused by
-too young or unstable projects.
-
-\subsubsection{Representativeness}
-Another criterion for the selection of projects in the data set is that they
-form a subset that is representative to the set of all OSS projects tracked by
-Ohloh. A tool created by \citet{nagappan} at Microsoft Research that is able
-to determine the representativeness of a subset of projects will be used. This
-tool scores projects by two metrics: total lines of code, and yearly
-contributors count.
-
-The tool by \citet{nagappan} is also capable of selecting a sample based on a
-given baseline project and a total subset size. It keeps adding projects to the
-subset as long as the project added will increase the total representativeness
-of the sample subset to a given 'universe' of projects. We will use this tool
-to select and score the sample subset of 250 projects using the Ohloh projects
-as universe.
-
-
-
-\section{Wavelet transform and analysis}
-The analysis of the projects under study will be conducted in two main steps:
-Wavelet transform, and Wavelet analysis. The second step is subdivided into two
-smaller steps: Similar sequence identification, and Similar sequence grouping.
-
-\subsection{Wavelet transform}
-The first step in the analysis of time series of software evolution is the
-wavelet transform. During this step discrete wavelet transform using the Haar
-filter is applied on a project's signal (see also section
-\ref{wavelet_analysis}). The results comprise the coefficients at each level of
-decomposition and are saved for analysis.
-
-\subsection{Wavelet analysis}
-The wavelet analysis step is split into two sub-steps which will be described in
-the following two subsections.
-
-\subsubsection{Similar sequence identification}
-During this step the coefficients from the wavelet transform step are
-analysed to find \emph{similar sequences}\rm. A sequence is defined as a
-subsequent series of coefficients - at a particular level of decomposition -
-with a length between 3 and 65 points.
-These thresholds were chosen to distinguish a sequence from an ordinary pair of
-coefficients if the sequence is very short. On the contrary, if a sequence is
-very long (larger than 65 points) we need to be able to distinguish the
-sequence from the complete signal.
-
-The 'points' mentioned here are not the same as data points in the data set.
-The data points represent monthly data from a project, and the points in
-sequences represent coefficients found at a certain level of decomposition
-during the wavelet transform. More specifically, these 'points' are scaled or
-filtered data points.
-
-A sequence is considered 'similar' if at least one other sequence was found of
-which the values are equal with respect to an allowed deviation. Similar
-sequences may be found within one project, but preferrably be found across
-projects.
-
-\subsubsection{Similar sequence grouping}
-In this step, the similar sequences from previous step are taken as input to
-find 'patterns'.
-
-A sequence is considered a 'pattern' if it appears at least 3 times in the
-sequence data. Each pattern instance is assigned an identification number to be
-used in further analysis.
-
-The sequences that form a pattern instance are grouped together and added meta
-data, such as, the number of occurrances, the list of projects having the
-sequence, and whether it appears in dead, alive, or both dead and alive
-projects.
-
-
-
-\section{Pattern analysis}
-In this phase of the research, the patterns will be analysed. The patterns found
-in the previous phase will be validated mostly manually, in search of patterns
-that are an objective warning sign [\ref{itm:question_warningsigns}].
-
-\subsection{Warning signs}
-A 'warning sign' is defined as a pattern found in a signal of a project's
-evolution data (such as the value of the 'lines of code' metric over time), that
-significantly increases the chances for that project to die (i.e., to end the
-code evolution for that project).
-
-\subsubsection{Definition of dead}
+\section{Validation}
+\label{method:validation}
+\subsection{Dead projects}
 \label{def:dead}
 A project is considered 'dead' if it complies to the following properties:
 \begin{itemize}
@@ -158,22 +78,23 @@ library updates, and other non-code changes are still allowed for dead
 projects.
 
 To compare dead and alive projects from the data set, we can use the above
-definition to identify the projects from the data set that are dead, and the
-other projects are still alive by definition.
+definition to identify the projects from the data set that are dead. The
+projects that are not 'dead' by this definition are considered to be 'alive'.
 
-\subsubsection{Dead project validation}
+\subsection{Dead project validation}
 To be sure that the projects from our data set that comply to the definition of
-dead are indeed dead, manual validation of these findings have to be done.
-In verifying if a project is dead, we will consult the project's page on the
-Ohloh website to see if the most recent data still complies to the definition of
-dead. Furthermore, we will lookup the project's website and its repository to
-find the latest commit history.
-
-\subsection{Pattern selection}
-Having the list of dead projects all patterns appearing in dead projects will be
-selected for further analysis.
+dead (section \ref{def:dead}) are indeed dead, manual validation of these
+findings have to be done.
+In verifying if a project is dead, we will manually consult the project's
+website, its source code repository, and possibly other sources to verify the
+properties of a 'dead' project.
 
 \begin{comment}
+- The plan
+- Methodology / method per question
+- Hypotheses
+- Validation
+
 This section describes the methods used to answer the research questions. A
 good structure of this section often follows the sub questions by providing a
 method for each.
