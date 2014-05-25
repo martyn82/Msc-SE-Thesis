@@ -164,16 +164,18 @@ coefficients at finding small changes in signals.
 
 \subsubsection{Similar sequence grouping}
 \label{def:pattern}
-In this step, the similar sequences from previous step are taken as input to
-find 'patterns'.
+Not all of the sequences found in the previous step are interesting. Many of
+these sequences are just small changes in the signal. In this step, the similar
+sequences from previous step are taken as input to find 'patterns'.
 
+\paragraph{}
 A sequence is considered a 'pattern' if it appears at least 3 times in the
-sequence data. Each pattern instance is assigned an identification number to be
-used in further analysis.
+sequence data. Each pattern is assigned an identification number to be used in
+further analysis.
 
-The sequences that form a pattern instance are grouped together and added meta
-data, such as, the number of occurrances, the list of projects having the
-sequence, and whether it appears in dead, alive, or both dead and alive
+The sequences that are instances of the same pattern are grouped together and
+added meta data, such as the number of occurrances, the list of projects
+it occurs, and whether it appears in dead, alive, or both dead and alive
 projects.
 
 \subsection{Results}
@@ -193,14 +195,45 @@ A total of 43 projects are dead according to the definition and their evolution
 data in the data set. However, further verification is needed to confirm that
 these projects are indeed dead.
 
-After manual verification with data from April 2014, we could confirm that 21
-of the 43 projects are indeed dead.
+\paragraph{}
+Our data set contains data points up to June 2013. After manual verification of
+the 'dead' projects with data up to April 2014, we could confirm that 21 of the
+43 projects have had no code activity in the period between June 2012 and
+April 2014. This data is acquired by consulting the project's websites, source
+code repositories and commit history, and the data available at Ohloh.
 
-\subsection{Pattern selection}
-Having the subset of dead projects, all patterns appearing in dead projects
-will be selected for further analysis. Then, a selection will be made for all
-projects having a pattern appearing in dead projects. This selection of
-projects where dead-project-patterns occur may show warning signs.
+\subsection{Patterns in dead projects}
+Given this set of 21 dead projects, we can select all patterns occurring in
+these dead projects. Patterns occurring in dead projects can be hints of
+evolutionary events that lead to the death of a project.
+
+A total number of 967 patterns were found across dead projects. The patterns
+do not occur at the same moment in the lifetime of the projects. Therefore, we
+have introduced different types of patterns for dead projects:
+
+\begin{description}
+	\item[Type A.] Type A patterns strictly occur at the end of the evolution data
+		of a dead project. More formaly, if a dead project $P$ starts at point $x$ and
+		ends at point $y$, the pattern starts at $x'$ and ends at $y$. In our data
+		set, the maximum date $y$ of $P$ is June 2013.
+	
+	\item[Type B.] Type B patterns strictly \emph{do not }\rm occur at the end of
+		evolution data of a dead project, but anywhere else in the lifetime of a dead
+		project.
+	
+	\item[Type AB.] Type AB patterns are patterns that behave like both types A and
+		B patterns.
+\end{description}
+
+\noindent
+In the search for patterns that are warning signs, we are mostly interested in
+patterns of Type A, because these patterns could indicate an evolutionary event
+that lead to the end of code evolution for the dead projects it appears in.
+
+\subsection{Results}
+From the 967 patterns that were found across 21 dead projects, 25 of these
+patterns are type A patterns, 317 of type B, and 625 of type AB.
+
 
 \begin{comment}
 - Execution of the research
