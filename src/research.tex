@@ -28,7 +28,7 @@ This tool, ``\emph{OhlohAnalytics}\rm'', was developed as part of the
 replicative research by \citet{bruntink2014}, and provides a validated and
 cleansed data set of 12,360 OSS projects, collected from Ohloh in July 2013.
 
-\subsection{Initial data validation and cleansing}
+\subsubsection{Initial validation and cleansing}
 The OhlohAnalytics tool by \citet{ohlohanalytics} did the initial analysis,
 validation, and cleansing of the data by detecting inconsistent values and
 removing these records from the data set. Additionally, extra data fields are
@@ -45,7 +45,8 @@ evolution data of 10,811 projects.
 
 \input{tables/table_data_fields}
 
-\subsection{Subsequent data series}
+\subsection{Data validation}
+\subsubsection{Subsequent data series}
 Although the data set should be consistent after validation and cleansing, we 
 need another validation step prior to the selection of the 250 projects for the
 study.
@@ -63,7 +64,7 @@ these projects were filtered and only the projects that have all data points
 between minimum and maximum $age\_in\_months$ are kept. From the set of 10,811
 projects, a total number of 6,418 projects is left.
 
-\subsection{Minimal sequence length}
+\subsubsection{Minimal sequence length}
 A time series of 1 (monthly) data point is obviously not analysable over time
 and uncomparable to larger projects. The threshold of at least 12 monthly data
 points is chosen to minimise noise in the evolution data that may be caused by
@@ -71,7 +72,7 @@ too young or unstable projects.
 
 After this selection, a set of 5,986 projects is left.
 
-\subsection{Representativeness}
+\subsubsection{Representativeness}
 For the selection of a sample of 250 projects, we use the tool created by
 \citet{nagappan} at Microsoft Research. This tool takes a, possibly atomic,
 sample set and selects additional projects to add to the sample that increase
@@ -91,7 +92,7 @@ subset, a sample of 250 projects was selected.
 The resulting sample of 250 projects was scored against the initial master data
 of 20,028 projects and scores a 99.5\% representativeness.
 
-\subsection{Results of data selection}
+\subsection{Results}
 The results of the Data selection phase of the study are the following: the
 evolution data of 250 distinct projects having a total of 22,943 data points.
 The biggest project having 321 monthly data points, the smallest having 14
@@ -132,7 +133,8 @@ filter is applied on a project's signal. The results comprise the coefficients
 at each level of decomposition which are saved for further analysis. For more
 details on this analysis method see section \ref{wavelet_analysis}.
 
-\subsection{Similar sequence identification}
+\subsection{Wavelet analysis}
+\subsubsection{Similar sequence identification}
 During this step the coefficients from the wavelet transform step are
 analysed to find \emph{similar sequences}\rm. A sequence is defined as a
 subsequent series of coefficients - at a particular level of decomposition -
@@ -160,7 +162,7 @@ coefficients, the other 1,669,432 sequences were found using filter/scale
 coefficients. This is expected as filter coefficients are better than wavelet
 coefficients at finding small changes in signals.
 
-\subsection{Similar sequence grouping}
+\subsubsection{Similar sequence grouping}
 \label{def:pattern}
 In this step, the similar sequences from previous step are taken as input to
 find 'patterns'.
@@ -174,7 +176,7 @@ data, such as, the number of occurrances, the list of projects having the
 sequence, and whether it appears in dead, alive, or both dead and alive
 projects.
 
-\subsection{Results of wavelet analysis}
+\subsection{Results}
 The results of this step revealed a total of 16,049 patterns in the projects.
 All the patterns were found in the sequences resulting from using filter
 coefficients, and 0 in those from using wavelet coefficients. The sequences
