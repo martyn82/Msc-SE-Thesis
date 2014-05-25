@@ -59,8 +59,12 @@
 \newcommand{\coverpic}[2][.9\textwidth]{\renewcommand{\uvapic}{\centerline{\includegraphics[width=#1]{#2}}}}
 
 \newcommand{\uvaabstract}{}
-\renewcommand{\abstract}[2][Abstract]{\renewcommand{\uvaabstract}{\chapter*{#1}\addcontentsline{toc}{chapter}{#1}%
-	\par#2\newpage}
+\renewcommand{\abstract}[2][Abstract]{
+	\renewcommand{\uvaabstract}{\chapter*{#1}\addcontentsline{toc}{chapter}{#1}\par#2\newpage}
+}
+\newcommand{\uvapreface}{}
+\newcommand{\preface}[2][Preface]{
+	\renewcommand{\uvapreface}{\chapter*{#1}\addcontentsline{toc}{chapter}{#1}\par#2\newpage}
 }
 
 %% Listing environment
@@ -84,13 +88,15 @@
 	\colorbox[gray]{0.92}{\usebox{\@tempboxa}}
 }
 %% end of Listing environment
-
+\newcommand{\uvacolofon}{}
+\newcommand{\colofon}{\renewcommand{\uvacolofon}{}}
 \newcommand{\revisionhistory}{\newpage}
-
 \newcommand{\uvacoverfoot}{%
+	\let\orgarraystretch\arraystretch
+	\renewcommand{\arraystretch}{1.2}
 	\begin{center}
 	\begin{tabular}{ r | l }
-		\multirow{3}{*}{\includegraphics[height=48pt]{figures/uva.pdf}}
+		\multirow{3}{*}[0.1cm]{\includegraphics[height=48pt]{figures/uva.pdf}}
 			& \textsc{\Large Universiteit van Amsterdam}\\
 			& \textsc{Faculteit der Natuurwetenschappen, Wiskunde en Informatica}\\
 			& \textsc{Master Software Engineering}\\
@@ -98,6 +104,7 @@
 		% Supervisor: Prof Dr P. Klint
 	\end{tabular}
 	\end{center}
+	\renewcommand{\arraystretch}{\orgarraystretch}
 }
 \newcommand{\hostlogo}{%
 	\vfill
@@ -114,6 +121,7 @@
 	\renewcommand{\thefootnote}{\fnsymbol{footnote}}
 	% Will be page 0, s.t. contents start on page 1
 	\setcounter{page}{0}
+	\pagenumbering{roman}
 	% \eccoverhead
 	% Volume and article title, author(s)
 	\vspace{60pt}
@@ -129,17 +137,27 @@
 		\uvadate, \pageref*{lastpage} pages
 	\end{center}
 	\vfill
+	\begin{center}
 	\begin{tabular}{ll}
 		\textbf{Supervisors:} 			& \uvasuper \\[0.3cm]
 		\textbf{Host organisation:}		& \uvahost \\[0.3cm]
 		\textbf{Publication status:}	& \uvastatus
 	\end{tabular}
+	\end{center}
 	\hostlogo
 	\uvacoverfoot
+	
+	\include{copyright}
+
 	\revisionhistory
-	\tableofcontents
-	\newpage
 	\uvaabstract
+	\uvapreface
+	\setcounter{page}{1}
+	\pagenumbering{arabic}
+
+	\tableofcontents
+	\cleardoublepage
+
 	\global\@topnum\z@ % To prevent floats above the title
 	\setcounter{footnote}{0}
 	\renewcommand{\thefootnote}{\arabic{footnote}}
