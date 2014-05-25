@@ -13,7 +13,7 @@
 
 \usepackage[square, numbers, comma]{natbib}
 \usepackage[singlelinecheck=false, skip=0pt, justification=centering]{caption}
-\usepackage{multicol, nameref, url, verbatim}
+\usepackage{chngcntr, multicol, nameref, url, verbatim, wrapfig}
 %\usepackage[]{algorithm2e}
 
 \ifisdraft
@@ -31,12 +31,18 @@
 	%% end Draft section
 \fi
 
+%% Table setup
+\counterwithout{table}{chapter}
 \let\oldtabular\tabular
 \renewcommand{\tabular}{\footnotesize\oldtabular}
 \renewcommand{\thetable}{\Roman{table}}
 \renewcommand{\arraystretch}{1.5}
+
+%% Figure setup
+\counterwithout{figure}{chapter}
 \renewcommand{\thefigure}{\Roman{figure}}
 
+%% Title setup
 \makeatletter
 \let\orgdescriptionlabel\descriptionlabel
 \renewcommand*{\descriptionlabel}[1]{%
@@ -50,9 +56,10 @@
 }
 \makeatother
 
+%% Keywords setup
 \newcommand{\keywords}{\vspace{1cm}\noindent\bfseries{Keywords: }\rm}
 
-% research hypothesis and questions
+%% Research questions setup
 \newcommand{\researchQuestion}{Can we use wavelet analysis to find objective
 warning signs in open-source software projects leading to the end of code
 evolution?}
@@ -60,7 +67,7 @@ evolution?}
 \newcommand{\subQuestionTwo}{Under what conditions does wavelet analysis
 succeed or fail in detecting evolutionary events?}
 
-% title section
+%% Title section
 \title{Automatic Means of Detecting Warning Signs in Software Evolution}
 \author{ing. Martijn Endenburg}
 \authemail{martijn.endenburg@gmail.com}
