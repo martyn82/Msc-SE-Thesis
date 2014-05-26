@@ -100,20 +100,32 @@ monthly data points. This confirms that there are no projects with less
 than 12 monthly data points.
 
 \section{Wavelet transform and analysis}
-\label{method:dwt}
-
+\subsection{Project signals}
 The evolution of the 250 projects are modeled as signals as input for the
-wavelet analysis. We have constructed project signals by modeling
-$age\_in\_months$ in the time domain, and $loc\_fact$ in the frequency domain.
-The expectation is that we are measuring project's code activity over time and
-therefore should be able to detect patterns in the code activity.
+wavelet transform and analysis. We have constructed project signals by modeling
+$age\_in\_months$ in the time domain, and $LOC$ in the frequency domain. Figure
+\ref{figure:signal} shows a project's signal.
+
+\begin{figure}[h]
+\caption{LOC signal of project ID 19012}\label{figure:signal}
+\centering
+	\includegraphics[height=192pt]{figures/signal_pid_19012.pdf}
+\end{figure}
+
+\paragraph{}
+The $LOC$ we used in the transform and analysis is slightly different from the
+$loc\_fact$ that exists in the data set. The goal for the signal processing is
+that we are able to detect patterns in a project's code activity. This means we
+are interested in all changes that occur in source files. Therefore, we took
+the same metric as in the original study by \citet{karus2013}. The $LOC$ metric
+is constructed as the sum of $loc\_fact$, $comments\_fact$, and $blanks\_fact$.
 
 \paragraph{}
 For the wavelet transform and analysis, we have used R Statistics Suite
 with packages ``wavelets'', ``chron'' and ``zoo''. The Wavelets package
-contains an implementation of discrete wavelet transform functions, including
-the Haar filter; Chron contains functions for working with chronological data
-series; and Zoo eases indexing and working with indexed of data.
+contains a implementations of discrete wavelet transform functions, including
+the Haar filter; Chron provides functions for working with chronological data
+series; and Zoo eases indexing of and working with indexed data.
 
 The Haar filter is used by \citet{karus2013} in his research because of its
 simplicity and ease of interpretation. As this study is a replication of
@@ -123,43 +135,43 @@ simplicity and ease of interpretation. As this study is a replication of
 The R scripts used for the steps of wavelet transform, sequence identification,
 and grouping, are based on the scripts created and used by
 \citeauthor{karus2013} in the initial research. Small adjustments have been
-made to make them compatible with our data set.
+made to make the scripts compatible with our data set.
 
 \subsection{Wavelet transform}
 The first step in the analysis of time series of software evolution is the
 wavelet transform. During this step discrete wavelet transform using the Haar
-filter is applied on a project's signal. The results comprise the coefficients
-at each level of decomposition which are saved for further analysis. For more
-details on this analysis method see section \ref{wavelet_analysis}.
+filter is applied on a project's signal. The results comprise the
+coefficients\footnote{The coefficients are not the same as points in the
+data set. The data points represent monthly facts from a project, and the
+coefficients in sequences represent values found at a certain level of
+decomposition from the wavelet transform. More specifically: the coefficients
+are values resulted from shifting or filtering the signal.} at each level of
+decomposition which are saved for further analysis. For more details on this
+analysis method see section \ref{wavelet_analysis}.
 
 \subsection{Wavelet analysis}
 \subsubsection{Similar sequence identification}
-During this step the coefficients from the wavelet transform step are
+During this step the resulting coefficients from the wavelet transform are
 analysed to find \emph{similar sequences}\rm. A sequence is defined as a
-subsequent series of coefficients - at a particular level of decomposition -
-with a length between 3 and 65 points.
-These thresholds were chosen to distinguish a sequence from an ordinary pair of
-coefficients if the sequence is very short. On the contrary, if a sequence is
-very long (larger than 65 points) we need to be able to distinguish the
-sequence from the complete signal.
+subsequent series of coefficients, at a particular level of decomposition, with
+a sequence length between 3 and 65 (inclusive) coefficients.
 
-The 'points' mentioned here are not the same as data points in the data set.
-The data points represent monthly data from a project, and the points in
-sequences represent coefficients found at a certain level of decomposition
-during the wavelet transform. More specifically, these 'points' are scaled or
-filtered data points.
+The thresholds were chosen by \citet{karus2013} in the original study to
+distinguish a sequence from an ordinary set of coefficients if the sequence is
+very short (length 1 or 2). On the contrary, if a sequence is larger than 65 we
+have to be able to distinguish the sequence from the complete signal.
 
 A sequence is considered 'similar' if at least one other sequence was found of
-which the values are equal with respect to an allowed deviation. Similar
-sequences may be found within one project, but preferrably be found across
-projects.
+which the values of the coefficients are equal with respect to an allowed
+deviation. Similar sequences may be found within one project, but preferrably be
+found across projects.
 
 \paragraph{}
 The similar sequence identification found 1,669,448 sequences that occurred
 at least 2 times in the data. Only 16 sequences were found using wavelet/shift
 coefficients, the other 1,669,432 sequences were found using filter/scale
-coefficients. This is expected as filter coefficients are better than wavelet
-coefficients at finding small changes in signals.
+coefficients. This is expected as scaling is better than shifting at finding
+small coefficients.
 
 \subsubsection{Similar sequence grouping}
 \label{def:pattern}
@@ -228,8 +240,10 @@ have introduced different types of patterns for dead projects:
 \end{description}
 
 \noindent
+The above types partition the patterns into three disjunctive sets.
+
 In the search for patterns that are warning signs, we are mostly interested in
-patterns of Type A, because these patterns could indicate an evolutionary event
+patterns of type A, because these patterns could indicate an evolutionary event
 that lead to the end of code evolution for the dead projects it appears in.
 
 \subsection{Results}
