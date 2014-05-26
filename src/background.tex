@@ -145,11 +145,7 @@ of an audio wave (see Figure \ref{figure:wave}), the frequency domain may
 represent the amplitude, or the frequency, and the time the duration of the
 amplitude or frequency value.
 
-\begin{figure}[h]
-\caption{Example of an audio wave}\label{figure:wave}
-\centering
-	\includegraphics[height=192pt]{figures/pink_audio.pdf}
-\end{figure}
+\input{figures/wave}
 
 However, the time domain is not specifically bound to time intervals only. A
 less intuitive, but realistic approach would be to model amplitude in the time
@@ -159,22 +155,34 @@ analysed, but the time information is lost.
 \subsection{Discrete wavelet transformation}
 To be able to analyse and compare different wavelets, we need a way to scale
 the signal. Discrete wavelet transformation is the operation of applying a
-filter function, or set of filter functions (i.e., filter bank) to the wavelet.
-This is a way of sampling the signal at different intervals giving a natural
-means of scaling the signal \cite{karus2013}.
+filter function (also known as 'filter'), or set of filter functions (also known
+as 'filter bank') to the wavelet. This is a way of sampling the signal at
+different intervals giving a natural means of scaling the signal
+\cite{karus2013}.
 
 \paragraph{}
 Wavelet analysis is similar to Fourier analysis with the difference that
-wavelets deal with time and frequency information, and Fourier transform deals
-with frequency information only. Wavelet analysis is the analysis of signals
-(time-series) by decomposing the signal into wavelet/shift\footnote{Shifting,
-or translating, is the operation of moving the wavelet in the time domain.}
-coefficients and scaling/filter\footnote{Filtering, or dilating, is the
-operation of scaling the wavelet in the frequency domain.} coefficients based
-on wavelet functions (e.g., filters) \cite{karus2013}. The decomposition can be
-repeated on the scaling/filter coefficients until the number of resulting
-wavelet/shift coefficients is smaller than the filter length. The filter length
-is a property of the filter function being used.
+wavelet transform deals with time and frequency information, and Fourier
+transform deals with frequency information only. Wavelet analysis is the
+transformation of signals (time-series) by decomposing the signal into
+wavelet/shift coefficients, and scaling/filter coefficients based on wavelet
+functions (filters) \cite{karus2013}.
+
+Shifting/translating is the operation of moving the wavelet in the time
+domain producing scale/filter coefficients, and requires frequency resolution.
+Filtering/dilating is the operation of scaling the the wavelet in the frequency
+domain producing wavelet/shift coefficients, and requires time resolution.
+These operations are illustrated in Figure \ref{figure:shifting} and Figure
+\ref{figure:filtering} respectively.
+
+The decomposition can be repeated on the scale/filter coefficients until the
+number of resulting wavelet/shift coefficients is smaller than the filter
+length \cite{graps}. The filter length is a property of the filter function
+being used.
+
+\input{figures/shifting}
+\vspace{1em}
+\input{figures/filtering}
 
 \paragraph{}
 Wavelet transform has proven important in signal processing thanks to its
@@ -205,9 +213,9 @@ time values of the signal, and $F$ the set of frequency values of the signal.
 	T$\\ $\Phi(f) = t$, such that $t \in T$ and $f \in F$.\\
 	This function maps $F$ onto $T$ and thus produces the scale of the wavelet.
 
-	\item[Scaling filter] \hfill \\ A low-pass filter of length $2N$ and sum 1. A
-	high-pass filter can be calculated as the quadrature mirror filter of the
-	low-pass filter. Daubechies wavelets can be defined by the scaling filter.
+	\item[Scaling filter] \hfill \\ A low-pass filter of length $2N$ and sum $1$.
+	A high-pass filter can be calculated as the quadrature mirror filter of the
+	low-pass filter. All Daubechies wavelets can be defined by the scaling filter.
 \end{description}
 
 \subsection{Haar wavelet}

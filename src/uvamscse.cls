@@ -96,7 +96,7 @@
 	\renewcommand{\arraystretch}{1.2}
 	\begin{center}
 	\begin{tabular}{ r | l }
-		\multirow{3}{*}[0.1cm]{\includegraphics[height=48pt]{figures/uva.pdf}}
+		\multirow{3}{*}[0.1cm]{\includegraphics[height=48pt]{images/uva.pdf}}
 			& \textsc{\Large Universiteit van Amsterdam}\\
 			& \textsc{Faculteit der Natuurwetenschappen, Wiskunde en Informatica}\\
 			& \textsc{Master Software Engineering}\\
@@ -109,7 +109,7 @@
 \newcommand{\hostlogo}{%
 	\vfill
 	\begin{center}
-		\includegraphics[height=76pt]{figures/vnu.jpg}
+		\includegraphics[height=76pt]{images/vnu.jpg}
 	\end{center}
 }
 
