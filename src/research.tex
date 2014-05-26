@@ -137,13 +137,13 @@ made to make the scripts compatible with our data set.
 The first step in the analysis of time series of software evolution is the
 wavelet transform. During this step discrete wavelet transform using the Haar
 filter is applied on a project's signal. The results comprise the
-coefficients\footnote{The coefficients are not the same as points in the
-data set. The data points represent monthly facts from a project, and the
-coefficients in sequences represent values found at a certain level of
-decomposition from the wavelet transform. More specifically: the coefficients
-are values resulted from shifting or filtering the signal.} at each level of
-decomposition which are saved for further analysis. For more details on this
-analysis method see section \ref{wavelet_analysis}.
+coefficients\footnote{The coefficients are not the same as data points. The
+data points represent monthly facts from a project, and the coefficients in
+sequences represent values found at a certain level of decomposition from the
+wavelet transform. More specifically: the coefficients are values resulted from
+shifting or filtering the signal.} at each level of decomposition which are
+saved for further analysis. For more details on this analysis method see
+section \ref{wavelet_analysis}.
 
 \subsection{Wavelet analysis}
 \subsubsection{Similar sequence identification}
@@ -166,8 +166,7 @@ found across projects.
 The similar sequence identification found 1,669,448 sequences that occurred
 at least 2 times in the data. Only 16 sequences were found using wavelet/shift
 coefficients, the other 1,669,432 sequences were found using filter/scale
-coefficients. This is expected as scaling is better than shifting at finding
-small coefficients.
+coefficients.
 
 \subsubsection{Similar sequence grouping}
 \label{def:pattern}
@@ -190,8 +189,8 @@ The results of this step revealed a total of 16,049 patterns in the projects.
 All the patterns were found in the sequences resulting from using filter
 coefficients, and 0 in those from using wavelet coefficients. The sequences
 occurred at least 4 times, and at most 1,511 times. They occur in at least 1
-and at most 204 projects. Their lengths differ between 4 points and 19 points
-across various decomposition levels (levels of detail).
+and at most 204 projects. Their lengths differ between 4 and 19 points across
+various decomposition levels (levels of detail).
 
 \section{Pattern identification}
 \subsection{Dead project identification}

@@ -1,0 +1,90 @@
+\chapter{Report on replication}
+
+\section{About the original study}
+The research question of the original study ``\emph{Automatic means of
+identifying evolutionary events in software development}\rm'' conducted by
+\citet{karus2013} in 2013, was ``\emph{Can we use wavelet analysis to find
+objective warning signs in software projects leading to the end of code
+evolution?}\rm''.
+
+\subsection{Data set}
+\citeauthor{karus2013} used a data set consisting of 27 OSS projects, of which
+18 were randomly chosen using Google Code Search from different repositories
+having different team sizes, main programming languages, and project types. 15
+of these projects were on-going, and 3 had no activity since January 2009
+(verified in January 2013) (i.e., 'dead').
+
+\subsection{Design}
+The research was done in the following steps:
+\begin{enumerate}
+	\item \citeauthor{karus2013} used weekly commit data to perform analysis on.
+		Therefore, the first step was to aggregate daily commit data into weekly data.
+	\item Then, the project signals were used as input for discrete wavelet
+		transform using the Haar filter.
+	\item Finding similar sequences.
+	\item Similar sequence grouping (i.e., identifying patterns).
+\end{enumerate}
+
+\noindent
+Table \ref{table:karus_series} shows the signals that were used for analysis in
+the original study.
+
+\input{tables/karus_series}
+
+\subsection{Results}
+998 common patterns were found across different projects. It showed that
+``evolution patterns in software projects do express various warning signs
+leading to or indicating the impending end of code evolution.''
+\cite{karus2013}.
+\citeauthor{karus2013} concluded, that: ``\ldots wavelet analysis can be
+successfully used to detect anomalies before they turn into a long-term issue
+allowing action to be taken before it is too late.'', and: ``In conclusion, we
+have demonstrated the usefulness for both tracing software evolution and for
+detecting anomalies in software evolution.''.
+
+\section{About the replication}
+\subsection{Level of interaction}
+During this study, and especially in the beginning, there was contact with
+\citeauthor{karus2013} about how the implementation of the wavelet transform and
+detection of patterns was done. In that period, he provided his R scripts that
+he used for his study.
+
+\subsection{Changes}
+A few modifications were made to the original study in replication.
+\begin{description}
+	\item[Sample size.] The sample size of 27 projects was extended to a total of
+	250 projects.
+	
+	\item[Sample selection.] The selection of the projects for the study was done
+	using a tool measuring the representativeness of the sample against a master
+	set, to have a set that is as representative as possible.
+	\citeauthor{karus2013} picked random projects and tested the set for
+	representativeness.
+	
+	\item[Time series.] In the original study, daily commit data was aggregated
+	into weekly data. In this study, we used montly data. Project data available at
+	Ohloh is already aggregated into monthly data. We expect the difference between
+	weekly and monthly data is negligible when looking for warning signs that may
+	lead to the end of code evolution. The effects of patterns of such kind will be
+	visible beyond the weekly boundaries.
+	
+	\item[Project signals.] The signals used by \citeauthor{karus2013} are listed
+	in Table \ref{table:karus_series}. In the replicative study we picked only one
+	series: the LOC over time. The choice for having just one signal is because of
+	time constraints. The choice for LOC was because it can be interpreted
+	intuitively.
+\end{description}
+
+\subsection{Results}
+The results that came out of this study are comparable to those in the original
+study. We have also found patterns in software evolution by using wavelet
+analysis. Therefore, we can agree that ``\ldots evolution patterns in software
+projects do express various warning signs leading to or indicating the impending end of
+code evolution.'', but care should be taken. Of course not \emph{all }\rm
+patterns detected are warning signs.
+
+\paragraph{}
+This study takes the results obtained by replicating the research by
+\citeauthor{karus2013} further by looking into the patterns found. We have
+identified types of patterns which have different semantics in the search for
+patterns that are objective warning signs.
