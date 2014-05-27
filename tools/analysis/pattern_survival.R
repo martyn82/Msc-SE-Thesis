@@ -22,6 +22,7 @@ opts.reprsample <- TRUE
 
 patterns.dead <- read.csv2(paste("output", paste(paste("patterns", opts.time, opts.var, sep="_"), "csv", sep="."), sep="/"))
 sequences.data <- read.csv2(paste("output", paste(paste("haar", "similar", opts.time, opts.var, sep="_"), "csv", sep="."), sep="/"))
+sequences.locations <- read.csv2(paste("output", paste(paste("sequenceLocations", opts.var, sep="_"), "csv", sep="."), sep="/"))
 dead.data <- read.csv2("output/deadProjectsValidated.csv")
 facts.data <- read.csv2("data/factsForAnalysis.csv")
 
@@ -75,7 +76,9 @@ projects <- data.frame(
   "pid"=numeric(0),
   "time"=numeric(0),
   "group"=numeric(0),
-  "status"=numeric(0)
+  "status"=numeric(0),
+  "ttl"=numeric(0),
+  "diagnosed"=numeric(0)
 )
 p <- 1
 
@@ -91,7 +94,7 @@ for(i in 1:length(all.pids)){
     dead.date <- as.Date(project.death$dead.date)
     max.months <- max(project$Age.Months)
     diff.months <- floor(12 * as.numeric(as.yearmon(max.date) - as.yearmon(dead.date)))
-    project.age <- max.months - diff.months
+    project.age <- max.months - diff.months # The age of dying
 
     rm(project.death, max.date, dead.date, max.months, diff.months)
   }
@@ -99,11 +102,27 @@ for(i in 1:length(all.pids)){
     project.age <- max(project$Age.Months)
   }
 
+  if(project.group){
+    pattern.loc <- sequences.locations[sequences.locations$pid == pid & sequences.locations$seq.id %in% unique(patterns$seq.id), ]
+
+    if(nrow(pattern.loc) == 0){
+      project.diagnosed <- -1
+    }
+    else {
+      project.diagnosed <- min(pattern.loc$seq.start)
+    }
+  }
+  else {
+    project.diagnosed <- max(project$Age.Months)
+  }
+
   projects[p, ] <- c(
     "pid"=as.numeric(pid),
     "time"=as.numeric(project.age),
     "group"=as.numeric(project.group),
-    "status"=as.numeric(project.status)
+    "status"=as.numeric(project.status),
+    "ttl"=as.numeric(project.age - project.diagnosed),
+    "diagnosed"=as.numeric(project.diagnosed)
   )
   p <- p + 1
 }
