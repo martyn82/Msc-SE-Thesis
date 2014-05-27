@@ -10,10 +10,11 @@
 #    - Calculate the percentage of the first observation of the sequence.
 #    - Calculate the percentage of the last observation of the sequence.
 
-input.pid.col <- "pid"
+input.pid.col <- "Project.Id"
 metric <- "LOC"
 
-input.data <- read.csv2(paste("output", "deadProjectsValidated.csv", sep="/"))
+input.file <-"data/factsForAnalysis.csv" #paste("output", "deadProjectsValidated.csv", sep="/")
+input.data <- read.csv2(input.file)
 
 sim.data <- read.csv2(paste("output", paste(paste("haar", "similar", "Age.Months", metric, sep="_"), "csv", sep="."), sep="/"))
 facts.data <- read.csv2(paste("data", "factsForAnalysis.csv", sep="/"))
