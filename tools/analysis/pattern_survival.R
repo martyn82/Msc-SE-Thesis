@@ -31,14 +31,14 @@ dead.pids <- unique(dead.data[as.logical(dead.data$confirmed.dead) == TRUE, ]$pi
 
 # Set which pattern type should be analysed
 patterns <- patterns.dead[patterns.dead$seq.type == opts.pattern.type, ]
-
-# Store PIDs of dead projects in group 1
-patterns.dead.pids <- unique(as.numeric(unlist(strsplit(as.character(patterns$pid), "|", fixed=TRUE))))
+patterns$pids <- strsplit(as.character(patterns$pids), split="|", fixed=TRUE)
 
 # Retrieve the PIDs having sequences for the patterns under analysis
 sequences <- sequences.data[sequences.data$Seq.Id %in% patterns$seq.id, ]
 sequences.pids <- unique(as.numeric(unlist(strsplit(as.character(sequences$Project.list), "|", fixed=TRUE))))
-rm(sequences)
+
+sequences.data$Project.list <- strsplit(as.character(sequences.data$Project.list), split="|", fixed=TRUE)
+sequences.data$Project.id.ss.rl <- strsplit(as.character(sequences.data$Project.id.ss.rl), split="|", fixed=TRUE)
 
 # Retrieve the PIDs having no sequences for the patterns under analysis
 control.pids <- unique(facts.data[!(facts.data$Project.Id %in% sequences.pids), ]$Project.Id)
@@ -102,18 +102,47 @@ for(i in 1:length(all.pids)){
     project.age <- max(project$Age.Months)
   }
 
-  if(project.group){
-    pattern.loc <- sequences.locations[sequences.locations$pid == pid & sequences.locations$seq.id %in% unique(patterns$seq.id), ]
+  project.diagnosed <- NA
+  
+  if(project.group) {
+    pattern.locs <- sequences.data[sequences.data$pid0 == pid
+                                   & sequences.data$Seq.Id %in% sequences$Seq.Id, ]
+    
+    if(nrow(pattern.locs) == 0){
+      pattern.locs <- sequences.data[pid %in% unlist(sequences.data$Project.list)
+                                     & sequences.data$Seq.Id %in% sequences$Seq.Id, ]
 
-    if(nrow(pattern.loc) == 0){
-      project.diagnosed <- -1
+      if(nrow(pattern.locs) == 0){
+        stop(paste("No patterns for pid", pid))
+      }
+
+      pattern.locs <- sequences.data[pid %in% unlist(sequences.data$Project.list), ]
+      for(l in 1:length(pattern.locs$Project.id.ss.rl)){
+        regions <- pattern.locs$Project.id.ss.rl[l]
+        regions <- strsplit(unlist(regions), split="-", fixed=TRUE)
+        
+        for(r in 1:length(regions)){
+          region <- as.numeric(unlist(regions[r]))
+          if(region[1] != pid){
+            next
+          }
+          
+          pattern.locs <- sequences.data[sequences.data$pid0 == pid
+                                       & sequences.data$pid0.revlevel == region[2]
+                                       & sequences.data$pid0.startseq == region[3], ]
+          break
+        }
+        
+        if(nrow(pattern.locs) > 0){
+          break
+        }
+      }
     }
-    else {
-      project.diagnosed <- min(pattern.loc$seq.start)
+
+    if(nrow(pattern.locs) > 0){
+      patterns.locations <- sequences.locations[sequences.locations$seq.id %in% pattern.locs$Seq.Id, ]
+      project.diagnosed <- min(patterns.locations$seq.start)
     }
-  }
-  else {
-    project.diagnosed <- max(project$Age.Months)
   }
 
   projects[p, ] <- c(
@@ -127,7 +156,7 @@ for(i in 1:length(all.pids)){
   p <- p + 1
 }
 
-rm(all.pids, control.pids, control.pids.sample, dead.pids, group.size, patterns.dead.pids, sequences.pids, sequences.pids.sample)
+rm(all.pids, control.pids, control.pids.sample, dead.pids, group.size, sequences.pids, sequences.pids.sample)
 rm(i, p, pid, project, project.status, project.group, project.age)
 
 surv.fit <- survfit(Surv(time, status) ~ group, data=projects, type="kaplan-meier")
@@ -139,3 +168,5 @@ ggkm(
 )
 
 rm(opts.time.interval, opts.time, opts.var, opts.pattern.type, ggkm)
+
+write.csv2(projects, paste("output", paste(paste("survival", "Age.Months", "LOC", sep="_"), "csv", sep="."), sep="/"))
