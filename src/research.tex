@@ -101,6 +101,7 @@ less than 12 monthly data points.
 
 \section{Wavelet transform and analysis}
 \subsection{Project signals}
+\label{section:signals}
 The evolution of the 250 projects are modeled as signals as input for the
 wavelet transform and analysis. The constructed project signals are modeled with
 $age\_in\_months$ in the time domain, and $LOC$ in the frequency domain. Figure
@@ -165,8 +166,8 @@ found across projects.
 
 \paragraph{}
 The similar sequence identification found 1,669,448 sequences that occurred
-at least 2 times in the data. Only 16 sequences were found using wavelet/shift
-coefficients, the other 1,669,432 sequences were found using filter/scale
+at least 2 times in the data. Only 16 sequences were found in wavelet/shift
+coefficients, the other 1,669,432 sequences were found in filter/scale
 coefficients.
 
 \subsubsection{Similar sequence grouping}
@@ -186,12 +187,7 @@ it occurs, and whether it appears in dead, alive, or both dead and alive
 projects.
 
 \subsection{Results}
-The results of this step revealed a total of 16,049 patterns in the projects.
-All the patterns were found in the sequences resulting from using filter
-coefficients, and 0 in those from using wavelet coefficients. The sequences
-occurred at least 4 times, and at most 1,511 times. They occur in at least 1
-and at most 204 projects. Their lengths differ between 4 and 19 points across
-various decomposition levels (levels of detail).
+The results of this phase revealed a total of 16,049 patterns in the projects.
 
 \section{Pattern identification}
 \subsection{Dead project identification}

@@ -12,32 +12,11 @@ complied to the definition of a dead project as defined in section
 data up to April 2014, revealed that 21 (8.4\%) are \emph{really }\rm dead.
 
 For each of the 38 projects, the project's website, source code repository, and
-commit history was consulted. The results of the verification are shown in
-Table \ref{table:deads}.
+commit history was consulted. The 21 dead projects and their $age\_in\_months$
+at the moment of death as a result of the verification are shown in Table
+\ref{table:deads}.
 
 \input{tables/deads}
-
-\paragraph{}
-The other 17 projects complying to the definition of dead (section
-\ref{def:dead}) appeared to be still alive. For 9 of the projects activity is
-very low or rapidly decreasing; 5 projects were migrated to another source code
-repository; and for 3 projects the activity is increasing after a long period of
-no activity.
-
-\paragraph{}
-The 9 projects with very low or decreasing activity show signs of 'dying'. Their
-community is slowly but surely abandoning the project as can be seen by a
-decrease of 35\% to 55\% of contributors, and/or commits.
-
-The 5 migrated projects for which the tracking information is not updated at
-Ohloh are lost. The tracking is stopped from the moment the project is
-migrated. The tracking and analysis can be recovered by updating the source
-code locations at Ohloh, but for this study the project is out of sight.
-
-The 3 projects that have had no activity in a year, but after that show little
-increase of activity are more difficult to explain. Manual evaluation showed
-that there are similar projects that eventually die, but there are also similar
-projects that get 'resurrected'.
 
 \paragraph{}
 All, except one, of the projects in Table \ref{table:deads} are dead because it
@@ -75,8 +54,69 @@ involve code changes.
 The project died in July 2012, after 8 months since the first data point
 tracked.
 
-\section{Patterns}
+\paragraph{}
+The other 17 projects complying to the definition of dead (section
+\ref{def:dead}) appeared to be still alive. For 9 of the projects activity is
+very low or rapidly decreasing; 5 projects were migrated to another source code
+repository; and for 3 projects the activity is increasing after a long period of
+no activity.
 
+\paragraph{}
+The 9 projects with very low or decreasing activity show signs of 'dying'. Their
+community is slowly but surely abandoning the project as can be seen by a
+decrease of 35\% to 55\% of contributors, and/or commits.
+
+The 5 migrated projects for which the tracking information is not updated at
+Ohloh are lost. The tracking is stopped from the moment the project is
+migrated. The tracking and analysis can be recovered by updating the source
+code locations at Ohloh, but for this study the project is out of sight.
+
+The 3 projects that have had no activity in a year, but after that show little
+increase of activity are more difficult to explain. Manual evaluation showed
+that there exist similar projects outside the data set that eventually die, but
+there are also similar projects that eventually got 'resurrected'.
+
+\section{Sequences and patterns}
+The wavelet transform and first analysis step resulted in 1,669,448 similar
+sequences found in project's LOC\footnote{LOC: see section
+\ref{section:signals}} signals. Almost all of these sequences (1,669,432
+(99.999\%)) were found in scale/filter coefficients in 250 distinct projects.
+A mere 16 sequences were found in wavelet/shift coefficients occurring in 15
+distinct projects.
+
+The large difference in number of sequences found between the two types of
+coefficients is due to the fact that the LOC metric is a cumulative metric.
+This makes finding a matching sequence of coefficients using only shift
+coefficients (i.e., along the time axis) less likely.
+
+\paragraph{}
+The detection of popular sequences found 16,049 patterns\footnote{Pattern:
+see section \ref{def:pattern}}. The patterns consist only of sequences
+of scale/filter coefficients. This was to be expected; the 16 similar sequences
+in shift coefficients are not similar within the group of sequences of shift
+coefficients. Additionally, the shift coefficients are incomparable to the
+filter coefficients because it is a fundamentally different way of signal
+transformation. Mixing both types of coefficients would ignore how the
+coefficients were found and invalidate the patterns.
+
+The patterns occurred at least 5 times and at most 1,512 times. On average, a
+pattern occurs 104 times. A single pattern occurs in at least 1 and at most 204
+projects (36 projects on average). The pattern length is between 4 and 19
+coefficients (on average 6) across various decomposition levels. Patterns are
+found at levels 3 to 7. The higher the level, the closer the level of detail of
+wavelet is to the original signal.
+
+12,643 (79\%) of the patterns appear in both dead and alive projects; 3,390
+(21\%) of the patterns appear in alive projects only; and 16 (0.1\%) of the
+patterns appear in dead projects only.
+
+\paragraph{}
+To be able to know what the patterns represent within a signal, the patterns are
+re-composed to a sequence of the original signal. Taking the pattern's
+decomposition level and starting point, it can be projected onto the signal of
+the project it was first discovered to have the $age\_in\_months$ value the
+sequence starts in the project. The original sequence is taken for this
+process, not the similar sequences.
 
 \begin{comment}
 - Factual results
