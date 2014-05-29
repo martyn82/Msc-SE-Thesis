@@ -3,16 +3,41 @@
 
 \section{Dead projects}
 \label{section:deads}
-Of the 250 projects used for this study, a total of 43 projects complied to the
-definition of a dead project as defined in section \ref{def:dead}. The data set
-contains data points up to June 2013, because the data was gathered in July
-2013. Manual evaluation of the 43 potential dead projects, with data up to April
-2014, revealed that 21 (8.4\%) were actually dead.
-For each of the 43 projects, the project's website, source code repository, and
-commit history was consulted. The results of the evaluation are shown in Table
-\ref{table:deads}.
+The data set of 250 projects contains data points up to June 2013, because the
+data was gathered in July 2013.
+
+The data set contains 21 (8.4\%) dead projects. A total of 38 (15.2\%) projects
+complied to the definition of a dead project as defined in section
+\ref{def:dead}, but manual verification of the 38 potential dead projects, with
+data up to April 2014, revealed that 21 (8.4\%) are \emph{really }\rm dead.
+
+For each of the 38 projects, the project's website, source code repository, and
+commit history was consulted. The results of the verification are shown in
+Table \ref{table:deads}.
 
 \input{tables/deads}
+
+\paragraph{}
+The other 17 projects complying to the definition of dead (section
+\ref{def:dead}) appeared to be still alive. For 9 of the projects activity is
+very low or rapidly decreasing; 5 projects were migrated to another source code
+repository; and for 3 projects the activity is increasing after a long period of
+no activity.
+
+\paragraph{}
+The 9 projects with very low or decreasing activity show signs of 'dying'. Their
+community is slowly but surely abandoning the project as can be seen by a
+decrease of 35\% to 55\% of contributors, and/or commits.
+
+The 5 migrated projects for which the tracking information is not updated at
+Ohloh are lost. The tracking is stopped from the moment the project is
+migrated. The tracking and analysis can be recovered by updating the source
+code locations at Ohloh, but for this study the project is out of sight.
+
+The 3 projects that have had no activity in a year, but after that show little
+increase of activity are more difficult to explain. Manual evaluation showed
+that there are similar projects that eventually die, but there are also similar
+projects that get 'resurrected'.
 
 \paragraph{}
 All, except one, of the projects in Table \ref{table:deads} are dead because it
@@ -26,28 +51,29 @@ The first 7 projects have died before their first anniversary. The tail 14
 projects died between 14 and 142 months of age.
 
 \paragraph{}
-When we zoom in on the project with ID 317799, which is the youngest in this set
-and died in its second month, we see that this project has had a history of the
-slightest change in its lines of code evolution. The project has had a total
+When zooming in on the project with ID 317799, which is the youngest in this set
+and died in its second month, it shows that this project has had a history of
+the slightest change in its lines of code evolution. The project has had a total
 number of 7 commits during the time it is being tracked by Ohloh (since
 September 2011 up to now). A total of 4 contributors have worked on the project
 since it was tracked. The most recent commit was done in October 2011.
 
 \paragraph{}
-Project with ID 12547 is the oldest. It died after 142 tracked months, has had
-its most recent commits in February 2012. A total of 10 contributors have
+Project with ID 12547 is the oldest. It died after 142 tracked months and has
+had its most recent commits in February 2012. A total of 10 contributors have
 worked on this project since May 2000.
 
 \paragraph{}
-Our special case project, with ID 587204, is the only project that is not
+The special case project, with ID 587204, is the only project that is not
 abandoned by its (entire) community. The project has had 3 contributors over its
 lifetime. One of them is still active every now and then. The most recent
 commits were done in January 2014, the commits before that were in June 2012.
 The commits involved updates in documentation, and the creation of a
-configuration file for a continuous integration server.
+configuration file for a continuous integration server. These commits do not
+involve code changes.
 
-The project died after 8 months since the first data point tracked, which was in
-July 2012.
+The project died in July 2012, after 8 months since the first data point
+tracked.
 
 \section{Patterns}
 

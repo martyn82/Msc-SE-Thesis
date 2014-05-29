@@ -4,10 +4,10 @@
 \section{Data selection}
 \label{method:data}
 A total number of 250 OSS projects will be used for this study. This number is
-somewhat arbitrary, but was chosen to have a much larger data set than the
-initial study conducted by \citet{karus2013}, as we believe a larger data
-set yields more trustworthy results, and still keep the research feasible
-within the given time constraints of four months.
+somewhat arbitrary, but was chosen to have a larger data set than the initial
+study conducted by \citet{karus2013}, as a larger data set yields more
+trustworthy results. However, the research still needs to be feasible within
+the given time constraints of four months.
 
 Several steps have been taken prior to the selection of this set of 250
 projects. The steps are described in the following sections.
@@ -23,8 +23,8 @@ Apache Subversion, Bash, Firebug, Linux Kernel, Mozilla Firefox, MySQL, PHP,
 and Ubuntu.
 
 \paragraph{}
-For this research, we use the data provided by a tool by \citet{ohlohanalytics}.
-This tool, ``\emph{OhlohAnalytics}\rm'', was developed as part of the
+For this research, the data provided by a tool by \citet{ohlohanalytics} is
+used. This tool, ``\emph{OhlohAnalytics}\rm'', was developed as part of the
 replicative research by \citet{bruntink2014}, and provides a validated and
 cleansed data set of 12,360 OSS projects, collected from Ohloh in July 2013.
 
@@ -47,22 +47,22 @@ evolution data of 10,811 projects.
 
 \subsection{Data validation}
 \subsubsection{Subsequent data series}
-Although the data set should be consistent after validation and cleansing, we 
-need another validation step prior to the selection of the 250 projects for the
-study.
+Although the data set should be consistent after validation and cleansing,
+another validation step is needed prior to the selection of the 250 projects
+for the study.
 
-The evolution data of the 10,811 projects contained gaps. We expect a
-subsequent series of data is necessary to be able to analyse time series for a
-project. Therefore, a number representing the \emph{fraction of continuity }\rm
-of the evolution data per project was needed. For each project the difference
-between the minimum and maximum values of the $age\_in\_months$ fact is taken,
-added by one, giving us the expected number of data points for a project. The
-calculation of the fraction of total evolution data is done for each project.
+The evolution data of the 10,811 projects contained gaps. A subsequent series of
+data is necessary to be able to analyse time series for a project.
+Therefore, a number representing the \emph{fraction of continuity }\rm of the
+evolution data per project was needed. For each project the difference between
+the minimum and maximum values of the $age\_in\_months$ fact is taken, added by
+one, giving the expected number of data points for a project. The calculation of
+the fraction of total evolution data is done for each project.
 
 After the fractions of the total evolution data for each project were caculated,
-these projects were filtered and only the projects that have all data points
-between minimum and maximum $age\_in\_months$ are kept. From the set of 10,811
-projects, a total number of 6,418 projects is left.
+the projects were filtered and only those projects that have all data points
+between minimum and maximum $age\_in\_months$ are kept. This reduces the total
+number of projects to 6,418.
 
 \subsubsection{Minimal sequence length}
 A time series of 1 (monthly) data point is obviously not analysable over time
@@ -70,14 +70,14 @@ and uncomparable to larger projects. The threshold of at least 12 monthly data
 points is chosen to minimise noise in the evolution data that may be caused by
 too young or unstable projects.
 
-After this selection, a set of 5,986 projects is left.
+After this selection the data set contains 5,986 projects.
 
 \subsubsection{Representativeness}
-For the selection of a sample of 250 projects, we use the tool created by
-\citet{nagappan} at Microsoft Research. This tool takes a, possibly atomic,
-sample set and selects additional projects to add to the sample that increase
-the overall representativeness of that sample. The tool scores projects by two
-metrics: total lines of code, and yearly contributors count.
+For the selection of a sample of 250 projects, the tool created by
+\citet{nagappan} at Microsoft Research is used. This tool takes a - possibly
+atomic - sample set and selects additional projects to add to the sample that
+increase the overall representativeness of that sample. The tool scores
+projects by two metrics: total lines of code, and yearly contributors count.
 
 The tool iteratively selects 250 projects and adds it to the sample. Each
 additional project is selected by its score to maximally increase the
@@ -85,7 +85,7 @@ representativeness of the sample as a whole, compared to the master data.
 
 The master data is a list of 20,028 projects tracked by Ohloh delivered with
 this tool. A pre-filtering of this master data was done to make the tool select
-only the projects that appear in our data set of 5,986 projects. After
+only the projects that appear in the data set of 5,986 projects. After
 pre-filtering, a subset of the master data of 1,588 projects is left. From this
 subset, a sample of 250 projects was selected.
 
@@ -93,45 +93,46 @@ The resulting sample of 250 projects was scored against the initial master data
 of 20,028 projects and scores a 99.5\% representativeness.
 
 \subsection{Results}
-The results of the Data selection phase of the study are the following: the
-evolution data of 250 distinct projects having a total of 22,943 data points.
-The biggest project having 321 monthly data points, the smallest having 14
-monthly data points. This confirms that there are no projects with less
-than 12 monthly data points.
+The statistical results of the Data selection phase of the study are the
+following: the evolution data of 250 distinct projects having a total of 22,943
+data points. The biggest project having 321 monthly data points, the smallest
+having 14 monthly data points. This confirms that there are no projects with
+less than 12 monthly data points.
 
 \section{Wavelet transform and analysis}
 \subsection{Project signals}
 The evolution of the 250 projects are modeled as signals as input for the
-wavelet transform and analysis. We have constructed project signals by modeling
+wavelet transform and analysis. The constructed project signals are modeled with
 $age\_in\_months$ in the time domain, and $LOC$ in the frequency domain. Figure
-\ref{figure:signal} shows a project's signal.
+\ref{figure:signal} illustrates a project's signal.
 
 \input{figures/signal}
 
 \paragraph{}
-The $LOC$ we used in the transform and analysis is slightly different from the
-$loc\_fact$ that exists in the data set. The goal for the signal processing is
-that we are able to detect patterns in a project's code activity. This means we
-are interested in all changes that occur in source files. Therefore, we took
-the same metric as in the original study by \citet{karus2013}. The $LOC$ metric
-is constructed as the sum of $loc\_fact$, $comments\_fact$, and $blanks\_fact$.
+The $LOC$ metric used in this study for the transform and analysis is slightly
+different from the $loc\_fact$ that exists in the data set. The goal for the
+signal processing is to be able to detect patterns in a project's code activity.
+This means that all changes that occur in source files are of interest.
+Therefore, the same metric as in the original study by \citet{karus2013} is
+used. The $LOC$ metric is constructed as the sum of $loc\_fact$,
+$comments\_fact$, and $blanks\_fact$.
 
 \paragraph{}
-For the wavelet transform and analysis, we have used R Statistics Suite
+For the wavelet transform and analysis, I have used R Statistics Suite
 with packages ``wavelets'', ``chron'' and ``zoo''. The Wavelets package
-contains a implementations of discrete wavelet transform functions, including
+contains implementations of discrete wavelet transform functions, including
 the Haar filter; Chron provides functions for working with chronological data
 series; and Zoo eases indexing of and working with indexed data.
 
-The Haar filter is used by \citet{karus2013} in his research because of its
-simplicity and ease of interpretation. As this study is a replication of
-\citeauthor{karus2013}' study, the choice of using the Haar filter was made.
+The Haar filter is used by \citet{karus2013} because of its simplicity and ease
+of interpretation. As this study is a replication of \citeauthor{karus2013}'
+study, the choice of using the Haar filter was made.
 
 \paragraph{}
 The R scripts used for the steps of wavelet transform, sequence identification,
 and grouping, are based on the scripts created and used by
 \citeauthor{karus2013} in the initial research. Small adjustments have been
-made to make the scripts compatible with our data set.
+made to make the scripts compatible with the data set.
 
 \subsection{Wavelet transform}
 The first step in the analysis of time series of software evolution is the
@@ -154,12 +155,12 @@ a sequence length between 3 and 65 (inclusive) coefficients.
 
 The thresholds were chosen by \citet{karus2013} in the original study to
 distinguish a sequence from an ordinary set of coefficients if the sequence is
-very short (length 1 or 2). On the contrary, if a sequence is larger than 65 we
-have to be able to distinguish the sequence from the complete signal.
+very short (length 1 or 2). On the other hand, the ability to distinguish the
+sequence from the complete signal is needed, hence the maximum length of 65.
 
 A sequence is considered 'similar' if at least one other sequence was found of
 which the values of the coefficients are equal with respect to an allowed
-deviation. Similar sequences may be found within one project, but preferrably be
+deviation. Similar sequences may be found within one project, but can also be
 found across projects.
 
 \paragraph{}
@@ -195,35 +196,35 @@ various decomposition levels (levels of detail).
 \section{Pattern identification}
 \subsection{Dead project identification}
 In the search to find patterns that are warning signs leading to the end of
-code evolution, we first extract from our initial 250 projects the projects
-that satisfy the definition of a dead project (see also section \ref{def:dead}).
-A total of 43 projects are dead according to the definition and their evolution
-data in the data set. However, further verification is needed to confirm that
-these projects are indeed dead.
+code evolution, the projects that satisfy the definition of a dead project (see
+also section \ref{def:dead}) were extracted from the 250 projects.
+A total of 38 projects are dead according to the definition and their evolution
+data in the data set. However, further verification with more recent data is
+needed to confirm this.
 
 \paragraph{}
-Our data set contains data points up to June 2013. After manual verification of
-the 'dead' projects with data up to April 2014, we could confirm that 21 of the
-43 projects have had no code activity in the period between June 2012 and
-April 2014. This data is acquired by consulting the project's websites, source
-code repositories and commit history, and the data available at Ohloh.
+The data set contains data points up to June 2013. After manual verification of
+the 'dead' projects with data up to April 2014, 21 of the 38 projects have had
+no code activity in the period between June 2012 and April 2014. This data is
+acquired by consulting the project's websites, source code repositories and
+commit history, and the data available at Ohloh.
 
 More information on the results of the evaluation of dead projects can be found
 in section \ref{section:deads}.
 
 \subsection{Patterns in dead projects}
-Given this set of 21 dead projects, we can select all patterns occurring in
-these dead projects. Patterns occurring in dead projects can be hints of
+Given the set of 21 dead projects, all patterns occurring in the dead
+projects are selected. Patterns occurring in dead projects can be hints of
 evolutionary events that lead to the death of a project.
 
 A total number of 967 patterns were found across dead projects. The patterns
-do not occur at the same moment in the lifetime of the projects. Therefore, we
-have introduced different types of patterns for dead projects:
+do not occur at the same moment in the lifetime of the projects. Therefore,
+different types of patterns for dead projects are introduced:
 
 \begin{description}
 	\item[Type A.] Type A patterns strictly occur at the end of the evolution data
 		of a dead project. More formaly, if a dead project $P$ starts at point $x$ and
-		ends at point $y$, the pattern starts at $x'$ and ends at $y$. In our data
+		ends at point $y$, the pattern starts at $x'$ and ends at $y$. In the data
 		set, the maximum date $y$ of $P$ is June 2013.
 	
 	\item[Type B.] Type B patterns strictly \emph{do not }\rm occur at the end of
@@ -235,11 +236,12 @@ have introduced different types of patterns for dead projects:
 \end{description}
 
 \noindent
-The above types partition the patterns into three disjunctive sets.
+The above types partition the total set of patterns into three disjunctive sets.
 
-In the search for patterns that are warning signs, we are mostly interested in
-patterns of type A, because these patterns could indicate an evolutionary event
-that lead to the end of code evolution for the dead projects it appears in.
+In the search for patterns that are warning signs, the patterns of type A are
+the most interesting, because these patterns could indicate an evolutionary
+event that lead to the end of code evolution for the dead projects it appears
+in.
 
 \subsection{Results}
 From the 967 patterns that were found across 21 dead projects, 25 of these
