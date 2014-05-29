@@ -86,7 +86,10 @@ succeed or fail in detecting evolutionary events?}
 \fi
 
 \abstract{\input{abstract}}
-\preface{\input{preface}}
+
+\ifisdraft\else
+	\preface{\input{preface}}
+\fi
 
 \begin{document}
 
