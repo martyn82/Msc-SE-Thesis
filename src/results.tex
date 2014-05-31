@@ -84,11 +84,6 @@ sequences found in project's LOC\footnote{LOC: see section
 A mere 16 sequences were found in wavelet/shift coefficients occurring in 15
 distinct projects.
 
-The large difference in number of sequences found between the two types of
-coefficients is due to the fact that the LOC metric is a cumulative metric.
-This makes finding a matching sequence of coefficients using only shift
-coefficients (i.e., along the time axis) less likely.
-
 \paragraph{}
 The detection of popular sequences found 16,049 patterns\footnote{Pattern:
 see section \ref{def:pattern}}. The patterns consist only of sequences
@@ -110,13 +105,48 @@ wavelet is to the original signal.
 (21\%) of the patterns appear in alive projects only; and 16 (0.1\%) of the
 patterns appear in dead projects only.
 
+\subsection{Pattern evaluation}
+\label{section:pattern_evaluation}
+To be able to know what the patterns represent, the 16,049 patterns are
+projected onto the original signal. This is done by finding the project the
+pattern was first detected, and taking the pattern's level of decomposition and
+starting point in the series of coefficients for its project.
+
+As the set of values of level of decomposition, starting point in the series,
+its length (i.e., number of coefficients), and the originating project is
+unique for each pattern, it can be 're-projected' onto the signal of that
+particular project. This gives the $age\_in\_months$ values the sequence starts
+and ends in the project.
+
+Knowing the start and end month of a sequence within a project, the values of
+the original signal during the sequence are captured for further analysis.
+
 \paragraph{}
-To be able to know what the patterns represent within a signal, the patterns are
-re-composed to a sequence of the original signal. Taking the pattern's
-decomposition level and starting point, it can be projected onto the signal of
-the project it was first discovered to have the $age\_in\_months$ value the
-sequence starts in the project. The original sequence is taken for this
-process, not the similar sequences.
+The sequences have a wide range in what they represent. The maximum difference
+of the LOC value is computed for each sequence by computing the difference
+between every two values. The maximum of the list of differences is taken as
+the maximum LOC difference. The patterns have maximum LOC differences between 0
+(i.e., no change in LOC over the series) and 502,999. Figure
+\ref{figure:pattern_loc_diff} shows the distribution of this number across the
+patterns.
+
+\input{figures/pattern_loc_diff_all}
+
+75\% of the patterns have a maximum LOC difference less than 11,731; 50\% have a
+maximum LOC difference less than 2,736; and 25\% less than 540. A maximum LOC
+difference of 0 is the most common (5.22\%), followed by 3,994 (4.62\%), 9
+(4.51\%), and 1,865 (3.11\%).
+
+The above top four patterns with least maximum LOC differences are shown in
+Figure \ref{figure:top_patterns_plots}. The figure illustrates the wavelets of
+the patterns for all the project signals they were detected in, depicted as the
+differences in LOC values between two subsequent coefficients.
+The figure shows that the sequences have similar waveforms. Note that the
+factor of scale is reintroduced, because the sequences all contain scale/filter
+coefficients. The factor of time, however, is still being eliminated, hence the
+use of index on the horizontal axis.
+
+\input{figures/top_patterns_plots}
 
 \begin{comment}
 - Factual results
