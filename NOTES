@@ -1,0 +1,63 @@
+JANUARY:
+- worked on plan
+
+FEBRUARY:
+- worked on plan
+- read papers
+- literature survey
+- build data set
+
+MARCH:
+- build data set
+- defined measure for signal (LOC on age.months)
+- study wavelet analysis
+- first complete wavelet analysis run on data set
+
+APRIL:
+- build data set of higher quality (coverage, minimal months)
+- second complete wavelet analysis run on data set
+- validation of found sequences
+- dead project identification
+- dead project verification
+- ran similar sequences using dead projects
+- ran scripts on LOCchurn, no patterns as result
+- ran scripts on activedevs, no substantial patterns as result
+- RESULTS: sequences all indicate a stagnation in LOC change
+
+MAY:
+- survival analysis on LOC
+- pattern identification and typing
+- RESULTS: patterns indicate stagnation in LOC change, still active
+- RESULTS: 25 patterns of type A in both dead and alive projects
+- RESULTS: survival analysis of groups with and without pattern of type A revealed with pattern dies earlier,
+           but no median survival can be calculated as less than 50% of the group dies.
+
+
+Steps:
+- Data selection
+  - OhlohAnalytics: data gathering, validation, cleansing
+  - Data analysis: subsequent data series, minimal length
+  - Data selection and representativeness (Nagappan, Microsoft Research)
+  - RESULT: 99.5% representative set of 250 projects' evolution data
+
+- Wavelet transform
+  - Signal selection
+  - Discrete wavelet transformation
+  - RESULT: 22,943 data points in LOC of 250 projects transformed in 7 levels of decomposition using two types of coefficients
+
+- Wavelet analysis: similar sequence detection
+  - Compare coefficients from two projects to find similarities
+  - RESULT: 1,669,448 similar sequences found; only 16 of shift coefficients, the rest scale coefficients. 
+
+- Wavelet analysis: pattern detection
+  - Aggregation of similar sequences to groups of sequences forming a pattern
+  - RESULT: 16,049 patterns found. All of scale coefficients.
+
+- Pattern analysis
+  - Dead project identification (21 dead projects found)
+  - Patterns in dead projects (967 patterns)
+  - Patterns at end of evolution of dead projects (type A: 25 patterns)
+  - Projects having type A patterns die earlier: survival analysis
+  - RESULT: There is something with these patterns.
+
+- Conclusions
