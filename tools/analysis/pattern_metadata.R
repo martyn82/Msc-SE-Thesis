@@ -11,6 +11,12 @@ patterns.metadata <- data.frame(
   "seq.id"=numeric(0),
   "seq.type"=character(0),
   "pids"=character(0),
+  "rel.loc.diff"=numeric(0),
+  "rel.ad.diff"=numeric(0),
+  "rel.lc.diff"=numeric(0),
+  "max.rel.loc.diff"=numeric(0),
+  "max.rel.ad.diff"=numeric(0),
+  "max.rel.lc.diff"=numeric(0),
   "max.loc.diff"=numeric(0),
   "max.ad.diff"=numeric(0),
   "max.lc.diff"=numeric(0),
@@ -29,11 +35,17 @@ for(sid in sids){
   seq <- sequences[sequences$seq.id == sid, ]
   pattern <- patterns[patterns$seq.id == sid, ]
   sim <- similar[similar$Seq.Id == sid, ]
-
+stop()
   patterns.metadata[p, ] <- c(
     "seq.id"=as.numeric(sid),
     "seq.type"=as.character(pattern$seq.type),
     "pids"=as.character(pattern$pids),
+    "rel.loc.diff"=as.numeric(seq$rel.loc.diff),
+    "rel.ad.diff"=as.numeric(seq$rel.ad.diff),
+    "rel.lc.diff"=as.numeric(seq$rel.lc.diff),
+    "max.rel.loc.diff"=as.numeric(seq$max.rel.loc.diff),
+    "max.rel.ad.diff"=as.numeric(seq$max.rel.ad.diff),
+    "max.rel.lc.diff"=as.numeric(seq$max.rel.lc.diff),
     "max.loc.diff"=as.numeric(seq$max.loc.diff),
     "max.ad.diff"=as.numeric(seq$max.ad.diff),
     "max.lc.diff"=as.numeric(seq$max.lc.diff),
