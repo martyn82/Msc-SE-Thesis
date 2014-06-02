@@ -2,7 +2,7 @@
 \newif\ifisdraft
 \newif\ifispublished
 
-\isdrafttrue
+\isdraftfalse
 \ispublishedfalse
 
 \ifisdraft
@@ -95,6 +95,16 @@ succeed or fail in detecting evolutionary events?}
 
 \maketitle
 
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{\listtablename}
+\listoftables
+
 \include{introduction}
 \include{method}
 \include{background}
@@ -103,20 +113,12 @@ succeed or fail in detecting evolutionary events?}
 \include{analysis}
 \include{replication}
 
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography}
 \bibliography{thesis}{}
 \bibliographystyle{myplainnat}
-\addcontentsline{toc}{chapter}{Bibliography}
 
 %% appendices
-
-\clearpage
-\listoffigures
-\phantomsection
-\addcontentsline{toc}{chapter}{\listfigurename}
-
-\clearpage
-\listoftables
-\phantomsection
-\addcontentsline{toc}{chapter}{\listtablename}
 
 \end{document}

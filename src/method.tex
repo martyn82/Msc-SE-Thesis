@@ -22,10 +22,11 @@ The research will be conducted in the following steps:
 	
 	An important criterion for the data is that the evolution data for each project
 	is continuous, in the sense that it does not contain 'gaps'. Analysis on time
-	series requires subsequent series of data.
+	series is expected to require subsequent series of data
+	(\ref{hyp:subsequent_data}).
 	
 	The data set for analysis should also be representative to the total set of
-	OSS projects in order to be able to generalise conclusions from the
+	OSS projects in order to be able to generalise findings from the
 	projects within the data set to the world of OSS projects in general.
 	
 	\item[Wavelet analysis.] This step is divided into two sub-steps: wavelet
@@ -33,18 +34,17 @@ The research will be conducted in the following steps:
 	
 	First, the evolution data of the selected projects will be transformed using
 	discrete wavelet transform (DWT). The results of these transforms are kept for
-	further analysis. Important here is the choice of signal. The signal is a model
-	of a time variable and a frequency variable, and is also known as a 'wave'. The
-	signal can be composed of any measurable property of a project's evolution, such as
-	'lines of code' (LOC).
+	further analysis. Important here is the choice of signal. The signal is a
+	model of a time variable and a frequency variable, and is also known as a
+	'wave'. The signal can be composed of any measurable property of a project's
+	evolution, such as 'lines of code' (LOC).
 	
 	Second, the results of the transforms are being analysed to find patterns. A
 	pattern is a sequence of transformed data that occurs multiple times. To be
-	able to find patterns, we need to define in detail when a sequence is a
-	pattern. Choosing what recurrent in terms of number of occurrances will highly
-	influence the number of patterns found and possibly influence the types
-	of patterns we are able to detect. The same counts for the allowed error or
-	deviation in similarity for patterns.
+	able to find patterns, a detailed definition of when a sequence is a
+	pattern is needed. Choosing when a sequence becomes a pattern in terms of
+	number of occurrances will highly influence the number of patterns found and
+	possibly influence the types of patterns we are able to detect.
 	
 	\item[Pattern identification.] The patterns found in the Wavelet analysis step
 	will be further analysed to find patterns that are 'warning signs'. This is a
@@ -52,9 +52,9 @@ The research will be conducted in the following steps:
 	\ref{itm:question_warningsigns}). The validation needed in this step is
 	described in section \ref{method:validation}.
 	
-	\item[Conclude.] The final phase in the study is the analysis of the results to
-	come to conlusions and answers to the research questions (section
-	\ref{questions}).
+	\item[Analysis and conclusions.] The final phase in the study is the analysis
+	of the results to come to conlusions and answers to the research questions
+	(section \ref{questions}).
 \end{description}
 
 \section{Validation}
@@ -62,13 +62,13 @@ The research will be conducted in the following steps:
 \subsection{Dead projects}
 \label{def:dead}
 A project is considered 'dead' if it complies to the following properties:
-\begin{itemize}
+\begin{enumerate}
 	\item the project showed no change in 'lines of code' (LOC) for the last 12
 	months;
 	\item the project has had 0 contributors in code for the last 12 months;
 	\item the project has had 0 LOC churn\footnote{LOC churn: the sum of LOC added
 	and LOC deleted.} for the last 12 months.
-\end{itemize}
+\end{enumerate}
 
 \noindent
 The above properties combined specify that the project has had no code activity
@@ -77,17 +77,51 @@ According to this definition, changes in documentation, wiki pages, external
 library updates, and other non-code changes are still allowed for dead
 projects.
 
-To compare dead and alive projects from the data set, we can use the above
-definition to identify the projects from the data set that are dead. The
-projects that are not 'dead' by this definition are considered to be 'alive'.
+To compare dead and alive projects from the data set, the above definition can
+be used to identify the projects from the data set that are dead. The projects
+that are not 'dead' by this definition are considered to be 'alive'.
 
 \subsection{Dead project validation}
 To be sure that the projects from our data set that comply to the definition of
 dead (section \ref{def:dead}) are indeed dead, manual validation of these
 findings have to be done.
-In verifying if a project is dead, we will manually consult the project's
+In verifying if a project is dead, I will manually consult the project's
 website, its source code repository, and possibly other sources to verify the
 properties of a 'dead' project.
+
+\subsection{Hypotheses}
+In the search for patterns that may lead to the end of code evolution, the
+following hypotheses are defined. During the research, these hypotheses will be
+either confirmed or refuted.
+
+\subsubsection{Hypotheses regarding wavelet analysis}
+\begin{description}
+	\item[H1\label{hyp:subsequent_data}] \hspace{0em}
+	The analysis of waveforms will need a subsequent data series in order
+	to function properly.
+
+	An investigation will be made to determine the differences between analysing
+	subsequent data series and data series containing gaps. Whether this
+	hypothesis is true will help answering \ref{itm:question_successfailure}.
+\end{description}
+
+\subsubsection{Hypotheses regarding pattern identification}
+\begin{description}
+	\item[H2\label{hyp:pattern_low_diff}] \hspace{0em}
+	Patterns in LOC leading to end of code evolution contain low LOC differences.
+
+	For all patterns found with LOC as signal, the maximum LOC difference will be
+	computed and compared to patterns in LOC occurring at the end of code
+	evolution in the dead projects.
+	
+	\item[H3\label{hyp:pattern_types}] \hspace{0em}
+	Patterns at the end of code evolution in dead projects are warning signs.
+
+	The patterns occurring at the end of code evolution in dead projects are
+	expected to be more likely a warning sign. A survival analysis of projects
+	having these kinds of patterns will be conducted to confirm or refute this
+	hypothesis.
+\end{description}
 
 \begin{comment}
 - The plan

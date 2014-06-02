@@ -9,7 +9,8 @@ data was gathered in July 2013.
 The data set contains 21 (8.4\%) dead projects. A total of 38 (15.2\%) projects
 complied to the definition of a dead project as defined in section
 \ref{def:dead}, but manual verification of the 38 potential dead projects, with
-data up to April 2014, revealed that 21 (8.4\%) are \emph{really }\rm dead.
+data up to April 2014, revealed that 21 (8.4\%) are still complying to the
+definition of a dead project in April 2014.
 
 For each of the 38 projects, the project's website, source code repository, and
 commit history was consulted. The 21 dead projects and their $age\_in\_months$
@@ -76,18 +77,25 @@ increase of activity are more difficult to explain. Manual evaluation showed
 that there exist similar projects outside the data set that eventually die, but
 there are also similar projects that eventually got 'resurrected'.
 
+
+
 \section{Sequences and patterns}
-The wavelet transform and first analysis step resulted in 1,669,448 similar
-sequences found in project's LOC\footnote{LOC: see section
-\ref{section:signals}} signals. Almost all of these sequences (1,669,432
-(99.999\%)) were found in scale/filter coefficients in 250 distinct projects.
+The wavelet transform of the LOC signals of 250 projects resulted in 22,943
+data points decomposed up to 7 levels, using two types of coefficients.
+
+The first wavelet analysis step compared the series of coefficients of every
+unique pair of projects and resulted in 1,669,448 similar sequences found in
+project's LOC\footnote{LOC: see section \ref{section:signals}} signals. Almost
+all of these sequences (1,669,432 (99.999\%)) were found in scale/filter
+coefficients in 250 distinct projects.
 A mere 16 sequences were found in wavelet/shift coefficients occurring in 15
 distinct projects.
 
 \paragraph{}
-The detection of popular sequences found 16,049 patterns\footnote{Pattern:
-see section \ref{def:pattern}}. The patterns consist only of sequences
-of scale/filter coefficients.
+The second wavelet analysis step aggregated similar sequences across multiple
+pairs together to form patterns. The detection of these 'popular sequences'
+found 16,049 patterns\footnote{Pattern: see section \ref{def:pattern}}. The
+patterns consist only of sequences of scale/filter coefficients.
 
 \paragraph{}
 The patterns occurred between 5 and 1,512 times across the projects. On
@@ -101,6 +109,16 @@ of detail of the wavelet is to the original signal.
 (21\%) of the patterns appear in alive projects only; and 16 (0.1\%) of the
 patterns appear in dead projects only.
 
+\section{Typed patterns}
+The pattern typing from section \ref{section:patterns_dead} was the result of
+identification of patterns in dead projects only. There were are total of 967
+patterns found across 21 dead projects, of which 25 of type A, 317 of type B,
+and 625 of type AB.
+
+
+%\subsection{Patterns in dead projects}
+%The patterns that were found in dead projects were typed as shown in section
+%\ref{section:patterns_dead}.
 
 \begin{comment}
 - Factual results

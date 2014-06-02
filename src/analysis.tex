@@ -2,6 +2,49 @@
 \label{analysis}
 
 % answer subquestion one: what patterns can be found using wavelet analysis?
+\section{Wavelet analysis}
+In verification of Hypothesis \ref{hyp:subsequent_data}, the requirement of a
+subsequent data series for wavelet analysis, a hypothetical signal was
+constructed. Let the following set of pairs be the signal $S$ to be analysed,
+where the first value is the time value, and the second value the LOC value:
+$$S = \{(1,100), (2,150), (5,250)\}$$
+
+\noindent
+In signal $S$ the two pairs between $(2,150)$ and $(5,250)$ are missing. The
+implementation of discrete wavelet transform in the 'wavelets' R package
+requires an indexed series as input wavelet. This means, that whether or not
+the signal contains gaps, these gaps are automatically closed by using a
+subsequent index. After indexing, the signal $S$ will look as follows:
+$$S' = \{(0,100), (1,150), (2,250)\}$$
+
+\noindent
+The wavelet transformation can perfectly be done by using $S'$ as input
+signal and the output series of coefficients are indistinguishable from a
+signal without gaps. However, the patterns that are found will be invald as it
+was found by ignoring the missing data.
+
+\paragraph{}
+A further investigation was done on how to fix such gaps, using three different
+methods of 'guessing' the data:
+\begin{description}
+	\item[mean] \hfill \\[1em]
+	$\grave{S}' = \{(1,100), (2,150), (3,200), (4,200), (5,250)\}$
+	
+	\item[piecewise constant interpolation] \hfill \\[1em]
+	$\grave{S}'' = \{(1,100), (2,150), (3,150), (4,250), (5,250)\}$
+	
+	\item[linear interpolation] \hfill \\[1em]
+	$\grave{S}''' = \{(1,100), (2,150), (3,183), (4,216), (5,250)\}$
+\end{description}
+
+\paragraph{}
+The success of one of the above methods of closing a gap depends on the size of
+the gap. The smaller the gap, the lesser impact it has on the reliability of
+the detection of a pattern for that particluar signal. The larger the gap, the
+more the impact on reliability. However, having gaps in the data negatively
+influences the reliability of detecting patterns. Therefore, Hypothesis
+\ref{hyp:subsequent_data} is confirmed.
+
 \section{Sequence analysis}
 There are more than 100,000 times more similar sequences found in the
 scale/filter coefficients than in the wavelet/shift coefficients. The large
@@ -20,7 +63,7 @@ fundamentally different way of signal transformation. Mixing both types of
 coefficients would ignore how the coefficients were found and invalidate the
 patterns.
 
-\section{Pattern evaluation}
+\section{Pattern analysis}
 \label{section:pattern_evaluation}
 To be able to know what the patterns represent, the 16,049 patterns are
 projected onto the original signal. This is done by finding the project the
@@ -37,36 +80,130 @@ Knowing the start and end month of a sequence within a project, the values of
 the original signal during the sequence are captured for further analysis.
 
 \paragraph{}
-The absolute maximum differences of the LOC values is computed for each
-sequence. The patterns have maximum LOC differences between 0 (i.e., no change
-in LOC in the sequence) and 6,862,111. Figure \ref{figure:pattern_loc_diff}
-shows the distribution of this number across the patterns.
+In verification of hypothesis \ref{hyp:pattern_low_diff}, the absolute maximum
+differences of the LOC values is computed for each sequence. The patterns have
+maximum LOC differences between 0 (i.e., no change in LOC in the sequence) and
+6,862,111. Figure \ref{figure:pattern_loc_diff} shows the number of patterns
+having a certain value of maximum LOC difference.
 
 \input{figures/pattern_loc_diff_all}
 
+\noindent
 75\% of the patterns have a maximum LOC difference less than 20,595; 50\% have
 a maximum LOC difference less than 5,250; and 25\% less than 1,046.
 
-\paragraph{}
-The top four patterns with least maximum LOC differences are shown in Figure
-\ref{figure:top_patterns_plots} to illustrate how such patterns look like. The
-figure depicts the wavelets of the patterns for all the project signals they
-were detected in. Which are the differences in LOC values between two subsequent
-coefficients.
+\subsection{Pattern type A}
+The 25 type A patterns occur in 11 of the 21 dead projects. From the definition
+of a type A pattern, it should occur strictly at the end of the evolution of a
+dead project. This means that patterns overlap. At first, one would expect that
+there could be only one pattern at the end of the evolution of the same
+project. It appears there can be more than one. The patterns that overlap do
+last until the end of the evolution of a project, but they can start earlier.
 
-The graphs show that the sequences have similar waveforms. Each graph contains
-a multiple of plotted sequences: pattern 1: 216 sequences; pattern 2: 156
-sequences; pattern 3: 151 sequences; and pattern 4: 141 sequences. Note that
-the factor of scale is reintroduced, because the sequences all contain
-scale/filter coefficients. The factor of time, however, is still being
-eliminated, hence the use of \emph{index }\rm instead of a time metric on the
-horizontal axis.
+\paragraph{}
+For the 25 patterns of type A, which occur at the end of evolution of dead
+projects (section \ref{section:patterns_dead}), the maximum LOC differences are
+distributed differently than for the set of patterns as a whole. Table
+\ref{table:type_a_max_diff} shows the number of type A patterns having a
+certain value of maximum LOC difference.
+
+\input{tables/type_a_loc_diff}
+
+\noindent
+Table \ref{table:type_a_max_diff} suggests that Hypothesis
+\ref{hyp:pattern_low_diff} is \emph{false}\rm: it is not typically the case
+that patterns in LOC at the end of code evolution of dead projects have a low
+difference in LOC. The hypothesis is false in this data set.
+
+\paragraph{}
+The four patterns having the most common values of maximum LOC difference are
+shown in Figure \ref{figure:top_patterns_plots} to illustrate how these look
+like. The figure depicts the wavelets of the patterns, which are the LOC values
+at a given snapshot in time for the dead project it was detected in.
 
 \input{figures/top_patterns_plots}
 
+\paragraph{}
+Figure \ref{figure:top_patterns_plots} also show the lengths of the patterns.
+The shortest pattern lasts 19 months, the longest 57. 75\% of the type A
+patterns detected have a length of at least 25 months.
+
+\subsection{Warning signs}
+The type A patterns would be the best candidates for being 'warning signs' as
+they are detected at the end of evolution in dead projects. After selection of
+all the projects patterns of type A occur in, a total of 93 projects are found.
+Of which 11 were already in the pool of dead projects, and 79 are 'alive'
+projects.
+
+Using this group of 93 projects having a type A pattern, a second group of 93
+projects can be selected having not the pattern. This second group is
+representative to the complete data set, again using the tool by
+\citet{nagappan}. For each project of both groups it is recorded at what age the
+project died, that is, if it died. For the others, the maximum age in the data
+set is used. In Figure \ref{figure:kp_survival} the Kaplan-Meier estimation of
+the survival function is shown for these groups.
+
+\input{figures/kp_survival}
+
+\noindent
+Figure \ref{figure:kp_survival} suggests that group 1 of projects having the
+type A pattern die earlier than group 0 of projects without the pattern. This
+suggests that having a type A pattern shortens the life of a project.
+
+\begin{comment}
+\paragraph{}
+The four patterns with the most common maximum LOC differences are shown in
+Figure \ref{figure:top_patterns_plots} to illustrate how such patterns look
+like. The figure depicts the wavelets of the patterns for all the project
+signals they were detected in. Which are the differences in LOC values between
+two subsequent coefficients.
+
+\input{figures/top_patterns_plots}
+
+The graphs show that the sequences have similar waveforms. Each graph contains
+a multiple of plotted sequences: pattern 1 contains 216 sequences; pattern 2
+contains 156 sequences; pattern 3 contains 151 sequences; and pattern 4 contains
+141 sequences. Note that the factor of scale is reintroduced, because the
+sequences all contain scale/filter coefficients. The factor of time, however,
+is still being eliminated, hence the use of \emph{index }\rm instead of a time
+metric on the horizontal axis.
+\end{comment}
+
 \section{Conclusions}
-%Many more sequences were found using filtering. This is expected as scaling is
-% better than shifting at finding small coefficients.
+% What patterns can be found using wavelet analysis?
+% Under what conditions does wavelet analysis succeed or fail in detecting
+% evolutionary events?
+% Can we use wavelet analysis to find objective warning signs in open-source
+% software projects leading to the end of code evolution?
+
+The patterns detected using wavelet analysis on LOC signals show similar
+sequences of LOC series within and across projects. The waveforms of these
+patterns vary from sudden rise or fall in LOC, to stagnation and silence (i.e.,
+flat line).
+
+However, the detection of a pattern depends on the similarity of the sequence
+between other sequences within the same analysis. Therefore, the sequences that
+turn out to be patterns are subjective and relative to other sequences
+[\ref{itm:question_patterns}].
+
+\paragraph{}
+When an input LOC signal for analysis is not continuous within the start
+and end boundaries of the signal, the wavelet analysis will detect patterns
+that are not trustworthy. In that case, the wavelet analysis may find
+more false-positive evolutionary events [\ref{itm:question_successfailure}].
+
+\paragraph{}
+In answering the main question of the research
+``\emph{\researchQuestion}\rm'' [\ref{itm:question_warningsigns}]
+it can be said that wavelet analysis is able to find patterns that increase the
+chances of a project to end. However, it is too early to say that it is able to
+find an objective warning sign. In the analysis it appears that there is a
+relation between a pattern of type A and the death of a project, however, it is
+very hard to tell what caused the pattern.
+This makes validation of the pattern, what event caused the pattern, and the
+relation to the end of code evolution of the project difficult and a subject
+for further research.
+
 
 \section{Threats to validity}
 \begin{comment}
@@ -84,12 +221,13 @@ projects?
 \end{comment}
 
 \section{Future work}
-
+% use other metrics
+% even more data
 
 \begin{comment}
 - Analyse results
 - Conclude and interpret results
-- Answer research questions
+- Answer hypotheses and research questions
 - Threats to validity
 - Discussion
 - Future work
