@@ -27,23 +27,43 @@ was found by ignoring the missing data.
 A further investigation was done on how to fix such gaps, using three different
 methods of 'guessing' the data:
 \begin{description}
+	\item[last observation carried] \hfill \\[1em]
+	$\grave{S}' = \{(1,100), (2,150), (3,150), (4,150), (5,250)\}$
+
 	\item[mean] \hfill \\[1em]
-	$\grave{S}' = \{(1,100), (2,150), (3,200), (4,200), (5,250)\}$
+	$\grave{S}'' = \{(1,100), (2,150), (3,200), (4,200), (5,250)\}$
 	
 	\item[piecewise constant interpolation] \hfill \\[1em]
-	$\grave{S}'' = \{(1,100), (2,150), (3,150), (4,250), (5,250)\}$
+	$\grave{S}''' = \{(1,100), (2,150), (3,150), (4,250), (5,250)\}$
 	
 	\item[linear interpolation] \hfill \\[1em]
-	$\grave{S}''' = \{(1,100), (2,150), (3,183), (4,216), (5,250)\}$
+	$\grave{S}'''' = \{(1,100), (2,150), (3,183), (4,216), (5,250)\}$
 \end{description}
+
+\paragraph{}
+Using the first method \emph{last observation carried }\rm will give a signal
+with a flat line between point 2 and 5. Filling the gap with \emph{mean }\rm
+values, will still result in a signal with a flat line, although smaller, but
+still undesired. The \emph{piecewise constant }\rm interpolation results in two
+smaller flat lines. And the \emph{linear interpolation }\rm will give a signal
+that will linearly flow towards the next known value. 
+
+The flat lines, when it lasts long enough, may be detected as no change in LOC
+during that period. This is undesired as can be mistaken for a pattern that
+stopped code evolution.
+
+However, the linear line could be mistaken for growth or shrink in LOC,
+depending on the direction of the line. If the period of interpolation is long
+enough, this also might give the wrong idea. Either way, 'guessing' missing data
+adds noise. Not only to the project itself, but to the analysis as a whole.
 
 \paragraph{}
 The success of one of the above methods of closing a gap depends on the size of
 the gap. The smaller the gap, the lesser impact it has on the reliability of
 the detection of a pattern for that particluar signal. The larger the gap, the
-more the impact on reliability. However, having gaps in the data negatively
-influences the reliability of detecting patterns. Therefore, Hypothesis
-\ref{hyp:subsequent_data} is confirmed.
+more the impact on reliability. However, in general having gaps in the data
+negatively influences the reliability of detecting patterns. Therefore,
+Hypothesis \ref{hyp:subsequent_data} is confirmed.
 
 \section{Sequence analysis}
 There are more than 100,000 times more similar sequences found in the

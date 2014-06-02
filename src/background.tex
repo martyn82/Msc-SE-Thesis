@@ -119,12 +119,8 @@ evolutionary events.
 
 \section{Wavelet analysis}
 \label{wavelet_analysis}
-A wavelet is a portion of a continuous-time signal (also known as waveform).
-Opposed to the continuous wave which has infinite duration, the wavelet has a
-finite duration.
-
-The analysis of waves is being used in many fields, such as, economics,
-seismology, (astro-)physics, and computer science.
+Wavelets are functions that satisfy certain mathematical requirements and are
+used in representing data or other functions \cite{graps}.
 
 \subsection{Waveforms}
 A waveform, or wave, is a signal (time-series) in a two-dimensional space.
@@ -144,14 +140,14 @@ amplitude or frequency value.
 \input{figures/wave}
 
 However, the time domain is not specifically bound to time intervals only. A
-less intuitive, but realistic approach would be to model amplitude in the time
-domain. That way the frequency relation to amplitude of a signal can be
-analysed, but the time information is lost.
+less intuitive approach could be to model frequency in the time domain. That
+way the frequency relation to amplitude of a signal can be analysed, but the
+time information is lost.
 
 \subsection{Discrete wavelet transformation}
-To be able to analyse and compare different wavelets, we need a way to scale
-the signal. Discrete wavelet transformation is the operation of applying a
-filter function (also known as 'filter'), or set of filter functions (also known
+To be able to analyse and compare wavelets of different lengths and scales, we
+need a way to transform the signal. Discrete wavelet transformation is the
+operation of applying a filter function, or set of filter functions (also known
 as 'filter bank') to the wavelet. This is a way of sampling the signal at
 different intervals giving a natural means of scaling the signal
 \cite{karus2013}.
@@ -159,14 +155,19 @@ different intervals giving a natural means of scaling the signal
 \paragraph{}
 Wavelet analysis is similar to Fourier analysis with the difference that
 wavelet transform deals with time and frequency information, and Fourier
-transform deals with frequency information only. Wavelet analysis is the
-transformation of signals (time-series) by decomposing the signal into
-wavelet/shift coefficients, and scaling/filter coefficients based on wavelet
-functions (filters) \cite{karus2013}.
+transform deals with frequency information only. Wavelet analysis has the
+advantage over Fourier analysis that it can deal with 'choppy' signals, as
+opposed to only sines and cosines \cite{graps}.
 
-Shifting/translating is the operation of moving the wavelet in the time
-domain producing scale/filter coefficients, and requires frequency resolution.
-Filtering/dilating is the operation of scaling the the wavelet in the frequency
+\paragraph{}
+Wavelet transform is the transformation of signals (time-series) by
+decomposing the signal into wavelet/shift coefficients, and scaling/filter
+coefficients based on filter functions (i.e., filters) \cite{karus2013}.
+
+During wavelet transform, the signal is shifted and filtered.
+Shifting/translating is the operation of moving the wavelet in the time domain
+producing scale/filter coefficients, and requires frequency resolution.
+Filtering/dilating is the operation of scaling the wavelet in the frequency
 domain producing wavelet/shift coefficients, and requires time resolution.
 These operations are illustrated in Figure \ref{figure:shifting} and Figure
 \ref{figure:filtering} respectively.
@@ -182,14 +183,15 @@ being used.
 
 \paragraph{}
 Wavelet transform has proven important in signal processing thanks to its
-inherent properties which allow comparisons at different scales and shifts.
-Compared to other time series analysis techniques, the main advantages of
-wavelet transformations in the analysis of signals are \cite{karus2013}:
+inherent properties which allow comparisons at different scales and shifts
+\cite{karus2013}. Compared to other time series analysis techniques, the main
+advantages of wavelet transformations in the analysis of signals are:
 \begin{itemize}
 	\item Wavelet/shift coefficients allow fuzzy matching as differences in details
 	are 'smoothed out'.
 	\item Filter/scale coefficients allow detection of small anomalies in series.
-	\item Transform levels make series of different lengths or scale comparable.
+	\item Decomposition levels make series of different lengths or scale
+	comparable.
 \end{itemize}
 
 \subsection{Wavelet functions}
@@ -238,12 +240,22 @@ divide the signal into two wavelets that range from 0 to $1/2$ and from
 $1/2$ to 1. Then we can divide the signal again giving four wavelets that range
 from 0 to $1/4$, from $1/4$ to $2/4$, from $2/4$ to $3/4$, and from $3/4$ to 1
 \cite{graps}. This decomposition can be repeated as long as the time resolution
-of the original signal allows.
+of the original signal allows, that is, as long as the number of resulting
+coefficients is larger than 2 (filter length). Wavelet transforms using Haar
+filter is illustrated in Figure \ref{figure:haar_transform}.
 
 In each scaling or filtering step (i.e., decomposition) the Haar function adds
 more detail to the wavelets in the current level. The Haar filter captures the
 differences between scale levels. The resulting coefficients can be used to
-compare signals regardless of scale and length \cite{graps}.
+compare signals regardless of scale or length \cite{graps}.
+
+\input{figures/haar_transform}
+
+\paragraph{}
+The resulting coefficients should only be compared to coefficients of the same
+type. The scale/filter coefficients are incomparable to the wavelet/shift
+coefficients, because that would mean comparing time values with frequency
+values.
 
 \paragraph{}
 Wavelet transformation with the Haar filter is widely used. For example, as a
