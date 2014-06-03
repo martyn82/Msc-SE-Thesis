@@ -275,15 +275,22 @@ differences between scale levels. These resulting coefficients can be used to
 compare signals regardless of scale or length \cite{graps}.
 
 Wavelet transform using the Haar filter is illustrated in Figure
-\ref{figure:haar_transform}.
+\ref{figure:haar_transform}. The figure shows a stacked plot of a signal
+(lower most graph) and the transformed signals at each level of decomposition.
 
 \input{figures/haar_transform}
+
+The spikes shown in Figure \ref{figure:haar_transform} represent the
+coefficients found at the relevant level. The number of coefficients increases
+by a factor of 2 at each level. In the figure, the original signal consists of
+64 samples, therefore, the signal can be decomposed to a maximum of $64 \log_{2}
+= 6$ levels; having 
 
 \paragraph{}
 The coefficients should only be compared to coefficients of the same type. The
 scale/filter coefficients are incomparable to the wavelet/shift coefficients,
-because that would mean comparing time with frequency which leads to undesired
-relations.
+because that would mean comparing time with frequency which leads to invalid
+relations between signals.
 
 \paragraph{}
 Wavelet transform using the Haar filter is widely used in other fields. For
