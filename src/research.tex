@@ -51,13 +51,14 @@ Although the data set should be consistent after validation and cleansing,
 another validation step is needed prior to the selection of the 250 projects
 for the study.
 
-The evolution data of the 10,811 projects contained gaps. A subsequent series of
-data is necessary to be able to analyse time series for a project.
-Therefore, a number representing the \emph{fraction of continuity }\rm of the
-evolution data per project was needed. For each project the difference between
-the minimum and maximum values of the $age\_in\_months$ fact is taken, added by
-one, giving the expected number of data points for a project. The calculation of
-the fraction of total evolution data is done for each project.
+The evolution data of the 10,811 projects contained gaps. It is expected by
+Hypothesis \ref{hyp:subsequent_data} that a subsequent series of data is
+required to be able to analyse time series for a project. Therefore, a number
+representing the \emph{fraction of continuity }\rm of the evolution data per
+project was calculated. For each project the difference between the minimum and
+maximum values of the $age\_in\_months$ fact is taken, added by one, giving the
+expected number of data points for a project. The computation of the fraction
+of total evolution data is done for each project.
 
 After the fractions of the total evolution data for each project were caculated,
 the projects were filtered and only those projects that have all data points
@@ -65,8 +66,8 @@ between minimum and maximum $age\_in\_months$ are kept. This reduces the total
 number of projects to 6,418.
 
 \subsubsection{Minimal sequence length}
-A time series of 1 (monthly) data point is obviously not analysable over time
-and uncomparable to larger projects. The threshold of at least 12 monthly data
+A time series of 1 (monthly) data point is not analysable over time and
+incomparable to larger projects. The threshold of at least 12 monthly data
 points is chosen to minimise noise in the evolution data that may be caused by
 too young or unstable projects.
 
@@ -85,19 +86,23 @@ representativeness of the sample as a whole, compared to the master data.
 
 The master data is a list of 20,028 projects tracked by Ohloh delivered with
 this tool. A pre-filtering of this master data was done to make the tool select
-only the projects that appear in the data set of 5,986 projects. After
-pre-filtering, a subset of the master data of 1,588 projects is left. From this
-subset, a sample of 250 projects was selected.
+only the projects that appear in the data set of 5,986 projects.
 
-The resulting sample of 250 projects was scored against the initial master data
-of 20,028 projects and scores a 99.5\% representativeness.
+The resulting sample of 250 projects was scored against the tool's initial
+master data of 20,028 projects and scores a 99.5\%
+representativeness.
 
-\subsection{Results}
-The statistical results of the Data selection phase of the study are the
-following: the evolution data of 250 distinct projects having a total of 22,943
-data points. The biggest project having 321 monthly data points, the smallest
-having 14 monthly data points. This confirms that there are no projects with
-less than 12 monthly data points.
+\subsection{Dead projects}
+In the search to find patterns that are warning signs leading to the end of
+code evolution, the projects that satisfy the definition of a dead project (see
+also section \ref{def:dead}) were extracted from the 250 projects.
+
+\subsection{Final data set}
+The statistical results of the Data selection phase are the following: the
+evolution data of 250 distinct projects having a total of 22,943 data points.
+The biggest project having 321 monthly data points, the smallest having 14
+monthly data points. This confirms that there are no projects with less than 12
+monthly data points.
 
 \section{Wavelet transform and analysis}
 \subsection{Project signals}
@@ -111,12 +116,12 @@ $age\_in\_months$ in the time domain, and $LOC$ in the frequency domain. Figure
 
 \paragraph{}
 The $LOC$ metric used in this study for the transform and analysis is slightly
-different from the $loc\_fact$ that exists in the data set. The goal for the
-signal processing is to be able to detect patterns in a project's code activity.
-This means that all changes that occur in source files are of interest.
-Therefore, the same metric as in the original study by \citet{karus2013} is
-used. The $LOC$ metric is constructed as the sum of $loc\_fact$,
-$comments\_fact$, and $blanks\_fact$.
+different from the $loc\_fact$ that is available at Ohloh. The goal for the
+signal processing is to be able to detect patterns in a project's code
+activity. This means that all changes that occur in source files are of
+interest. Therefore, the same metric as in the original study by
+\citet{karus2013} is used. The $LOC$ metric is constructed as the sum of
+$loc\_fact$, $comments\_fact$, and $blanks\_fact$.
 
 \paragraph{}
 For the wavelet transform and analysis, I have used R Statistics Suite
@@ -139,42 +144,42 @@ made to make the scripts compatible with the data set.
 The first step in the analysis of time series of software evolution is the
 wavelet transform. During this step discrete wavelet transform using the Haar
 filter is applied on a project's signal. The results comprise the
-coefficients\footnote{The coefficients are not the same as data points. The
-data points represent monthly facts from a project, and the coefficients in
-sequences represent values found at a certain level of decomposition from the
-wavelet transform. More specifically: the coefficients are values resulted from
-shifting or filtering the signal.} at each level of decomposition which are
-saved for further analysis. For more details on this analysis method see
-section \ref{wavelet_analysis}.
+coefficients at each level of decomposition which are saved for further
+analysis.
+
+The coefficients are not the same as data points. The data points represent
+monthly facts from a project, and the coefficients represent values found at a
+certain level of decomposition from the wavelet transform. More specifically:
+the coefficients are values resulted from shifting or scaling the signal. For
+more details on wavelet transform and analysis see section
+\ref{wavelet_analysis}.
 
 \subsection{Wavelet analysis}
 \subsubsection{Similar sequence identification}
-During this step the resulting coefficients from the wavelet transform are
-analysed to find \emph{similar sequences}\rm. A sequence is defined as a
-subsequent series of coefficients, at a particular level of decomposition, with
-a sequence length between 3 and 65 (inclusive) coefficients.
+The coefficients resulted from the wavelet transform are analysed to find
+\emph{similar sequences}\rm. A sequence is defined as a subsequent series of
+coefficients at a particular level of decomposition, with a sequence length
+between 3 and 65 (inclusive) coefficients.
 
-The thresholds were chosen by \citet{karus2013} in the original study to
-distinguish a sequence from an ordinary set of coefficients if the sequence is
-very short (length 1 or 2). On the other hand, the ability to distinguish the
-sequence from the complete signal is needed, hence the maximum length of 65.
+The sequence length thresholds were chosen by \citet{karus2013} in the original
+study to distinguish a sequence from an ordinary set of coefficients if the
+sequence is very short (length 1 or 2). Or, in case the sequence is very long,
+the ability to distinguish the sequence from the complete signal, hence the
+maximum length of 65.
 
+\paragraph{}
 A sequence is considered 'similar' if at least one other sequence was found of
 which the values of the coefficients are equal with respect to an allowed
 deviation. The process of finding similar sequences constructs pairs of
 sequences from one project to the other. Similar sequences may be found within
 one project, but can also be found across projects. 
 
-\paragraph{}
-The similar sequence identification found 1,669,448 sequences that occurred
-at least 2 times. Only 16 sequences were found in wavelet/shift coefficients,
-the other 1,669,432 sequences were found in filter/scale coefficients.
-
 \subsubsection{Similar sequence grouping}
 \label{def:pattern}
 Not all of the sequences found in the previous step are interesting. Many of
-these sequences are just small changes in the signal. In this step, the similar
-sequences from previous step are taken as input to find 'patterns'.
+the sequences considered similar are coincidence, or represent trivialities. In
+the sequence grouping step, the similar sequences are taken as input to find
+'patterns'.
 
 \paragraph{}
 A sequence is considered a 'pattern' if it appears at least 3 times in the
@@ -182,41 +187,19 @@ sequence data. Each pattern is assigned an identification number to be used in
 further analysis.
 
 The sequences that are instances of the same pattern are grouped together and
-added meta data, such as the number of occurrances, the list of projects
-it occurs, and whether it appears in dead, alive, or both dead and alive
-projects.
-
-\subsection{Results}
-The results of this phase revealed a total of 16,049 patterns in the projects.
+added meta data, such as the number of occurrences, the list of projects
+it occurs in, and whether this list of projects contains dead, alive, or both
+dead and alive projects.
 
 \section{Pattern identification}
-\subsection{Dead project identification}
-In the search to find patterns that are warning signs leading to the end of
-code evolution, the projects that satisfy the definition of a dead project (see
-also section \ref{def:dead}) were extracted from the 250 projects.
-A total of 38 projects are dead according to the definition and their evolution
-data in the data set. However, further verification with more recent data is
-needed to confirm this.
-
-\paragraph{}
-The data set contains data points up to June 2013. After manual verification of
-the 'dead' projects with data up to April 2014, 21 of the 38 projects have had
-no code activity in the period between June 2012 and April 2014. This data is
-acquired by consulting the project's websites, source code repositories and
-commit history, and the data available at Ohloh.
-
-More information on the results of the evaluation of dead projects can be found
-in section \ref{section:deads}.
-
-\subsection{Patterns in dead projects}
 \label{section:patterns_dead}
-Given the set of 21 dead projects, all patterns occurring in the dead
+Given the dead projects in the data set, all patterns occurring in the dead
 projects are selected. Patterns occurring in dead projects can be hints of
-evolutionary events that lead to the death of a project.
+evolutionary events that lead to the death of the project.
 
-A total number of 967 patterns were found across dead projects. The patterns
-do not occur at the same moment in the lifetime of the projects. Therefore,
-different types of patterns for dead projects are introduced:
+The patterns found in dead projects do not occur all at the same moment in the
+lifetime of the projects. Therefore, different types of patterns for dead
+projects are introduced:
 
 \begin{description}
 	\item[Type A.] Type A patterns strictly occur at the end of the evolution data
@@ -228,22 +211,20 @@ different types of patterns for dead projects are introduced:
 		evolution data of a dead project, but anywhere else in the lifetime of a dead
 		project.
 	
-	\item[Type AB.] Type AB patterns are patterns that behave like both types A and
-		B patterns.
+	\item[Type AB.] Type AB patterns are patterns that weakly satisfy the
+		properties of both type A and B patterns. This category is needed to
+		distinguish strict type A patterns.
 \end{description}
 
 \noindent
-The above types partition the total set of patterns into three disjunctive sets.
+The above types partition the total set of encountered patterns into three
+disjunctive sets.
 
-In the search for patterns that are warning signs, the patterns of type A are
-the most interesting, because these patterns could indicate an evolutionary
-event that lead to the end of code evolution for the dead projects it appears
-in.
-
-\subsection{Results}
-From the 967 patterns that were found across 21 dead projects, 25 of these
-patterns are type A patterns, 317 of type B, and 625 of type AB.
-
+\subsection{Finding warning signs}
+In the search for patterns that are warning signs, the patterns of type A will
+be the most interesting, because these patterns could indicate an evolutionary
+event that has lead to the end of code evolution for the dead projects it
+appears in.
 
 \begin{comment}
 - Execution of the research

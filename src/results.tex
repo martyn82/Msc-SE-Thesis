@@ -3,19 +3,17 @@
 
 \section{Dead projects}
 \label{section:deads}
-The data set of 250 projects contains data points up to June 2013, because the
-data was gathered in July 2013.
+The data set of 250 projects was gathered in July 2013, and contains data points
+up to June 2013.
 
-The data set contains 21 (8.4\%) dead projects. A total of 38 (15.2\%) projects
-complied to the definition of a dead project as defined in section
-\ref{def:dead}, but manual verification of the 38 potential dead projects, with
-data up to April 2014, revealed that 21 (8.4\%) are still complying to the
-definition of a dead project in April 2014.
+A total of 38 (15.2\%) projects complied to the definition of a dead project as
+defined in section \ref{def:dead}. Manual verification of the 38 potential
+dead projects using the project's websites, source code repositories, and
+commit history up to April 2014, revealed that 21 (8.4\%) are still complying
+to the definition of a dead project in April 2014.
 
-For each of the 38 projects, the project's website, source code repository, and
-commit history was consulted. The 21 dead projects and their $age\_in\_months$
-at the moment of death as a result of the verification are shown in Table
-\ref{table:deads}.
+The 21 dead projects and their $age\_in\_months$ at the moment of death as a
+result of the verification are shown in Table \ref{table:deads}.
 
 \input{tables/deads}
 
@@ -27,16 +25,12 @@ intervals. However, since the updates do not involve code activity, it is
 considered dead.
 
 \paragraph{}
-The first 7 projects have died before their first anniversary. The tail 14
-projects died between 14 and 142 months of age.
-
-\paragraph{}
 When zooming in on the project with ID 317799, which is the youngest in this set
 and died in its second month, it shows that this project has had a history of
 the slightest change in its lines of code evolution. The project has had a total
 number of 7 commits during the time it is being tracked by Ohloh (since
-September 2011 up to now). A total of 4 contributors have worked on the project
-since it was tracked. The most recent commit was done in October 2011.
+September 2011). A total of 4 contributors have worked on the project since it
+was tracked. The most recent commit was done in October 2011.
 
 \paragraph{}
 Project with ID 12547 is the oldest. It died after 142 tracked months and has
@@ -56,11 +50,11 @@ The project died in July 2012, after 8 months since the first data point
 tracked.
 
 \paragraph{}
-The other 17 projects complying to the definition of dead (section
-\ref{def:dead}) appeared to be still alive. For 9 of the projects activity is
-very low or rapidly decreasing; 5 projects were migrated to another source code
-repository; and for 3 projects the activity is increasing after a long period of
-no activity.
+From the initial 38 projects, the remaining 17 projects complying to the
+definition of dead (section \ref{def:dead}) appeared to be still alive. For 9
+of the projects activity is very low or rapidly decreasing; 5 projects were
+migrated to another source code repository; and for 3 projects the activity is
+increasing after a long period of no activity.
 
 \paragraph{}
 The 9 projects with very low or decreasing activity show signs of 'dying'. Their
@@ -81,40 +75,49 @@ there are also similar projects that eventually got 'resurrected'.
 
 \section{Sequences and patterns}
 The wavelet transform of the LOC signals of 250 projects resulted in 22,943
-data points decomposed up to 7 levels, using two types of coefficients.
+data points decomposed up to 7 levels into wavelet/shift and filter/scale
+coefficients.
 
-The first wavelet analysis step compared the series of coefficients of every
-unique pair of projects and resulted in 1,669,448 similar sequences found in
-project's LOC\footnote{LOC: see section \ref{section:signals}} signals. Almost
-all of these sequences (1,669,432 (99.999\%)) were found in scale/filter
-coefficients in 250 distinct projects.
-A mere 16 sequences were found in wavelet/shift coefficients occurring in 15
-distinct projects.
+The similar sequence identification found 1,669,448 sequences that occurred
+at least 2 times. A mere 16 sequences were found in wavelet/shift coefficients,
+the other 1,669,432 sequences were found in filter/scale coefficients.
 
 \paragraph{}
 The second wavelet analysis step aggregated similar sequences across multiple
 pairs together to form patterns. The detection of these 'popular sequences'
-found 16,049 patterns\footnote{Pattern: see section \ref{def:pattern}}. The
-patterns consist only of sequences of scale/filter coefficients.
+found 16,049 patterns. The patterns consist only of sequences of scale/filter
+coefficients.
+
+Some patterns that were found are shown in Figure \ref{figure:patterns_plots}.
+The four graphs are plots of patterns recomposed onto the original signal. The
+graphs all have multiple ($>$ 140) occurences of the pattern plotted of one or
+more projects in the same graph. The graphs show that the sequences have
+similar waveforms. Each graph contains a multiple of plotted sequences: pattern
+1 contains 216 sequences; pattern 2 contains 156 sequences; pattern 3 contains
+151 sequences; and pattern 4 contains 141 sequences.
+
+
+\input{figures/patterns_plots}
 
 \paragraph{}
 The patterns occurred between 5 and 1,512 times across the projects. On
 average, a pattern occurs 104 times. A single pattern occurs in at least 1 and
 at most 204 projects (36 projects on average). The pattern length is between 4
-and 19 coefficients (on average 6) across various decomposition levels.
-Patterns are found at levels 3 to 7. The higher the level, the closer the level
-of detail of the wavelet is to the original signal.
+and 19 coefficients (on average 6) across decomposition levels 3 to 7. The
+higher the level, the closer the level of detail of the wavelet is to the
+original signal.
+
+\paragraph{}
 
 12,643 (79\%) of the patterns appear in both dead and alive projects; 3,390
 (21\%) of the patterns appear in alive projects only; and 16 (0.1\%) of the
 patterns appear in dead projects only.
 
-\section{Typed patterns}
-The pattern typing from section \ref{section:patterns_dead} was the result of
-identification of patterns in dead projects only. There were are total of 967
-patterns found across 21 dead projects, of which 25 of type A, 317 of type B,
-and 625 of type AB.
-
+\section{Pattern classification}
+The types of patterns from section \ref{section:patterns_dead} was the result
+of identification of patterns in dead projects only. There were are total of
+967 patterns found across 21 dead projects, of which 25 of type A, 317 of type
+B, and 625 of type AB.
 
 %\subsection{Patterns in dead projects}
 %The patterns that were found in dead projects were typed as shown in section

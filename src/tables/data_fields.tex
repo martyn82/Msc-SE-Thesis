@@ -11,31 +11,31 @@
 		\bfseries{Activity}\rm \\ \hline
 
 		abs\_loc\_growth & $loc\_added\_fact$, $loc\_deleted\_fact$ & The number of
-		'lines of code' (LOC) that the project has grown (or shrank) this month. \\
+		'lines of code' (LOC) that the project has grown (or shrank) current month. \\
 
 		blanks\_added\_fact & Raw & The number of blank lines added to source text
-		this month. \\
+		current month. \\
 
 		blanks\_deleted\_fact & Raw & The number of blank lines deleted from source
-		text this month. \\
+		text current month. \\
 
 		comments\_added\_fact & Raw & The number of lines of comments added in source
-		text this month. \\
+		text current month. \\
 
 		comments\_deleted\_fact & Raw & The number of lines deleted from source text
-		which are comments; for this month. \\
+		which are comments; for current month. \\
 
-		commits\_fact & Raw & The total number of commits made this month. \\
+		commits\_fact & Raw & The total number of commits made current month. \\
 
 		contributors\_fact & Raw & The total number of contributors who made at least
-		one commit this month. \\
+		one commit current month. \\
 
 		ind\_loc\_growth & $loc\_fact$, $abs\_loc\_growth$ & The relative growth of
-		the project measured in LOC for this month. \\
+		the project measured in LOC for current month. \\
 
-		loc\_added\_fact & Raw & The number of LOC added this month. \\
+		loc\_added\_fact & Raw & The number of LOC added current month. \\
 
-		loc\_deleted\_fact & Raw & The number of LOC deleted this month. \\
+		loc\_deleted\_fact & Raw & The number of LOC deleted current month. \\
 		\hline
 		
 		\bfseries{Analysis}\rm \\ \hline
@@ -50,27 +50,27 @@
 		since the first data point (i.e., where $age\_in\_months = 0$). \\
 
 		main\_language\_fact & Raw & The programming language having the highest LOC
-		value for the project in this month (XML and HTML are ignored). \\
+		value for the project in current month (XML and HTML are ignored). \\
 
-		month\_fact & Raw & The month value of this month's analysis. Extracted from
+		month\_fact & Raw & The month value of current month's analysis. Extracted from
 		$udpated\_at$ field. \\
 
-		year\_fact & Raw & The year value of this month's analysis. Extracted from
+		year\_fact & Raw & The year value of current month's analysis. Extracted from
 		$updated\_at$ field. \\
 		\hline
 		
 		\bfseries{Size}\rm \\ \hline
 
-		blanks\_fact & Raw & The total number of blank lines in source text this
+		blanks\_fact & Raw & The total number of blank lines in source text in current
 		month. \\
 
 		comment\_ratio\_fact & Raw & The fraction of net lines in source text which
-		are comments; for this month. \\
+		are comments; for current month. \\
 
 		comments\_fact & Raw & The total number of lines in source text which are
-		comments; for this month. \\
+		comments; for current month. \\
 
-		loc\_fact & Raw & The total number of LOC this month. \\
+		loc\_fact & Raw & The total number of LOC current month. \\
 
 		\hline
 	\end{tabular}
