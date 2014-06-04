@@ -12,6 +12,7 @@ MARCH:
 - defined measure for signal (LOC on age.months)
 - study wavelet analysis
 - first complete wavelet analysis run on data set
+- RESULTS: final data set
 
 APRIL:
 - build data set of higher quality (coverage, minimal months)
@@ -22,7 +23,9 @@ APRIL:
 - ran similar sequences using dead projects
 - ran scripts on LOCchurn, no patterns as result
 - ran scripts on activedevs, no substantial patterns as result
-- RESULTS: sequences all indicate a stagnation in LOC change
+- RESULTS: dead projects identified
+- RESULTS: dequences found that indicate a stagnation in LOC change
+- RESULST: patterns found
 
 MAY:
 - survival analysis on LOC
@@ -39,6 +42,7 @@ Steps:
   - Data analysis: subsequent data series, minimal length
   - Data selection and representativeness (Nagappan, Microsoft Research)
   - RESULT: 99.5% representative set of 250 projects' evolution data
+  - RESULT: 21 of 250 projects are identified as dead
 
 - Wavelet transform
   - Signal selection
@@ -58,6 +62,6 @@ Steps:
   - Patterns in dead projects (967 patterns)
   - Patterns at end of evolution of dead projects (type A: 25 patterns)
   - Projects having type A patterns die earlier: survival analysis
-  - RESULT: There is something with these patterns.
+  - RESULT: A survival analysis on projects having type A patterns suggests these projects have a higher chance of dying
 
 - Conclusions

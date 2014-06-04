@@ -73,7 +73,7 @@ too young or unstable projects.
 
 After this selection the data set contains 5,986 projects.
 
-\subsubsection{Representativeness}
+\subsubsection{Sample selection}
 For the selection of a sample of 250 projects, the tool created by
 \citet{nagappan} at Microsoft Research is used. This tool takes a - possibly
 atomic - sample set and selects additional projects to add to the sample that
@@ -88,21 +88,10 @@ The master data is a list of 20,028 projects tracked by Ohloh delivered with
 this tool. A pre-filtering of this master data was done to make the tool select
 only the projects that appear in the data set of 5,986 projects.
 
-The resulting sample of 250 projects was scored against the tool's initial
-master data of 20,028 projects and scores a 99.5\%
-representativeness.
-
 \subsection{Dead projects}
 In the search to find patterns that are warning signs leading to the end of
 code evolution, the projects that satisfy the definition of a dead project (see
 also section \ref{def:dead}) were extracted from the 250 projects.
-
-\subsection{Final data set}
-The statistical results of the Data selection phase are the following: the
-evolution data of 250 distinct projects having a total of 22,943 data points.
-The biggest project having 321 monthly data points, the smallest having 14
-monthly data points. This confirms that there are no projects with less than 12
-monthly data points.
 
 \section{Wavelet transform and analysis}
 \subsection{Project signals}
@@ -168,16 +157,20 @@ the ability to distinguish the sequence from the complete signal, hence the
 maximum length of 65.
 
 \paragraph{}
-A sequence is considered 'similar' if at least one other sequence was found of
-which the values of the coefficients are equal with respect to an allowed
-deviation. The process of finding similar sequences constructs pairs of
-sequences from one project to the other. Similar sequences may be found within
-one project, but can also be found across projects. 
+In the search for similar sequences, the sequences of one project at a time are
+analysed against sequences of other projects. A sequence is considered
+'similar' if at least one other sequence was found of which the values of the
+coefficients are equal with respect to an allowed deviation. The process of
+finding similar sequences constructs ordered pairs of sequences from one
+project to the other. The first element of the pair is the project of which the
+sequence was first discovered, the second is the project of the similar
+sequence. Similar sequences may be found within one project, but can also be
+found across projects.
 
 \subsubsection{Similar sequence grouping}
 \label{def:pattern}
 Not all of the sequences found in the previous step are interesting. Many of
-the sequences considered similar are coincidence, or represent trivialities. In
+the sequences considered similar are contingent or represent trivialities. In
 the sequence grouping step, the similar sequences are taken as input to find
 'patterns'.
 
@@ -191,10 +184,22 @@ added meta data, such as the number of occurrences, the list of projects
 it occurs in, and whether this list of projects contains dead, alive, or both
 dead and alive projects.
 
-\section{Pattern identification}
+\paragraph{}
+A distinction is made between the \emph{detection }\rm of a pattern and an
+\emph{occurrence }\rm of a pattern. Although the difference is slight, the
+distinction is essential for further analysis.
+
+When \emph{detecting }\rm a pattern in project $A$, it means it was
+encountered by analysing that particular project. Finding an \emph{occurrence
+}\rm of a pattern means that the pattern was found by evaluating other project
+$B$'s sequences against those from project $A$. A pattern is then recorded as a
+tuple of a sequence detected in project $A$ and a set of at least 2 other
+sequences being similar, occurring elsewhere.
+
+\section{Pattern classification}
 \label{section:patterns_dead}
-Given the dead projects in the data set, all patterns occurring in the dead
-projects are selected. Patterns occurring in dead projects can be hints of
+Given the dead projects in the data set, all patterns detected in the dead
+projects are selected. Patterns detected in dead projects can be hints of
 evolutionary events that lead to the death of the project.
 
 The patterns found in dead projects do not occur all at the same moment in the
@@ -202,18 +207,18 @@ lifetime of the projects. Therefore, different types of patterns for dead
 projects are introduced:
 
 \begin{description}
-	\item[Type A.] Type A patterns strictly occur at the end of the evolution data
-		of a dead project. More formaly, if a dead project $P$ starts at point $x$ and
-		ends at point $y$, the pattern starts at $x'$ and ends at $y$. In the data
-		set, the maximum date $y$ of $P$ is June 2013.
+	\item[Type A.] Type A patterns strictly detected at the end of the evolution
+		data of a dead project. More formaly, if a dead project $P$ starts at point
+		$x$ and ends at point $y$, the pattern starts at $x'$ and ends at $y$. In the
+		data set, the maximum date $y$ of $P$ is June 2013.
 	
-	\item[Type B.] Type B patterns strictly \emph{do not }\rm occur at the end of
-		evolution data of a dead project, but anywhere else in the lifetime of a dead
-		project.
+	\item[Type B.] Type B patterns strictly \emph{not }\rm detected at the end of
+		evolution data of a dead project. Such patterns may occur anywhere else in
+		the lifetime of a dead project.
 	
 	\item[Type AB.] Type AB patterns are patterns that weakly satisfy the
 		properties of both type A and B patterns. This category is needed to
-		distinguish strict type A patterns.
+		distinguish strict from weak type A patterns.
 \end{description}
 
 \noindent

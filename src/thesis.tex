@@ -12,7 +12,7 @@
 \fi
 
 \usepackage[square, numbers, comma]{natbib}
-\usepackage[singlelinecheck=false, skip=0pt, justification=centering]{caption}
+\usepackage[singlelinecheck=false, skip=0em, justification=centering]{caption}
 \usepackage{chngcntr, multicol, nameref, url, verbatim, wrapfig}
 %\usepackage[]{algorithm2e}
 
@@ -32,6 +32,7 @@
 \fi
 
 %% Table setup
+\captionsetup[table]{skip=1em}
 \counterwithout{table}{chapter}
 \let\oldtabular\tabular
 \renewcommand{\tabular}{\footnotesize\oldtabular}
@@ -39,6 +40,7 @@
 \renewcommand{\arraystretch}{1.5}
 
 %% Figure setup
+\captionsetup[figure]{skip=0em}
 \counterwithout{figure}{chapter}
 \renewcommand{\thefigure}{\Roman{figure}}
 
