@@ -17,30 +17,30 @@ subsequent index. After indexing, the signal $S$ will look as follows:
 $$S' = \{(0,100), (1,150), (2,250)\}$$
 
 \noindent
-The wavelet transformation can perfectly be done by using $S'$ as input
-signal and the output series of coefficients are indistinguishable from a
-signal without gaps. However, the patterns that are found will be invald as it
-was found by ignoring the missing data.
+The wavelet transformation can perfectly be done using $S'$ as input
+signal. The output series of coefficients are indistinguishable from an other
+signal without gaps. However, the patterns found will be invalid as it ignored
+intermediate data during similarity analysis.
 
 \paragraph{}
 A further investigation was done on how to fix such gaps, using three different
 methods of 'guessing' the data:
 \begin{description}
 	\item[last observation carried] \hfill \\[1em]
-	$\grave{S}' = \{(1,100), (2,150), (3,150), (4,150), (5,250)\}$
+	$S_{1} = \{(1,100), (2,150), (3,150), (4,150), (5,250)\}$
 
 	\item[mean] \hfill \\[1em]
-	$\grave{S}'' = \{(1,100), (2,150), (3,200), (4,200), (5,250)\}$
+	$S_{2} = \{(1,100), (2,150), (3,200), (4,200), (5,250)\}$
 	
 	\item[piecewise constant interpolation] \hfill \\[1em]
-	$\grave{S}''' = \{(1,100), (2,150), (3,150), (4,250), (5,250)\}$
+	$S_{3} = \{(1,100), (2,150), (3,150), (4,250), (5,250)\}$
 	
 	\item[linear interpolation] \hfill \\[1em]
-	$\grave{S}'''' = \{(1,100), (2,150), (3,183), (4,216), (5,250)\}$
+	$S_{4} = \{(1,100), (2,150), (3,183), (4,216), (5,250)\}$
 \end{description}
 
 \paragraph{}
-Using the first method \emph{last observation carried }\rm will give a signal
+The first method \emph{last observation carried }\rm will give a signal
 with a flat line between point 2 and 5. Filling the gap with \emph{mean }\rm
 values, will still result in a signal with a flat line, although smaller, but
 still undesired. The \emph{piecewise constant }\rm interpolation results in two
@@ -64,7 +64,8 @@ more the impact on reliability. However, in general having gaps in the data
 negatively influences the reliability of detecting patterns. Therefore,
 Hypothesis \ref{hyp:subsequent_data} is confirmed.
 
-\section{Sequence analysis}
+\section{Pattern analysis}
+\label{section:pattern_evaluation}
 There are more than 100,000 times more similar sequences found in the
 scale/filter coefficients than in the wavelet/shift coefficients. The large
 difference in number of sequences found between the two types of coefficients
@@ -74,29 +75,32 @@ coefficients using only shift coefficients (i.e., along the time axis) less
 likely.
 
 \paragraph{}
-The fact that, of the 16,049 patterns, there are 0 patterns found in shift
-coefficients was to be expected. The 16 similar sequences in shift coefficients
-are not similar within the same group of sequences. Additionally, the shift
-coefficients are incomparable to the filter coefficients because it is a
-fundamentally different way of signal transformation. Mixing both types of
-coefficients would ignore how the coefficients were found and invalidate the
-patterns.
+Of the 16,049 patterns, there are 0 patterns detected in shift coefficients.
+This can be explained by the fact that the 16 similar sequences in shift
+coefficients are not similar within the same group of sequences.
+Additionally, the shift coefficients are incomparable to the filter
+coefficients because they were found in a fundamentally different way of signal
+transformation. Mixing both types of coefficients would neglect the way the
+coefficients were found and invalidate the patterns comprising sequences of
+both types of coefficients.
 
-\section{Pattern analysis}
-\label{section:pattern_evaluation}
-To be able to know what the patterns represent, the 16,049 patterns are
+\begin{comment}
+\subsection{Evaluation}
+To be able to know what the patterns represent, a sample of the patterns are
 projected onto the original signal. This is done by finding the project the
 pattern was first detected, and taking the pattern's level of decomposition and
 starting point in the series of coefficients for its project.
 
-As the set of values of level of decomposition, starting point in the series,
-its length (i.e., number of coefficients), and the originating project is
-unique for each pattern, it can be 're-projected' onto the signal of that
-particular project. This gives the $age\_in\_months$ values the sequence starts
-and ends in the project.
+As the tuple of values of level of decomposition, starting point in the series,
+the pattern length (i.e., number of coefficients), and the originating project
+is unique for each pattern, it can be 'recomposed' to the original signal of
+that particular project. This gives the $age\_in\_months$ values the sequence
+starts and ends in the project.
 
 Knowing the start and end month of a sequence within a project, the values of
 the original signal during the sequence are captured for further analysis.
+Examples of recomposed patterns are shown in Figure
+\ref{figure:patterns_plots}.
 
 \paragraph{}
 In verification of hypothesis \ref{hyp:pattern_low_diff}, the absolute maximum
@@ -109,15 +113,15 @@ having a certain value of maximum LOC difference.
 
 \noindent
 75\% of the patterns have a maximum LOC difference less than 20,595; 50\% have
-a maximum LOC difference less than 5,250; and 25\% less than 1,046.
+a maximum LOC difference less than 5,250; and 25\% less than 1,046. Hypothesis
+\ref{hyp:pattern_low_diff} is invalid for \emph{all }\rm patterns, but might be
+true for patterns of type A.
 
 \subsection{Pattern type A}
 The 25 type A patterns occur in 11 of the 21 dead projects. From the definition
 of a type A pattern, it should occur strictly at the end of the evolution of a
-dead project. This means that patterns overlap. At first, one would expect that
-there could be only one pattern at the end of the evolution of the same
-project. It appears there can be more than one. The patterns that overlap do
-last until the end of the evolution of a project, but they can start earlier.
+dead project. This means that patterns overlap even though all 25 patterns do
+last until the end of the evolution of a project, but some start earlier.
 
 \paragraph{}
 For the 25 patterns of type A, which occur at the end of evolution of dead
@@ -146,6 +150,7 @@ at a given snapshot in time for the dead project it was detected in.
 Figure \ref{figure:top_patterns_plots} also show the lengths of the patterns.
 The shortest pattern lasts 19 months, the longest 57. 75\% of the type A
 patterns detected have a length of at least 25 months.
+\end{comment}
 
 \subsection{Warning signs}
 The type A patterns would be the best candidates for being 'warning signs' as
