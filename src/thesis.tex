@@ -21,7 +21,10 @@
 	\usepackage{draftwatermark}
 	\SetWatermarkText{-DRAFT-}
 	\SetWatermarkScale{5}
+\fi
 
+\ifispublished
+\else
 	%% Add revision history page
 	\renewcommand{\revisionhistory}{
 		\newpage
