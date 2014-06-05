@@ -1,30 +1,33 @@
 \chapter{Analysis and Conclusions}
 \label{analysis}
 
-\section{Wavelet analysis}
+\section{Evaluation}
+\subsection{Wavelet analysis}
+\label{section:gapless_wavelets}
 In verification of Hypothesis \ref{hyp:subsequent_data}, the requirement of a
 subsequent data series for wavelet analysis, a hypothetical signal was
 constructed. Let the following set of pairs be the signal $S$ to be analysed,
-where the first value is the time value, and the second value the LOC value:
+where the first entry is the time value, and the second entry the LOC value:
 $$S = \{(1,100), (2,150), (5,250)\}$$
 
 \noindent
-In signal $S$ the two pairs between $(2,150)$ and $(5,250)$ are missing. The
+In signal $S$ the two pairs having first entry $3$ and $4$ are missing. The
 implementation of discrete wavelet transform in the 'wavelets' R package
 requires an indexed series as input wavelet. This means, that whether or not
-the signal contains gaps, these gaps are automatically closed by using a
-subsequent index. After indexing, the signal $S$ will look as follows:
+the signal contains gaps, these gaps are naturally closed by indexing the
+signal. After zero-based indexing, the signal $S$ will look as follows:
 $$S' = \{(0,100), (1,150), (2,250)\}$$
 
 \noindent
 The wavelet transformation can perfectly be done using $S'$ as input
-signal. The output series of coefficients are indistinguishable from an other
-signal without gaps. However, the patterns found will be invalid as it ignored
+signal. The output series of coefficients are indistinguishable from other
+signals without gaps. However, the patterns found will be invalid as it ignored
 intermediate data during similarity analysis.
 
 \paragraph{}
-A further investigation was done on how to fix such gaps, using three different
-methods of 'guessing' the data:
+A further investigation was done on how to fix such gaps. The use of three
+different methods of 'guessing' the data was explored and the results were the
+following:
 \begin{description}
 	\item[last observation carried] \hfill \\[1em]
 	$S_{1} = \{(1,100), (2,150), (3,150), (4,150), (5,250)\}$
@@ -40,128 +43,82 @@ methods of 'guessing' the data:
 \end{description}
 
 \paragraph{}
-The first method \emph{last observation carried }\rm will give a signal
-with a flat line between point 2 and 5. Filling the gap with \emph{mean }\rm
-values, will still result in a signal with a flat line, although smaller, but
-still undesired. The \emph{piecewise constant }\rm interpolation results in two
-smaller flat lines. And the \emph{linear interpolation }\rm will give a signal
-that will linearly flow towards the next known value. 
+The method \emph{last observation carried }\rm results in a signal with a
+same values between point 2 and 5, which shows a flat line when plotted in a
+graph.
 
-The flat lines, when it lasts long enough, may be detected as no change in LOC
-during that period. This is undesired as can be mistaken for a pattern that
-stopped code evolution.
+Filling the gaps with \emph{mean }\rm values, will also result in a signal with
+same values. It is similar to last observation carried but using the mean is
+excluding the two known observations, whereas last observation carried is
+inclusive. Using mean, the number of second entries having same values
+will therefore be smaller than using the last observation.
 
-However, the linear line could be mistaken for growth or shrink in LOC,
-depending on the direction of the line. If the period of interpolation is long
-enough, this also might give the wrong idea. Either way, 'guessing' missing data
-adds noise. Not only to the project itself, but to the analysis as a whole.
+The \emph{piecewise constant }\rm interpolation results in a signal having two
+smaller flat lines, because the repeating values are 'snapped' to the closest
+neighbour.
+
+Finally, the \emph{linear interpolation }\rm will result in a signal that
+linearly flows towards the next known value. The advantage of this technique is
+that there will not be a flat line in the signal, but the disadvantage is that
+the numbers are new in the signal, possibly not even close to what was present
+in the complete signal.
+
+\paragraph{}
+The flat lines introduced using the above techniques may be detected as no
+change in LOC during that period. This is undesired as can be mistaken for a
+pattern that stopped code evolution.
+
+However, the signal resulted from linear interpolation could be mistaken for
+growth or decay in LOC, depending on the direction.
 
 \paragraph{}
 The success of one of the above methods of closing a gap depends on the size of
 the gap. The smaller the gap, the lesser impact it has on the reliability of
 the detection of a pattern for that particluar signal. The larger the gap, the
-more the impact on reliability. However, in general having gaps in the data
+more the impact on reliability. Either way, adding data will add noise.
+However, in general having gaps in the data and close the gaps by adding data
 negatively influences the reliability of detecting patterns. Therefore,
 Hypothesis \ref{hyp:subsequent_data} is confirmed.
 
-\section{Pattern analysis}
+\subsection{Patterns}
 \label{section:pattern_evaluation}
 There are more than 100,000 times more similar sequences found in the
 scale/filter coefficients than in the wavelet/shift coefficients. The large
 difference in number of sequences found between the two types of coefficients
 is due to the fact that the LOC metric is a cumulative metric. The typical
-trend of a LOC signal is growth. This makes finding a matching sequence of
-coefficients using only shift coefficients (i.e., along the time axis) less
-likely.
+trend of a LOC signal is growth. This makes finding similar sequences using
+shift coefficients (i.e., along the time axis) less likely.
 
 \paragraph{}
-Of the 16,049 patterns, there are 0 patterns detected in shift coefficients.
-This can be explained by the fact that the 16 similar sequences in shift
-coefficients are not similar within the same group of sequences.
-Additionally, the shift coefficients are incomparable to the filter
-coefficients because they were found in a fundamentally different way of signal
+No patterns were detected in shift coefficients. This can be explained by the
+fact that the 16 similar sequences in shift coefficients are not similar within
+the same group of sequences.
+
+Additionally, the shift coefficients are incomparable to the filter coefficients
+because they were found in a fundamentally different way of signal
 transformation. Mixing both types of coefficients would neglect the way the
 coefficients were found and invalidate the patterns comprising sequences of
 both types of coefficients.
 
-\begin{comment}
-\subsection{Evaluation}
-To be able to know what the patterns represent, a sample of the patterns are
-projected onto the original signal. This is done by finding the project the
-pattern was first detected, and taking the pattern's level of decomposition and
-starting point in the series of coefficients for its project.
-
-As the tuple of values of level of decomposition, starting point in the series,
-the pattern length (i.e., number of coefficients), and the originating project
-is unique for each pattern, it can be 'recomposed' to the original signal of
-that particular project. This gives the $age\_in\_months$ values the sequence
-starts and ends in the project.
-
-Knowing the start and end month of a sequence within a project, the values of
-the original signal during the sequence are captured for further analysis.
-Examples of recomposed patterns are shown in Figure
-\ref{figure:patterns_plots}.
-
 \paragraph{}
-In verification of hypothesis \ref{hyp:pattern_low_diff}, the absolute maximum
-differences of the LOC values is computed for each sequence. The patterns have
-maximum LOC differences between 0 (i.e., no change in LOC in the sequence) and
-6,862,111. Figure \ref{figure:pattern_loc_diff} shows the number of patterns
-having a certain value of maximum LOC difference.
+The patterns that were detected show strong similarity. The similarity was
+demonstrated in Figure \ref{figure:patterns_plots} in section
+\ref{section:seqs_patterns}. The figure presented four graphs of four distinct
+patterns plotted as wavelets of the original signals. Each graph contains
+between 141 and 216 wavelets. Because of the similarity, the shape of the
+pattern is still quite clear.
 
-\input{figures/pattern_loc_diff_all}
-
-\noindent
-75\% of the patterns have a maximum LOC difference less than 20,595; 50\% have
-a maximum LOC difference less than 5,250; and 25\% less than 1,046. Hypothesis
-\ref{hyp:pattern_low_diff} is invalid for \emph{all }\rm patterns, but might be
-true for patterns of type A.
-
-\subsection{Pattern type A}
-The 25 type A patterns occur in 11 of the 21 dead projects. From the definition
-of a type A pattern, it should occur strictly at the end of the evolution of a
-dead project. This means that patterns overlap even though all 25 patterns do
-last until the end of the evolution of a project, but some start earlier.
-
-\paragraph{}
-For the 25 patterns of type A, which occur at the end of evolution of dead
-projects (section \ref{section:patterns_dead}), the maximum LOC differences are
-distributed differently than for the set of patterns as a whole. Table
-\ref{table:type_a_max_diff} shows the number of type A patterns having a
-certain value of maximum LOC difference.
-
-\input{tables/type_a_loc_diff}
-
-\noindent
-Table \ref{table:type_a_max_diff} suggests that Hypothesis
-\ref{hyp:pattern_low_diff} is \emph{false}\rm: it is not typically the case
-that patterns in LOC at the end of code evolution of dead projects have a low
-difference in LOC. The hypothesis is false in this data set.
-
-\paragraph{}
-The four patterns having the most common values of maximum LOC difference are
-shown in Figure \ref{figure:top_patterns_plots} to illustrate how these look
-like. The figure depicts the wavelets of the patterns, which are the LOC values
-at a given snapshot in time for the dead project it was detected in.
-
-\input{figures/top_patterns_plots}
-
-\paragraph{}
-Figure \ref{figure:top_patterns_plots} also show the lengths of the patterns.
-The shortest pattern lasts 19 months, the longest 57. 75\% of the type A
-patterns detected have a length of at least 25 months.
-\end{comment}
-
-\subsection{Warning signs}
+\subsection{Survivability}
+\label{section:kp_survival}
 The type A patterns would be the best candidates for being 'warning signs' as
-they are detected at the end of evolution in dead projects. After selection of
-all the projects patterns of type A occur in, a total of 93 projects are found.
-Of which 11 were already in the pool of dead projects, and 79 are 'alive'
-projects.
+they are detected at the end of evolution in dead projects. To determine whether
+the chances for a project to die increase when having a type A pattern, two
+groups are made. One group consisting of projects having the pattern, and
+a second group of equal size consisting of projects not having the pattern.
 
-Using this group of 93 projects having a type A pattern, a second group of 93
-projects can be selected having not the pattern. This second group is
-representative to the complete data set, again using the tool by
+Both groups of 93 projects contain projects that have died. The second group -
+the projects without the pattern - is representative to the complete data set.
+Selecting projects and scoring for representativeness is done with the tool by
 \citet{nagappan}. For each project of both groups it is recorded at what age the
 project died, that is, if it died. For the others, the maximum age in the data
 set is used. In Figure \ref{figure:kp_survival} the Kaplan-Meier estimation of
@@ -170,45 +127,58 @@ the survival function is shown for these groups.
 \input{figures/kp_survival}
 
 \noindent
-Figure \ref{figure:kp_survival} suggests that group 1 of projects having the
-type A pattern die earlier than group 0 of projects without the pattern. This
-suggests that having a type A pattern shortens the life of a project.
+The Kaplan-Meier estimation of survival function as depicted in Figure
+\ref{figure:kp_survival} suggests that projects in group 1 - the projects
+having the type A pattern - die earlier than projects in group 0 - the projects
+without the pattern. This suggests that having found a type A pattern in a
+project shortens the project's life. Therefore, Hypothesis
+\ref{hyp:pattern_types} is confirmed; projects with a pattern occurring at the
+end of evolution of a dead project (i.e., type A pattern) have a higher chance
+of dying.
 
 \section{Conclusions}
 % What patterns can be found using wavelet analysis?
+
 % Under what conditions does wavelet analysis succeed or fail in detecting
 % evolutionary events?
+
+In this study, the patterns detected using wavelet analysis on LOC signals
+comprise similar sequences of LOC series within and across projects. The
+waveforms of these patterns vary in all kinds of shapes. The type A patterns
+all show a stagnation of LOC changes, that is, very few changes relative to the
+project size.
+
+In general, the ability to detect a 'pattern' as being a group of similar
+sequences within or across projects, depends on the similarity of the sequence
+between other sequences within the same analysis. Therefore, it is important to
+have a data set that is large enough and representative to the world of OSS
+projects to be able to detect patterns that can be generalised
+[\ref{itm:question_patterns}, \ref{itm:question_successfailure}].
+
+\paragraph{}
+Another aspect that contributes to the success or failure of wavelet analysis
+for software evolution is that the input signal should be free of gaps. In
+section \ref{section:gapless_wavelets} the confirmation of Hypothesis
+\ref{hyp:subsequent_data} is argued.
+
+In case an input LOC signal for analysis is not continuous within the start
+and end boundaries of the signal, the wavelet analysis will detect patterns
+that are not trustworthy. Wavelet analysis may find more false-positive
+evolutionary events [\ref{itm:question_successfailure}].
+
+\paragraph{}
 % Can we use wavelet analysis to find objective warning signs in open-source
 % software projects leading to the end of code evolution?
+In this study, I have shown that wavelet analysis is able to find patterns that
+increase the chances of a project to end. As discussed in section
+\ref{section:kp_survival}, it appears that there is a relation between a
+pattern of type A and the death of a project, however, it is no causal
+relation.
 
-The patterns detected using wavelet analysis on LOC signals show similar
-sequences of LOC series within and across projects. The waveforms of these
-patterns vary from sudden rise or fall in LOC, to stagnation and silence (i.e.,
-flat line).
-
-However, the detection of a pattern depends on the similarity of the sequence
-between other sequences within the same analysis. Therefore, the sequences that
-turn out to be patterns are subjective and relative to other sequences
-[\ref{itm:question_patterns}].
-
-\paragraph{}
-When an input LOC signal for analysis is not continuous within the start
-and end boundaries of the signal, the wavelet analysis will detect patterns
-that are not trustworthy. In that case, the wavelet analysis may find
-more false-positive evolutionary events [\ref{itm:question_successfailure}].
-
-\paragraph{}
-In answering the main question of the research
-``\emph{\researchQuestion}\rm'' [\ref{itm:question_warningsigns}]
-it can be said that wavelet analysis is able to find patterns that increase the
-chances of a project to end. However, it is too early to say that it is able to
-find an objective warning sign. In the analysis it appears that there is a
-relation between a pattern of type A and the death of a project, however, it is
-very hard to tell what caused the pattern.
-This makes validation of the pattern, what event caused the pattern, and the
-relation to the end of code evolution of the project difficult and a subject
-for further research.
-
+Furthermore, as the patterns found during analysis are subject to the data set
+as a whole, I cannot conclude that wavelet analysis is able to find
+\emph{objective }\rm warning signs in OSS projects
+[\ref{itm:question_warningsigns}].
 
 \section{Threats to validity}
 \begin{comment}

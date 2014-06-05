@@ -86,6 +86,7 @@ there are also similar projects that eventually got 'resurrected'.
 
 
 \section{Sequences and patterns}
+\label{section:seqs_patterns}
 The wavelet transform of the LOC signals of 250 projects resulted in 22,943
 data points decomposed up to 7 levels into wavelet/shift and filter/scale
 coefficients.
@@ -129,38 +130,41 @@ same pattern is detected at multiple levels. Additionally, it can be said that
 a pattern has multiple levels.
 
 \paragraph{}
-Table \ref{table:pattern_counts} presents the patterns detected and occurring
-across dead and alive projects. Recall the distinction between pattern
-\emph{detection }\rm and pattern \emph{occurrence }\rm as described in section
-\ref{def:pattern}.
+Table \ref{table:pattern_counts} presents the numbers of patterns
+detected and occurring across projects. Recall the distinction between
+detecting and occurring patterns from section \ref{def:pattern}.
 
 \input{tables/pattern_counts}
 
+\noindent
+As can be seen from Table \ref{table:pattern_counts}, 16,049 patterns were
+detected across 250 projects, which is 64.2 patterns per project on average;
+14,965 patterns were detected across 229 alive projects (65.3 patterns on
+average per project); and 1,084 patterns detected in 21 dead projects (an
+average of 51.6 patterns per project). The averages do not differ significantly
+over the projects.
+
 \section{Pattern classification}
 The classification of the patterns was done to distinguish different types of
-patterns to be able to find evolutionary events.
+patterns to be able to find evolutionary events. For this, the patterns
+detected in dead projects were taken and classified according to
+the definitions in section \ref{section:patterns_dead}. It is expected that
+this group has the highest chance of keeping a pattern indicating an
+evolutionary event leading to the end of code evolution.
 
 \paragraph{}
-At first, the 1,084 patterns detected in dead projects were selected. Then, the
-similar sequences of these patterns were selected. For each of these similar
-sequences, only the similar sequences occurring in other dead projects were
-analysed and classified by type as described in section
-\ref{section:patterns_dead}.
-
-\paragraph{}
-The resulting set of typed patterns is a mixture of the unique patterns detected
-and occurring in dead projects. The mixture is needed to be able to tell with
-confidence that the type of a pattern is correct according to the definitions.
-
-A total number of 967 patterns were classified. The sizes of the pattern type
-subsets are shown in Table \ref{table:pattern_type_counts}. For each subset, it
-is stated in how many dead projects a pattern of that type was found.
+A total of 1,084 patterns is classified. The sizes of the pattern type subsets
+are shown in Table \ref{table:pattern_type_counts}. For each subset, it is
+stated in how many dead projects a pattern of that type was found.
 
 \input{tables/pattern_type_counts}
 
 \noindent
-In search of patterns that may lead to the end of code evolution, patterns of
-type A will be most interesting, because these patterns last until the end of
+The patterns of all three groups were detected in dead projects, but may occur
+in alive projects.
+
+In search of patterns that lead to the end of code evolution, patterns of type
+A will be most interesting, because these patterns last until the end of
 evolution data of dead projects.
 
 \begin{comment}

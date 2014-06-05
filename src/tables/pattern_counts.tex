@@ -1,26 +1,31 @@
 \begin{table}[H]
-\caption{Numbers of patterns detected and occurring}\label{table:pattern_counts}
+\caption{Patterns detected and occurring}\label{table:pattern_counts}
 \centering
-\begin{tabular}{lrr}
+\begin{tabular}{lrr|rr}
 \hline
-	\bfseries{Patterns detected}\rm \\
+	\bfseries{Patterns detected}\rm & & & \bfseries{Count} \\
 	\hline
-	in alive projects & 14,965 & 93.25\% \\
-	in dead projects & 1,084 & 6.75\% \\
+	total & & & 16,049 & 100.00\% \\
 	\hline
-	total detected & 16,049 & 100.00\% \\
-	\hline \\
-\end{tabular}
-\hspace{1em}
-\begin{tabular}{lrr}
-\hline
-	\bfseries{Pattern occurrences}\rm \\
+	in dead projects & & & 1,084 & 6.75\% \\
+	in alive projects & & & 14,965 & 93.25\% \\
+\hline\hline
+	\bfseries{Patterns detected in dead projects}\rm & \bfseries{Occurrences}\rm
+	& & \bfseries{Count}\rm \\
 	\hline
-	in alive projects only & 3,390 & 21.12\% \\
-	in dead projects only & 16 & 0.10\% \\
-	in both dead and alive projects & 12,643 & 78.78\% \\
+	total & 111,848 & 100.00\% & 1,084 & 100.00\% \\
 	\hline
-	total occurring & 16,049 & 100.00\% \\
+	in dead projects only & 111 & 0.10\% & 16 & 1.48\% \\
+	%in alive projects only & 0 & 0.00\% & 0 & 0.00\% \\
+	in both dead and alive projects & 111,737 & 99.90\% & 1,068 & 98.52\% \\
+\hline\hline
+	\bfseries{Patterns detected in alive projects}\rm & \bfseries{Occurrences}\rm & & \bfseries{Count}\rm \\
+	\hline
+	total & 1,560,883 & 100.00\% & 14,965 & 100.00\% \\
+	\hline
+	%in dead projects only & 0 & 0.00\% & 0 & 0.00\% \\
+	in alive projects only & 37,333 & 2.39\% & 3,390 & 22.65\% \\
+	in both dead and alive projects & 1,523,550 & 97.61\% & 11,575 & 77.35\% \\
 \hline
 \end{tabular}
 \end{table}
