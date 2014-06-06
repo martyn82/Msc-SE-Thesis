@@ -1,40 +1,34 @@
-\newcommand{\tableHeadSeries}{\bfseries{Time}\rm & \bfseries{Frequency}\rm}
+\newcommand{\tableHeadSeries}{\bfseries{Time}\rm & \bfseries{Frequency}\rm &
+\bfseries{Aggregation}\rm}
 \begin{table}[H]
 \caption{Project signals in the original study}\label{table:karus_series}
 \centering
-\begin{tabular}{ll}
+\begin{tabular}{lll}
 	\hline
 	\tableHeadSeries \\
 	\hline
-	Date & Active developers \\
-	& Cumulative developers \\
-	& Cumulative LOC added \\
-	& Cumulative LOC churn \\
-	& Cumulative LOC modified \\
-	& Cumulative LOC removed \\
-	& LOC \\
-	& Relative date progress \\
-	& Relative LOC churn \\
-	& Relative team size \\
-	& Files \\
+	Days since first commit & Active developers & Mean \\
+	& Cumulative developers & Sum \\
+	& Cumulative LOC added & Sum \\
+	& Cumulative LOC churn & Sum \\
+	& Cumulative LOC modified & Sum \\
+	& Cumulative LOC removed & Sum \\
+	& LOC & Mean \\
+	& Relative cumulative LOC churn & Mean \\
+	& Relative team size & Mean \\
+	& Files & Mean \\
 	\hline
-\end{tabular}
-\hspace{1em}
-\begin{tabular}{ll}
 	\hline
-	\tableHeadSeries \\
-	\hline
-	Cumulative LOC churn & Active developers \\
-	& Cumulative developers \\
-	& Cumulative LOC added \\
-	& Cumulative LOC modified \\
-	& Cumulative LOC removed \\
-	& LOC \\
-	& Relative date progress \\
-	& Relative LOC churn \\
-	& Relative team size \\
-	& Files \\
-	& Commits \\
+	Cumulative LOC churn & Active developers & Mean \\
+	& Cumulative developers & Sum \\
+	& Cumulative LOC added & Sum \\
+	& Cumulative LOC modified & Sum \\
+	& Cumulative LOC removed & Sum \\
+	& LOC & Mean \\
+	& Relative cumulative LOC churn & Mean \\
+	& Relative team size & Mean \\
+	& Files & Mean \\
+	& Commits & Mean \\
 	\hline
 \end{tabular}
 \end{table}

@@ -1,91 +1,242 @@
-\chapter{Report on replication}
+\chapter{Replication report}
 \label{replication}
 
 \section{About the original study}
-The research question of the original study ``\emph{Automatic means of
-identifying evolutionary events in software development}\rm'' conducted by
-\citet{karus2013} in 2013, was ``\emph{Can we use wavelet analysis to find
-objective warning signs in software projects leading to the end of code
-evolution?}\rm''.
+The original study, ``\repltitle{}'', was conducted by \replauthor{} in
+\citeyear{karus2013}. The main research question of the original study is:
 
-\subsection{Data set}
-\citeauthor{karus2013} used a data set consisting of 27 OSS projects, of which
-18 were randomly chosen using Google Code Search from different repositories
-having different team sizes, main programming languages, and project types. 15
-of these projects were on-going, and 3 had no activity since January 2009
-(verified in January 2013) (i.e., 'dead').
+``Can we use wavelet analysis to find objective warning signs in software
+projects leading to the end of code evolution?''
 
-\subsection{Design}
-The research was done in the following steps:
-\begin{enumerate}
-	\item \citeauthor{karus2013} used weekly commit data to perform analysis on.
-		Therefore, the first step was to aggregate daily commit data into weekly data.
-	\item Then, the project signals were used as input for discrete wavelet
-		transform using the Haar filter.
-	\item Finding similar sequences.
-	\item Similar sequence grouping (i.e., identifying patterns).
-\end{enumerate}
+\subsection{Data}
+\citeauthor{karus2013} used a data set consisting of 27 OSS projects.
 
-\noindent
-Table \ref{table:karus_series} shows the signals that were used for analysis in
-the original study.
+18 of the projects were randomly chosen using Google Code Search and contained
+evolution data from different repositories. The projects vary in team sizes,
+main programming languages, and project types. 15 of the projects were alive,
+and 3 had no activity since January 2009 and were considered 'dead'. The
+evaluation for dead or alive was done in January 2013.
+
+The data set was then complemented with 9 dead projects from Sourceforge.com in
+order to balance the number of dead and alive projects. Making a total number of
+27 projects.
+
+\paragraph{}
+\citeauthor{karus2013} used a specially built tool for mining the software
+repositories. As a result, complete commit logs of the projects were gathered.
+
+The construction of the project signals was done using the metrics shown in
+Table \ref{table:karus_series}. \citeauthor{karus2013} used two kinds of
+time-series dimensions: days since first commit, and cumulative code churn. A
+total number of 20 types of signals were constructed for 27 projects, making a
+total of 540 signals analysed in the original study.
 
 \input{tables/karus_series}
 
-\subsection{Results}
-998 common patterns were found across different projects. It showed that
-``evolution patterns in software projects do express various warning signs
-leading to or indicating the impending end of code evolution.''
-\cite{karus2013}.
-\citeauthor{karus2013} concluded, that: ``\ldots wavelet analysis can be
-successfully used to detect anomalies before they turn into a long-term issue
-allowing action to be taken before it is too late.'', and: ``In conclusion, we
-have demonstrated the usefulness for both tracing software evolution and for
-detecting anomalies in software evolution.''.
-
-\section{About the replication}
-\subsection{Level of interaction}
-During this study, and especially in the beginning, there was contact with
-\citeauthor{karus2013} about how the implementation of the wavelet transform and
-detection of patterns was done. In that period, he provided his R scripts that
-he used for his study.
-
-\subsection{Changes}
-A few modifications were made to the original study in replication.
+\subsection{Method}
+The original study was done in the following steps:
 \begin{description}
-	\item[Sample size.] The sample size of 27 projects was extended to a total of
-	250 projects.
-	
-	\item[Sample selection.] The selection of the projects for the study was done
-	using a tool measuring the representativeness of the sample against a master
-	set, to have a set that is as representative as possible.
-	\citeauthor{karus2013} picked random projects and tested the set for
-	representativeness.
-	
-	\item[Time series.] In the original study, daily commit data was aggregated
-	into weekly data. In this study, we used montly data. Project data available at
-	Ohloh is already aggregated into monthly data. We expect the difference between
-	weekly and monthly data is negligible when looking for warning signs that may
-	lead to the end of code evolution. The effects of patterns of such kind will be
-	visible beyond the weekly boundaries.
-	
-	\item[Project signals.] The signals used by \citeauthor{karus2013} are listed
-	in Table \ref{table:karus_series}. In the replicative study we picked only one
-	series: the LOC over time. The choice for having just one signal is because of
-	time constraints. The choice for LOC was because it can be interpreted
-	intuitively.
+	\item[Data preparation.] The evolution data of the 27 projects was aggregated
+		along the time-series dimensions. \citeauthor{karus2013} had daily commit
+		data for all 27 projects. The 'days since first commit' metric was aggregated
+		into 7 day-frames (i.e., weekly data), and the time-series of 'cumulative LOC
+		churn' metric was aggregated into 1,000 LOC frames.
+		
+		The aggregation method for each of the metrics are shown in Table
+		\ref{table:karus_series}.
+		
+	\item[Discrete wavelet transform.] The second step was applying the discrete
+		wavelet transform with the Haar filter (Daubechies-2) on the data series.
+		This step resulted in wavelet and filter coefficients for each compression
+		level.
+		
+	\item[Similar region detection.] In the third step, the series of coefficients
+		are compared to find linearly positively similar regions of sub-sequences. In
+		the paper, \citet{karus2013} showed the method for defining what is similar.
+
+		The similar sequences occurring at least 3 times are grouped together as a
+		'pattern'.
 \end{description}
 
 \subsection{Results}
-The results that came out of this study are comparable to those in the original
-study. We have also found patterns in software evolution by using wavelet
-analysis. Therefore, we can agree that ``\ldots evolution patterns in software
-projects do express various warning signs leading to or indicating the impending end of
-code evolution.'', but care should be taken. Of course not \emph{all }\rm
-patterns detected are warning signs.
+\citeauthor{karus2013} found 998 common patterns across different projects. He
+confirmed that ``\emph{\ldots{}evolution patterns in software projects do
+express various warning signs leading to or indicating the impending end of
+code evolution.}\rm'' \cite{karus2013}.
 
 \paragraph{}
-This study takes the results obtained by replicating the research by
-\citeauthor{karus2013} further by looking into the patterns found. We have
-identified types of patterns which have different semantics in the search for
-patterns that are objective warning signs.
+\citet{karus2013} concluded that: ``\emph{\ldots{}wavelet analysis can be
+successfully used to detect anomalies }\rm [in software evolution] \emph{before
+they turn into a long-term issue, allowing action to be taken before it is too
+late.}\rm'', and, ``\emph{In conclusion, we have demonstrated the usefulness
+for both tracing software evolution and for detecting anomalies in software
+evolution.}\rm''.
+
+\section{About the replication}
+\subsection{Level of interaction}
+During this study, and especially in the beginning, I was in contact with
+\citeauthor{karus2013} about the implementation of his study. He explained some
+of the decisions he made and the 'problems' he had conducting the study.
+
+\paragraph{}
+There are many knobs that can be tweaked in this kind of research. Therefore, to
+be able to  fully replicate the results, \citeauthor{karus2013} provided his
+raw data set and his analysis scripts. The three R scripts he had used for
+detecting the patterns:
+\begin{itemize}
+	\item wavelet analysis: takes the data as input, and outputs
+		the coefficients;
+
+	\item similar sequence detection: takes the coefficients and
+		outputs pairs of similar regions;
+
+	\item sequence grouping: takes the pairs of similar regions and outputs the
+		patterns.
+\end{itemize}
+
+\subsection{Changes}
+Table \ref{table:changes} presents what aspects of the original study were
+changes in the replication. The change to the original and the replication is
+compared and motivated.
+
+\begin{table}[H]
+\caption{Changes to the original study}\label{table:changes}
+\centering
+\begin{tabular}{p{20mm}p{30mm}p{30mm}p{6cm}}
+\hline
+	\bfseries{Aspect}\rm & \bfseries{Original}\rm & \bfseries{Replication}\rm &
+	\bfseries{Motivation}\rm \\
+	\hline
+	\bfseries{Data}\rm \\
+	\hline
+	Sample size & 27 projects & 250 projects & A larger data is believed to yield
+	more trustworthy results in terms of the ability to generalise results. \\
+
+	Sample selection & Random and manual complementation & Automatic
+	representative selection & Knowing the representativeness and selecting
+	projects accordingly increases the ability to generalise the results. \\
+
+	Data gathering & Repository mining & Ohloh analysis & The data gathered by
+	the tool \cite{ohlohanalytics, bruntink2014} was gathered from Ohloh
+	\cite{ohloh}. Ohloh did the source code repository mining and aggregated and
+	analysed this data into monthly facts. Furthermore, the data provided by the
+	OhlohAnalytics tool is already validated and cleansed to be consistent. \\
+
+	Data frames & Daily aggregated to weekly & Monthly & No aggregation of the raw
+	data was done in the replication, because the data provided from Ohloh and
+	OhlohAnalytics is already presented in monthly time frames. \\
+
+	Time series & Days since first commit & Age in months & Similar to the 'Data
+	frames' change, the 'days since first commit' is aggregated in 7 day frames in
+	the original study. \citeauthor{karus2013} aggregates the other metrics as
+	shown in Table \ref{table:karus_series}. In the replication this was not the
+	case as the data provided is already in monthly data frames. The aggregation
+	was not done because of issues found with aggregation of LOC as discussed in
+	section \ref{section:gapless_wavelets}. \\
+
+	Code churn & Sum of LOC added, modified, and removed & Sum of LOC added and
+	removed & Ohloh does not track a modified LOC fact. Therefore, the LOC
+	modified metric could not be added to the calculation of LOC churn. \\
+\hline
+\end{tabular}
+\end{table}
+\begin{table}[H]
+\begin{tabular}{p{20mm}p{30mm}p{30mm}p{6cm}}
+	\hline
+	\bfseries{Analysis}\rm \\
+	\hline
+
+	Signals & $20\times27=540$ signals (see Table \ref{table:karus_series}) &
+	$1\times250=250$ signals (i.e., LOC) & Only LOC is used because of its simple
+	interpretation and intiuitive representation. \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Discussion}
+\subsubsection{Time frames}
+The fact that I used monthly time frames as opposed to weekly time frames, was
+because of the fact that Ohloh provides no finer grained time frames than
+monthly. Furthermore, there was no reason to believe that finer grained time
+frames are necessary for detecting patterns that lead to the end of code
+evolution for a project.
+
+The 'end of code evolution', or 'project death' is a phenomenon that reveals in
+several months. In the definition of a dead project (see section
+\ref{def:dead}), the 'end of code evolution' is the moment that the project
+died, which in turn is defined as having no code activity for 12 months in a
+row. Therefore, patterns leading to the end of code evolution will last for
+months. Weekly data points will probably not add significant value in detecting
+warning signs.
+
+\subsubsection{LOC churn}
+The 'LOC churn' metric is defined as the sum of lines of code added, modified,
+and deleted. The data used in the replication of the study did not include LOC
+modified. Therefore, the LOC churn is calculated as the sum of LOC added and
+removed. This differs from the original study. However, there was no reason to
+think of this as a threat to validity because the way it is computed was
+consistent.
+
+Ohloh inspects differentials when counting lines of code added or deleted. This
+means that one line modified will be counted as both one line deleted and one
+line added. When calculating the lines of code churn, the lines that were
+modified are actually counted twice. Still, it won't introduce problems as the
+metric of LOC churn is computed consistently across all projects.
+
+Furthermore, in the replication the LOC churn metric is not used as a signal to
+be analysed, but merely as a measure to indicate any code activity for
+determining whether a project is dead.
+
+\subsubsection{Signals}
+\citeauthor{karus2013} processed 540 signals in total, as opposed to 250
+signals in the replication. The quantity of signals is not related to the
+quality of the patterns it is able to detect, because the signals are
+interpreted independently (i.e., not mixed).
+
+The choice of the signal should depend on the relation between the time and
+frequency domains. For time and 'lines of code' (LOC), this relation can be
+interpreted with some intuition, which eases validation of the results.
+
+\section{Evaluation}
+The results from the replication are comparable to the results of the original
+study. Both studies found patterns in software evolution by using wavelet
+analysis. Both studies found patterns that may lead to the end of code
+evolution.
+
+\paragraph{}
+The difference in results between the original and the replication can be found
+in the evaluation of the patterns and the evaluation of wavelet analysis as a
+tool to find objective warning signs.
+
+Wavelet analysis works best on subsequent series of data (section
+\ref{section:gapless_wavelets}). Furthermore, the ability of wavelet analysis
+to find patterns depends on the data at hand (section \ref{section:conclusions}).
+
+Some patterns show strong characteristics, such as patterns of type A that were
+detected at the end of evolution of dead projects. As a result of survival
+analysis these type A patterns suggest to be a sign of warning for the death
+of a project. However, it cannot be concluded that wavelet analysis is capable
+of finding warning signs objectively, as the sequences making a pattern
+strongly relate.
+
+\begin{comment}
+About original study:
+- research questions
+- participants
+- design
+- artifacts
+- context variables
+- summary of results
+
+About replication:
+- motivation
+- level of interaction with original researchers
+- changes to the original experiment
+
+Comparison of results:
+- consistent results
+- differences in results
+
+Conclude across studies.
+
+\end{comment}

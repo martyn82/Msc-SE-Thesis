@@ -122,21 +122,22 @@ Selecting projects and scoring for representativeness is done with the tool by
 \citet{nagappan}. For each project of both groups it is recorded at what age the
 project died, that is, if it died. For the others, the maximum age in the data
 set is used. In Figure \ref{figure:kp_survival} the Kaplan-Meier estimation of
-the survival function is shown for these groups.
+the survival function of the projects is shown for these groups.
 
 \input{figures/kp_survival}
 
 \noindent
-The Kaplan-Meier estimation of survival function as depicted in Figure
-\ref{figure:kp_survival} suggests that projects in group 1 - the projects
-having the type A pattern - die earlier than projects in group 0 - the projects
-without the pattern. This suggests that having found a type A pattern in a
-project shortens the project's life. Therefore, Hypothesis
+The Kaplan-Meier estimation of survival function of the projects as depicted in
+Figure \ref{figure:kp_survival} suggests that projects in group 1 - the
+projects having the type A pattern - die earlier than projects in group 0 - the
+projects without the pattern. This suggests that having found a type A pattern
+in a project shortens the project's life. Therefore, Hypothesis
 \ref{hyp:pattern_types} is confirmed; projects with a pattern occurring at the
 end of evolution of a dead project (i.e., type A pattern) have a higher chance
 of dying.
 
 \section{Conclusions}
+\label{section:conclusions}
 In this study, the patterns detected using wavelet analysis on LOC signals
 comprise similar sequences of LOC series within and across projects. The
 waveforms of these patterns vary in all kinds of shapes. The type A patterns
@@ -174,23 +175,93 @@ as a whole, I cannot conclude that wavelet analysis is able to find
 [\ref{itm:question_warningsigns}].
 
 \section{Threats to validity}
-\begin{comment}
-* Is the Ohloh database a representation of the world of OSS projects?
-* Is LOC as the sum of source lines of code, comments, and blank lines valid?
-* The use of LOC as a measure of project evolution. Does it represent
-activity/growth/whatever to say something about the project's status?
-* A selection criterion for the projects was a continuous series of subsequent
-monthly facts. Maybe the full series of evolution data of a project is needed in
-order to find objective signs or to be able to compare different projects.
-* Is 250 projects enough to detect patterns and generalise to the world of OSS
-projects?
-* Is monthly aggregated data fine-grained enough?
+The following aspects were found which may lead to threats to the validity of
+the results.
 
-\end{comment}
+\begin{description}
+	\item[Construct validity] \hfill
+	
+	\begin{description}
+		\item[\rm{Missing historical data}] -- In the analysis of project's
+			evolution data, only the data provided by the OhlohAnalytics tool was used.
+			The data before the first data point in the set is not taken into account. It
+			is possible that certain evolutionary events happened before the first point.
+			These events were not detected as they lay beyond reach of this study.
+
+		\item[\rm{Missing most recent data}] -- The data provided for the
+			study has data points until June 2013. Therefore, not the most recent data of
+			the projects is used.
+
+		\item[\rm{LOC as activity indicator}] -- The use of LOC (defined as
+			lines of code + comments + blanks) as a measure of project activity could be
+			false. The LOC will not change between two months whenever the amount of code
+			deleted is equal to the amount added. In that case, the churn would be 2
+			times the LOC added/deleted, but the LOC will stay the same.
+
+			When patterns are detected that show a stagnation in LOC, the suggestion
+			would be that the project's activity is decreasing. However, it might also
+			be the case that by coincidence it only looks like activity is decreasing,
+			but in reality lots of work is being done.
+
+		\item[\rm{Data source}] -- Using only one data source (Ohloh) may
+			influence the value of the metrics. Ohloh did the analysis of the project's
+			source code repositories. Several studies have shown that the data provided
+			by Ohloh needs a thorough examination and cleansing before it can be used
+			\cite{bruntink2013, ohlohanalytics, bruntink2014}. The data was initially
+			validated and cleansed, but to make it consistent. No actual verification on
+			the correctness of the data was conducted.
+
+	\begin{comment}
+			Additionally, the data set of projects is a sample taken from all projects
+			tracked by Ohloh. What is unclear is if the set of projects tracked by Ohloh
+			is a representation of the world of OSS projects. Selecting a data set that
+			is representative to the projects tracked by Ohloh does not automatically be
+			representative to the world.
+
+		\item[Sample size.] \hspace{1em} For this study, a set of 250 projects is
+			used. Is this enough to generalise the results to the world of OSS projects.
+
+		\item[Time resolution.] \hspace{1em} Is monthly aggregated data fine-grained
+			enough?
+	\end{comment}
+	\end{description}
+
+	\item[Internal validity] \hfill
+
+	\begin{description}
+		\item[\rm{Selection bias}] -- The selection criteria for the data was to have
+			at least 12 data points. It turned out, no project in the set was younger
+			than 14 months. It might be that these younger projects show significance in
+			the ability to detect evolutionary events, possibly refute or confirm
+			findings.
+	\end{description}
+
+	\item[External validity] \hfill
+
+	\begin{description}
+		\item[\rm{Replication}] -- It seems hard to precisely replicate the study
+			as there are a multitude of possible configurations to be made that may, in
+			the end, influence the results drastically. Such as, the data resolution
+			(using daily, weekly, or monthly data), the definition of similarity between
+			sequences (what deviation is allowed, what is the difference of coincidence
+			and a reoccurring sequence), and the definition of a pattern (how many
+			occurrences, minimum, and maximum length).
+			
+			Furthermore, there is the interpretation of what a 'warning sign' should
+			look like on a pattern level. All these settings and interpretations
+			complicate generalising results.
+	\end{description}
+\end{description}
 
 \section{Future work}
-% use other metrics
-% even more data
+Next studies on the use of wavelet analysis for detecting warning signs in
+software evolution could use even more data. Do the type A patterns still
+manifest themselves using the full data set of 5,986 projects (section
+\ref{method:data}).
+
+Other interesting results could be obtained by using different signals. For
+instance, the LOC churn might be a good candidate as it reflects code activity
+more than LOC.
 
 \begin{comment}
 - Analyse results
