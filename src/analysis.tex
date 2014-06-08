@@ -1,6 +1,12 @@
 \chapter{Analysis and Conclusions}
 \label{analysis}
 
+This chapter discusses the results. First, an evaluation is done on the workings
+of wavelet analysis. Then the patterns found are evaluated. Next, the
+survivability of projects with a certain patterns is evaluated. Then, the
+answers on the research questions are presented. The last two sections describe
+threats to validity and future work.
+
 \section{Evaluation}
 \subsection{Wavelet analysis}
 \label{section:gapless_wavelets}
@@ -25,7 +31,7 @@ signals without gaps. However, the patterns found will be invalid as it ignored
 intermediate data during similarity analysis.
 
 \paragraph{}
-A further investigation was done on how to fix such gaps. The use of three
+A further investigation was done on how to fix such gaps. The use of four
 different methods of 'guessing' the data was explored and the results were the
 following:
 \begin{description}
@@ -43,7 +49,7 @@ following:
 \end{description}
 
 \paragraph{}
-The method \emph{last observation carried }\rm results in a signal with a
+The method \emph{last observation carried }\rm results in a signal with
 same values between point 2 and 5, which shows a flat line when plotted in a
 graph.
 
@@ -68,7 +74,7 @@ The flat lines introduced using the above techniques may be detected as no
 change in LOC during that period. This is undesired as can be mistaken for a
 pattern that stopped code evolution.
 
-However, the signal resulted from linear interpolation could be mistaken for
+Moreover, the signal resulted from linear interpolation could be mistaken for
 growth or decay in LOC, depending on the direction.
 
 \paragraph{}
@@ -116,13 +122,13 @@ the chances for a project to die increase when having a type A pattern, two
 groups are made. One group consisting of projects having the pattern, and
 a second group of equal size consisting of projects not having the pattern.
 
-Both groups of 93 projects contain projects that have died. The second group -
-the projects without the pattern - is representative to the complete data set.
+Both groups of 93 projects contain alive and dead projects. The group with
+projects without the pattern is representative to the data set as a whole.
 Selecting projects and scoring for representativeness is done with the tool by
-\citet{nagappan}. For each project of both groups it is recorded at what age the
-project died, that is, if it died. For the others, the maximum age in the data
-set is used. In Figure \ref{figure:kp_survival} the Kaplan-Meier estimation of
-the survival function of the projects is shown for these groups.
+\citet{nagappan}. For each project of both groups it is recorded at what age
+the project died, that is, if it died. For the others, the maximum age in the
+data set is used. In Figure \ref{figure:kp_survival} the Kaplan-Meier
+estimation of the survival function of the projects is shown for these groups.
 
 \input{figures/kp_survival}
 
@@ -157,7 +163,7 @@ for software evolution is that the input signal should be free of gaps. In
 section \ref{section:gapless_wavelets} the confirmation of Hypothesis
 \ref{hyp:subsequent_data} is argued.
 
-In case an input LOC signal for analysis is not continuous within the start
+In the case an input LOC signal for analysis is not continuous within the start
 and end boundaries of the signal, the wavelet analysis will detect patterns
 that are not trustworthy. Wavelet analysis may find more false-positive
 evolutionary events [\ref{itm:question_successfailure}].
@@ -166,8 +172,8 @@ evolutionary events [\ref{itm:question_successfailure}].
 In this study, I have shown that wavelet analysis is able to find patterns that
 increase the chances of a project to end. As discussed in section
 \ref{section:kp_survival}, it appears that there is a relation between a
-pattern of type A and the death of a project, however, it is no causal
-relation.
+pattern of type A and the death of a project, however, it is not found to be a
+causal relation.
 
 Furthermore, as the patterns found during analysis are subject to the data set
 as a whole, I cannot conclude that wavelet analysis is able to find
@@ -188,20 +194,20 @@ the results.
 			is possible that certain evolutionary events happened before the first point.
 			These events were not detected as they lay beyond reach of this study.
 
-		\item[\rm{Missing most recent data}] -- The data provided for the
-			study has data points until June 2013. Therefore, not the most recent data of
-			the projects is used.
+		\item[\rm{Missing most recent data}] -- The data provided for the study has
+			data points until June 2013. Therefore, not the most recent data of the
+			projects is used.
 
 		\item[\rm{LOC as activity indicator}] -- The use of LOC (defined as
 			lines of code + comments + blanks) as a measure of project activity could be
 			false. The LOC will not change between two months whenever the amount of code
-			deleted is equal to the amount added. In that case, the churn would be 2
-			times the LOC added/deleted, but the LOC will stay the same.
+			deleted is equal to the amount added. In that case, the churn would be twice
+			the LOC added/deleted, but the LOC will stay the same.
 
 			When patterns are detected that show a stagnation in LOC, the suggestion
 			would be that the project's activity is decreasing. However, it might also
-			be the case that by coincidence it only looks like activity is decreasing,
-			but in reality lots of work is being done.
+			be the case that by coincidence it seems activity is decreasing, but in
+			reality lots of activity has been going on.
 
 		\item[\rm{Data source}] -- Using only one data source (Ohloh) may
 			influence the value of the metrics. Ohloh did the analysis of the project's
@@ -241,27 +247,32 @@ the results.
 	\begin{description}
 		\item[\rm{Replication}] -- It seems hard to precisely replicate the study
 			as there are a multitude of possible configurations to be made that may, in
-			the end, influence the results drastically. Such as, the data resolution
-			(using daily, weekly, or monthly data), the definition of similarity between
-			sequences (what deviation is allowed, what is the difference of coincidence
-			and a reoccurring sequence), and the definition of a pattern (how many
-			occurrences, minimum, and maximum length).
+			the end, influence the results drastically. Such as, the definition of
+			similarity between sequences (what deviation is allowed, what is the
+			difference of coincidence and a reoccurring sequence), and the definition of
+			a pattern (how many occurrences, minimum, and maximum length).
 			
 			Furthermore, there is the interpretation of what a 'warning sign' should
-			look like on a pattern level. All these settings and interpretations
-			complicate generalising results.
+			look like on a pattern level.
 	\end{description}
 \end{description}
 
 \section{Future work}
-Next studies on the use of wavelet analysis for detecting warning signs in
-software evolution could use even more data. Do the type A patterns still
-manifest themselves using the full data set of 5,986 projects (section
-\ref{method:data}).
+A next step in the research on the use of wavelet analysis for detecting
+warning signs in software evolution would be to use a larger data set. It would
+be interesting to know if the findings of the type A patterns will be
+consistent. The whole usable data set for this study contains 5,986 projects
+(section \ref{method:data}).
 
-Other interesting results could be obtained by using different signals. For
-instance, the LOC churn might be a good candidate as it reflects code activity
-more than LOC.
+\paragraph{}
+The analysis could be done on other signals. In this study, only LOC was used,
+but many other signals can be constructed. LOC measures code activity to a
+certain extent, but LOC churn could reflect code activity better. To use LOC
+churn properly, the LOC modified fact is also needed.
+
+Other metrics could be team size, developer's churn (the number of developers
+added and removed from the team), contributor's code activity, bug reports,
+defects per kLOC etc.
 
 \begin{comment}
 - Analyse results

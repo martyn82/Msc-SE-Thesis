@@ -1,15 +1,18 @@
 \chapter{Research method}
 \label{method}
 
+In this chapter, the research approach is described. In the second section, the
+hypotheses are formulated, and finally, the validation methods are described.
+
 \section{Research approach}
-The research will be conducted in the following steps:
+The research will be conducted in the following phases:
 \begin{description}
-	\item[Literature study.] As part of the research plan, relevant literature will
-	be studied in order to get familiar with the topics touched by this
+	\item[Literature survey.] As part of the research plan, relevant literature
+	will be studied in order to get familiar with the topics touched by this
 	study. Important topics are, the ecosystem of OSS organisation and community,
 	and the success and survival factors of OSS projects. Literature regarding
-	wavelets, wavelet transforms and analysis, and in particular the Haar wavelet
-	will be studied to understand its workings.
+	wavelets, (discrete) wavelet transform and analysis, and in particular the
+	Haar wavelet will be studied to understand its workings.
 
 	\item[Data selection.] In this phase, the OSS projects for the study will be
 	selected. The evolution data of these OSS projects will be validated and
@@ -19,12 +22,6 @@ The research will be conducted in the following steps:
 	data set for the study. It is expected that not all data is suitable for
 	analysis.
 
-	A criterion for the data that is expected to be important is that the
-	evolution data for each project is continuous, in the sense that it does not
-	contain 'gaps'. Analysis on time series is expected to require subsequent
-	series of data. This expectation is formulated as a hypothesis
-	(\ref{hyp:subsequent_data}) and will be tested for validity.
-	
 	The data set for analysis should also be representative to the total set of
 	OSS projects in order to be able to generalise findings from the
 	projects within the data set to the world of OSS projects in general.
@@ -34,15 +31,12 @@ The research will be conducted in the following steps:
 	
 	First, the evolution data of the selected projects will be transformed using
 	discrete wavelet transform (DWT). The results of these transforms are kept for
-	further analysis. The signal is a model of a time variable and a frequency
-	variable, and is also known as a 'wave'. The signal can be composed of any
-	measurable property of a project's evolution, such as 'lines of code' (LOC).
-	The choice for a suitable signal will be made.
+	further analysis. The choice for a suitable signal will be made.
 	
-	Second, the results of the transforms are being analysed to find patterns. A
-	pattern is a sequence of transformed data that occurs multiple times. To be
-	able to find patterns, a detailed definition of when a sequence is a
-	pattern is needed. Choosing when a sequence becomes a pattern in terms of
+	Second, the results of the wavelet transform are being analysed to find
+	patterns. A pattern is a sequence of transformed data that occurs multiple
+	times. To be able to find patterns, a detailed definition of when a sequence
+	is a pattern is needed. Choosing when a sequence becomes a pattern in terms of
 	number of occurrances might influence the number of patterns found and
 	possibly influence the types of patterns wavelet analysis is able to detect.
 	
@@ -57,8 +51,36 @@ The research will be conducted in the following steps:
 	(section \ref{questions}).
 \end{description}
 
+\section{Hypotheses}
+In the search for patterns that may lead to the end of code evolution, the
+following hypotheses are defined. During the research, these hypotheses will be
+either confirmed or refuted.
+
+\begin{description}
+	\item[H1\label{hyp:subsequent_data}] \hspace{0em}
+	The analysis of waveforms will need a subsequent data series in order
+	to function properly.
+
+	An investigation will be made to determine the differences between analysing
+	subsequent data series and data series containing gaps. Whether this
+	hypothesis is true will help answering \ref{itm:question_successfailure}.
+	
+	\item[H2\label{hyp:pattern_types}] \hspace{0em}
+	Projects with a pattern occurring at the end of code evolution of a dead
+	project have a higher chance of dying.
+
+	The patterns occurring at the end of code evolution in dead projects are
+	expected to be more likely a warning sign. A survival analysis of projects
+	having these kinds of patterns will be conducted to confirm or refute this
+	hypothesis.
+\end{description}
+
 \section{Validation}
 \label{method:validation}
+In order to validate the patterns and in particular to know if a pattern
+represents an evolutionary event leading to the end of code evolution, dead
+projects have to be identified.
+
 \subsection{Dead projects}
 \label{def:dead}
 A project is considered 'dead' if it complies to the following properties:
@@ -84,11 +106,10 @@ that are not 'dead' by this definition are considered to be 'alive'.
 \paragraph{}
 To be sure that the projects from our data set that comply to the definition of
 dead (section \ref{def:dead}) are still dead beyond the data set, manual
-validation of these findings have to be done.
-
-In verifying if a project is dead, I will manually consult the project's
-website, its source code repository, and possibly other sources to verify the
-properties of a 'dead' project.
+validation of these findings have to be done. In verifying if a project is
+dead, I will manually consult the project's website, its source code
+repository, and possibly other sources to verify the properties of a 'dead'
+project.
 
 \subsection{Warning signs}
 To recognise patterns that are warning signs, a selection of patterns occurring
@@ -98,32 +119,8 @@ evolution of a dead project.
 
 Knowing these patterns, selecting the projects having these patterns will be
 done to find out if these projects have a higher chance of dying than projects
-that do not show such pattern. An analysis of survival estimation will be done
-to evaluate this (\ref{hyp:pattern_types}).
-
-\section{Hypotheses}
-In the search for patterns that may lead to the end of code evolution, the
-following hypotheses are defined. During the research, these hypotheses will be
-either confirmed or refuted.
-
-\begin{description}
-	\item[H1\label{hyp:subsequent_data}] \hspace{0em}
-	The analysis of waveforms will need a subsequent data series in order
-	to function properly.
-
-	An investigation will be made to determine the differences between analysing
-	subsequent data series and data series containing gaps. Whether this
-	hypothesis is true will help answering \ref{itm:question_successfailure}.
-	
-	\item[H2\label{hyp:pattern_types}] \hspace{0em}
-	Projects with a pattern occurring at the end of code evolution of a dead
-	project have a higher chance of dying.
-
-	The patterns occurring at the end of code evolution in dead projects are
-	expected to be more likely a warning sign. A survival analysis of projects
-	having these kinds of patterns will be conducted to confirm or refute this
-	hypothesis.
-\end{description}
+that do not show such pattern. An analysis of survival will be done to evaluate
+this (\ref{hyp:pattern_types}).
 
 \begin{comment}
 - The plan

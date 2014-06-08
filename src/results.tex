@@ -1,6 +1,11 @@
 \chapter{Results}
 \label{results}
 
+This chapter presents the results of the research execution. First, the data is
+described. Next, the identification of dead projects. Section
+\ref{section:seqs_patterns} presents the results for sequences and pattern
+detection. Finally, the classification of the patterns are presented.
+
 \section{Data}
 The data set of 250 projects was gathered in July 2013. It contains monthly
 data points for each project up to June 2013.
@@ -15,7 +20,7 @@ having a total of 22,943 data points. The oldest project having 321 monthly
 data points, the youngest having 14 monthly data points. The first data point
 in the set is of October 1986.
 
-\subsection{Dead projects}
+\section{Dead projects}
 \label{section:deads}
 A total of 38 (15.2\%) projects complied to the definition of a dead project as
 defined in section \ref{def:dead}. Manual verification of the 38 potential
@@ -31,10 +36,9 @@ result of the verification are shown in Table \ref{table:deads}.
 
 \paragraph{}
 All, except one, of the projects in Table \ref{table:deads} are dead because it
-was abandoned by the community of contributors. Except for project with ID
-587204, which is still receiving updates, but at very slow and sporadic
-intervals. However, since the updates do not involve code activity, it is
-considered dead.
+was abandoned by the community of contributors. Except for project #587204,
+which is still receiving updates, but at very slow and sporadic intervals.
+However, since the updates do not involve code activity, it is considered dead.
 
 \paragraph{}
 When looking into project \#317799, which is the youngest in this set and died
@@ -144,6 +148,8 @@ average per project); and 1,084 patterns detected in 21 dead projects (an
 average of 51.6 patterns per project). The averages do not differ significantly
 over the projects.
 
+
+
 \section{Pattern classification}
 The classification of the patterns was done to distinguish different types of
 patterns to be able to find evolutionary events. For this, the patterns
@@ -153,19 +159,23 @@ this group has the highest chance of keeping a pattern indicating an
 evolutionary event leading to the end of code evolution.
 
 \paragraph{}
-A total of 1,084 patterns is classified. The sizes of the pattern type subsets
-are shown in Table \ref{table:pattern_type_counts}. For each subset, it is
-stated in how many dead projects a pattern of that type was found.
+A total of 1,084 patterns detected in dead projects is classified. The sizes of
+the pattern type subsets are shown in Table \ref{table:pattern_type_counts}.
+For each subset, it is stated in how many projects a pattern of that type was
+found.
 
 \input{tables/pattern_type_counts}
 
 \noindent
 The patterns of all three groups were detected in dead projects, but may occur
-in alive projects.
+in both dead and alive projects.
 
 In search of patterns that lead to the end of code evolution, patterns of type
 A will be most interesting, because these patterns last until the end of
 evolution data of dead projects.
+
+The evaluation of type A patterns is described in section
+\ref{section:kp_survival}.
 
 \begin{comment}
 - Factual results

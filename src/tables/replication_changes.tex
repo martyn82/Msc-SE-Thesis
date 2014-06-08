@@ -1,0 +1,53 @@
+\begin{table}[H]
+\caption{Changes to the original study}\label{table:changes}
+\centering
+\begin{tabular}{p{20mm}p{30mm}p{30mm}p{6cm}}
+\hline
+	\bfseries{Aspect}\rm & \bfseries{Original}\rm & \bfseries{Replication}\rm &
+	\bfseries{Motivation}\rm \\
+	\hline
+	\bfseries{Data}\rm \\
+	\hline
+	Sample size & 27 projects & 250 projects & A larger data is believed to yield
+	more trustworthy results in terms of the ability to generalise results. \\
+
+	Sample selection & Random and manual complementation & Automatic
+	representative selection & Knowing the representativeness and selecting
+	projects accordingly increases the ability to generalise the results. \\
+
+	Data gathering & Repository mining & Ohloh analysis & The data gathered by
+	the tool \cite{ohlohanalytics, bruntink2014} was gathered from Ohloh
+	\cite{ohloh}. Ohloh did the source code repository mining and aggregated and
+	analysed this data into monthly facts. Furthermore, the data provided by the
+	OhlohAnalytics tool is already validated and cleansed to be consistent. \\
+
+	Data frames & Daily aggregated to weekly & Monthly & No aggregation of the raw
+	data was done in the replication, because the data provided from Ohloh and
+	OhlohAnalytics is already presented in monthly time frames. \\
+
+	Time series & Days since first commit & Age in months & Similar to the 'Data
+	frames' change, the 'days since first commit' is aggregated in 7 day frames in
+	the original study. \citeauthor{karus2013} aggregates the other metrics as
+	shown in Table \ref{table:karus_series}. In the replication this was not the
+	case as the data provided is already in monthly data frames. The aggregation
+	was not done because of issues found with aggregation of LOC as discussed in
+	section \ref{section:gapless_wavelets}. \\
+
+	Code churn & Sum of LOC added, modified, and removed & Sum of LOC added and
+	removed & Ohloh does not track a modified LOC fact. Therefore, the LOC
+	modified metric could not be added to the calculation of LOC churn. \\
+\hline
+\end{tabular}
+\end{table}
+\begin{table}[H]
+\begin{tabular}{p{20mm}p{30mm}p{30mm}p{6cm}}
+	\hline
+	\bfseries{Analysis}\rm \\
+	\hline
+
+	Signals & $20\times27=540$ signals (see Table \ref{table:karus_series}) &
+	$1\times250=250$ signals (i.e., LOC) & Only LOC is used because of its simple
+	interpretation and intiuitive representation. \\
+\hline
+\end{tabular}
+\end{table}
