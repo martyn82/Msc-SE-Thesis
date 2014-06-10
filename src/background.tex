@@ -104,8 +104,8 @@ In the survey of OSS projects by \citet{androutsellis}, project success is
 defined from three perspectives:
 
 \begin{description}
-	\item[Prerequisites for success.] \hspace{1em} The prerequisites for a good
-		chance of a successful project are divided in three categories: the first is
+	\item[Prerequisites for success] \hfill \\ The prerequisites for a good
+		chance of a successful project are divided in four categories: the first is
 		the need for \textit{starting points} for a project. The starting points
 		are threefold; (1) a certain interest is required in the mind of one person
 		or a group of developers; (2) the audience the software is targeting
@@ -113,7 +113,9 @@ defined from three perspectives:
 		project may play an important role.
 		
 		Second is the \textit{community organisation}. A meritocratic culture would
-		be the best chance for a successful project.
+		be the best chance for a successful project. That is, a culture that is ruled
+		by the people who deserve it. The leaders come from the inside of the
+		community and are by definition supported by that community.
 		
 		Third is the aspects that contribute to the prerequisites for success are the
 		\textit{technical} environment and infrastructure as well as programming
@@ -121,12 +123,12 @@ defined from three perspectives:
 		process. The choice of external project dependencies affects the success of a
 		project under development.
 		
-		And fourth, a prerequisite for project success is the open-source
-		perspective. The licensing scheme and the definition of an effective and
+		And fourth, a prerequisite for project success is the \textit{open-source
+		perspective}. The licensing scheme and the definition of an effective and
 		reasonable business model are issues that should be clear from the beginning
 		of a project.
 		
-	\item[Sustainability.] \hspace{1em} Ensuring the sustainability of a project
+	\item[Sustainability] \hfill \\ Ensuring the sustainability of a project
 		that has reached a certain level of success. At the system level this means
 		achieving identified goals, update documentation and testing material. The
 		importance of software maintainability plays an important role in the
@@ -138,7 +140,7 @@ defined from three perspectives:
 		continuously evolving and taking advantage of the developers' skills and
 		competencies \cite{androutsellis}.
 
-	\item[Indicators for success.] \hspace{1em} The indicators to distinguish a
+	\item[Indicators for success] \hfill \\ The indicators to distinguish a
 		successful project from other, less successful ones are of interest by
 		many researchers. A lot of indicators for success or success factors have
 		been identified, but the ultimate key indicators for success have not yet
@@ -221,34 +223,34 @@ projects is developer satisfaction. This, in turn, is similar to findings of
 Measures regarding the process of software development are identified.
 \citet{crowston2003} states in accordance to \citet{lehman} that
 software development is an ever-going activity. A number of possible indicators
-of success are suggested by \citet{crowston2003}:
+of success are suggested by \citeauthor{crowston2003}:
 
 \begin{description}
-	\item[Number of developers] \hfill \\ The number of developers are
-		important in the continuity of a project and could therefore be an indicator
+	\item[Number of developers] \hfill \\ The number of developers appears
+		important for the continuity of a project and could therefore be an indicator
 		of success.
-		
-	\item[Level of activity] \hfill \\ Seems more important than the number of
-		developers. Their contribution to the project in submitting code, and bug
-		reports.
-		
+
+	\item[Level of activity] \hfill \\ Seems to be more important than the number
+		of developers. The developers' contribution to the project in submitting code,
+		and bug reports.
+
 	\item[Cycle time] \hfill \\ The time between releases, or cycle time, might
 		be an indicator for success. The norm of the OSS community in general is
 		'release early and often', which implies an active release cycle is a sign of
 		a healthy project.
-		
+
 	\item[Employment opportunities] \hfill \\ The motivation of OSS developers
 		might be an indicator for success. Developers may participate in an OSS
-		project to improve their employment opportunities. It can be measured as the
-		salary, or jobs acquired, of the participating developers.
-		
+		project to improve their employment opportunities. It can be measured as
+		their salary, or jobs acquired.
+
 	\item[Individual reputation] \hfill \\ Related but not quite the same as
 		the employment opportunities it is considered an indicator of success if
 		developers are willing to participate because they will be rewarded with
 		reputation in the community. Measurement, however, is very difficult. Earlier
 		studies did not succeed in relating the earning of reputation to the
 		success of a particular project.
-		
+
 	\item[Knowledge creation] \hfill \\ An effect that can be measured by
 		surveying the developers for their perceived learning on a project. It seems
 		important for developers that they learn during their participation in a
@@ -257,8 +259,9 @@ of success are suggested by \citet{crowston2003}:
 
 \noindent
 Although important, the previous list of measures is by no means an exhaustive
-list of measures for OSS project success. \citet{crowston2003} even suggest
-that not any of these measures actually measure success.
+list of measures for OSS project success. The disclaimer by \citet{crowston2003}
+states that by no means they claim that any of these measures actually measures
+project success.
 
 \paragraph{}
 In another study, three years later, conducted by \citet{crowston2006}, the
@@ -268,12 +271,12 @@ the previous paragraphs in 122 projects from
 SourceForge\footnote{\url{http://www.sourceforge.net}}.
 The paper shows the challenges for mining source code repositories and OSS communities.
 
-One measure that was revisited is the Number of Developers.
-\citeauthor{crowston2006} suggests the Number of Developers as a measure is a
-flawed number, because it aggregates the number of developers joining and the
-number of developers leaving a project. A developers 'churn' (i.e.,
-sum of developers joined and left) or a 'tenure' (i.e., developers time on the
-project) would be more appropriate in measuring team size or composition.
+One measure that was revisited is the \textit{number of developers}.
+\citeauthor{crowston2006} suggests the 'number of developers' as a measure is a
+flawed number, because it aggregates the numbers of developers joining and the
+leaving a project. A developers 'churn' (i.e., sum of developers joined and
+left) or a 'tenure' (i.e., developers time on the project) would be more
+appropriate in measuring team size or composition.
 
 
 
@@ -320,7 +323,9 @@ projects from SourceForge. The projects are analysed by the following metrics:
 		
 	\item[Maturity] \hfill \\ An indicator of maturity is given by SourceForge
 		ranging in seven possible values: planning, pre-alpha, alpha, beta,
-		production/stable, mature, and inactive.
+		production/stable, mature, and inactive. This metric is equal to the
+		development stage indicator of \citet{androutsellis} and
+		\citet{crowston2006}.
 \end{description}
 
 \noindent
@@ -365,7 +370,14 @@ would be 'more successful'.
 \citeauthor{beecher} found that the projects in the first group achieve better
 results compared to the second group. Projects that made the transition from
 the second to the first did better on previous metrics than before the
-transition.
+transition. This implies that the type of repository influences the project
+success. Projects in repositories Debian, KDE, and GNOME are in general more
+successful than projects in repositories RubyForge, Savannah, and SourceForge.
+This is probably due to the stricter rules for a project to enter one of the
+repositories in the first group and the free nature of the repositories in the
+second group.
+
+
 
 \subsection{Software evolution prediction}
 A study by \citet{goulao} used seasonal time analysis to predict the evolution
@@ -394,7 +406,7 @@ Several studies have been conducted regarding the survivability of OSS projects
 \citet{raja2012} defined and evaluated a measure of survivability of OSS
 projects. The measure the authors found is \textit{viability}: \textit{the
 ability of a project to grow and maintain its structure in the presence of
-pertubations}. The viability is defined along three dimensions:
+perturbations}. The viability is defined along three dimensions:
 
 \begin{description}
 	\item[Vigor] \hfill \\ The ability of a project to grow/evolve over a period of
@@ -422,9 +434,10 @@ three dimensions -- vigor, resilience, and organisation -- are different
 attributes contributing to viability.
 
 \paragraph{}
-Another study by \citet{samoladas2010} on the survivability of OSS projects.
-The authors performed an analysis on the duration of 1,147 OSS projects from
-various sources.
+In a study by \citet{samoladas2010} on the survivability of OSS projects,
+the authors performed an analysis on the duration of 1,147 OSS projects from
+various sources using a similar, but slightly different, interpretation of the
+duration metric of \citet{beecher}:
 
 \begin{description}
 	\item[Duration] \hfill \\ The age of the project in months since the birth
@@ -434,10 +447,10 @@ various sources.
 \end{description}
 
 \noindent
-\citeauthor{samoladas2010} employed Kaplan-Meier estimation of the survival
+\citeauthor{samoladas2010} employed a Kaplan-Meier estimation of the survival
 function and the hazard function of the projects. Analysis was performed by
-using the duration metric on all projects, and on the projects categorised
-using 25 categories.
+using the duration metric on all projects, and on projects category as the
+projects were categorised in 25 distinct categories.
 
 The findings by \citeauthor{samoladas2010} were that there is an effect of
 project category (i.e., application domain), and number of committers on the
@@ -511,7 +524,8 @@ the project's survival at growth stage.
 
 The level of service quality will positively impact the project's survival at
 both the initial and growth stages. The license restrictiveness has no
-significant impact on the survivability of a project.
+significant impact on the survivability of a project. This is in contrast to
+the observations regarding open-source perspective of \citet{androutsellis}.
 
 Furthermore, network sizes do not impact the survivability, but the quality of
 the external network does at both stages.
@@ -569,6 +583,13 @@ find repeating patterns or processes hidden in the logs of change events of OSS
 projects. However, Fourier transform seems not the right tool to use for
 analysis of evolution time series data.
 
+\paragraph{}
+Wavelet analysis is similar to Fourier analysis with the difference that
+wavelet transform deals with time and frequency information, and Fourier
+transform deals with frequency information only. Wavelet analysis has the
+advantage over Fourier analysis that it can deal with non-smooth ('choppy')
+signals, as opposed to the limitation of only sines and cosines \cite{graps}.
+
 \subsection{Waveforms and wavelets}
 Wavelets are functions that satisfy certain mathematical requirements and are
 used in representing data or other functions \cite{graps}.
@@ -604,13 +625,6 @@ discrete wavelet transformation is a way of sampling the signal at different
 intervals giving a natural means of scaling the signal \cite{karus2013}.
 
 \paragraph{}
-Wavelet analysis is similar to Fourier analysis with the difference that
-wavelet transform deals with time and frequency information, and Fourier
-transform deals with frequency information only. Wavelet analysis has the
-advantage over Fourier analysis that it can deal with non-smooth ('choppy')
-signals, as opposed to the limitation of only sines and cosines \cite{graps}.
-
-\paragraph{}
 In digital signal processing, the category of methods that discrete wavelet
 transform belongs to, there is a phenomenon called the \textit{uncertainty
 principle}. It means that the shorter the signal, the harder it is to
@@ -642,7 +656,7 @@ Figure \ref{figure:filtering} respectively.
 \input{figures/filtering}
 
 \paragraph{}
-Wavelet transform has proven important in signal processing thanks to its
+Wavelet transform has proven to be important in signal processing thanks to its
 inherent properties which allow comparisons at different scales and shifts
 \cite{karus2013}. Compared to other time series analysis techniques, the main
 advantages of wavelet transformations in the analysis of signals are:
