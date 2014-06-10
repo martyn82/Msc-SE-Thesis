@@ -1,12 +1,6 @@
 \chapter{Analysis and Conclusions}
 \label{analysis}
 
-This chapter discusses the results. First, an evaluation is done on the workings
-of wavelet analysis. Then the patterns found are evaluated. Next, the
-survivability of projects with a certain patterns is evaluated. Then, the
-answers on the research questions are presented. The last two sections describe
-threats to validity and future work.
-
 \section{Evaluation}
 \subsection{Wavelet analysis}
 \label{section:gapless_wavelets}
@@ -49,21 +43,21 @@ following:
 \end{description}
 
 \paragraph{}
-The method \emph{last observation carried }\rm results in a signal with
+The method \textit{last observation carried} results in a signal with
 same values between point 2 and 5, which shows a flat line when plotted in a
 graph.
 
-Filling the gaps with \emph{mean }\rm values, will also result in a signal with
+Filling the gaps with \textit{mean} values, will also result in a signal with
 same values. It is similar to last observation carried but using the mean is
 excluding the two known observations, whereas last observation carried is
 inclusive. Using mean, the number of second entries having same values
 will therefore be smaller than using the last observation.
 
-The \emph{piecewise constant }\rm interpolation results in a signal having two
+The \textit{piecewise constant} interpolation results in a signal having two
 smaller flat lines, because the repeating values are 'snapped' to the closest
 neighbour.
 
-Finally, the \emph{linear interpolation }\rm will result in a signal that
+Finally, the \textit{linear interpolation} will result in a signal that
 linearly flows towards the next known value. The advantage of this technique is
 that there will not be a flat line in the signal, but the disadvantage is that
 the numbers are new in the signal, possibly not even close to what was present
@@ -80,7 +74,7 @@ growth or decay in LOC, depending on the direction.
 \paragraph{}
 The success of one of the above methods of closing a gap depends on the size of
 the gap. The smaller the gap, the lesser impact it has on the reliability of
-the detection of a pattern for that particluar signal. The larger the gap, the
+the detection of a pattern for that particular signal. The larger the gap, the
 more the impact on reliability. Either way, adding data will add noise.
 However, in general having gaps in the data and close the gaps by adding data
 negatively influences the reliability of detecting patterns. Therefore,
@@ -177,7 +171,7 @@ causal relation.
 
 Furthermore, as the patterns found during analysis are subject to the data set
 as a whole, I cannot conclude that wavelet analysis is able to find
-\emph{objective }\rm warning signs in OSS projects
+\textit{objective} warning signs in OSS projects
 [\ref{itm:question_warningsigns}].
 
 \section{Threats to validity}
@@ -189,7 +183,8 @@ the results.
 	
 	\begin{description}
 		\item[\rm{Missing historical data}] -- In the analysis of project's
-			evolution data, only the data provided by the OhlohAnalytics tool was used.
+			evolution data, only the data provided by the OhlohAnalytics tool
+			\cite{ohlohanalytics, bruntink2013} was used.
 			The data before the first data point in the set is not taken into account. It
 			is possible that certain evolutionary events happened before the first point.
 			These events were not detected as they lay beyond reach of this study.

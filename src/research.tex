@@ -1,10 +1,6 @@
 \chapter{Research}
 \label{research}
 
-In this chapter, I describe the research execution. First, the data selection is
-described. Then the wavelet transform and analysis is described. Finally, the
-classification of patterns.
-
 \section{Data selection}
 \label{method:data}
 A total number of 250 OSS projects will be used for this study. This number is
@@ -18,9 +14,9 @@ projects. The steps are described in the following sections.
 
 \subsection{Data gathering}
 The data for this research is gathered from
-Ohloh\footnote{\url{http://www.ohloh.net}}: \emph{``Ohloh is a free, public
+Ohloh\footnote{\url{http://www.ohloh.net}}: \textit{``Ohloh is a free, public
 directory of Free and Open Source Software and the contributors who create and
-maintain it.'' }\rm \cite{ohloh}. At the time of this writing, Ohloh tracks more
+maintain it.'' } \cite{ohloh}. At the time of this writing, Ohloh tracks more
 than 660,000 OSS projects varying in all ranges of size, and popularity. The
 most popular projects currently being Apache HTTP Server, Apache OpenOffice,
 Apache Subversion, Bash, Firebug, Linux Kernel, Mozilla Firefox, MySQL, PHP,
@@ -28,12 +24,12 @@ and Ubuntu.
 
 \paragraph{}
 For this research, the data provided by a tool by \citet{ohlohanalytics} is
-used. This tool, ``\emph{OhlohAnalytics}\rm'', was developed as part of the
-replicative research by \citet{bruntink2014}, and provides a validated and
+used. This tool, ``\textit{OhlohAnalytics}'', was developed as part of the
+replication research by \citet{bruntink2013}, and provides a validated and
 cleansed data set of 12,360 OSS projects, collected from Ohloh in July 2013.
 
 \subsubsection{Initial validation and cleansing}
-The OhlohAnalytics tool by \citet{ohlohanalytics} did the initial analysis,
+The OhlohAnalytics tool by \citet{ohlohanalytics} performed initial analysis,
 validation, and cleansing of the data by detecting inconsistent values and
 removing these records from the data set. Additionally, extra data fields are
 derived or aggregated from and added to the raw data for convenience.
@@ -58,16 +54,16 @@ for the study.
 The evolution data of the 10,811 projects contained gaps. It is expected by
 Hypothesis \ref{hyp:subsequent_data} that a subsequent series of data is
 required to be able to analyse time series for a project. Therefore, a number
-representing the \emph{fraction of continuity }\rm of the evolution data per
+representing the \textit{fraction of continuity} of the evolution data per
 project was calculated. For each project the difference between the minimum and
 maximum values of the $age\_in\_months$ fact is taken, added by one, giving the
 expected number of data points for a project. The computation of the fraction
 of total evolution data is done for each project.
 
-After the fractions of the total evolution data for each project were caculated,
-the projects were filtered and only those projects that have all data points
-between minimum and maximum $age\_in\_months$ are kept. This reduces the total
-number of projects to 6,418.
+After the fractions of the total evolution data for each project were
+calculated, the projects were filtered and only those projects that have all
+data points between minimum and maximum $age\_in\_months$ are kept. This
+reduces the total number of projects to 6,418.
 
 \subsubsection{Minimal sequence length}
 A time series of 1 (monthly) data point is not analysable over time and
@@ -89,7 +85,7 @@ additional project is selected by its score to maximally increase the
 representativeness of the sample as a whole, compared to the master data.
 
 The master data is a list of 20,028 projects tracked by Ohloh delivered with
-this tool. A pre-filtering of this master data was done to make the tool select
+this tool. A pre-filtering of the master data was done to make the tool select
 only the projects that appear in the data set of 5,986 projects.
 
 \subsection{Dead projects}
@@ -108,9 +104,9 @@ $age\_in\_months$ in the time domain, and $LOC$ in the frequency domain. Figure
 \input{figures/signal}
 
 \paragraph{}
-The rationale for chosing 'lines of code' in time series is done because of
-simplicity and intuitive interpretation. LOC is not a way to measure
-productivity in a project, but it is sufficient to measure activity.
+The rationale for choosing 'lines of code' as time series is done because of
+its simplicity and intuitive interpretation. Additionally, LOC over time is a
+way to measure the growth of the project.
 
 \paragraph{}
 The $LOC$ metric used in this study for the transform and analysis is slightly
@@ -155,7 +151,7 @@ more details on wavelet transform and analysis see section
 \subsection{Wavelet analysis}
 \subsubsection{Similar sequence identification}
 The coefficients resulted from the wavelet transform are analysed to find
-\emph{similar sequences}\rm. A sequence is defined as a subsequent series of
+\textit{similar sequences}. A sequence is defined as a subsequent series of
 coefficients at a particular level of decomposition, with a sequence length
 between 3 and 65 (inclusive) coefficients.
 
@@ -194,16 +190,16 @@ it occurs in, and whether this list of projects contains dead, alive, or both
 dead and alive projects.
 
 \paragraph{}
-A distinction is made between the \emph{detection }\rm of a pattern and an
-\emph{occurrence }\rm of a pattern. Although the difference is slight, the
+A distinction is made between the \textit{detection} of a pattern and an
+\textit{occurrence} of a pattern. Although the difference is slight, the
 distinction is essential for further analysis.
 
-When \emph{detecting }\rm a pattern in project $A$, it means it was
-encountered by analysing that particular project. Finding an \emph{occurrence
-}\rm of a pattern means that the pattern was found by evaluating other project
-$B$'s sequences against those from project $A$. A pattern is then recorded as a
-tuple of a sequence detected in project $A$ and a set of at least 2 other
-sequences being similar, occurring elsewhere.
+When \textit{detecting} a pattern in project $A$, it means it was
+encountered by analysing that particular project. Finding an
+\textit{occurrence} of a pattern means that the pattern was found by evaluating
+other project $B$'s sequences against those from project $A$. A pattern is then
+recorded as a tuple of a sequence detected in project $A$ and a set of at least
+2 other sequences being similar, occurring elsewhere.
 
 \section{Pattern classification}
 \label{section:patterns_dead}
@@ -217,10 +213,10 @@ projects are introduced:
 
 \begin{description}
 	\item[Type A.] Type A patterns strictly detected at the end of the evolution
-		data of a dead project. More formaly, if a dead project $P$ starts at point
+		data of a dead project. More formally, if a dead project $P$ starts at point
 		$x$ and ends at point $y$, the pattern starts at $x'$ and ends at $y$.
 	
-	\item[Type B.] Type B patterns strictly \emph{not }\rm detected at the end of
+	\item[Type B.] Type B patterns strictly \textit{not} detected at the end of
 		evolution data of a dead project. Such patterns may occur anywhere else in
 		the lifetime of a dead project.
 	
