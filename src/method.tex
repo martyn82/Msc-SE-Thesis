@@ -14,6 +14,11 @@ The research will be conducted in the following phases:
 	\item[Data selection.] In this phase, the OSS projects for the study will be
 	selected. The evolution data of these OSS projects will be validated and
 	cleansed to ensure all data for these projects is consistent.
+	
+	Another criterion for the data set is that the evolution series of the projects
+	are continuous, i.e., that the data per project does not have gaps of missing
+	data. The discussion for this requirement is done in section
+	\ref{section:gapless_wavelets}.
 
 	The data set for analysis should also be representative to the total set of
 	OSS projects in order to be able to generalise findings from the
@@ -44,43 +49,95 @@ The research will be conducted in the following phases:
 	(section \ref{questions}).
 \end{description}
 
-\section{Hypotheses}
-In the search for patterns that may lead to the end of code evolution, the
-following hypotheses are defined. During the research, these hypotheses will be
-either confirmed or refuted.
+\section{Continuous series}
+\label{section:gapless_wavelets}
+In verification of the requirement of a continuous series for wavelet analysis,
+a hypothetical signal was constructed. Let the following set of pairs be the
+signal $S$ to be analysed, where the first entry is the time value, and the
+second entry the LOC value:
+$$S = \{(1,100), (2,150), (5,250)\}$$
 
+\noindent
+In signal $S$ the two pairs having first entry $3$ and $4$ are missing. The
+implementation of discrete wavelet transform in the 'Wavelets' R package
+requires an indexed series as input wavelet. This means that whether or not
+the signal contains gaps, these gaps are naturally closed by indexing the
+signal. After zero-based indexing, the signal $S$ will look as follows:
+$$S' = \{(0,100), (1,150), (2,250)\}$$
+
+\noindent
+The wavelet transformation can perfectly be done using $S'$ as input
+signal. The output series of coefficients are indistinguishable from other
+signals without gaps. However, the patterns found will be invalid as it ignored
+intermediate data during similarity analysis.
+
+\paragraph{}
+A further investigation was done on how to fix such gaps. The use of four
+different methods of 'guessing' the data was explored and the results were the
+following:
 \begin{description}
-	\item[H1\label{hyp:subsequent_data}] \hspace{0em}
-	The analysis of waveforms will need a subsequent data series in order
-	to function properly.
+	\item[last observation carried] \hfill \\[1em]
+	$S_{1} = \{(1,100), (2,150), (3,150), (4,150), (5,250)\}$
 
-\begin{comment}
-Further evaluation of the data should be done prior to the selection of the
-data set for the study. It is expected that not all data is suitable for
-analysis.
-\end{comment}
-
-	An investigation will be made to determine the differences between analysing
-	subsequent data series and data series containing gaps. Whether this
-	hypothesis is true will help answering \ref{itm:question_successfailure}.
+	\item[mean] \hfill \\[1em]
+	$S_{2} = \{(1,100), (2,150), (3,200), (4,200), (5,250)\}$
 	
-	\item[H2\label{hyp:pattern_types}] \hspace{0em}
-	Projects having a pattern that is detected near the end of evolution of a
-	dead project have a higher chance of dying.
-
-	The patterns detected near the end of evolution in dead projects are
-	expected to be more likely a warning sign. A survival analysis of projects
-	having these kinds of patterns will be conducted to confirm or refute this
-	hypothesis.
+	\item[piecewise constant interpolation] \hfill \\[1em]
+	$S_{3} = \{(1,100), (2,150), (3,150), (4,250), (5,250)\}$
+	
+	\item[linear interpolation] \hfill \\[1em]
+	$S_{4} = \{(1,100), (2,150), (3,183), (4,216), (5,250)\}$
 \end{description}
 
+\paragraph{}
+The method \textit{last observation carried} results in a signal with
+same values between point 2 and 5, which shows a flat line when plotted in a
+graph.
+
+\paragraph{}
+Filling the gaps with \textit{mean} values, will also result in a signal with
+same values. It is similar to last observation carried but with one difference.
+The mean method is exclusive the two known observations, whereas last
+observation carried is inclusive. Using mean, the number of second entries
+having same values will therefore be 2 observations lesser than using the last
+observation.
+
+\paragraph{}
+The \textit{piecewise constant} interpolation results in a signal having two
+shorter flat lines. The repeating values are 'snapped' to the closest
+neighbour.
+
+\paragraph{}
+Finally, the \textit{linear interpolation} will result in a signal that
+linearly flows towards the next known value. The advantage of this technique is
+that there will not be a flat line in the resulting signal. However, the
+disadvantage is that resulting values possibly are not even close to what was
+present in the complete signal.
+
+\paragraph{}
+The flat lines introduced using the above techniques may be detected as no
+change in LOC during that period. This is undesired as can be mistaken for a
+pattern that stopped code evolution.
+
+Moreover, the signal resulted from linear interpolation could be mistaken for
+growth or decay in LOC, depending on the direction.
+
+\paragraph{}
+The success of one of the above methods of closing a gap depends on the size of
+the gap. The smaller the gap, the lesser impact it has on the reliability of
+the detection of a pattern for that particular signal. The larger the gap, the
+more the impact on reliability. Either way, adding data will add noise and, in
+general, having gaps in the evolution data and closing the gaps by adding data
+will negatively influence the reliability of detecting patterns.
+
 \section{Validation}
+\subsection{Dead projects}
 \label{method:validation}
 In order to validate the patterns and in particular to know if a pattern
 represents an evolutionary event leading to the end of code evolution, dead
-projects have to be identified.
+projects have to be identified.\\
 
-\subsection{Dead projects}
+\noindent
 \label{def:dead}
 A project is considered 'dead' if it complies to the following properties:
 \begin{enumerate}
@@ -120,7 +177,7 @@ evolution of a dead project.
 Knowing these patterns, selecting the projects having these patterns will be
 done to find out if these projects have a higher chance of dying than projects
 that do not show such pattern. An analysis of survival will be done to evaluate
-this (\ref{hyp:pattern_types}).
+this.
 
 \begin{comment}
 - The plan

@@ -4,14 +4,14 @@
 This chapter reports on the replication using guidelines as proposed in the
 paper by \citet{carver}.
 
-\section{About the original study}
+\section*{About the original study}
 The original study, ``\repltitle{}'', was conducted by \replauthor{} in
 \citeyear{karus2013}. The main research question of the original study is:
 
 ``Can we use wavelet analysis to find objective warning signs in software
 projects leading to the end of code evolution?''
 
-\subsection{Data}
+\subsection*{Data}
 \citeauthor{karus2013} used a data set consisting of 27 OSS projects.
 
 18 of the projects were randomly chosen using Google Code Search and contained
@@ -36,7 +36,7 @@ total of 540 signals analysed in the original study.
 
 \input{tables/karus_series}
 
-\subsection{Method}
+\subsection*{Method}
 The original study was done in the following steps:
 \begin{description}
 	\item[Data preparation.] The evolution data of the 27 projects was aggregated
@@ -61,22 +61,22 @@ The original study was done in the following steps:
 		'pattern'.
 \end{description}
 
-\subsection{Results}
-\citeauthor{karus2013} found 998 common patterns across different projects. He
+\subsection*{Results}
+\citet{karus2013} found 998 common patterns across different projects. He
 confirmed that ``\textit{\ldots{}evolution patterns in software projects do
 express various warning signs leading to or indicating the impending end of
-code evolution.}'' \cite{karus2013}.
+code evolution.}''.
 
 \paragraph{}
-\citet{karus2013} concluded that: ``\textit{\ldots{}wavelet analysis can be
+\citeauthor{karus2013} concluded that: ``\textit{\ldots{}wavelet analysis can be
 successfully used to detect anomalies} [in software evolution] \textit{before
 they turn into a long-term issue, allowing action to be taken before it is too
 late.}'', and, ``\textit{In conclusion, we have demonstrated the usefulness
 for both tracing software evolution and for detecting anomalies in software
 evolution.}''.
 
-\section{About the replication}
-\subsection{Level of interaction}
+\section*{About the replication}
+\subsection*{Level of interaction}
 During this study, and especially in the beginning, I was in contact with
 \citeauthor{karus2013} about the implementation of his study. He explained some
 of the decisions he made and the 'problems' he had conducting the study.
@@ -97,14 +97,14 @@ detecting the patterns:
 		patterns.
 \end{itemize}
 
-\subsection{Changes}
+\subsection*{Changes}
 Table \ref{table:changes} presents what aspects of the original study were
 changed in the replication. Each change is compared and motivated.
 
 \input{tables/replication_changes}
 
-\subsection{Discussion}
-\subsubsection{Time frames}
+\subsection*{Discussion}
+\subsubsection*{Time frames}
 The fact that I used monthly time frames as opposed to weekly time frames, was
 because of the fact that Ohloh provides no finer grained time frames than
 monthly. Furthermore, there was no reason to believe that finer grained time
@@ -119,7 +119,7 @@ row. Therefore, patterns leading to the end of code evolution will last for
 months. Weekly data points will probably not add significant value in detecting
 warning signs.
 
-\subsubsection{LOC churn}
+\subsubsection*{LOC churn}
 The 'LOC churn' metric is defined as the sum of lines of code added, modified,
 and deleted. The data used in the replication of the study did not include LOC
 modified. Therefore, the LOC churn is calculated as the sum of LOC added and
@@ -137,7 +137,7 @@ Furthermore, in the replication the LOC churn metric is not used as a signal to
 be analysed, but merely as a measure to indicate any code activity for
 determining whether a project is dead.
 
-\subsubsection{Signals}
+\subsubsection*{Signals}
 \citeauthor{karus2013} processed 540 signals in total, as opposed to 250
 signals in the replication. The quantity of signals is not related to the
 quality of the patterns it is able to detect, because the signals are
@@ -147,7 +147,7 @@ The choice of the signal should depend on the relation between the time and
 frequency domains. For time and 'lines of code' (LOC), this relation can be
 interpreted with some intuition, which eases validation of the results.
 
-\section{Evaluation}
+\section*{Evaluation}
 The results from the replication are comparable to the results of the original
 study. Both studies found patterns in software evolution by using wavelet
 analysis. Both studies found patterns that may lead to the end of code
@@ -158,7 +158,7 @@ The difference in results between the original and the replication can be found
 in the evaluation of the patterns and the evaluation of wavelet analysis as a
 tool to find objective warning signs.
 
-Wavelet analysis works best on subsequent series of data (section
+Wavelet analysis works best on continuous data series (section
 \ref{section:gapless_wavelets}). Furthermore, the ability of wavelet analysis
 to find patterns depends on the data at hand (section \ref{section:conclusions}).
 

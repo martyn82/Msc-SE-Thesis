@@ -2,84 +2,6 @@
 \label{analysis}
 
 \section{Evaluation}
-\subsection{Wavelet analysis}
-\label{section:gapless_wavelets}
-In verification of Hypothesis \ref{hyp:subsequent_data}, the requirement of a
-subsequent data series for wavelet analysis, a hypothetical signal was
-constructed. Let the following set of pairs be the signal $S$ to be analysed,
-where the first entry is the time value, and the second entry the LOC value:
-$$S = \{(1,100), (2,150), (5,250)\}$$
-
-\noindent
-In signal $S$ the two pairs having first entry $3$ and $4$ are missing. The
-implementation of discrete wavelet transform in the 'wavelets' R package
-requires an indexed series as input wavelet. This means, that whether or not
-the signal contains gaps, these gaps are naturally closed by indexing the
-signal. After zero-based indexing, the signal $S$ will look as follows:
-$$S' = \{(0,100), (1,150), (2,250)\}$$
-
-\noindent
-The wavelet transformation can perfectly be done using $S'$ as input
-signal. The output series of coefficients are indistinguishable from other
-signals without gaps. However, the patterns found will be invalid as it ignored
-intermediate data during similarity analysis.
-
-\paragraph{}
-A further investigation was done on how to fix such gaps. The use of four
-different methods of 'guessing' the data was explored and the results were the
-following:
-\begin{description}
-	\item[last observation carried] \hfill \\[1em]
-	$S_{1} = \{(1,100), (2,150), (3,150), (4,150), (5,250)\}$
-
-	\item[mean] \hfill \\[1em]
-	$S_{2} = \{(1,100), (2,150), (3,200), (4,200), (5,250)\}$
-	
-	\item[piecewise constant interpolation] \hfill \\[1em]
-	$S_{3} = \{(1,100), (2,150), (3,150), (4,250), (5,250)\}$
-	
-	\item[linear interpolation] \hfill \\[1em]
-	$S_{4} = \{(1,100), (2,150), (3,183), (4,216), (5,250)\}$
-\end{description}
-
-\paragraph{}
-The method \textit{last observation carried} results in a signal with
-same values between point 2 and 5, which shows a flat line when plotted in a
-graph.
-
-Filling the gaps with \textit{mean} values, will also result in a signal with
-same values. It is similar to last observation carried but using the mean is
-excluding the two known observations, whereas last observation carried is
-inclusive. Using mean, the number of second entries having same values
-will therefore be smaller than using the last observation.
-
-The \textit{piecewise constant} interpolation results in a signal having two
-smaller flat lines, because the repeating values are 'snapped' to the closest
-neighbour.
-
-Finally, the \textit{linear interpolation} will result in a signal that
-linearly flows towards the next known value. The advantage of this technique is
-that there will not be a flat line in the signal, but the disadvantage is that
-the numbers are new in the signal, possibly not even close to what was present
-in the complete signal.
-
-\paragraph{}
-The flat lines introduced using the above techniques may be detected as no
-change in LOC during that period. This is undesired as can be mistaken for a
-pattern that stopped code evolution.
-
-Moreover, the signal resulted from linear interpolation could be mistaken for
-growth or decay in LOC, depending on the direction.
-
-\paragraph{}
-The success of one of the above methods of closing a gap depends on the size of
-the gap. The smaller the gap, the lesser impact it has on the reliability of
-the detection of a pattern for that particular signal. The larger the gap, the
-more the impact on reliability. Either way, adding data will add noise.
-However, in general having gaps in the data and close the gaps by adding data
-negatively influences the reliability of detecting patterns. Therefore,
-Hypothesis \ref{hyp:subsequent_data} is confirmed.
-
 \subsection{Patterns}
 \label{section:pattern_evaluation}
 There are more than 100,000 times more similar sequences found in the
@@ -111,16 +33,16 @@ pattern is still quite clear.
 \subsection{Survivability}
 \label{section:kp_survival}
 The type A patterns would be the best candidates for being 'warning signs' as
-they are detected at the end of evolution in dead projects. To determine whether
-the chances for a project to die increase when having a type A pattern, two
-groups are made. One group consisting of projects having the pattern, and
+they are detected at the end of evolution in dead projects. To determine
+whether the chances for a project to die increase when having a type A pattern,
+two groups are made. One group consisting of projects having the pattern, and
 a second group of equal size consisting of projects not having the pattern.
 
 Both groups of 93 projects contain alive and dead projects. The group with
 projects without the pattern is representative to the data set as a whole.
 Selecting projects and scoring for representativeness is done with the tool by
-\citet{nagappan}. For each project of both groups it is recorded at what age
-the project died, that is, if it died. For the others, the maximum age in the
+\citet{nagappan}. For each dead project in both groups it is recorded at what
+age the project died. For the alive projects, the maximum age in the
 data set is used. In Figure \ref{figure:kp_survival} the Kaplan-Meier
 estimation of the survival function of the projects is shown for these groups.
 
@@ -131,10 +53,9 @@ The Kaplan-Meier estimation of survival function of the projects as depicted in
 Figure \ref{figure:kp_survival} suggests that projects in group 1 - the
 projects having the type A pattern - die earlier than projects in group 0 - the
 projects without the pattern. This suggests that having found a type A pattern
-in a project shortens the project's life. Therefore, Hypothesis
-\ref{hyp:pattern_types} is confirmed; projects with a pattern occurring at the
-end of evolution of a dead project (i.e., type A pattern) have a higher chance
-of dying.
+in a project shortens the project's life. Projects with a pattern occurring at
+the end of evolution of a dead project (i.e., type A pattern) have a higher
+chance of dying.
 
 \section{Conclusions}
 \label{section:conclusions}
@@ -154,8 +75,7 @@ projects to be able to detect patterns that can be generalised
 \paragraph{}
 Another aspect that contributes to the success or failure of wavelet analysis
 for software evolution is that the input signal should be free of gaps. In
-section \ref{section:gapless_wavelets} the confirmation of Hypothesis
-\ref{hyp:subsequent_data} is argued.
+section \ref{section:gapless_wavelets} this is argued.
 
 In the case an input LOC signal for analysis is not continuous within the start
 and end boundaries of the signal, the wavelet analysis will detect patterns

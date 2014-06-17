@@ -46,19 +46,18 @@ evolution data of 10,811 projects.
 \input{tables/data_fields}
 
 \subsection{Data validation}
-\subsubsection{Subsequent data series}
+\subsubsection{Continuous series}
 Although the data set should be consistent after validation and cleansing,
 another validation step is needed prior to the selection of the 250 projects
 for the study.
 
-The evolution data of the 10,811 projects contained gaps. It is expected by
-Hypothesis \ref{hyp:subsequent_data} that a subsequent series of data is
-required to be able to analyse time series for a project. Therefore, a number
-representing the \textit{fraction of continuity} of the evolution data per
-project was calculated. For each project the difference between the minimum and
-maximum values of the $age\_in\_months$ fact is taken, added by one, giving the
-expected number of data points for a project. The computation of the fraction
-of total evolution data is done for each project.
+The evolution data of the 10,811 projects contained gaps. A continuous series
+of data is required to be able to analyse time series for a project. Therefore,
+a number representing the \textit{fraction of continuity} of the evolution data
+per project was calculated. For each project the difference between the minimum
+and maximum values of the $age\_in\_months$ fact is taken, added by one, giving
+the expected number of data points for a project. The computation of the
+fraction of total evolution data is done for each project.
 
 After the fractions of the total evolution data for each project were
 calculated, the projects were filtered and only those projects that have all
@@ -151,9 +150,9 @@ more details on wavelet transform and analysis see section
 \subsection{Wavelet analysis}
 \subsubsection{Similar sequence identification}
 The coefficients resulting from the wavelet transform are analysed to find
-\textit{similar sequences}. A sequence is defined as a subsequent series of
-coefficients at a particular level of decomposition, with a sequence length
-between 3 and 65 (inclusive) coefficients.
+\textit{similar sequences}. A sequence is defined as a series of coefficients
+at a particular level of decomposition, with a sequence length between 3 and 65
+(inclusive) coefficients.
 
 The sequence length thresholds were chosen by \citet{karus2013} in the original
 study to distinguish a sequence from an ordinary set of coefficients if the
