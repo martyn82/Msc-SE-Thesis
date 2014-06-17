@@ -1,0 +1,22 @@
+\begin{table}[H]
+\caption{Similar sequence properties}\label{table:sequence_props}
+\centering
+\begin{tabular}{lp{10cm}}
+\hline
+	\textbf{Property} & \textbf{Description} \\
+	\hline
+	Coefficient type & The type of coefficient; either
+	W (wavelet/shift), or V (filter/scale). \\
+	Project0 & The identity of the project the sequence was detected in. \\
+	Project1 & The identity of the project having the similar sequence. \\
+	Level0 & The compression level at which the sequence was detected. \\
+	Level1 & The compression level at which the similar sequence was found. \\
+	Start0 & The index of the coefficient the detected sequence starts. \\
+	Start1 & The index of the coefficient at which the similar sequence starts. \\
+	Length & The length representing the number of coefficients of the sequence. \\
+	Maximum deviation & A number representing the precision of similarity as the
+	maximum deviation between coefficients of project0 and those of project1. \\
+	Sequence & The list of coefficients representing the sequence of project0. \\
+\hline
+\end{tabular}
+\end{table}

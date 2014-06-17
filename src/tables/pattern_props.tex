@@ -1,0 +1,23 @@
+\begin{table}[H]
+\caption{Pattern properties}\label{table:pattern_props}
+\caption*{\footnotesize\textit{The list of sequence properties also applies to
+patterns.}}
+\centering
+\begin{tabular}{lp{10cm}}
+\hline
+	\textbf{Property} & \textbf{Description} \\
+	\hline
+	ID & The identity of the pattern. \\
+	Project count & The number of projects containing at least one similar
+	sequence. \\
+	Occurrences & The number of occurrences of the pattern. \\
+	Project list & The list of projects having a similar sequence. \\
+	Sequences & The list of similar sequences making the pattern; defined as a list
+	of tuples of project ID, level, and start index. \\
+	Has dead & A boolean value indicating whether the project list contains at
+	least one dead project. \\
+	Has alive & A boolean value indicating whether the project list contains at
+	least one alive project. \\
+\hline
+\end{tabular}
+\end{table}

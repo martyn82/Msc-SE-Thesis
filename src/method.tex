@@ -6,7 +6,7 @@ The research will be conducted in the following phases:
 \begin{description}
 	\item[Literature survey.] As part of the research plan, relevant literature
 	will be studied in order to get familiar with the topics touched by this
-	study. Important topics are, the ecosystem of OSS organisation and community,
+	study. Important topics are the ecosystem of OSS organisation and community,
 	and the success and survival factors of OSS projects. Literature regarding
 	wavelets, (discrete) wavelet transform and analysis, and in particular the
 	Haar wavelet will be studied to understand its workings.
@@ -14,10 +14,6 @@ The research will be conducted in the following phases:
 	\item[Data selection.] In this phase, the OSS projects for the study will be
 	selected. The evolution data of these OSS projects will be validated and
 	cleansed to ensure all data for these projects is consistent.
-
-	Further evaluation of the data should be done prior to the selection of the
-	data set for the study. It is expected that not all data is suitable for
-	analysis.
 
 	The data set for analysis should also be representative to the total set of
 	OSS projects in order to be able to generalise findings from the
@@ -58,15 +54,21 @@ either confirmed or refuted.
 	The analysis of waveforms will need a subsequent data series in order
 	to function properly.
 
+\begin{comment}
+Further evaluation of the data should be done prior to the selection of the
+data set for the study. It is expected that not all data is suitable for
+analysis.
+\end{comment}
+
 	An investigation will be made to determine the differences between analysing
 	subsequent data series and data series containing gaps. Whether this
 	hypothesis is true will help answering \ref{itm:question_successfailure}.
 	
 	\item[H2\label{hyp:pattern_types}] \hspace{0em}
-	Projects with a pattern occurring at the end of code evolution of a dead
-	project have a higher chance of dying.
+	Projects having a pattern that is detected near the end of evolution of a
+	dead project have a higher chance of dying.
 
-	The patterns occurring at the end of code evolution in dead projects are
+	The patterns detected near the end of evolution in dead projects are
 	expected to be more likely a warning sign. A survival analysis of projects
 	having these kinds of patterns will be conducted to confirm or refute this
 	hypothesis.
@@ -82,16 +84,18 @@ projects have to be identified.
 \label{def:dead}
 A project is considered 'dead' if it complies to the following properties:
 \begin{enumerate}
-	\item the project showed no change in 'lines of code' (LOC) for the last 12
-	months;
 	\item the project has had 0 contributors in code for the last 12 months;
-	\item the project has had 0 LOC churn\footnote{LOC churn: the sum of LOC added
-	and LOC deleted \cite{elbaum}.} for the last 12 months.
+	\item the project has had 0 'lines of code' (LOC) churn\footnote{LOC churn:
+	the sum of LOC added and LOC deleted \cite{elbaum}.} for the last 12 months.
 \end{enumerate}
 
 \noindent
 The above properties combined specify that the project has had no code activity
-for the past year, meaning the code evolution of the project has stopped.
+for the past year, meaning the code evolution of the project has stopped. If the
+LOC churn of a series of data points equals 0 (zero), this implies that the
+difference in 'lines of code' (LOC) over that same series also equals 0 (i.e.,
+there was no growth or decay in code size).
+
 According to this definition, changes in documentation, wiki pages, external
 library updates, and other non-code changes are still allowed for dead
 projects.
@@ -102,16 +106,15 @@ that are not 'dead' by this definition are considered to be 'alive'.
 
 \paragraph{}
 To be sure that the projects from our data set that comply to the definition of
-dead (section \ref{def:dead}) are still dead beyond the data set, manual
-validation of these findings have to be done. In verifying if a project is
-dead, I will manually consult the project's website, its source code
-repository, and possibly other sources to verify the properties of a 'dead'
-project.
+dead are still dead beyond the data set, manual validation of these findings
+have to be done. In verifying if a project is dead, I will manually consult the
+project's website, its source code repository, and possibly other sources to
+verify the properties of a 'dead' project.
 
 \subsection{Warning signs}
 To recognise patterns that are warning signs, a selection of patterns occurring
 in dead projects will be made for further analysis. The best candidates for
-patterns being a warning sign are patterns occurring at the end of the
+patterns being a warning sign are patterns occurring near the end of the
 evolution of a dead project.
 
 Knowing these patterns, selecting the projects having these patterns will be

@@ -5,7 +5,7 @@
 The data set of 250 projects was gathered in July 2013. It contains monthly
 data points for each project up to June 2013.
 
-The data set was tested for representativeness by using the tool by
+The data set was tested for representativeness using the tool by
 \citet{nagappan}. The data set scored a 99.5\% representativeness to the tool's
 master data of 20,028 projects tracked by Ohloh.
 
@@ -62,25 +62,26 @@ tracked.
 
 \paragraph{}
 From the initial 38 projects, the remaining 17 projects complying to the
-definition of dead (section \ref{def:dead}) appeared to be still alive. For 9
-of the projects activity is very low or rapidly decreasing; 5 projects were
-migrated to another source code repository; and for 3 projects the activity is
-increasing after a long period of no activity.
+definition of dead (section \ref{def:dead}) appeared to be still alive. These
+17 projects are evaluated:
 
-\paragraph{}
-The 9 projects with very low or decreasing activity show signs of 'dying'. Their
-community is slowly but surely abandoning the project as can be seen by a
-decrease of 35\% to 55\% of contributors, and/or commits.
+\begin{itemize}
+	\item For 9 of the projects activity is very low or rapidly decreasing. Their
+		community is slowly but surely abandoning the project as can be seen by a
+		decrease of 35\% to 55\% of contributors, and/or commits.
 
-The 5 migrated projects for which the tracking information is not updated at
-Ohloh are lost. The tracking is stopped from the moment the project is
-migrated. The tracking and analysis can be recovered by updating the source
-code locations at Ohloh, but for this study the project is out of sight.
+	\item 5 of the projects are migrated to another source code repository. For
+		these projects the tracking information is not updated at Ohloh and are lost.
+		The tracking is stopped from the moment the project is migrated. The tracking
+		and analysis can be recovered by updating the source code locations at Ohloh,
+		but for this study the project is out of sight.
 
-The 3 projects that have had no activity in a year, but after that show little
-increase of activity are more difficult to explain. Manual evaluation showed
-that there exist similar projects outside the data set that eventually die, but
-there are also similar projects that eventually got 'resurrected'.
+	\item The 3 projects that have had no activity in a year (i.e, were dead), but
+		after that show little increase of activity are more difficult to explain.
+		Manual evaluation showed that there exist similar projects outside the data
+		set that eventually die, but there are also similar projects that eventually
+		got 'resurrected'.
+\end{itemize}
 
 
 
@@ -90,9 +91,13 @@ The wavelet transform of the LOC signals of 250 projects resulted in 22,943
 data points decomposed up to 7 levels into wavelet/shift and filter/scale
 coefficients.
 
-The similar sequence identification found 1,669,448 sequences that occurred
-at least 2 times. A mere 16 sequences were found in wavelet/shift coefficients,
-the other 1,669,432 sequences were found in filter/scale coefficients.
+\input{tables/sequence_counts}
+
+\noindent
+As shown in Table \ref{table:sequence_counts}, the similar sequence
+identification found a total of 1,669,448 sequences that occurred at least 2
+times. A mere 16 sequences were found in wavelet/shift coefficients, the other
+1,669,432 sequences were found in filter/scale coefficients.
 
 \paragraph{}
 The second wavelet analysis step aggregated similar sequences across multiple
