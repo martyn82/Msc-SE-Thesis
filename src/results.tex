@@ -106,20 +106,14 @@ found 16,049 patterns. The patterns consist only of sequences of scale/filter
 coefficients.
 
 \paragraph{}
-Some patterns that were found are shown in Figure \ref{figure:patterns_plots}.
-The four graphs are plots of patterns recomposed onto the original signal,
-however, transformed to \textit{relative LOC change} to make them more
-comparable in the graph.
-
-The graphs all have multiple ($>$ 140) occurrences of the pattern plotted of one
-or more projects in the same graph. The graphs show that the sequences
-composing a pattern have similar waveforms. Each graph contains a multiple of
-plotted sequences as stated in the figure.
+An arbitrary pattern that was found is shown in Figure
+\ref{figure:patterns_plots}. The graph shows the similarity of the pattern with
+its occurrences across multiple projects. Time is indexed and LOC is
+represented as coefficients. This is due to the fact that wavelet transform
+scales and filters these measures and thus no longer represent real-world
+values such as months or actual lines of code.
 
 \input{figures/patterns_plots}
-
-\noindent
-Pattern no. 2 illustrates a pattern indicating no change in LOC for 8 months.
 
 \paragraph{}
 The patterns occurred between 5 and 1,512 times across the projects. On

@@ -35,7 +35,7 @@ for(sid in sids){
   seq <- sequences[sequences$seq.id == sid, ]
   pattern <- patterns[patterns$seq.id == sid, ]
   sim <- similar[similar$Seq.Id == sid, ]
-stop()
+
   patterns.metadata[p, ] <- c(
     "seq.id"=as.numeric(sid),
     "seq.type"=as.character(pattern$seq.type),
