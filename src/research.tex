@@ -234,8 +234,8 @@ projects are introduced.
 		A pattern is a Type A pattern if and only if:
 		\begin{itemize}
 			\item it is detected in a dead project;
-			\item for all occurrences, the end of the sequence matches the end
-			of dead project evolution.
+			\item for all occurrences in dead projects, the end of the sequence matches
+				the end of the dead project evolution.
 		\end{itemize}
 \end{description}
 
@@ -252,8 +252,8 @@ $y$ in project $P$.
 		A pattern is a Type B pattern if and only if:
 		\begin{itemize}
 			\item it is detected in a dead project;
-			\item for all occurrences, the end of the sequence \underline{does not} match
-			the end of dead project evolution.
+			\item for all occurrences in dead projects, the end of the sequence
+				\underline{does not} match the end of the dead project evolution.
 		\end{itemize}
 \end{description}
 
@@ -269,23 +269,50 @@ group of patterns that \textit{weakly} comply to both definitions.
 		A pattern is a Type AB pattern if and only if:
 		\begin{itemize}
 			\item it is detected in a dead project;
-			\item for some occurrences, the end of the sequence matches the end of dead
-			project evolution;
-			\item for some occurrences, the end of the sequence \underline{does not}
-			match the end of dead project evolution.
+			\item for some occurrences in dead projects, the end of the sequence matches
+				the end of the dead project evolution;
+			\item for some occurrences in dead projects, the end of the sequence
+				\underline{does not} match the end of the dead project evolution.
 		\end{itemize}
 \end{description}
 
 \vspace{1em}
 \noindent
 The above types partition the total set of patterns detected in dead projects
-into three disjunctive sets.
+into three disjunctive sets. Although the classification of the patterns into
+these types mention only the occurrences in dead projects, the patterns may
+occur in alive projects too. However, occurrences in alive projects are not
+taken into account for the classification.
 
-\paragraph{}
-In the search for patterns that are warning signs, the patterns of type A will
-be the most interesting, because these patterns could indicate an evolutionary
-event that has lead to the end of code evolution for the dead projects it
-appears in.
+\section{Survivability}
+\label{section:survivability}
+In the search for patterns that are warning signs the patterns of type A will
+be the most interesting, because these patterns occur near the end of evolution
+of dead projects. These patterns could indicate an evolutionary event that has
+lead to the end of code evolution for the dead projects it appears in.
+
+To determine whether the chances for a project to die increase when having a
+type A pattern, two groups are made:
+\begin{description}
+	\item[G0] \quad The group consisting of projects \underline{not} having an
+		occurrence of a type A pattern.
+	\item[G1] \quad The group consisting of projects having an occurrence of a type
+		A pattern.
+\end{description}
+
+\noindent
+Both groups contain dead and alive projects, are of equal size, and are
+disjunct by definition.
+
+The selection of projects for G1 is done by selecting all projects having an
+occurrence of a type A pattern. The selection of G0 (i.e., the control group)
+is done by using the tool from \citet{nagappan} to make the control group
+representative to the whole set of projects.
+
+For each dead project it is recorded at what age the project died. For the
+alive projects, the maximum age in the data set is used. The state of 'death' is
+taken as event for the Kaplan-Meier estimation of survival function for the
+projects.
 
 \begin{comment}
 - Execution of the research

@@ -1,8 +1,7 @@
-\chapter{Analysis and Conclusions}
+\chapter{Analysis and Discussion}
 \label{analysis}
 
-\section{Evaluation}
-\subsection{Patterns}
+\section{Patterns}
 \label{section:pattern_evaluation}
 There are more than 100,000 times more similar sequences found in the
 scale/filter coefficients than in the wavelet/shift coefficients. The large
@@ -26,166 +25,85 @@ both types of coefficients.
 The patterns that were detected show strong similarity among signals. The
 similarity was demonstrated in Figure \ref{figure:patterns_plots} in section
 \ref{section:seqs_patterns}. The figure presents an arbitrary pattern and its
-occurrences across different projects.
+occurrences across different projects. The figure also demonstrates how wavelet
+transforms 'smooths out' differences in details by scaling and filtering the
+signals.
 
-\subsection{Survivability}
+\begin{comment}
+More about:
+- A type A pattern and its occurrences
+- Compare the pattern occurrence on coefficients to the projection on a signal
+- What do the other non-type A patterns tell us?
+\end{comment}
+
+\section{Survivability}
 \label{section:kp_survival}
-The type A patterns would be the best candidates for being 'warning signs' as
-they are detected near the end of evolution in dead projects. To determine
-whether the chances for a project to die increase when having a type A pattern,
-two groups are made. One group consisting of projects having the pattern, and
-a second group of equal size consisting of projects not having the pattern.
+The Kaplan-Meier estimation of the survival function of the projects as shown
+in Figure \ref{figure:kp_survival} visualise the survival probability of
+projects with and without the occurrence of a type A pattern. The figure shows
+a p-value of 0.00835. This is the log-rank value representing the comparability
+of the two groups. In general, a p-value $>$ 0.05 indicates the two groups are
+incomparable (i.e., the two groups do not show significant differences).
+Thus, the p-value of 0.00835 indicates comparable groups. Typically, the larger
+the groups, the lower the p-value. However, group sizes of 93 projects seems
+large enough to estimate survivability of projects having an occurrence of a
+type A pattern.
 
-Both groups of 93 projects contain alive and dead projects. The group with
-projects without the pattern is representative to the data set as a whole.
-Selecting projects and scoring for representativeness is done with the tool by
-\citet{nagappan}. For each dead project in both groups it is recorded at what
-age the project died. For the alive projects, the maximum age in the
-data set is used. In Figure \ref{figure:kp_survival} the Kaplan-Meier
-estimation of the survival function of the projects is shown for these groups.
+\paragraph{}
+The curve has no censored projects, i.e., there are no projects lost to
+follow-up. This increases the reliability of the curve because all projects in
+the curve are either dead or alive at any point in the curve (i.e., they are
+all 'at risk' of dying).
 
-\input{figures/kp_survival}
+\paragraph{}
+The Kaplan-Meier estimation of the survival function of the projects as shown
+in Figure \ref{figure:kp_survival} suggests that projects in group G1 -- the
+projects having an occurrence of a type A pattern -- die earlier than the
+projects in group G0 -- the projects without an occurrence of a type A pattern.
+
+Figure \ref{figure:kp_survival} shows that the projects of G0 have a survival
+chance of approximately 93\% after the first year. In the first 12 months, the
+survival chances drop to around 86\%. After that, the survival chance remains
+stable for projects in G0.
+
+More than half of the projects in G0 lives longer than 84 months (7 years)
+against 72 months (6 years) in G1. A quarter of the projects in G0 lives longer
+than 144 months (12 years), against 108 months (9 years) in G1. Two projects of
+G0 outlives all projects in G1 after 18 years.
+
+\paragraph{}
+During the first year, the projects of G1 have 3\% higher survival chance than
+those of G0: approximately 96\%. It is after 4 years that the projects of G1
+have a lower survival chance than those in G0. Between 3.2 and 3.8 years of
+age, projects in both groups show equal survival chances.\\
 
 \noindent
-The Kaplan-Meier estimation of survival function of the projects as depicted in
-Figure \ref{figure:kp_survival} suggests that projects in group 1 - the
-projects having the type A pattern - die earlier than projects in group 0 - the
-projects without the pattern. This suggests that having found a type A pattern
-in a project shortens the project's life. Projects with a pattern occurring at
-the end of evolution of a dead project (i.e., type A pattern) have a higher
-chance of dying.
+The four projects in G0 that die in their first 14 months of age are shown in
+Table \ref{table:deads_g0}.
 
-\section{Conclusions}
-\label{section:conclusions}
-In this study, the patterns detected using wavelet analysis on LOC signals
-comprise similar sequences of LOC series within and across projects. The
-waveforms of these patterns vary in all kinds of shapes. The type A patterns
-all show a stagnation of LOC changes, that is, very few changes relative to the
-project size.
+\input{tables/deads_g0}
 
-In general, the ability to detect a 'pattern' as being a group of similar
-sequences within or across projects, depends on the similarity of the sequence
-between other sequences within the same analysis. Therefore, it is important to
-have a data set that is large enough and representative to the world of OSS
-projects to be able to detect patterns that can be generalised
-[\ref{itm:question_patterns}, \ref{itm:question_successfailure}].
+\noindent
+Table \ref{table:deads_g0} shows that the four dead projects of group G0 have
+no pattern of type A, which is true by the definition of the group. However,
+they do all have occurrences of patterns of type AB. This means that there are
+patterns detected in these four projects that occur near and last until the end
+of code evolution of these projects. Further evaluation shows that the 42 AB
+patterns from these four projects all show a stagnation in LOC change. The
+difficulty is that the type AB patterns also occur somewhere else in a dead
+project's evolution, which makes it hard by current definitions to identify as
+possible warning signs.
 
-\paragraph{}
-Another aspect that contributes to the success or failure of wavelet analysis
-for software evolution is that the input signal should be free of gaps. In
-section \ref{section:gapless_wavelets} this is argued.
-
-In the case an input LOC signal for analysis is not continuous within the start
-and end boundaries of the signal, the wavelet analysis will detect patterns
-that are not trustworthy. Wavelet analysis may find more false-positive
-evolutionary events [\ref{itm:question_successfailure}].
-
-\paragraph{}
-In this study, I have shown that wavelet analysis is able to find patterns that
-increase the chances of a project to end. As discussed in section
-\ref{section:kp_survival}, it appears that there is a relation between a
-pattern of type A and the death of a project, however, it is not found to be a
-causal relation.
-
-Furthermore, as the patterns found during analysis are subject to the data set
-as a whole, I cannot conclude that wavelet analysis is able to find
-\textit{objective} warning signs in OSS projects
-[\ref{itm:question_warningsigns}].
-
-\section{Threats to validity}
-The following aspects were found which may lead to threats to the validity of
-the results.
-
-\begin{description}
-	\item[Construct validity] \hfill
-	
-	\begin{description}
-		\item[\rm{Missing historical data}] -- In the analysis of project's
-			evolution data, only the data provided by the OhlohAnalytics tool
-			\cite{ohlohanalytics, bruntink2013} was used.
-			The data before the first data point in the set is not taken into account. It
-			is possible that certain evolutionary events happened before the first point.
-			These events were not detected as they lay beyond reach of this study.
-
-		\item[\rm{Missing most recent data}] -- The data provided for the study has
-			data points until June 2013. Therefore, not the most recent data of the
-			projects is used.
-
-		\item[\rm{LOC as activity indicator}] -- The use of LOC (defined as
-			lines of code + comments + blanks) as a measure of project activity could be
-			false. The LOC will not change between two months whenever the amount of code
-			deleted is equal to the amount added. In that case, the churn would be twice
-			the LOC added/deleted, but the LOC will stay the same.
-
-			When patterns are detected that show a stagnation in LOC, the suggestion
-			would be that the project's activity is decreasing. However, it might also
-			be the case that by coincidence it seems activity is decreasing, but in
-			reality lots of activity has been going on.
-
-		\item[\rm{Data source}] -- Using only one data source (Ohloh) may
-			influence the value of the metrics. Ohloh did the analysis of the project's
-			source code repositories. Several studies have shown that the data provided
-			by Ohloh needs a thorough examination and cleansing before it can be used
-			\cite{bruntink2013, ohlohanalytics, bruntink2014}. The data was initially
-			validated and cleansed, but to make it consistent. No actual verification on
-			the correctness of the data was conducted.
-
-	\begin{comment}
-			Additionally, the data set of projects is a sample taken from all projects
-			tracked by Ohloh. What is unclear is if the set of projects tracked by Ohloh
-			is a representation of the world of OSS projects. Selecting a data set that
-			is representative to the projects tracked by Ohloh does not automatically be
-			representative to the world.
-
-		\item[Sample size.] \hspace{1em} For this study, a set of 250 projects is
-			used. Is this enough to generalise the results to the world of OSS projects.
-
-		\item[Time resolution.] \hspace{1em} Is monthly aggregated data fine-grained
-			enough?
-	\end{comment}
-	\end{description}
-
-	\item[Internal validity] \hfill
-
-	\begin{description}
-		\item[\rm{Selection bias}] -- The selection criteria for the data was to have
-			at least 12 data points. It turned out, no project in the set was younger
-			than 14 months. It might be that these younger projects show significance in
-			the ability to detect evolutionary events, possibly refute or confirm
-			findings.
-	\end{description}
-
-	\item[External validity] \hfill
-
-	\begin{description}
-		\item[\rm{Replication}] -- It seems hard to precisely replicate the study
-			as there are a multitude of possible configurations to be made that may, in
-			the end, influence the results drastically. Such as, the definition of
-			similarity between sequences (what deviation is allowed, what is the
-			difference of coincidence and a reoccurring sequence), and the definition of
-			a pattern (how many occurrences, minimum, and maximum length).
-			
-			Furthermore, there is the interpretation of what a 'warning sign' should
-			look like on a pattern level.
-	\end{description}
-\end{description}
-
-\section{Future work}
-A next step in the research on the use of wavelet analysis for detecting
-warning signs in software evolution would be to use a larger data set. It would
-be interesting to know if the findings of the type A patterns will be
-consistent. The whole usable data set for this study contains 5,986 projects
-(section \ref{method:data}).
-
-\paragraph{}
-The analysis could be done on other signals. In this study, only LOC was used,
-but many other signals can be constructed. LOC measures code activity to a
-certain extent, but LOC churn could reflect code activity better. To use LOC
-churn properly, the LOC modified fact is also needed.
-
-Other metrics could be team size, developer's churn (the number of developers
-added and removed from the team), contributor's code activity, bug reports,
-defects per kLOC etc.
+\begin{comment}
+More about:
+- How come G1 have higher survival chances in the first year?
+- How come G1 and G0 have equal chances between 3.2 and 3.8 years?
+- What are the causes of death in G1? Especially the partial extinction in month
+120?
+- What is time-to-live between diagnosis and death?
+- False-positives: patterns detected as warning signs which are not.
+- False-negatives: warning signs undetected.
+\end{comment}
 
 \begin{comment}
 - Analyse results
