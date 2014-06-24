@@ -1,6 +1,5 @@
 #pattern.ids <- c(10081, 15138, 15139, 15790, 3256, 3257, 3397, 3398)
 pattern.ids <- c(3256)
-max.plots <- 3
 xlab <- "time (months)"
 ylab <- "LOC"
 
