@@ -172,13 +172,58 @@ Table \ref{table:pattern_type_counts}. The projects for the control group G0
 are selected as not occurring in G1 and being representative to the whole set
 of 250 projects.
 
+\subsection{Group G0}
+\label{section:group_g0}
+The four projects in group G0 that die are shown in Table \ref{table:deads_g0}.
+As stated in section \ref{section:deads}, all dead projects except \#587204 are
+abandoned by their communities.
+
+\input{tables/deads_g0}
+
+\noindent
+Table \ref{table:deads_g0} shows that the four dead projects of group G0 have
+no pattern of type A, which is true by the definition of the group. However,
+they do all have occurrences of patterns of type AB. This means that there are
+patterns detected in these four projects that occur near and last until the end
+of code evolution of these projects. Further evaluation shows that the 42 AB
+patterns from these four projects all show a stagnation in LOC change. The
+difficulty is that the type AB patterns also occur somewhere else in a dead
+project's evolution, which makes it hard by current definitions to identify as
+possible warning signs.
+
 \paragraph{}
-The event of 'death' is taken as status indication, the dying age in months for
-dead projects and the maximum age in months of alive projects are taken as time
-indicators for the projects. The Kaplan-Meier estimation of survival function
-for the projects is shown in Figure \ref{figure:kp_survival}, having the
-survival probability on the vertical axis, and the age in months of projects on
-the horizontal axis.
+The other 89 projects of G0 stay alive. Their age varies between 13 and 255
+months.
+
+\subsection{Group G1}
+\label{section:group_g1}
+The dead projects in group G1 are shown in Table \ref{table:deads_g1}. The
+column 'TTL' ('time to live') states the number of months the project has
+lived between the 'diagnosis' of the type A pattern and the death of the
+project. The 'Diagnosed' column states the age in months the pattern was found.
+
+\input{tables/deads_g1}
+
+\noindent
+All projects in Table \ref{table:deads_g1} are abandoned (see section
+\ref{section:deads}). One quarter of the projects in the table live 9 months
+after a type A pattern was found. Another quarter lives 36 months after
+diagnosis. The dead projects in group G1 on average live up to 30 months since
+a type A pattern was found.
+
+Project \#15700 is an outlier; an occurrence of a type A pattern was found when
+the project was 1 month old, but it lived for another 10 years before it died.
+
+\paragraph{}
+The majority (79) of the projects in group G1 are still alive. The 75 projects
+that have been 'diagnosed' of a type A pattern have had the occurrence in their
+first month of age. Only in 4 projects the pattern was found later: 23, 33, 52
+and 62 months.
+
+\subsection{Estimation of survival}
+The Kaplan-Meier estimation of survival function for the projects is shown in
+Figure \ref{figure:kp_survival}, having the survival probability on the
+vertical axis, and the age in months of projects on the horizontal axis.
 
 The numbers at the bottom, divided in two rows representing group 0 and group
 1, represent the number of projects alive per group at the corresponding point
@@ -187,8 +232,40 @@ on the horizontal axis.
 \input{figures/kp_survival}
 
 \noindent
-Further analysis of the Kaplan-Meier estimation is done in section
-\ref{section:kp_survival}.
+The Kaplan-Meier estimation of the survival function of the projects as shown
+in Figure \ref{figure:kp_survival} visualise the survival probability of
+the projects with and without the occurrence of a type A pattern.
+
+The figure shows a p-value of $p = 0.00835$. This is the log-rank value
+representing the comparability of the two groups. In general, a p-value of $p >
+0.05$ indicates the two groups are incomparable (i.e., the two groups do not
+show significant differences). Thus, the p-value of $p = 0.00835$ indicates
+comparable groups. Typically, the larger the groups, the lower the p-value.
+It seems a group size of 93 projects is large enough to estimate survivability
+of projects having an occurrence of a type A pattern.
+
+\paragraph{}
+The groups do not contain censored projects, i.e., there are no projects
+lost to follow-up. This increases the reliability of the estimation because all
+projects in are either dead or alive at any point in the curve (i.e., they are
+all 'at risk' of dying).
+
+\paragraph{}
+Figure \ref{figure:kp_survival} shows that the projects of G0 have a survival
+chance of approximately 93\% after the first year. In the first 12 months, the
+survival chances drop to around 86\%. After that, the survival chance remains
+stable for projects in G0.
+
+More than half of the projects in G0 lives longer than 84 months (7 years)
+against 72 months (6 years) in G1. A quarter of the projects in G0 lives longer
+than 144 months (12 years), against 108 months (9 years) in G1. Two projects of
+G0 outlives all projects in G1 after 18 years.
+
+\paragraph{}
+During the first year, the projects of G1 have 3\% higher survival chance than
+those of G0: approximately 96\%. It is after 4 years that the projects of G1
+have a lower survival chance than those in G0. Between approximately 3.2 and
+3.8 years of age, projects in both groups show equal survival chances.
 
 \begin{comment}
 - Factual results

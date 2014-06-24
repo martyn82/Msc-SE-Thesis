@@ -2,7 +2,7 @@
 \label{analysis}
 
 \section{Patterns}
-\label{section:pattern_evaluation}
+\subsection{Similarity}
 There are more than 100,000 times more similar sequences found in the
 scale/filter coefficients than in the wavelet/shift coefficients. The large
 difference in number of sequences found between the two types of coefficients
@@ -29,80 +29,69 @@ occurrences across different projects. The figure also demonstrates how wavelet
 transforms 'smooths out' differences in details by scaling and filtering the
 signals.
 
-\begin{comment}
-More about:
-- A type A pattern and its occurrences
-- Compare the pattern occurrence on coefficients to the projection on a signal
-- What do the other non-type A patterns tell us?
-\end{comment}
+\subsection{Comparison}
+% Visualise a type A pattern on signals
 
-\section{Survivability}
+\subsection{Detection}
+The classification of the patterns detected in dead projects (see section
+\ref{section:patterns_dead}) was needed to distinguish possible warning signs
+from other recurring events. The type A patterns were expected to be the best
+candidates for representing warning signs because of the property that they
+last until the end of code evolution of a dead project.
+
+\paragraph{}
+Type B patterns are the patterns not lasting until the end of code evolution of
+dead projects. The typical shape of the type B patterns found in LOC signals in
+this study are sub-linear growth in LOC. The other two common shapes of type B
+patterns is an almost super-linear growth sine shape and super-linear decay.
+The latter shows a free fall in LOC. Figure \ref{figure:type_b_pattern}
+illustrates all three shapes.
+
+\input{figures/type_b_pattern}
+
+\noindent
+Occurrences of type AB patterns are found anywhere in the evolution of dead
+projects. This means that they may or may not be a candidate for representing a
+warning sign. The difficulty is the fact that the AB patterns do not occur in a
+consistent manner: in one project it may be an indicator for end of code
+evolution, while in another project it does not.
+
+\subsubsection{False-negatives}
+When looking back at the projects selected for survival analysis in group G0
+(section \ref{section:group_g0}), 4 out of 93 projects \textit{not} having a
+type A pattern died. The patterns indicating the impending end of code
+evolution were not detected as such. However, all 4 projects had occurrences of
+type AB patterns.
+
+\subsubsection{False-positives}
+Taking the projects in group G1 (section \ref{section:group_g1}), 79 out of 93
+projects were still alive by April 2014. The alive projects already lived
+longer since diagnosis than the dead projects in the same group. This means
+that not all patterns of type A can be interpreted as a warning sign.
+
+\paragraph{}
+It can be a possibility to treat AB patterns also as possible warning signs,
+because of the property that in \textit{some} projects the pattern occurs near,
+and lasts until the end of code evolution. This, however, will yield more
+false-positive results because a pattern occurring anywhere in a project's
+evolution could hardly be an indicator of the end of that evolution.
+On the other hand, treating the AB patterns explicitly \textit{not} as possible
+warning signs -- as in this study -- will yield more false-negative results.
+
+\section{Survival analysis}
 \label{section:kp_survival}
-The Kaplan-Meier estimation of the survival function of the projects as shown
-in Figure \ref{figure:kp_survival} visualise the survival probability of
-projects with and without the occurrence of a type A pattern. The figure shows
-a p-value of 0.00835. This is the log-rank value representing the comparability
-of the two groups. In general, a p-value $>$ 0.05 indicates the two groups are
-incomparable (i.e., the two groups do not show significant differences).
-Thus, the p-value of 0.00835 indicates comparable groups. Typically, the larger
-the groups, the lower the p-value. However, group sizes of 93 projects seems
-large enough to estimate survivability of projects having an occurrence of a
-type A pattern.
-
-\paragraph{}
-The curve has no censored projects, i.e., there are no projects lost to
-follow-up. This increases the reliability of the curve because all projects in
-the curve are either dead or alive at any point in the curve (i.e., they are
-all 'at risk' of dying).
-
-\paragraph{}
 The Kaplan-Meier estimation of the survival function of the projects as shown
 in Figure \ref{figure:kp_survival} suggests that projects in group G1 -- the
 projects having an occurrence of a type A pattern -- die earlier than the
 projects in group G0 -- the projects without an occurrence of a type A pattern.
 
-Figure \ref{figure:kp_survival} shows that the projects of G0 have a survival
-chance of approximately 93\% after the first year. In the first 12 months, the
-survival chances drop to around 86\%. After that, the survival chance remains
-stable for projects in G0.
-
-More than half of the projects in G0 lives longer than 84 months (7 years)
-against 72 months (6 years) in G1. A quarter of the projects in G0 lives longer
-than 144 months (12 years), against 108 months (9 years) in G1. Two projects of
-G0 outlives all projects in G1 after 18 years.
-
 \paragraph{}
-During the first year, the projects of G1 have 3\% higher survival chance than
-those of G0: approximately 96\%. It is after 4 years that the projects of G1
-have a lower survival chance than those in G0. Between 3.2 and 3.8 years of
-age, projects in both groups show equal survival chances.\\
 
-\noindent
-The four projects in G0 that die in their first 14 months of age are shown in
-Table \ref{table:deads_g0}.
-
-\input{tables/deads_g0}
-
-\noindent
-Table \ref{table:deads_g0} shows that the four dead projects of group G0 have
-no pattern of type A, which is true by the definition of the group. However,
-they do all have occurrences of patterns of type AB. This means that there are
-patterns detected in these four projects that occur near and last until the end
-of code evolution of these projects. Further evaluation shows that the 42 AB
-patterns from these four projects all show a stagnation in LOC change. The
-difficulty is that the type AB patterns also occur somewhere else in a dead
-project's evolution, which makes it hard by current definitions to identify as
-possible warning signs.
 
 \begin{comment}
 More about:
 - How come G1 have higher survival chances in the first year?
 - How come G1 and G0 have equal chances between 3.2 and 3.8 years?
-- What are the causes of death in G1? Especially the partial extinction in month
-120?
-- What is time-to-live between diagnosis and death?
-- False-positives: patterns detected as warning signs which are not.
-- False-negatives: warning signs undetected.
 \end{comment}
 
 \begin{comment}
