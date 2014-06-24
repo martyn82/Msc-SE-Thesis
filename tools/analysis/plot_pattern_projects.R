@@ -1,5 +1,5 @@
-#pattern.ids <- c(15661)
-pattern.ids <- c(6)
+#pattern.ids <- c(6)
+pattern.ids <- c(3256)
 max.plots <- 3
 xlab <- "time (index)"
 ylab <- "LOC (coefficient)"
@@ -12,6 +12,7 @@ if (!exists("sequences.occurrences")) {
 
 for (id in pattern.ids) {
   pattern.sequence <- sequences.similar[sequences.similar$Seq.Id == id, ]
+  pid <- pattern.sequence$pid0
   pattern.sequence <- as.numeric(sub(",", ".", unlist(strsplit(as.character(pattern.sequence$seq), split="-", fixed=T)), fixed=T))
 
   plot(
@@ -20,7 +21,7 @@ for (id in pattern.ids) {
     type="l",
     xlab=xlab,
     ylab=ylab,
-    main=paste("pattern #", id, "in project #", as.numeric(pattern.metadata$pid))
+    main=paste("pattern #", id, "in project #", pid)
   )
   
   pattern.similar <- sequences.similar[sequences.similar$Seq.Id == id, ]

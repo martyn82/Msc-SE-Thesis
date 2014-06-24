@@ -2,7 +2,7 @@
 \label{analysis}
 
 \section{Patterns}
-\subsection{Similarity}
+\subsection{Detection}
 There are more than 100,000 times more similar sequences found in the
 scale/filter coefficients than in the wavelet/shift coefficients. The large
 difference in number of sequences found between the two types of coefficients
@@ -21,7 +21,7 @@ transformation. Mixing both types of coefficients would neglect the way the
 coefficients were found and invalidate the patterns comprising sequences of
 both types of coefficients.
 
-\paragraph{}
+\subsection{Similarity}
 The patterns that were detected show strong similarity among signals. The
 similarity was demonstrated in Figure \ref{figure:patterns_plots} in section
 \ref{section:seqs_patterns}. The figure presents an arbitrary pattern and its
@@ -29,10 +29,25 @@ occurrences across different projects. The figure also demonstrates how wavelet
 transforms 'smooths out' differences in details by scaling and filtering the
 signals.
 
-\subsection{Comparison}
-% Visualise a type A pattern on signals
+\paragraph{}
+One of the properties of the Haar function is that it is reversible. This
+means that it is possible to pick any wavelet on any level of decomposition
+that resulted from Haar transform and use it to re-compose the original signal.
+This is a useful property for testing a pattern. Figure
+\ref{figure:type_a_pattern} shows the type A pattern \#3256 projected onto the
+original signals of two projects.
 
-\subsection{Detection}
+\input{figures/type_a_pattern}
+
+\indent
+Figure \ref{figure:type_a_pattern} shows the wavelets of the occurrence of type
+A pattern \#3256 in two dead projects. The pattern starts near, and lasts until
+the end of code evolution of the projects. This figure shows that the pattern
+ends in a stagnation of LOC change. The shapes of both wavelets are similar,
+even though the wavelets are not scaled in this figure -- project \#3085 is
+about 30\% smaller than project \#155830 when comparing the LOC values.
+
+\subsection{Warning signs}
 The classification of the patterns detected in dead projects (see section
 \ref{section:patterns_dead}) was needed to distinguish possible warning signs
 from other recurring events. The type A patterns were expected to be the best
