@@ -51,17 +51,22 @@ about 30\% smaller than project \#155830 when comparing the LOC values.\\
 Manual evaluation using the commit logs of these two projects revealed that:
 
 \begin{itemize}
-	\item The peak in the signal of project \#3085 started in its
+	\item The rise in LOC in the signal of project \#3085 started in its
 		67\textsuperscript{th} month of age. It is caused by an update to a file
 		with an addition of about 200 lines of code. This does not seem much, but
 		relative to the project it is significant and sufficient to shape the
 		pattern.
 
-	\item The peak in the signal of project \#155830 starting in its
+	\item The rise in LOC in the signal of project \#155830 starting in its
 		72\textsuperscript{nd} month appears to be caused by a fix of a broken build
 		and happened after 25 months of no LOC changes. Apparently, many lines of
 		code (approximately 10,000) had to be added in order to fix the build.
 \end{itemize}
+
+\noindent
+The flat line starting at month 70 in project \#3085 and at month 83 in project
+\#155380 indicate a stagnation in LOC changes and lasts for 15 and 12 months
+respectively.
 
 \subsection{Warning signs}
 The classification of the patterns detected in dead projects (see section
@@ -130,8 +135,8 @@ once. The total number of commits in the history of the projects confirms this:
 both projects have less than 30 commits in their entire 2 year history.
 
 The smaller two projects have had 40 and 60 commits in respectively 3 and 4
-years time. The four projects could therefore as well be outliers in group G0
-that cause a slight distortion in the curve.
+years time. The four projects could therefore as well be outliers that cause a
+slight distortion in the curve.
 
 
 \section{Threats to validity}
@@ -169,7 +174,7 @@ the results.
 			source code repositories. Several studies have shown that the data provided
 			by Ohloh needs a thorough examination and cleansing before it can be used
 			\cite{bruntink2013, ohlohanalytics, bruntink2014}. The data was initially
-			validated and cleansed, but to make it consistent. No actual verification on
+			validated and cleansed to make it consistent, but no actual verification on
 			the correctness of the data was conducted.
 	\end{description}
 

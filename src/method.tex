@@ -90,25 +90,24 @@ following:
 \end{description}
 
 \paragraph{}
-The method \textit{last observation carried} results in a signal with
+The method \textit{last observation carried} results in a signal $S_{1}$ with
 same values between point 2 and 5, which shows a flat line when plotted in a
 graph.
 
 \paragraph{}
-Filling the gaps with \textit{mean} values, will also result in a signal with
-same values. It is similar to last observation carried but with one difference.
-The mean method is exclusive the two known observations, whereas last
-observation carried is inclusive. Using mean, the number of second entries
-having same values will therefore be 2 observations lesser than using the last
-observation.
+Filling the gaps with \textit{mean} values, will also result in a signal
+$S_{2}$ with same values. It is similar to last observation carried but with
+one difference: the mean method is exclusive, whereas 'last observation
+carried' is inclusive. Using mean, the number of second entries having same
+values will therefore be 2 observations lesser than using the last observation.
 
 \paragraph{}
-The \textit{piecewise constant} interpolation results in a signal having two
-shorter flat lines. The repeating values are 'snapped' to the closest
-neighbour.
+The \textit{piecewise constant} interpolation results in a signal $S_{3}$
+having two shorter flat lines. The repeating values are 'snapped' to the
+closest neighbour.
 
 \paragraph{}
-Finally, the \textit{linear interpolation} will result in a signal that
+Finally, the \textit{linear interpolation} will result in a signal $S_{4}$ that
 linearly flows towards the next known value. The advantage of this technique is
 that there will not be a flat line in the resulting signal. However, the
 disadvantage is that resulting values possibly are not even close to what was

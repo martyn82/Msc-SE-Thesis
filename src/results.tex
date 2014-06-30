@@ -21,7 +21,7 @@ A total of 38 (15.2\%) projects complied to the definition of a dead project as
 defined in section \ref{def:dead}. Manual verification of the 38 potential
 dead projects using the project's websites, source code repositories, and
 commit history up to April 2014, revealed that 21 (8.4\%) are still complying
-to the definition of a dead project in April 2014.
+to the definition of a dead project by April 2014.
 
 \paragraph{}
 The 21 dead projects and their $age\_in\_months$ at the moment of death as a
@@ -49,10 +49,10 @@ had its most recent commits in February 2012. A total of 10 contributors have
 worked on this project since May 2000.
 
 \paragraph{}
-The special case project \#587204, is the only project that is not
-abandoned by its (entire) community. The project has had 3 contributors over its
-lifetime. One of them is still active every now and then. The most recent
-commits were done in January 2014, the commits before that were in June 2012.
+The special case project \#587204 is the only project that is not abandoned by
+its (entire) community. The project has had 3 contributors over its lifetime.
+One of them is still active every now and then. The most recent commits were
+done in January 2014, the commits before that were in June 2012.
 The commits involved updates in documentation, and the creation of a
 configuration file for a continuous integration server. These commits do not
 involve code changes.
@@ -122,10 +122,9 @@ at most 204 projects (36 projects on average). The pattern length is between 4
 and 19 coefficients (on average 6) across decomposition levels 3 to 7.
 
 On the 3\textsuperscript{th} level, the average pattern length is equal to 4
-coefficients. Every subsequent level doubles the average pattern length. This
-is expected as there are twice as many coefficients available. This means the
-same pattern is detected at multiple levels. Additionally, it can be said that
-a pattern has multiple levels.
+coefficients. At every subsequent level the average pattern length is doubled.
+This is expected as there are twice as many coefficients available. This means
+the same pattern is detected at multiple levels.
 
 \paragraph{}
 Table \ref{table:pattern_counts} presents the numbers of patterns
@@ -149,8 +148,8 @@ The classification of the patterns was done to distinguish different types of
 patterns to be able to find evolutionary events. For this, the patterns
 detected in dead projects were taken and classified according to
 the definitions in section \ref{section:patterns_dead}. It is expected that
-this group has the highest chance of keeping a pattern indicating an
-evolutionary event leading to the end of code evolution.
+the dead projects have the highest chance of keeping a pattern indicating
+an evolutionary event leading to the end of code evolution.
 
 \paragraph{}
 A total of 1,084 patterns detected in dead projects is classified. The sizes of
@@ -172,11 +171,13 @@ Table \ref{table:pattern_type_counts}. The projects for the control group G0
 are selected as not occurring in G1 and being representative to the whole set
 of 250 projects.
 
+In the next sections both groups of projects are evaluated.
+
 \subsection{Group G0}
 \label{section:group_g0}
-The four projects in group G0 that die are shown in Table \ref{table:deads_g0}.
-As stated in section \ref{section:deads}, all dead projects except \#587204 are
-abandoned by their communities.
+Group G0 contains 4 dead projects. These projects are shown in Table
+\ref{table:deads_g0}. As stated in section \ref{section:deads}, all dead
+projects except \#587204 are abandoned by their communities.
 
 \input{tables/deads_g0}
 
@@ -217,10 +218,11 @@ the project was 1 month old, but it lived for another 10 years before it died.
 \paragraph{}
 The majority (79) of the projects in group G1 are still alive. The 75 projects
 that have been 'diagnosed' of a type A pattern have had the occurrence in their
-first month of age. Only in 4 projects the pattern was found later: 23, 33, 52
+first month of age. In only 4 projects the pattern was found later: 23, 33, 52
 and 62 months.
 
 \subsection{Estimation of survival}
+\label{section:kp_survival_results}
 The Kaplan-Meier estimation of survival function for the projects is shown in
 Figure \ref{figure:kp_survival}, having the survival probability on the
 vertical axis, and the age in months of projects on the horizontal axis.
@@ -237,18 +239,12 @@ in Figure \ref{figure:kp_survival} visualise the survival probability of
 the projects with and without the occurrence of a type A pattern.
 
 The figure shows a p-value of $p = 0.00835$. This is the log-rank value
-representing the comparability of the two groups. In general, a p-value of $p >
+representing the equality of the two groups. In general, a p-value of $p >
 0.05$ indicates the two groups are incomparable (i.e., the two groups do not
-show significant differences). Thus, the p-value of $p = 0.00835$ indicates
+show significant differences). Thus, a p-value of $p = 0.00835$ indicates
 comparable groups. Typically, the larger the groups, the lower the p-value.
 It seems a group size of 93 projects is large enough to estimate survivability
 of projects having an occurrence of a type A pattern.
-
-\paragraph{}
-The groups do not contain censored projects, i.e., there are no projects
-lost to follow-up. This increases the reliability of the estimation because all
-projects in are either dead or alive at any point in the curve (i.e., they are
-all 'at risk' of dying).
 
 \paragraph{}
 Figure \ref{figure:kp_survival} shows that the projects of G0 have a survival

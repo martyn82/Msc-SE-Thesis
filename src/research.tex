@@ -103,17 +103,17 @@ $age\_in\_months$ in the time domain, and $LOC$ in the frequency domain. Figure
 \input{figures/signal}
 
 \paragraph{}
-The rationale for choosing 'lines of code' as time series is done because of
-its simplicity and intuitive interpretation. Additionally, LOC over time is a
-way to measure the growth of the project.
+The choice for 'lines of code' as time series is done because of its simplicity
+and intuitive interpretation. Additionally, LOC over time is a way to measure
+the growth of the project.
 
 \paragraph{}
 The $LOC$ metric used in this study for the transform and analysis is slightly
 different from the $loc\_fact$ that is available at Ohloh. The goal for the
 signal processing is to be able to detect patterns in a project's code
 activity. This means that all changes that occur in source files are of
-interest. Therefore, the same metric as in the original study by
-\citet{karus2013} is used. The $LOC$ metric is constructed as the sum of
+interest. Therefore, the $LOC$ metric is composed in the same way as in the
+original study by \citet{karus2013} and is constructed as the sum of
 $loc\_fact$, $comments\_fact$, and $blanks\_fact$.
 
 \paragraph{}
@@ -162,10 +162,10 @@ maximum length of 65.
 
 \paragraph{}
 In the search for similar sequences, the sequences of one project at a time are
-analysed against sequences of other projects. A sequence is considered
-'similar' if at least one other sequence was found of which the values of the
-coefficients are equal with respect to an allowed deviation of 0.005. This
-number is a configuration made by \citeauthor{karus2013} in the original study.
+analysed against other sequences. A sequence is considered 'similar' if at
+least one other sequence was found of which the values of the coefficients are
+equal with respect to an allowed deviation of 0.005. This number is a
+configuration made by \citeauthor{karus2013} in the original study.
 The choice was made to keep it the same in order to get similar results.
 A lower or higher value will yield fewer or more similar sequences
 respectively.
@@ -176,11 +176,10 @@ A distinction is made between the \textit{detection} of a sequence and an
 distinction is needed for further analysis.
 
 A sequence $x$ is \textit{detected} in a project $X$ if it was encountered by
-analysing that particular project. Finding an \textit{occurrence} of a sequence
-means that a sequence $y$  of another project $Y$ was found to be similar to
-sequence $x$ by evaluating that other project's sequences. A sequence is then
-recorded as a pair of sequence $x$ detected in project $X$ and a sequence $y$
-of project $Y$.
+analysing project $X$. Finding an \textit{occurrence} of a sequence means that
+a sequence $y$ of another project $Y$ was found to be similar to sequence $x$
+by evaluating project $Y$'s sequences. A sequence is then recorded as a pair of
+sequences $(x, y)$ detected in project $X$ and project $Y$ respectively.
 
 \paragraph{}
 The process of finding similar sequences constructs ordered pairs of sequences
@@ -234,16 +233,16 @@ projects are introduced.
 		A pattern is a Type A pattern if and only if:
 		\begin{itemize}
 			\item it is detected in a dead project;
-			\item for all occurrences in dead projects, the end of the sequence matches
-				the end of the dead project evolution.
+			\item for \underline{all} occurrences in dead projects, the end of the
+				sequence matches the end of the dead project evolution.
 		\end{itemize}
 \end{description}
 
 \vspace{1em}
 \noindent
 For example: if the evolution of a dead project $P$ starts at point $x$ and ends
-at point $y$, then a type A pattern is detected at point $x'$ and ends at point
-$y$ in project $P$.
+at point $y$, then a pattern detected at point $x'$ and ending at point $y$ in
+project $P$ is a type A pattern.
 
 \vspace{1em}
 \label{def:pattern_typeb}
@@ -252,8 +251,8 @@ $y$ in project $P$.
 		A pattern is a Type B pattern if and only if:
 		\begin{itemize}
 			\item it is detected in a dead project;
-			\item for all occurrences in dead projects, the end of the sequence
-				\underline{does not} match the end of the dead project evolution.
+			\item for \underline{all} occurrences in dead projects, the end of the
+				sequence \underline{does not} match the end of the dead project evolution.
 		\end{itemize}
 \end{description}
 
@@ -269,10 +268,10 @@ group of patterns that \textit{weakly} comply to both definitions.
 		A pattern is a Type AB pattern if and only if:
 		\begin{itemize}
 			\item it is detected in a dead project;
-			\item for some occurrences in dead projects, the end of the sequence matches
-				the end of the dead project evolution;
-			\item for some occurrences in dead projects, the end of the sequence
-				\underline{does not} match the end of the dead project evolution.
+			\item for \underline{some} occurrences in dead projects, the end of the
+				sequence matches the end of the dead project evolution;
+			\item for \underline{some} occurrences in dead projects, the end of the
+				sequence \underline{does not} match the end of the dead project evolution.
 		\end{itemize}
 \end{description}
 
@@ -310,11 +309,14 @@ occurrence of a type A pattern. The selection of G0 (i.e., the control group)
 is done by using the tool from \citet{nagappan} to make the control group
 representative to the whole set of projects.
 
-For each dead project it is recorded at what age the project died. For the
-alive projects. The dying age in months for dead projects and the maximum age
-in months of alive projects are taken as time indicators for the projects. The
-state whether a project is 'dead' is taken as event status for the Kaplan-Meier
-estimation of survival function for the projects. 
+For each dead project it is recorded at what age the project died. The dying
+age in months for dead projects and the maximum age in months of alive projects
+are taken as time indicators for the projects. The state whether a project is
+'dead' is taken as event status for the Kaplan-Meier estimation of survival
+function for the projects.
+
+The results of survival estimation are presented in section
+\ref{section:kp_survival_results}.
 
 \begin{comment}
 - Execution of the research

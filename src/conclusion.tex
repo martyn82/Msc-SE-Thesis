@@ -1,26 +1,21 @@
 \chapter{Conclusions}
 \label{conclusions}
 
-\begin{comment}
-- Patterns AB are false-negatives; the indicate a warning sign in some cases, in
-other cases they don't.
-
-\end{comment}
-
 \subsubsection{\textit{\ref{itm:question_patterns}: \subQuestionOne}}
-The patterns detected using wavelet analysis on LOC signals comprise similar
-sequences of LOC series within and across projects. The waveforms of these
-patterns vary in all kinds of shapes. Type A patterns all show a stagnation in
-LOC changes, that is, between very few and no changes relative to the project
-size. Whereas types B, and AB patterns vary between linear, super-linear, and
-sub-linear growth or decay (see Figure \ref{figure:type_b_pattern}).
+The patterns detected in this study using wavelet analysis on LOC signals
+comprise similar sequences of LOC series within and across projects. The
+waveforms of these patterns vary in all kinds of shapes. Type A patterns all
+show a stagnation in LOC changes, that is, between very few and no changes
+relative to the project size. Whereas types B, and AB patterns vary between
+super-linear and sub-linear growth or decay (see Figure
+\ref{figure:type_b_pattern}).
 
 \subsubsection{\textit{\ref{itm:question_successfailure}: \subQuestionTwo}}
 The events underlying the patterns vary widely and the event cannot directly be
 derived from a pattern. A pattern is merely the symptom or result of an event.
 Determining the event that caused the pattern requires an in-depth analysis of
 the project and the time period comprising the pattern. Moreover, various
-patterns may show similarities, but similar patterns do not always refer to the
+patterns may show similarities, but similar patterns often do not refer to the
 same event.
 
 \paragraph{}
@@ -33,11 +28,11 @@ signs.
 
 \paragraph{}
 Another aspect that contributes to the success or failure of wavelet analysis
-for software evolution is that the input signal should be free of gaps. In
-section \ref{section:gapless_wavelets} this is discussed. In the case an input
-LOC signal for analysis is not continuous within the start and end boundaries
-of the signal, the wavelet analysis will detect patterns that are not
-trustworthy. Wavelet analysis may find more false-positive evolutionary events.
+for software evolution is that the input signal should be free of gaps, as
+discussed in section \ref{section:gapless_wavelets}. In the case an input LOC
+signal for analysis is not continuous between the start and end boundaries of
+the signal, the wavelet analysis will detect patterns that are not trustworthy,
+and wavelet analysis may find more false-positive evolutionary events.
 
 \paragraph{}
 The classification of the patterns in this study was done to reduce the
@@ -60,5 +55,5 @@ was not found to be a causal relation.
 
 Furthermore, as pointed out in the previous paragraphs, the patterns that were
 found during analysis are subject to the data set as a whole, and subject to
-the classification of the patterns, I cannot conclude that wavelet analysis is
-able to find \textit{objective} warning signs in OSS projects.
+the classification of the patterns. Therefore, I cannot conclude that wavelet
+analysis is able to find \textit{objective} warning signs in OSS projects.
