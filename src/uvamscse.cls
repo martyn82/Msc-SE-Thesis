@@ -147,7 +147,7 @@
 	\hostlogo
 	\uvacoverfoot
 	
-	\include{copyright}
+	\include{colofon}
 
 	\revisionhistory
 	\uvaabstract
