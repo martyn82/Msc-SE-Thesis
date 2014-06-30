@@ -4,124 +4,61 @@
 \begin{comment}
 - Patterns AB are false-negatives; the indicate a warning sign in some cases, in
 other cases they don't.
-- One pattern does not correspond to a specific event. A pattern is the result
-of an event and patterns just show similarities. It is not possible to directly
-link a pattern to an event. The opposite could be true, but was not studied.
 
 \end{comment}
 
-In this study, the patterns detected using wavelet analysis on LOC signals
-comprise similar sequences of LOC series within and across projects. The
-waveforms of these patterns vary in all kinds of shapes. The type A patterns
-all show a stagnation of LOC changes, that is, very few changes relative to the
-project size.
+\subsubsection{\textit{\ref{itm:question_patterns}: \subQuestionOne}}
+The patterns detected using wavelet analysis on LOC signals comprise similar
+sequences of LOC series within and across projects. The waveforms of these
+patterns vary in all kinds of shapes. Type A patterns all show a stagnation in
+LOC changes, that is, between very few and no changes relative to the project
+size. Whereas types B, and AB patterns vary between linear, super-linear, and
+sub-linear growth or decay (see Figure \ref{figure:type_b_pattern}).
 
-In general, the ability to detect a 'pattern' as being a group of similar
+\subsubsection{\textit{\ref{itm:question_successfailure}: \subQuestionTwo}}
+The events underlying the patterns vary widely and the event cannot directly be
+derived from a pattern. A pattern is merely the symptom or result of an event.
+Determining the event that caused the pattern requires an in-depth analysis of
+the project and the time period comprising the pattern. Moreover, various
+patterns may show similarities, but similar patterns do not always refer to the
+same event.
+
+\paragraph{}
+In general, the ability to detect a pattern as being a group of similar
 sequences within or across projects, depends on the similarity of the sequence
 between other sequences within the same analysis. Therefore, it is important to
 have a data set that is large enough and representative to the world of OSS
-projects to be able to detect patterns that can be generalised
-[\ref{itm:question_patterns}, \ref{itm:question_successfailure}].
+projects to be able to detect patterns that can be generalised as being warning
+signs.
 
 \paragraph{}
 Another aspect that contributes to the success or failure of wavelet analysis
 for software evolution is that the input signal should be free of gaps. In
-section \ref{section:gapless_wavelets} this is argued.
-
-In the case an input LOC signal for analysis is not continuous within the start
-and end boundaries of the signal, the wavelet analysis will detect patterns
-that are not trustworthy. Wavelet analysis may find more false-positive
-evolutionary events [\ref{itm:question_successfailure}].
+section \ref{section:gapless_wavelets} this is discussed. In the case an input
+LOC signal for analysis is not continuous within the start and end boundaries
+of the signal, the wavelet analysis will detect patterns that are not
+trustworthy. Wavelet analysis may find more false-positive evolutionary events.
 
 \paragraph{}
+The classification of the patterns in this study was done to reduce the
+number of patterns that may indicate warning signs. The chosen characteristics
+for this classification influenced the reliability of finding warning signs.
+
+Setting up stronger characteristics for the classification treats fewer
+patterns as possible warning signs. This yields more false-negatives as some
+warning signs might be missed.
+
+On the contrary, setting up weaker characteristics for the classification treats
+more patterns as possible warning signs which yields more false-positive
+results.
+
+\subsubsection{\textit{\ref{itm:question_warningsigns}: \researchQuestion}}
 In this study, I have shown that wavelet analysis is able to find patterns that
-increase the chances of a project to end. As discussed in section
-\ref{section:kp_survival}, it appears that there is a relation between a
-pattern of type A and the death of a project, however, it is not found to be a
-causal relation.
+increase the chances of a project to end as it appears that there is a relation
+between a pattern of type A and the death of a project. However, this relation
+was not found to be a causal relation.
 
-Furthermore, as the patterns found during analysis are subject to the data set
-as a whole, I cannot conclude that wavelet analysis is able to find
-\textit{objective} warning signs in OSS projects
-[\ref{itm:question_warningsigns}].
-
-\section{Threats to validity}
-The following aspects were found which may lead to threats to the validity of
-the results.
-
-\begin{description}
-	\item[Construct validity] \hfill
-	
-	\begin{description}
-		\item[\rm{Missing historical data}] -- In the analysis of project's
-			evolution data, only the data provided by the OhlohAnalytics tool
-			\cite{ohlohanalytics, bruntink2013} was used.
-			The data before the first data point in the set is not taken into account. It
-			is possible that certain evolutionary events happened before the first point.
-			These events were not detected as they lay beyond reach of this study.
-
-		\item[\rm{Missing most recent data}] -- The data provided for the study has
-			data points until June 2013. Therefore, not the most recent data of the
-			projects is used.
-
-		\item[\rm{LOC as activity indicator}] -- The use of LOC (defined as
-			lines of code + comments + blanks) as a measure of project activity could be
-			false. The LOC will not change between two months whenever the amount of code
-			deleted is equal to the amount added. In that case, the churn would be twice
-			the LOC added/deleted, but the LOC will stay the same.
-
-			When patterns are detected that show a stagnation in LOC, the suggestion
-			would be that the project's activity is decreasing. However, it might also
-			be the case that by coincidence it seems activity is decreasing, but in
-			reality lots of activity has been going on.
-
-		\item[\rm{Data source}] -- Using only one data source (Ohloh) may
-			influence the value of the metrics. Ohloh did the analysis of the project's
-			source code repositories. Several studies have shown that the data provided
-			by Ohloh needs a thorough examination and cleansing before it can be used
-			\cite{bruntink2013, ohlohanalytics, bruntink2014}. The data was initially
-			validated and cleansed, but to make it consistent. No actual verification on
-			the correctness of the data was conducted.
-	\end{description}
-
-	\item[Internal validity] \hfill
-
-	\begin{description}
-		\item[\rm{Selection bias}] -- The selection criteria for the data was to have
-			at least 12 data points. It turned out, no project in the set was younger
-			than 14 months. It might be that these younger projects show significance in
-			the ability to detect evolutionary events, possibly refute or confirm
-			findings.
-	\end{description}
-
-	\item[External validity] \hfill
-
-	\begin{description}
-		\item[\rm{Replication}] -- It seems hard to precisely replicate the study
-			as there are a multitude of possible configurations to be made that may, in
-			the end, influence the results drastically. Such as, the definition of
-			similarity between sequences (what deviation is allowed, what is the
-			difference of coincidence and a reoccurring sequence), and the definition of
-			a pattern (how many occurrences, minimum, and maximum length).
-			
-			Furthermore, there is the interpretation of what a 'warning sign' should
-			look like on a pattern level.
-	\end{description}
-\end{description}
-
-\section{Future work}
-A next step in the research on the use of wavelet analysis for detecting
-warning signs in software evolution would be to use a larger data set. It would
-be interesting to know if the findings of the type A patterns will be
-consistent. The whole usable data set for this study contains 5,986 projects
-(section \ref{method:data}).
-
-\paragraph{}
-The analysis could be done on other signals. In this study, only LOC was used,
-but many other signals can be constructed. LOC evolution measures code activity
-to a certain extent, but LOC churn could reflect code activity better. To use
-LOC churn properly, the LOC modified fact is also needed.
-
-Other useful metrics for finding warning signs could be team size, developer's
-churn (the number of developers added and removed from the team), contributor's
-code activity, bug reports, and defects per kLOC.
+Furthermore, as pointed out in the previous paragraphs, the patterns that were
+found during analysis are subject to the data set as a whole, and subject to
+the classification of the patterns, I cannot conclude that wavelet analysis is
+able to find \textit{objective} warning signs in OSS projects.
