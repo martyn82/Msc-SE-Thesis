@@ -55,7 +55,7 @@
 \newcommand{\uvastatus}{Draft}
 \newcommand{\docstatus}[1]{\renewcommand{\uvastatus}{#1}}
 
-\newcommand{\uvapic}{}
+\newcommand{\uvapic}{\centerline{\includegraphics[width=300pt]{images/cover.jpg}}}
 \newcommand{\coverpic}[2][.9\textwidth]{\renewcommand{\uvapic}{\centerline{\includegraphics[width=#1]{#2}}}}
 
 \newcommand{\uvaabstract}{}
