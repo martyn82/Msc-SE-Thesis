@@ -3,7 +3,7 @@
 \newif\ifispublished
 
 \isdraftfalse
-\ispublishedtrue
+\ispublishedfalse
 
 \ifisdraft
 	\documentclass[draft]{uvamscse}
@@ -12,8 +12,8 @@
 \fi
 
 \usepackage[singlelinecheck=false, skip=0em, justification=centering]{caption}
-\usepackage[square, numbers, comma]{natbib}
 \usepackage[bottom]{footmisc}
+\usepackage[square, numbers, comma]{natbib}
 \usepackage{chngcntr, multicol, nameref, url, verbatim, wrapfig}
 
 \ifisdraft
