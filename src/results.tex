@@ -106,16 +106,6 @@ found 16,049 patterns. The patterns consist only of sequences of scale/filter
 coefficients.
 
 \paragraph{}
-An arbitrary pattern that was found is shown in Figure
-\ref{figure:patterns_plots}. The graph shows the similarity of the pattern with
-its occurrences across multiple projects. Time is indexed and LOC is
-represented as coefficients. This is due to the fact that wavelet transform
-scales and filters these measures and thus no longer represent real-world
-values such as months or actual lines of code.
-
-\input{figures/patterns_plots}
-
-\paragraph{}
 The patterns occurred between 5 and 1,512 times across the projects. On
 average, a pattern occurs 104 times. A single pattern occurs in at least 1 and
 at most 204 projects (36 projects on average). The pattern length is between 4
@@ -140,6 +130,16 @@ detected across 250 projects, which is 64.2 patterns per project on average;
 average per project); and 1,084 patterns detected in 21 dead projects (an
 average of 51.6 patterns per project). The averages do not differ significantly
 over the projects.
+
+\paragraph{}
+An arbitrary pattern that was found is shown in Figure
+\ref{figure:patterns_plots}. The graph shows the similarity of the pattern with
+its occurrences across multiple projects. Time is indexed and LOC is
+represented as coefficients. This is due to the fact that wavelet transform
+scales and filters these measures and thus no longer represent real-world
+values such as months or actual lines of code.
+
+\input{figures/patterns_plots}
 
 
 
