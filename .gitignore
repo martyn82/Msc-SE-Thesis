@@ -2,6 +2,7 @@
 /tmp
 .settings/
 .externalToolBuilders/
+presentation/defence.key
 .buildpath
 .project
 .texlipse
