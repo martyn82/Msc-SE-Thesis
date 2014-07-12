@@ -7,7 +7,7 @@ A total number of 250 OSS projects will be used for this study. This number is
 somewhat arbitrary, but was chosen to have a larger data set than the initial
 study conducted by \citet{karus2013}, as a larger data set yields more
 trustworthy results. However, the research still needs to be feasible within
-the given time constraints of four months.
+the given time constraints.
 
 Several steps have been taken prior to the selection of this set of 250
 projects. The steps are described in the following sections.
@@ -52,12 +52,13 @@ another validation step is needed prior to the selection of the 250 projects
 for the study.
 
 The evolution data of the 10,811 projects contained gaps. A continuous series
-of data is required to be able to analyse time series for a project. Therefore,
-a number representing the \textit{fraction of continuity} of the evolution data
-per project was calculated. For each project the difference between the minimum
-and maximum values of the $age\_in\_months$ fact is taken, added by one, giving
-the expected number of data points for a project. The computation of the
-fraction of total evolution data is done for each project.
+of data is required to be able to analyse time series for a project (see
+section \ref{section:gapless_wavelets}). Therefore, a number representing the
+\textit{fraction of continuity} of the evolution data per project was
+calculated. For each project the difference between the minimum and maximum
+values of the $age\_in\_months$ fact is taken, added by one, giving the
+expected number of data points for a project. The computation of the fraction
+of total evolution data is done for each project.
 
 After the fractions of the total evolution data for each project were
 calculated, the projects were filtered and only those projects that have all
@@ -171,22 +172,12 @@ A lower or higher value will yield fewer or more similar sequences
 respectively.
 
 \paragraph{}
-A distinction is made between the \textit{detection} of a sequence and an
-\textit{occurrence} of a sequence. Although the difference is slight, the
-distinction is needed for further analysis.
-
-A sequence $x$ is \textit{detected} in a project $X$ if it was encountered by
-analysing project $X$. Finding an \textit{occurrence} of a sequence means that
-a sequence $y$ of another project $Y$ was found to be similar to sequence $x$
-by evaluating project $Y$'s sequences. A sequence is then recorded as a pair of
-sequences $(x, y)$ detected in project $X$ and project $Y$ respectively.
-
-\paragraph{}
 The process of finding similar sequences constructs ordered pairs of sequences
-from the one project to another. The first entry of the pair is the project
-of which the sequence was first discovered (i.e., detected), the second is the
-project of the similar sequence (i.e., occurrence). Similar sequences may be
-found within one project, but can also be found across projects.\\
+from the one project to another (see section \ref{section:approach}). The first
+entry of the pair is the sequence and project of which the sequence was first
+discovered (i.e., detected), the second is the sequence and project of the
+similar sequence (i.e., occurrence). Similar sequences may be found within one
+project, but can also be found across projects.\\
 
 \noindent
 The properties of a similar sequence are described in Table

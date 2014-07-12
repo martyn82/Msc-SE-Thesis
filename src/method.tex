@@ -2,6 +2,7 @@
 \label{method}
 
 \section{Research approach}
+\label{section:approach}
 The research will be conducted in the following phases:
 \begin{description}
 	\item[Literature survey.] As part of the research plan, relevant literature
@@ -38,6 +39,17 @@ The research will be conducted in the following phases:
 	number of occurrences might influence the number of patterns found and
 	possibly influence the types of patterns wavelet analysis is able to detect.
 	
+	A distinction is made between the \textit{detection} of a sequence and an
+	\textit{occurrence} of a sequence. Although the difference is slight, the
+	distinction is needed for further analysis.
+
+	A sequence $x$ is \textit{detected} in a project $X$ if it was encountered by
+	analysing project $X$. Finding an \textit{occurrence} of a sequence means that
+	a sequence $y$ of another project $Y$ was found to be similar to sequence $x$
+	by comparing project $Y$'s sequences against $x$. A similar sequence is then
+	recorded as a pair of sequences $(x, y)$ detected in project $X$ and occurring
+	in project $Y$ respectively.
+	
 	\item[Pattern identification.] The patterns found in the Wavelet analysis step
 	will be further analysed to find patterns that are 'warning signs'. This is a
 	pattern that leads to the 'end of code evolution' for a project (recall
@@ -54,15 +66,15 @@ The research will be conducted in the following phases:
 In verification of the requirement of a continuous series for wavelet analysis,
 a hypothetical signal was constructed. Let the following set of pairs be the
 signal $S$ to be analysed, where the first entry is the time value, and the
-second entry the LOC value:
+second entry the frequency value:
 $$S = \{(1,100), (2,150), (5,250)\}$$
 
 \noindent
-In signal $S$ the two pairs having first entry $3$ and $4$ are missing. The
-implementation of discrete wavelet transform in the 'Wavelets' R package
-requires an indexed series as input wavelet. This means that whether or not
-the signal contains gaps, these gaps are naturally closed by indexing the
-signal. After zero-based indexing, the signal $S$ will look as follows:
+In signal $S$ the two pairs having first entry $3$ and $4$ are missing. In
+software implementations of discrete wavelet transform, the input signal to
+process can be indexed. This means that whether or not the signal contains
+gaps, these gaps are naturally closed by indexing the signal. After zero-based
+indexing, the signal $S$ will look as follows:
 $$S' = \{(0,100), (1,150), (2,250)\}$$
 
 \noindent
@@ -72,8 +84,8 @@ signals without gaps. However, the patterns found will be invalid as it ignored
 intermediate data during similarity analysis.
 
 \paragraph{}
-A further investigation was done on how to fix such gaps. The use of four
-different methods of 'guessing' the data was explored and the results were the
+A further investigation can be done on how to fix such gaps. The use of four
+different methods of 'guessing' the data were explored and the results are the
 following:
 \begin{description}
 	\item[last observation carried] \hfill \\[1em]
@@ -90,21 +102,22 @@ following:
 \end{description}
 
 \paragraph{}
-The method \textit{last observation carried} results in a signal $S_{1}$ with
-same values between point 2 and 5, which shows a flat line when plotted in a
-graph.
+The method \textit{last observation carried} results in a signal $S_{1}$
+with the same values as second entry for points 2, 3, 4 and 5, which shows a
+flat line when plotted in a graph.
 
 \paragraph{}
 Filling the gaps with \textit{mean} values, will also result in a signal
-$S_{2}$ with same values. It is similar to last observation carried but with
-one difference: the mean method is exclusive, whereas 'last observation
-carried' is inclusive. Using mean, the number of second entries having same
-values will therefore be 2 observations lesser than using the last observation.
+$S_{2}$ with same values as second entry. It is similar to last observation
+carried but with the difference that the mean method is exclusive, whereas
+'last observation carried' is inclusive. Using mean, the number of second
+entries having same values will therefore be 2 observations lesser than using
+the last observation.
 
 \paragraph{}
 The \textit{piecewise constant} interpolation results in a signal $S_{3}$
-having two shorter flat lines. The repeating values are 'snapped' to the
-closest neighbour.
+that, when plotted, has two shorter flat lines. The repeating values are
+'snapped' to the closest neighbour.
 
 \paragraph{}
 Finally, the \textit{linear interpolation} will result in a signal $S_{4}$ that
@@ -115,33 +128,35 @@ present in the complete signal.
 
 \paragraph{}
 The flat lines introduced using the above techniques may be detected as no
-change in LOC during that period. This is undesired as can be mistaken for a
-pattern that stopped code evolution.
+change in frequency during the period that the data was missing. This is
+undesired in this research as it can be mistaken for a pattern that stopped
+code evolution.
 
 Moreover, the signal resulted from linear interpolation could be mistaken for
-growth or decay in LOC, depending on the direction.
+growth or decay in frequency, depending on the direction.
 
 \paragraph{}
 The success of one of the above methods of closing a gap depends on the size of
 the gap. The smaller the gap, the lesser impact it has on the reliability of
 the detection of a pattern for that particular signal. The larger the gap, the
-more the impact on reliability. Either way, adding data will add noise and, in
-general, having gaps in the evolution data and closing the gaps by adding data
-will negatively influence the reliability of detecting patterns.
+more the impact on reliability. Either way, guessing data will add fictional
+data and, in general, having gaps in the evolution data and closing the gaps by
+adding data will negatively influence the reliability of detecting patterns.
 
 Therefore, only projects of which a continuous series of data is available will
-be selected.
+be selected for this study.
 
 \section{Validation}
 \subsection{Dead projects}
 \label{method:validation}
-In order to validate the patterns and in particular to know if a pattern
+In order to validate the patterns found and in particular to know if a pattern
 represents an evolutionary event leading to the end of code evolution, dead
 projects have to be identified.\\
 
 \noindent
 \label{def:dead}
-A project is considered 'dead' if it complies to the following properties:
+A project is considered 'dead' if it has one or both of the following
+properties:
 \begin{enumerate}
 	\item the project has had 0 contributors in code for the last 12 months;
 	\item the project has had 0 'lines of code' (LOC) churn\footnote{LOC churn:
@@ -149,9 +164,9 @@ A project is considered 'dead' if it complies to the following properties:
 \end{enumerate}
 
 \noindent
-The above properties combined specify that the project has had no code activity
-for the past year, meaning the code evolution of the project has stopped. If the
-LOC churn of a series of data points equals 0 (zero), this implies that the
+The above properties specify that the project has had no code activity
+for the past year, meaning the code evolution of the project has stopped. If
+the LOC churn of a series of data points equals 0 (zero), this implies that the
 difference in 'lines of code' (LOC) over that same series also equals 0 (i.e.,
 there was no growth or decay in code size).
 
@@ -165,10 +180,10 @@ that are not 'dead' by this definition are considered to be 'alive'.
 
 \paragraph{}
 To be sure that the projects from our data set that comply to the definition of
-dead are still dead beyond the data set, manual validation of these findings
-have to be done. In verifying if a project is dead, I will manually consult the
-project's website, its source code repository, and possibly other sources to
-verify the properties of a 'dead' project.
+dead actually have no activity beyond the time boudaries of the data set,
+manual validation of these findings have to be done. In verifying if a project
+is dead, I will manually consult the project's website, its source code
+repository, and possibly other sources.
 
 \subsection{Warning signs}
 To recognise patterns that are warning signs, a selection of patterns occurring

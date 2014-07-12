@@ -13,7 +13,9 @@ master data of 20,028 projects tracked by Ohloh.
 The final data set contains monthly evolution data of 250 distinct projects
 having a total of 22,943 data points. The oldest project having 321 monthly
 data points, the youngest having 14 monthly data points. The first data point
-in the set is of October 1986.
+in the set is of October 1986. The last data point is of June 2013. The total
+OSS development time in the data set spans 22,943 months, which is 1,911.9
+years.
 
 \section{Dead projects}
 \label{section:deads}
@@ -186,14 +188,10 @@ Table \ref{table:deads_g0} shows that the four dead projects of group G0 have
 no pattern of type A, which is true by the definition of the group. However,
 they do all have occurrences of patterns of type AB. This means that there are
 patterns detected in these four projects that occur near and last until the end
-of code evolution of these projects. Further evaluation shows that the 42 AB
-patterns from these four projects all show a stagnation in LOC change. The
-difficulty is that the type AB patterns also occur somewhere else in a dead
-project's evolution, which makes it hard by current definitions to identify as
-possible warning signs.
+of code evolution of these projects.
 
 \paragraph{}
-The other 89 projects of G0 stay alive. Their age varies between 13 and 255
+The other 89 projects of G0 stay alive. Their ages vary between 13 and 255
 months.
 
 \subsection{Group G1}
@@ -235,7 +233,7 @@ on the horizontal axis.
 
 \noindent
 The Kaplan-Meier estimation of the survival function of the projects as shown
-in Figure \ref{figure:kp_survival} visualise the survival probability of
+in Figure \ref{figure:kp_survival} visualises the survival probability of
 the projects with and without the occurrence of a type A pattern.
 
 The figure shows a p-value of $p = 0.00835$. This is the log-rank value
